@@ -26,8 +26,7 @@ public class PlayerController : MonoBehaviour
         rbody = GetComponent<Rigidbody> ();
         viewCamera = Camera.main;
 
-        GuardController.OnGuardHasSpottedPlayer += DisablePlayer;
-        GuardAIController.OnGuardHasCaughtPlayer += DisablePlayer;
+      
     }
 
     void Update(){
@@ -51,28 +50,10 @@ public class PlayerController : MonoBehaviour
         velocity = transform.forward * moveSpeed * smoothInputMagnitude;
     }
 
-    void OnTriggerEnter(Collider hitCollider) {
-        if(hitCollider.tag == "Finish"){
-            DisablePlayer();
-            if (OnReachedEnd != null) {
-                OnReachedEnd();
-            }
-        }
-    }
-
-    void DisablePlayer() {
-        disabled = true;
-    }
-
     void FixedUpdate() {
         // Using rigidboy in order to set position/rotation
         rbody.MoveRotation(Quaternion.Euler(Vector3.up * angle));
         rbody.MovePosition(GetComponent<Rigidbody>().position + velocity * Time.deltaTime);
-    }
-
-    void OnDestroy() {
-        GuardController.OnGuardHasSpottedPlayer -= DisablePlayer;
-        GuardAIController.OnGuardHasCaughtPlayer -= DisablePlayer;
     }
 
 }
