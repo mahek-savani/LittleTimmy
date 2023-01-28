@@ -492,8 +492,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 1847924883}
+  m_Follow: {fileID: 1847924883}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -519,15 +519,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275464031}
-  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
-  m_LocalPosition: {x: -25.956812, y: 23.2, z: -13.2}
+  m_LocalRotation: {x: 0.44972372, y: -0, z: -0, w: 0.89316773}
+  m_LocalPosition: {x: -26, y: 19.95, z: -10.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2137054911}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 55, y: 48.552994, z: -131.87}
+  m_LocalEulerAnglesHint: {x: 53.452, y: 0, z: 0}
 --- !u!1 &378893425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,8 +1513,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758023738}
-  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
-  m_LocalPosition: {x: -25.956812, y: 23.2, z: -13.2}
+  m_LocalRotation: {x: 0.44972372, y: 0, z: 0, w: 0.89316773}
+  m_LocalPosition: {x: -26, y: 19.95, z: -10.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1985,6 +1985,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137054911}
   - component: {fileID: 2137054913}
+  - component: {fileID: 2137054914}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -2019,6 +2020,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2137054914
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137054910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 1
+  m_FollowOffset: {x: -0.78100014, y: 18.986, z: -10.524}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
+  m_AngularDampingMode: 0
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
+  m_AngularDamping: 0
 --- !u!1 &2137885733
 GameObject:
   m_ObjectHideFlags: 0
