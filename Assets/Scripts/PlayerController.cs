@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     // Move speed and smooth movement
     public float moveSpeed = 6;
     public float smoothMoveTime = .1f;
-    public float turnSpeed = 8;
+    public float turnSpeed = 100;
 
     // Private variables for smoothing
     float angle;
