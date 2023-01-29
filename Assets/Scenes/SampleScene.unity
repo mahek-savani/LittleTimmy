@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.083333336
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 1
   m_NavMeshData: {fileID: 23800000, guid: 1b7aae95150f9d74489aac05555b5d35, type: 2}
   m_BuildHeightMesh: 0
@@ -1308,6 +1308,7 @@ MonoBehaviour:
   myMesh: {fileID: 1230720002}
   newPatrolPoints: []
   graph: {fileID: 333847409}
+  speedVar: 4
 --- !u!195 &1230720006
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -37,8 +37,9 @@ public class StateMachine_Robust : MonoBehaviour
     public MeshRenderer myMesh;
 
     public GameObject[] newPatrolPoints;
-    public GameObject graph;
+    public Transform graph;
     public float speedVar = 4;
+    private Dictionary<Transform, int> paranoidPoints = new Dictionary<Transform, int>();
 
     void Start() {
         viewMesh = new Mesh();
@@ -196,6 +197,27 @@ public class StateMachine_Robust : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(delay);
             FindVisibleTargets();
+        }
+    }
+
+    // Maps paranoid points according to the source
+    // Waypoints closer to the source get a larger value, incentivizing movement near it
+    void assignSuspiciousWalk(Vector3 source)
+    {
+        for (int i = 0; i < graph.GetChildCount(); i++)
+        {
+            Transform wayPoint = graph.GetChild(i);
+            int roundedDist = Mathf.RoundToInt(Vector3.Distance(source, wayPoint.position));
+            paranoidPoints[wayPoint] = roundedDist;
+        }
+    }
+
+    void assignParanoidWalk()
+    {
+        for (int i = 0; i < graph.GetChildCount(); i++)
+        {
+            Transform wayPoint = graph.GetChild(i);
+            paranoidPoints[wayPoint] = Random.Range(1, 11);
         }
     }
 
