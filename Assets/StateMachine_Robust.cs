@@ -24,7 +24,7 @@ public class StateMachine_Robust : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
 
-    private enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID};
+    private enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
     private STATE state = STATE.IDLE;
     public Camera cam;
 
@@ -32,6 +32,12 @@ public class StateMachine_Robust : MonoBehaviour
     private int currentDest = -1;
     public NavMeshAgent agent;
     public Transform playerPos;
+    private Vector3 noiseSource;
+    private bool foundSource = false;
+    public MeshRenderer myMesh;
+
+    public GameObject[] newPatrolPoints;
+    public GameObject graph;
 
     void Start() {
         viewMesh = new Mesh();
@@ -39,11 +45,17 @@ public class StateMachine_Robust : MonoBehaviour
         viewMeshFilter.mesh = viewMesh;
 
         StartCoroutine("FindTargetsWithDelay", .2f);
+
+        //StartCoroutine(die());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("backspace"))
+        {
+            StartCoroutine(die());
+        }
         //DrawFieldOfView();
         switch (state) {
 
@@ -104,10 +116,19 @@ public class StateMachine_Robust : MonoBehaviour
                     agent.SetDestination(playerPos.position);
                 }
                 break;
+
+            // Investigate a noise or disturbance of some sort
+            case STATE.NOISE:
+                
+                if (Vector3.Distance(transform.position, noiseSource) < 0.5)
+                {
+                    getSuspicious();
+                }
+                break;
         }
     }
 
-    IEnumerator idleAction(int numSeconds = -1)
+/*     IEnumerator idleAction (int numSeconds = -1)
     {  
         if (numSeconds >= 0) 
         {
@@ -116,7 +137,54 @@ public class StateMachine_Robust : MonoBehaviour
         {
             yield return new WaitForSeconds(0);
         }
+    } */
+
+    void getAlert()
+    {
+        myMesh.material.color = Color.red;
+        state = STATE.CHASING;
     }
+
+    void getIdle()
+    {
+        myMesh.material.color = Color.blue;
+        agent.isStopped = true;
+        state = STATE.IDLE;
+    }
+
+    void getNOISE(Vector3 source)
+    {
+        myMesh.material.color = Color.yellow;
+        noiseSource = source;
+        state = STATE.NOISE;
+    }
+
+    // The NPC should investigate the area around themself when they get suspicious
+    void getSuspicious()
+    {
+        myMesh.material.color = Color.yellow;
+        state = STATE.SUSPICIOUS;
+    }
+
+    void getParanoid()
+    {
+        myMesh.material.color = new Color(235, 125, 52);
+        state = STATE.PARANOID;
+    }
+
+    void getPatrol()
+    {
+
+    }
+
+     IEnumerator die()
+     {
+        getIdle();
+        myMesh.material.color = Color.black;
+        //state = STATE.IDLE;
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+     }
 
     IEnumerator FindTargetsWithDelay(float delay) {
         while (true) {
