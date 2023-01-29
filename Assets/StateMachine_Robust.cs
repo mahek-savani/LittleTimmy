@@ -38,6 +38,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public GameObject[] newPatrolPoints;
     public GameObject graph;
+    public float speedVar = 4;
 
     void Start() {
         viewMesh = new Mesh();
@@ -46,16 +47,18 @@ public class StateMachine_Robust : MonoBehaviour
 
         StartCoroutine("FindTargetsWithDelay", .2f);
 
+        agent.speed = speedVar;
+
         //StartCoroutine(die());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("backspace"))
+/*         if (Input.GetKeyDown("backspace"))
         {
             StartCoroutine(die());
-        }
+        } */
         //DrawFieldOfView();
         switch (state) {
 
@@ -78,6 +81,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else if (Input.GetKeyDown("return"))
                 {
                     Debug.Log("Moving from IDLE to PATROLLING");
+                   // Debug.Log(patrolPoints[0]);
+                   // Debug.Log(patrolPoints[1]);
                     currentDest = 0;
                     agent.SetDestination(patrolPoints[0]);
                     state = STATE.PATROLLING;
@@ -86,13 +91,14 @@ public class StateMachine_Robust : MonoBehaviour
 
             case STATE.PATROLLING:
                 // Replace with a ray cast spotting function later
-                if (Vector3.Distance(transform.position, playerPos.position) < 3)
+                //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]));
+                if (Vector3.Distance(transform.position, playerPos.position) < 5)
                 {
                     Debug.Log("Moving from PATROLLING to CHASING");
                     state = STATE.CHASING;
                     agent.SetDestination(playerPos.position);
                 }
-                else if (Vector3.Distance(transform.position, patrolPoints[currentDest]) < 0.6)
+                else if (Vector3.Distance(transform.position, patrolPoints[currentDest]) < 1.2)
                 {
                     if (currentDest < patrolPoints.Count - 1)
                     {
