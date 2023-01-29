@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class StateMachine : MonoBehaviour
 {
 
-    private enum STATE {IDLE, PATROLLING, CHASING};
+    private enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID};
     private STATE state = STATE.IDLE;
     public Camera cam;
 
@@ -19,6 +19,7 @@ public class StateMachine : MonoBehaviour
     void Update()
     {
         switch (state) {
+
             case STATE.IDLE:
                 if (Input.GetMouseButtonDown(0))
                     {
@@ -43,6 +44,7 @@ public class StateMachine : MonoBehaviour
                     state = STATE.PATROLLING;
                 }
                 break;
+
             case STATE.PATROLLING:
                 // Replace with a ray cast spotting function later
                 if (Vector3.Distance(transform.position, playerPos.position) < 3)
@@ -63,6 +65,7 @@ public class StateMachine : MonoBehaviour
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
                 break;
+                
             case STATE.CHASING:
                 if (Vector3.Distance(transform.position, playerPos.position) > 3)
                 {
@@ -76,4 +79,17 @@ public class StateMachine : MonoBehaviour
                 break;
         }
     }
+
+    IEnumerator idleAction(int numSeconds = -1)
+    {  
+        if (numSeconds >= 0) 
+        {
+            yield return new WaitForSeconds(numSeconds);
+        } else
+        {
+            yield return new WaitForSeconds(0);
+        }
+    }
+
+
 }
