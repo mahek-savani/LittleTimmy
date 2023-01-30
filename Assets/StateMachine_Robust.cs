@@ -46,12 +46,16 @@ public class StateMachine_Robust : MonoBehaviour
     float timeCounter = 0f;
     public FieldOfView fov;
     float playerVisibleTimer = 0.0f;
-    float timeToSuspicion = 0.5f;
-    float timeToChase = 1f;
+    public float timeToSuspicion = 0.5f;
+    public float timeToChase = 1f;
     public Material alertFOV;
     public Material passiveFOV;
 
+    public LiveCounter NPCManager;
+
     private Transform currentPosition;
+
+    public bool alive = true;
     void Start() {
 /*         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -72,6 +76,7 @@ public class StateMachine_Robust : MonoBehaviour
         } else {
             playerVisibleTimer -= Time.deltaTime;
         }
+
         if (state == STATE.SUSPICIOUS || state == STATE.NOISE)
         {
             playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase); 
@@ -92,10 +97,14 @@ public class StateMachine_Robust : MonoBehaviour
         {
             getNoise(playerPos.position);
         }
-/*         if (Input.GetKeyDown("backspace"))
+
+        if (Input.GetKeyDown("backspace"))
         {
-            StartCoroutine(die());
-        } */
+            if (gameObject.name == "NPC 1")
+            {
+                die();
+            }
+        } 
         //DrawFieldOfView();
         switch (state) {
 
@@ -178,11 +187,12 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
 
             case STATE.PARANOID:
-                if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 0.5)
+                if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
                 {
-                    waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+                    waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
-                    agent.SetDestination(getRandomNeighbor(currentPoint).position);
+                    currentPosition = getRandomNeighbor(currentPoint);
+                    agent.SetDestination(currentPosition.position);
                 }
 
                 break;
@@ -211,10 +221,16 @@ public class StateMachine_Robust : MonoBehaviour
                 getParanoid();
                 break;
             case STATE.IDLE:
-                getIdle(0);
+                getIdle();
                 break;
             case STATE.NOISE:
                 getNoise(new Vector3(0, 0, 0));
+                break;
+            case STATE.SUSPICIOUS:
+                getSuspicious(transform.position);
+                break;
+            case STATE.CHASING:
+                getChase();
                 break;
         }
     }
@@ -262,12 +278,15 @@ public class StateMachine_Robust : MonoBehaviour
         timeCounter = suspiciousTime;
     }
 
-    void getParanoid()
+    public void getParanoid()
     {
-        myMesh.material.color = new Color(235, 125, 52);
+        myMesh.material.color = new Color(252/255f, 139/255f, 0f);
         assignParanoidWalk();
 
         returnToSuspicion();
+
+        timeToSuspicion /= 2;
+        timeToChase /= 2;
         
         state = STATE.PARANOID;
     }
@@ -275,16 +294,27 @@ public class StateMachine_Robust : MonoBehaviour
     void getPatrol()
     {
         returnToPatrol();
-        myMesh.material.color = Color.blue;
+        myMesh.material.color = Color.cyan;
 
         state = STATE.PATROLLING;
     }
 
     void die()
     {
+        alive = false;
+        state = STATE.IDLE;
+        waitTime = -1f;
+        agent.isStopped = true;
+        fov.viewMeshFilter.mesh.Clear();
+        NPCManager.decrement();
         myMesh.material.color = Color.black;
-        getIdle(3);
-        myMesh.material.color = Color.black;
+        //Destroy(fov.gameObject);
+        StartCoroutine("dieAsynchronous");
+    }
+
+    IEnumerator dieAsynchronous()
+    {
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 
@@ -314,7 +344,7 @@ public class StateMachine_Robust : MonoBehaviour
         for (int i = 0; i < graph.childCount; i++)
         {
             Transform wayPoint = graph.GetChild(i);
-            paranoidPoints[wayPoint] = Random.Range(1, 11);
+            paranoidPoints[wayPoint] = Random.Range(1, 6);
         }
     }
 
