@@ -47,8 +47,8 @@ public class StateMachine_Robust : MonoBehaviour
     float timeCounter = 0f;
     public FieldOfView fov;
     float playerVisibleTimer = 0.0f;
-    public float timeToSuspicion;
-    public float timeToChase;
+    private float timeToSuspicion;
+    private float timeToChase;
     public Material alertFOV;
     public Material passiveFOV;
     bool conscious = true;
