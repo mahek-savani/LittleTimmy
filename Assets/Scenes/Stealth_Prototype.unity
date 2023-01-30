@@ -1501,6 +1501,14 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6558086107544197675, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
+      propertyPath: viewAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558086107544197675, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
+      propertyPath: viewRadius
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
 --- !u!1001 &969007008
@@ -2135,6 +2143,14 @@ PrefabInstance:
     - target: {fileID: 5380935968173276056, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
       propertyPath: m_Name
       value: NPC 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380935968173276256, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
+      propertyPath: viewAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380935968173276256, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
+      propertyPath: viewRadius
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5380935968173276257, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
       propertyPath: m_Speed
@@ -2907,7 +2923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1847924878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,7 +2937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pbody: {fileID: 1847924879}
-  movementSpeed: 20
+  movementSpeed: 30
 --- !u!54 &1847924879
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -63,8 +63,8 @@ public class StateMachine_Robust : MonoBehaviour
                 viewMesh.name = "View Mesh";
                 viewMeshFilter.mesh = viewMesh; */
         timeToSuspicion = 1f;
-        timeToChase = 3f;
-        suspiciousTime = 120f;
+        timeToChase = 2f;
+        suspiciousTime = 10f;
 
         agent.speed = speedVar;
         getDefault();
