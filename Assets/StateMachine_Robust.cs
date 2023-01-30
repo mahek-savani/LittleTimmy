@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class StateMachine_Robust : MonoBehaviour
 {
-    [Header("View Visualization")]
+/*     [Header("View Visualization")]
     [SerializeField]
     public float viewRadius;
     [Range(0, 360)]
@@ -22,13 +22,12 @@ public class StateMachine_Robust : MonoBehaviour
     public int edgeResolveIter;
     public float edgeDstThreshold;
     public MeshFilter viewMeshFilter;
-    Mesh viewMesh;
+    Mesh viewMesh; */
 
     private enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
     private STATE state = STATE.IDLE;
     public Camera cam;
 
-    private List<Vector3> patrolPoints = new();
     private int currentDest = 0;
     public NavMeshAgent agent;
     public Transform playerPos;
@@ -53,11 +52,9 @@ public class StateMachine_Robust : MonoBehaviour
     public Material alertFOV;
     public Material passiveFOV;
     void Start() {
-        viewMesh = new Mesh();
+/*         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
-        viewMeshFilter.mesh = viewMesh;
-
-        StartCoroutine("FindTargetsWithDelay", .2f);
+        viewMeshFilter.mesh = viewMesh; */
 
         agent.speed = speedVar;
 
@@ -308,9 +305,9 @@ public class StateMachine_Robust : MonoBehaviour
         float closestDist = Mathf.Infinity;
         int nearestIndex = -1;
 
-        for (int i = 0; i < patrolPoints.Count; i++)
+        for (int i = 0; i < newPatrolPoints.Length; i++)
         {
-            Vector3 wayPoint = patrolPoints[i];
+            Vector3 wayPoint = newPatrolPoints[i].position;
             float currentDist = Vector3.Distance(transform.position, wayPoint);
 
             if (currentDist < closestDist)
@@ -349,6 +346,7 @@ public class StateMachine_Robust : MonoBehaviour
         currentDest = nearestIndex;
         agent.SetDestination(nearestPoint.position);
     }
+}
 /* 
     IEnumerator FindTargetsWithDelay(float delay) {
         while (true) {

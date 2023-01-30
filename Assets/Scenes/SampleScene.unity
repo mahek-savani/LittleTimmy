@@ -1174,6 +1174,7 @@ GameObject:
   - component: {fileID: 1230720000}
   - component: {fileID: 1230720005}
   - component: {fileID: 1230720006}
+  - component: {fileID: 1230720007}
   m_Layer: 0
   m_Name: Standard_Enemy
   m_TagString: Untagged
@@ -1269,7 +1270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230719999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.82, y: 0.589, z: -2.57}
+  m_LocalPosition: {x: 0.87, y: 0.589, z: -2.05}
   m_LocalScale: {x: 0.39896, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1289,26 +1290,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59e5e40fa4fdbf498923a026ae25f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 2
-  viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 8
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 64
-  visibleTargets: []
-  meshResolution: 1
-  edgeResolveIter: 4
-  edgeDstThreshold: 0.5
-  viewMeshFilter: {fileID: 360402756}
   cam: {fileID: 963194227}
   agent: {fileID: 1230720006}
   playerPos: {fileID: 783423430}
   myMesh: {fileID: 1230720002}
-  newPatrolPoints: []
-  graph: {fileID: 333847409}
+  newPatrolPoints:
+  - {fileID: 30522633}
+  - {fileID: 397705172}
+  graph: {fileID: 333847410}
   speedVar: 4
+  PLAYER_LAYER: 3
+  fov: {fileID: 1230720007}
+  alertFOV: {fileID: 2100000, guid: 9646a033ad9fcfa4cb20a035b93879b6, type: 2}
+  passiveFOV: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
 --- !u!195 &1230720006
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1331,6 +1325,31 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1230720007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230719999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8c519f8ceb2844f91b7ab17f7a3940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 3
+  viewAngle: 30
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  visibleTargets: []
+  meshResolution: 1
+  edgeResolveIter: 4
+  edgeDstThreshold: 0.5
+  viewMeshFilter: {fileID: 360402756}
 --- !u!1 &1239631484
 GameObject:
   m_ObjectHideFlags: 0
