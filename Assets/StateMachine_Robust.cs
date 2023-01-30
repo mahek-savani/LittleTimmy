@@ -42,7 +42,7 @@ public class StateMachine_Robust : MonoBehaviour
     public STATE defaultState = STATE.PATROLLING;
     public int PLAYER_LAYER = 3;
     float pointDist = 0.5f;
-    float suspiciousTime = 10f;
+    float suspiciousTime = 120f;
     float timeCounter = 0f;
     public FieldOfView fov;
     float playerVisibleTimer = 0.0f;
@@ -50,6 +50,8 @@ public class StateMachine_Robust : MonoBehaviour
     float timeToChase = 1f;
     public Material alertFOV;
     public Material passiveFOV;
+
+    private Transform currentPosition;
     void Start() {
 /*         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -154,11 +156,14 @@ public class StateMachine_Robust : MonoBehaviour
                 if (timeCounter < Mathf.Epsilon)
                 {
                     getDefault();
-                } else if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 1.2)
+                } else if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
                 {
-                    waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+                    //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
 
-                    agent.SetDestination(getRandomNeighbor(currentPoint).position);
+                    waypoint currentPoint = currentPosition.GetComponent<waypoint>();
+
+                    currentPosition = getRandomNeighbor(currentPoint);
+                    agent.SetDestination(currentPosition.position);
                 }
 
                 break;
@@ -173,7 +178,7 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
 
             case STATE.PARANOID:
-                if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 1.2)
+                if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 0.5)
                 {
                     waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
 
@@ -206,7 +211,10 @@ public class StateMachine_Robust : MonoBehaviour
                 getParanoid();
                 break;
             case STATE.IDLE:
-                getIdle();
+                getIdle(0);
+                break;
+            case STATE.NOISE:
+                getNoise(new Vector3(0, 0, 0));
                 break;
         }
     }
@@ -238,6 +246,7 @@ public class StateMachine_Robust : MonoBehaviour
         myMesh.material.color = Color.yellow;
         noiseSource = source;
         state = STATE.NOISE;
+        agent.SetDestination(source);
     }
 
     // The NPC should investigate the area around themself when they get suspicious
@@ -294,7 +303,8 @@ public class StateMachine_Robust : MonoBehaviour
         for (int i = 0; i < graph.childCount; i++)
         {
             Transform wayPoint = graph.GetChild(i);
-            int roundedDist = Mathf.RoundToInt(Vector3.Distance(source, wayPoint.position));
+            float dist = Mathf.Pow(Vector3.Distance(source, wayPoint.position), 2.0f);
+            int roundedDist = Mathf.RoundToInt(dist);
             paranoidPoints[wayPoint] = roundedDist;
         }
     }
@@ -360,7 +370,6 @@ public class StateMachine_Robust : MonoBehaviour
     {
         Transform nearestPoint = transform;
         float closestDist = Mathf.Infinity;
-        int nearestIndex = -1;
 
         for (int i = 0; i < graph.childCount; i++)
         {
@@ -371,11 +380,10 @@ public class StateMachine_Robust : MonoBehaviour
             {
                 closestDist = currentDist;
                 nearestPoint = wayPoint;
-                nearestIndex = i;
             }
         }
 
-        currentDest = nearestIndex;
+        currentPosition = nearestPoint;
         agent.SetDestination(nearestPoint.position);
     }
 }
