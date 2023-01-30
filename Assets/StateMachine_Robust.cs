@@ -29,17 +29,23 @@ public class StateMachine_Robust : MonoBehaviour
     public Camera cam;
 
     private List<Vector3> patrolPoints = new();
-    private int currentDest = -1;
+    private int currentDest = 0;
     public NavMeshAgent agent;
     public Transform playerPos;
     private Vector3 noiseSource;
     private bool foundSource = false;
     public MeshRenderer myMesh;
 
-    public GameObject[] newPatrolPoints;
+    public Transform[] newPatrolPoints;
     public Transform graph;
     public float speedVar = 4;
     private Dictionary<Transform, int> paranoidPoints = new Dictionary<Transform, int>();
+    float waitTime = 0.0f;
+    private STATE defaultState = STATE.PATROLLING;
+    public int PLAYER_LAYER = 3;
+    float pointDist = 0.5f;
+    float suspiciousTime = 10f;
+    float timeCounter = 0f;
 
     void Start() {
         viewMesh = new Mesh();
@@ -64,73 +70,81 @@ public class StateMachine_Robust : MonoBehaviour
         switch (state) {
 
             case STATE.IDLE:
-                if (Input.GetMouseButtonDown(0))
-                    {
-                        Vector3 screenPos = Input.mousePosition;
-                        Ray ray = cam.ScreenPointToRay(screenPos);
-
-                        RaycastHit collPos;
-
-                        int layerMask = 1 << 3;
-                        layerMask = ~layerMask;
-
-                        if (Physics.Raycast(ray, out collPos, Mathf.Infinity, layerMask))
-                        {
-                            patrolPoints.Add(collPos.point);
-                        }
-                    }
-                else if (Input.GetKeyDown("return"))
+                while (waitTime > Mathf.Epsilon)
                 {
-                    Debug.Log("Moving from IDLE to PATROLLING");
-                   // Debug.Log(patrolPoints[0]);
-                   // Debug.Log(patrolPoints[1]);
-                    currentDest = 0;
-                    agent.SetDestination(patrolPoints[0]);
-                    state = STATE.PATROLLING;
+                    waitTime -= Time.deltaTime;
                 }
+
+                getDefault();
                 break;
 
             case STATE.PATROLLING:
                 // Replace with a ray cast spotting function later
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]));
-                if (Vector3.Distance(transform.position, playerPos.position) < 5)
+/*                 if (Vector3.Distance(transform.position, playerPos.position) < 5)
                 {
                     Debug.Log("Moving from PATROLLING to CHASING");
                     state = STATE.CHASING;
                     agent.SetDestination(playerPos.position);
-                }
-                else if (Vector3.Distance(transform.position, patrolPoints[currentDest]) < 1.2)
+                } */
+
+                // Assign new waypoint if current one has been reached
+                if (Vector3.Distance(transform.position, newPatrolPoints[currentDest].position) < 1.2)
                 {
-                    if (currentDest < patrolPoints.Count - 1)
+                    if (currentDest < newPatrolPoints.Length - 1)
                     {
                         currentDest++;
                     } else{
                         currentDest = 0;
                     }
-                    agent.SetDestination(patrolPoints[currentDest]);
+                    agent.SetDestination(newPatrolPoints[currentDest].position);
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
                 break;
                 
             case STATE.CHASING:
-                if (Vector3.Distance(transform.position, playerPos.position) > 3)
+                if (Vector3.Distance(transform.position, playerPos.position) > 5)
                 {
-                    Debug.Log("Moving from CHASING to PATROLLING");
-                    state = STATE.PATROLLING;
-                    agent.SetDestination(patrolPoints[currentDest]);
+                    getNoise(transform.position);
+                    //agent.SetDestination(patrolPoints[currentDest]);
                 } else
                 {
                     agent.SetDestination(playerPos.position);
                 }
                 break;
 
+            case STATE.SUSPICIOUS:
+                timeCounter -= Time.deltaTime;
+
+                if (timeCounter < Mathf.Epsilon)
+                {
+                    getDefault();
+                } else if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 1.2)
+                {
+                    waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+
+                    agent.SetDestination(getRandomNeighbor(currentPoint).position);
+                }
+
+                break;
+
             // Investigate a noise or disturbance of some sort
             case STATE.NOISE:
                 
-                if (Vector3.Distance(transform.position, noiseSource) < 0.5)
+                if (Vector3.Distance(transform.position, noiseSource) < pointDist)
                 {
-                    getSuspicious();
+                    getSuspicious(transform.position);
                 }
+                break;
+
+            case STATE.PARANOID:
+                if (Vector3.Distance(transform.position, graph.GetChild(currentDest).position) < 1.2)
+                {
+                    waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+
+                    agent.SetDestination(getRandomNeighbor(currentPoint).position);
+                }
+
                 break;
         }
     }
@@ -146,20 +160,34 @@ public class StateMachine_Robust : MonoBehaviour
         }
     } */
 
+    void getDefault()
+    {
+        switch (defaultState)
+        {
+            case STATE.PATROLLING:
+                getPatrol();
+                break;
+            case STATE.PARANOID:
+                getParanoid();
+                break;
+        }
+    }
+
     void getAlert()
     {
         myMesh.material.color = Color.red;
         state = STATE.CHASING;
     }
 
-    void getIdle()
+    void getIdle(float time)
     {
         myMesh.material.color = Color.blue;
         agent.isStopped = true;
+        waitTime = time;
         state = STATE.IDLE;
     }
 
-    void getNOISE(Vector3 source)
+    void getNoise(Vector3 source)
     {
         myMesh.material.color = Color.yellow;
         noiseSource = source;
@@ -167,15 +195,25 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
     // The NPC should investigate the area around themself when they get suspicious
-    void getSuspicious()
+    void getSuspicious(Vector3 source)
     {
         myMesh.material.color = Color.yellow;
+        assignSuspiciousWalk(source);
+
+        returnToSuspicion();
+
         state = STATE.SUSPICIOUS;
+
+        timeCounter = suspiciousTime;
     }
 
     void getParanoid()
     {
         myMesh.material.color = new Color(235, 125, 52);
+        assignParanoidWalk();
+
+        returnToSuspicion();
+        
         state = STATE.PARANOID;
     }
 
@@ -184,14 +222,21 @@ public class StateMachine_Robust : MonoBehaviour
 
     }
 
-     IEnumerator die()
-     {
-        getIdle();
+    void die()
+    {
         myMesh.material.color = Color.black;
-        //state = STATE.IDLE;
-        yield return new WaitForSeconds(3);
+        getIdle(3);
+        myMesh.material.color = Color.black;
         Destroy(gameObject);
-     }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == PLAYER_LAYER)
+        {
+            getIdle(3.0f);
+        }
+    }
 
     IEnumerator FindTargetsWithDelay(float delay) {
         while (true) {
@@ -204,7 +249,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Waypoints closer to the source get a larger value, incentivizing movement near it
     void assignSuspiciousWalk(Vector3 source)
     {
-        for (int i = 0; i < graph.GetChildCount(); i++)
+        for (int i = 0; i < graph.childCount; i++)
         {
             Transform wayPoint = graph.GetChild(i);
             int roundedDist = Mathf.RoundToInt(Vector3.Distance(source, wayPoint.position));
@@ -214,11 +259,82 @@ public class StateMachine_Robust : MonoBehaviour
 
     void assignParanoidWalk()
     {
-        for (int i = 0; i < graph.GetChildCount(); i++)
+        for (int i = 0; i < graph.childCount; i++)
         {
             Transform wayPoint = graph.GetChild(i);
             paranoidPoints[wayPoint] = Random.Range(1, 11);
         }
+    }
+
+    // Given a waypoint, returns a random neighbor according to paranoidPoints
+    Transform getRandomNeighbor(waypoint wayPoint)
+    {
+        Transform bestPoint = transform;
+        int largestWeight = -1;
+
+        for (int i = 0; i < wayPoint.neighbors.Length; i++)
+        {
+            Transform currentPoint = wayPoint.neighbors[i].transform;
+            int diceRoll = Random.Range(1, 6);
+
+            int weight = paranoidPoints[currentPoint] + diceRoll;
+            if (weight > largestWeight)
+            {
+                largestWeight = weight;
+                bestPoint = currentPoint;
+            }
+        }
+
+        return bestPoint;
+    }
+
+    // Return to the nearest waypoint on a patrol
+    void returnToPatrol()
+    {
+        Vector3 nearestPoint = new Vector3();
+        float closestDist = Mathf.Infinity;
+        int nearestIndex = -1;
+
+        for (int i = 0; i < patrolPoints.Count; i++)
+        {
+            Vector3 wayPoint = patrolPoints[i];
+            float currentDist = Vector3.Distance(transform.position, wayPoint);
+
+            if (currentDist < closestDist)
+            {
+                closestDist = currentDist;
+                nearestPoint = wayPoint;
+                nearestIndex = i;
+            }
+        }
+
+        currentDest = nearestIndex;
+        agent.SetDestination(nearestPoint);
+    }
+
+
+    // Go to the nearest waypoint from your location
+    void returnToSuspicion()
+    {
+        Transform nearestPoint = transform;
+        float closestDist = Mathf.Infinity;
+        int nearestIndex = -1;
+
+        for (int i = 0; i < graph.GetChildCount(); i++)
+        {
+            Transform wayPoint = graph.GetChild(i);
+            float currentDist = Vector3.Distance(transform.position, wayPoint.position);
+
+            if (currentDist < closestDist)
+            {
+                closestDist = currentDist;
+                nearestPoint = wayPoint;
+                nearestIndex = i;
+            }
+        }
+
+        currentDest = nearestIndex;
+        agent.SetDestination(nearestPoint.position);
     }
 
     void LateUpdate() {
