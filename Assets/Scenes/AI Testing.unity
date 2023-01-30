@@ -717,6 +717,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1025152408}
     - target: {fileID: 5380935968173276258, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
+      propertyPath: FOVMesh
+      value: 
+      objectReference: {fileID: 1787851368}
+    - target: {fileID: 5380935968173276258, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 1748903169}
@@ -1126,6 +1130,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1787851368 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5380935967168741156, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
+  m_PrefabInstance: {fileID: 1508071128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1810876820
 GameObject:
   m_ObjectHideFlags: 0

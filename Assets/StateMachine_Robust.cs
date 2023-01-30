@@ -33,6 +33,7 @@ public class StateMachine_Robust : MonoBehaviour
     public Transform playerPos;
     private Vector3 noiseSource;
     public MeshRenderer myMesh;
+    public MeshRenderer FOVMesh;
 
     public Transform[] newPatrolPoints;
     public Transform graph;
@@ -42,14 +43,15 @@ public class StateMachine_Robust : MonoBehaviour
     public STATE defaultState = STATE.PATROLLING;
     public int PLAYER_LAYER = 3;
     float pointDist = 0.5f;
-    float suspiciousTime = 120f;
+    float suspiciousTime;
     float timeCounter = 0f;
     public FieldOfView fov;
     float playerVisibleTimer = 0.0f;
-    public float timeToSuspicion = 2f;
-    public float timeToChase = 10f;
+    public float timeToSuspicion;
+    public float timeToChase;
     public Material alertFOV;
     public Material passiveFOV;
+    bool conscious = true;
 
     public LiveCounter NPCManager;
 
@@ -57,9 +59,12 @@ public class StateMachine_Robust : MonoBehaviour
 
     public bool alive = true;
     void Start() {
-/*         viewMesh = new Mesh();
-        viewMesh.name = "View Mesh";
-        viewMeshFilter.mesh = viewMesh; */
+        /*         viewMesh = new Mesh();
+                viewMesh.name = "View Mesh";
+                viewMeshFilter.mesh = viewMesh; */
+        timeToSuspicion = 1f;
+        timeToChase = 3f;
+        suspiciousTime = 120f;
 
         agent.speed = speedVar;
         getDefault();
@@ -70,33 +75,43 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fov.visibleTargets.Count != 0){
-            playerVisibleTimer += Time.deltaTime;
-        } else {
-            playerVisibleTimer -= Time.deltaTime;
-        }
+        if (conscious)
+        {
+            if (fov.visibleTargets.Count != 0)
+            {
+                playerVisibleTimer += Time.deltaTime;
+            }
+            else
+            {
+                playerVisibleTimer -= Time.deltaTime;
+            }
 
-        if (state == STATE.SUSPICIOUS || state == STATE.NOISE)
-        {
-            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase); 
-        } else if (state == STATE.CHASING)
-        {
-            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase); 
-        } else
-        {
-            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase); 
-        }
+            if (state == STATE.SUSPICIOUS || state == STATE.NOISE)
+            {
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
+            }
+            else if (state == STATE.CHASING)
+            {
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
+            }
+            else
+            {
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+            }
 
-        Debug.Log(playerVisibleTimer);
+            Debug.Log(playerVisibleTimer);
 
-        fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer/timeToChase);
+            fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
-        if ((state == STATE.SUSPICIOUS || state == STATE.NOISE) && playerVisibleTimer >= timeToChase)
-        {
-            getChase();
-        } else if ((state == STATE.IDLE || state == STATE.PATROLLING) && playerVisibleTimer >= timeToSuspicion)
-        {
-            getNoise(playerPos.position);
+            if ((state == STATE.SUSPICIOUS || state == STATE.NOISE) && playerVisibleTimer >= timeToChase)
+            {
+                getChase();
+            }
+            else if ((state == STATE.IDLE || state == STATE.PATROLLING) && playerVisibleTimer >= timeToSuspicion)
+            {
+                getNoise(playerPos.position);
+            }
+
         }
 
         if (Input.GetKeyDown("backspace"))
@@ -116,7 +131,16 @@ public class StateMachine_Robust : MonoBehaviour
                 }
                 else
                 {
-                    getDefault();
+                    if (!conscious)
+                    {
+                        conscious = true;
+                        FOVMesh.enabled = true;
+                        getSuspicious(transform.position);
+                    }
+                    else
+                    {
+                        getDefault();
+                    }
                 }
                 break;
 
@@ -306,7 +330,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         alive = false;
         state = STATE.IDLE;
-        waitTime = -1f;
+        waitTime = 10f;
         agent.isStopped = true;
         fov.viewMeshFilter.mesh.Clear();
         NPCManager.decrement();
@@ -325,7 +349,10 @@ public class StateMachine_Robust : MonoBehaviour
     {
         if (collision.gameObject.layer == PLAYER_LAYER)
         {
+            conscious = false;
+            FOVMesh.enabled = false;
             getIdle(3.0f);
+            myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
         }
     }
 
