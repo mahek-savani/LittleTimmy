@@ -46,7 +46,12 @@ public class StateMachine_Robust : MonoBehaviour
     float pointDist = 0.5f;
     float suspiciousTime = 10f;
     float timeCounter = 0f;
-
+    public FieldOfView fov;
+    float playerVisibleTimer = 0.0f;
+    float timeToSuspicion = 0.5f;
+    float timeToChase = 1f;
+    public Material alertFOV;
+    public Material passiveFOV;
     void Start() {
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -62,6 +67,21 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(fov.visibleTargets.Count != 0){
+            playerVisibleTimer += Time.deltaTime;
+        } else {
+            playerVisibleTimer -= Time.deltaTime;
+        }
+        playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);      
+        fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer/timeToChase);
+
+        if(playerVisibleTimer >= timeToChase){
+            getChase();
+        } else if (playerVisibleTimer >= timeToSuspicion)
+        {
+            getNoise(playerPos.position);
+        }
 /*         if (Input.GetKeyDown("backspace"))
         {
             StartCoroutine(die());
@@ -105,7 +125,7 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.CHASING:
                 if (Vector3.Distance(transform.position, playerPos.position) > 5)
                 {
-                    getNoise(transform.position);
+                    getNoise(playerPos.position);
                     //agent.SetDestination(patrolPoints[currentDest]);
                 } else
                 {
@@ -173,7 +193,7 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
-    void getAlert()
+    void getChase()
     {
         myMesh.material.color = Color.red;
         state = STATE.CHASING;
@@ -235,13 +255,6 @@ public class StateMachine_Robust : MonoBehaviour
         if (collision.gameObject.layer == PLAYER_LAYER)
         {
             getIdle(3.0f);
-        }
-    }
-
-    IEnumerator FindTargetsWithDelay(float delay) {
-        while (true) {
-            yield return new WaitForSeconds(delay);
-            FindVisibleTargets();
         }
     }
 
@@ -336,6 +349,15 @@ public class StateMachine_Robust : MonoBehaviour
         currentDest = nearestIndex;
         agent.SetDestination(nearestPoint.position);
     }
+/* 
+    IEnumerator FindTargetsWithDelay(float delay) {
+        while (true) {
+            yield return new WaitForSeconds(delay);
+            FindVisibleTargets();
+        }
+    }
+
+    
 
     void LateUpdate() {
         DrawFieldOfView();
@@ -482,3 +504,4 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 }
+ */
