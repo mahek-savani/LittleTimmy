@@ -64,7 +64,7 @@ public class StateMachine_Robust : MonoBehaviour
                 viewMeshFilter.mesh = viewMesh; */
         timeToSuspicion = 1f;
         timeToChase = 2f;
-        suspiciousTime = 10f;
+        suspiciousTime = 5f;
 
         agent.speed = speedVar;
         getDefault();
@@ -99,7 +99,7 @@ public class StateMachine_Robust : MonoBehaviour
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
             }
 
-            Debug.Log(playerVisibleTimer);
+            //Debug.Log(playerVisibleTimer);
 
             fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
@@ -201,8 +201,11 @@ public class StateMachine_Robust : MonoBehaviour
 
             // Investigate a noise or disturbance of some sort
             case STATE.NOISE:
-                
-                if (Vector3.Distance(transform.position, noiseSource) < pointDist)
+                if (fov.visibleTargets.Count != 0)
+                {
+                    agent.SetDestination(playerPos.position);
+                }
+                else
                 {
                     getSuspicious(transform.position);
                 }
