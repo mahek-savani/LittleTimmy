@@ -46,8 +46,8 @@ public class StateMachine_Robust : MonoBehaviour
     float timeCounter = 0f;
     public FieldOfView fov;
     float playerVisibleTimer = 0.0f;
-    public float timeToSuspicion = 0.5f;
-    public float timeToChase = 1f;
+    public float timeToSuspicion = 2f;
+    public float timeToChase = 10f;
     public Material alertFOV;
     public Material passiveFOV;
 
@@ -70,7 +70,6 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if(fov.visibleTargets.Count != 0){
             playerVisibleTimer += Time.deltaTime;
         } else {
@@ -87,7 +86,9 @@ public class StateMachine_Robust : MonoBehaviour
         {
             playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase); 
         }
-             
+
+        Debug.Log(playerVisibleTimer);
+
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer/timeToChase);
 
         if ((state == STATE.SUSPICIOUS || state == STATE.NOISE) && playerVisibleTimer >= timeToChase)
@@ -109,17 +110,14 @@ public class StateMachine_Robust : MonoBehaviour
         switch (state) {
 
             case STATE.IDLE:
-                if (waitTime < 0)
-                {
-                    break;
-                }
-
-                while (waitTime > Mathf.Epsilon)
+                if (waitTime > 0)
                 {
                     waitTime -= Time.deltaTime;
                 }
-
-                getDefault();
+                else
+                {
+                    getDefault();
+                }
                 break;
 
             case STATE.PATROLLING:
@@ -237,6 +235,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     void getChase()
     {
+        agent.isStopped = false;
         myMesh.material.color = Color.red;
         state = STATE.CHASING;
     }
@@ -253,12 +252,13 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         agent.isStopped = true;
-        waitTime = -1f;
+        waitTime = Mathf.Infinity;
         state = STATE.IDLE;
     }
 
     void getNoise(Vector3 source)
     {
+        agent.isStopped = false;
         myMesh.material.color = Color.yellow;
         noiseSource = source;
         state = STATE.NOISE;
@@ -268,6 +268,7 @@ public class StateMachine_Robust : MonoBehaviour
     // The NPC should investigate the area around themself when they get suspicious
     void getSuspicious(Vector3 source)
     {
+        agent.isStopped = false;
         myMesh.material.color = Color.yellow;
         assignSuspiciousWalk(source);
 
@@ -280,6 +281,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getParanoid()
     {
+        agent.isStopped = false;
         myMesh.material.color = new Color(252/255f, 139/255f, 0f);
         assignParanoidWalk();
 
@@ -293,6 +295,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     void getPatrol()
     {
+        agent.isStopped = false;
         returnToPatrol();
         myMesh.material.color = Color.cyan;
 
