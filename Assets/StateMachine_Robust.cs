@@ -24,7 +24,7 @@ public class StateMachine_Robust : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh; */
 
-    private enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
+    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
     private STATE state = STATE.IDLE;
     public Camera cam;
 
@@ -32,7 +32,6 @@ public class StateMachine_Robust : MonoBehaviour
     public NavMeshAgent agent;
     public Transform playerPos;
     private Vector3 noiseSource;
-    private bool foundSource = false;
     public MeshRenderer myMesh;
 
     public Transform[] newPatrolPoints;
@@ -40,7 +39,7 @@ public class StateMachine_Robust : MonoBehaviour
     public float speedVar = 4;
     private Dictionary<Transform, int> paranoidPoints = new Dictionary<Transform, int>();
     float waitTime = 0.0f;
-    private STATE defaultState = STATE.PATROLLING;
+    public STATE defaultState = STATE.PATROLLING;
     public int PLAYER_LAYER = 3;
     float pointDist = 0.5f;
     float suspiciousTime = 10f;
@@ -57,6 +56,7 @@ public class StateMachine_Robust : MonoBehaviour
         viewMeshFilter.mesh = viewMesh; */
 
         agent.speed = speedVar;
+        getDefault();
 
         //StartCoroutine(die());
     }
@@ -70,12 +70,23 @@ public class StateMachine_Robust : MonoBehaviour
         } else {
             playerVisibleTimer -= Time.deltaTime;
         }
-        playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);      
+        if (state == STATE.SUSPICIOUS || state == STATE.NOISE)
+        {
+            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase); 
+        } else if (state == STATE.CHASING)
+        {
+            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase); 
+        } else
+        {
+            playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase); 
+        }
+             
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer/timeToChase);
 
-        if(playerVisibleTimer >= timeToChase){
+        if ((state == STATE.SUSPICIOUS || state == STATE.NOISE) && playerVisibleTimer >= timeToChase)
+        {
             getChase();
-        } else if (playerVisibleTimer >= timeToSuspicion)
+        } else if ((state == STATE.IDLE || state == STATE.PATROLLING) && playerVisibleTimer >= timeToSuspicion)
         {
             getNoise(playerPos.position);
         }
@@ -87,6 +98,11 @@ public class StateMachine_Robust : MonoBehaviour
         switch (state) {
 
             case STATE.IDLE:
+                if (waitTime < 0)
+                {
+                    break;
+                }
+
                 while (waitTime > Mathf.Epsilon)
                 {
                     waitTime -= Time.deltaTime;
@@ -106,8 +122,9 @@ public class StateMachine_Robust : MonoBehaviour
                 } */
 
                 // Assign new waypoint if current one has been reached
-                if (Vector3.Distance(transform.position, newPatrolPoints[currentDest].position) < 1.2)
+                if (Vector3.Distance(transform.position, newPatrolPoints[currentDest].position) < 0.5)
                 {
+                    Debug.Log(newPatrolPoints[currentDest].position);
                     if (currentDest < newPatrolPoints.Length - 1)
                     {
                         currentDest++;
@@ -126,6 +143,7 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(patrolPoints[currentDest]);
                 } else
                 {
+                    //Debug.Log(playerPos.position);
                     agent.SetDestination(playerPos.position);
                 }
                 break;
@@ -187,6 +205,9 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.PARANOID:
                 getParanoid();
                 break;
+            case STATE.IDLE:
+                getIdle();
+                break;
         }
     }
 
@@ -201,6 +222,14 @@ public class StateMachine_Robust : MonoBehaviour
         myMesh.material.color = Color.blue;
         agent.isStopped = true;
         waitTime = time;
+        state = STATE.IDLE;
+    }
+
+    void getIdle()
+    {
+        myMesh.material.color = Color.blue;
+        agent.isStopped = true;
+        waitTime = -1f;
         state = STATE.IDLE;
     }
 
@@ -236,7 +265,10 @@ public class StateMachine_Robust : MonoBehaviour
 
     void getPatrol()
     {
+        returnToPatrol();
+        myMesh.material.color = Color.blue;
 
+        state = STATE.PATROLLING;
     }
 
     void die()
@@ -330,7 +362,7 @@ public class StateMachine_Robust : MonoBehaviour
         float closestDist = Mathf.Infinity;
         int nearestIndex = -1;
 
-        for (int i = 0; i < graph.GetChildCount(); i++)
+        for (int i = 0; i < graph.childCount; i++)
         {
             Transform wayPoint = graph.GetChild(i);
             float currentDist = Vector3.Distance(transform.position, wayPoint.position);

@@ -18,6 +18,8 @@ public class playerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        //Debug.Log(vertical);
+
         Vector3 mag = new Vector3(horizontal, 0f, vertical).normalized;
 
         Vector3 velocity = mag * movementSpeed * Time.deltaTime;
