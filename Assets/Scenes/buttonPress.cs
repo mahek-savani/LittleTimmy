@@ -6,16 +6,17 @@ public class buttonPress : MonoBehaviour
 {
     public SpikeTrap spikeTrap;
     public GameObject buttonParent;
-    public void OnTriggerEnter()
+    public void OnTriggerEnter(Collider c)
     {
-        Debug.Log("Here");
-        if (spikeTrap.trapActive)
+        if (c.gameObject.layer == 3)
         {
-            buttonParent.GetComponent<Animation>().Play("buttonAnim");
-            spikeTrap.playAnimation();
-            spikeTrap.trapActive = false;
-            //Destroy(gameObject);
+            if (spikeTrap.trapActive)
+            {
+                buttonParent.GetComponent<Animation>().Play("buttonAnim");
+                spikeTrap.playAnimation();
+                spikeTrap.trapActive = false;
+                //Destroy(gameObject);
+            }
         }
-        
     }
 }

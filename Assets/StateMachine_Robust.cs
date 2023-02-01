@@ -329,7 +329,7 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.PATROLLING;
     }
 
-    void die()
+    public void die()
     {
         alive = false;
         state = STATE.IDLE;

@@ -6,16 +6,17 @@ public class PitTrapButton : MonoBehaviour
 {
     public PitTrap pitTrap;
     public GameObject buttonParent;
-    public void OnTriggerEnter()
+    public void OnTriggerEnter(Collider c)
     {
-        Debug.Log("Here");
-        if (pitTrap.trapActive)
+        if (c.gameObject.layer == 3)
         {
-            buttonParent.GetComponent<Animation>().Play("buttonAnim");
-            pitTrap.playAnimation();
-            pitTrap.trapActive = false;
-            //Destroy(gameObject);
+            if (pitTrap.trapActive)
+            {
+                buttonParent.GetComponent<Animation>().Play("buttonAnim");
+                pitTrap.playAnimation();
+                pitTrap.trapActive = false;
+                //Destroy(gameObject);
+            }
         }
-        
     }
 }
