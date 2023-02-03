@@ -5,12 +5,7 @@ using UnityEngine;
 public class DieOnTouch : MonoBehaviour
 {
     public PitTrap pitTrap;
-    // Start is called before the first frame update
 
-    void Update()
-    {
-        Debug.Log(pitTrap.trapActive);
-    }
     void OnTriggerEnter(Collider c)
     {
         Debug.Log("It's activating");
