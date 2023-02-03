@@ -157,7 +157,7 @@ public class StateMachine_Robust : MonoBehaviour
                 // Assign new waypoint if current one has been reached
                 if (Vector3.Distance(transform.position, newPatrolPoints[currentDest].position) < 0.5)
                 {
-                    Debug.Log(newPatrolPoints[currentDest].position);
+                    //Debug.Log(newPatrolPoints[currentDest].position);
                     if (currentDest < newPatrolPoints.Length - 1)
                     {
                         currentDest++;
