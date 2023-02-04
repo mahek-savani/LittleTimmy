@@ -204,6 +204,7 @@ public class StateMachine_Robust : MonoBehaviour
                 if (fov.visibleTargets.Count != 0)
                 {
                     agent.SetDestination(playerPos.position);
+                    transform.LookAt(playerPos.position, transform.up);
                 }
                 else
                 {
