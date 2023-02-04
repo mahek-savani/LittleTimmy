@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool hasTrapInInventory;
     public GameObject trapInHand;
 
+    private float pickupDelay;
+
     void Start()
     {
          hasTrapInInventory = false;
@@ -35,9 +37,12 @@ public class PlayerController : MonoBehaviour
         float vertVal = Input.GetAxis("Vertical");
 
         transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
+
+        if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
+        else pickupDelay = 0;
     }
 
-        void OnTriggerEnter(Collider triggerObject){
+    void OnTriggerEnter(Collider triggerObject){
         if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
                 trapInHand = triggerObject.gameObject;
                 triggerObject.gameObject.SetActive(false);
@@ -46,22 +51,26 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerStay(Collider triggerObject){
+        if(pickupDelay <= 0){
+            if(hasTrapInInventory){
+                if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
+                    // Swap object positions  
+                    Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
+                    trapInHand.transform.position = newObjectPos;
 
-        if(hasTrapInInventory){
-            if(Input.GetKeyDown("e") && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
-                // Swap object positions  
-                Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
-                trapInHand.transform.position = newObjectPos;
+                    // Swap object On/Off
+                    trapInHand.SetActive(true);
+                    triggerObject.gameObject.SetActive(false);
 
-                // Swap object On/Off
-                trapInHand.SetActive(true);
-                triggerObject.gameObject.SetActive(false);
+                    // Move the current object we are over into inventory
+                    // and ensure that hasTrapInInventory is true.
+                    trapInHand = triggerObject.gameObject;
+                    hasTrapInInventory = true; 
 
-                // Move the current object we are over into inventory
-                // and ensure that hasTrapInInventory is true.
-                trapInHand = triggerObject.gameObject;
-                hasTrapInInventory = true; 
+                    pickupDelay = 1f;
+                }
             }
         }
+        
     }
 }
