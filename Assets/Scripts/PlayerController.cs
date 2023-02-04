@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class PlayerController : MonoBehaviour
     public bool hasTrapInInventory;
     public GameObject trapInHand;
 
+    // UI
+    public GameObject tmp_Pickup;
+    TextMeshProUGUI tmp_Pickup_text;
+
     private float pickupDelay;
 
     void Start()
     {
          hasTrapInInventory = false;
+         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -39,20 +45,24 @@ public class PlayerController : MonoBehaviour
         transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
 
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
-        else pickupDelay = 0;
+        else {
+            pickupDelay = 0;
+            if(trapInHand) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+        }
     }
 
     void OnTriggerEnter(Collider triggerObject){
-        if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+        if(!trapInHand && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
                 trapInHand = triggerObject.gameObject;
                 triggerObject.gameObject.SetActive(false);
                 hasTrapInInventory = true;
+                tmp_Pickup_text.text = "Inventory: \n 1 Trap";
         }
     }
 
     void OnTriggerStay(Collider triggerObject){
         if(pickupDelay <= 0){
-            if(hasTrapInInventory){
+            if(trapInHand){
                 if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
                     // Swap object positions  
                     Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
@@ -66,6 +76,8 @@ public class PlayerController : MonoBehaviour
                     // and ensure that hasTrapInInventory is true.
                     trapInHand = triggerObject.gameObject;
                     hasTrapInInventory = true; 
+
+                    tmp_Pickup_text.text = "Trap Swapped!";
 
                     pickupDelay = 1f;
                 }
