@@ -57,6 +57,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     private Transform currentPosition;
 
+    // Specifies the amount of time (in seconds) for an NPC to stop chasing the player
+    public float coolTime;
+
     public bool alive = true;
     void Start() {
         /*         viewMesh = new Mesh();
@@ -65,6 +68,7 @@ public class StateMachine_Robust : MonoBehaviour
         timeToSuspicion = 1f;
         timeToChase = 2f;
         suspiciousTime = 5f;
+        coolTime = 1000f;
 
         agent.speed = speedVar;
         getDefault();
@@ -170,15 +174,23 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
                 
             case STATE.CHASING:
-                if (Vector3.Distance(transform.position, playerPos.position) > 5)
+                agent.SetDestination(playerPos.position);
+                if (fov.visibleTargets.Count != 0)
                 {
-                    getNoise(playerPos.position);
-                    //agent.SetDestination(patrolPoints[currentDest]);
-                } else
-                {
-                    //Debug.Log(playerPos.position);
-                    agent.SetDestination(playerPos.position);
+                    coolTime = 1000f;
                 }
+                else if (fov.visibleTargets.Count == 0)
+                {
+                    coolTime -= Time.deltaTime;
+
+                    if (coolTime <= Mathf.Epsilon)
+                    {
+                        getNoise(playerPos.position);
+                    }
+                    //agent.SetDestination(patrolPoints[currentDest]);
+                }
+
+
                 break;
 
             case STATE.SUSPICIOUS:
