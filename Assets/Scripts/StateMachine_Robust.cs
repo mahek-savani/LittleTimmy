@@ -42,7 +42,7 @@ public class StateMachine_Robust : MonoBehaviour
     float waitTime = 0.0f;
     public STATE defaultState = STATE.PATROLLING;
     public int PLAYER_LAYER = 3;
-    float pointDist = 0.5f;
+    //float pointDist = 0.5f;
     float suspiciousTime;
     float timeCounter = 0f;
     public FieldOfView fov;
