@@ -1033,6 +1033,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5380935968173276263, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f32b2a769cb1dcd409f19380be08a47d, type: 3}
 --- !u!23 &502281540 stripped
@@ -2025,6 +2029,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6558086107544197676, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
       propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6558086107544197676, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
+      propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6558086107544198611, guid: e1999f2e9a9f0bd4da5f8330e98c4aa6, type: 3}
