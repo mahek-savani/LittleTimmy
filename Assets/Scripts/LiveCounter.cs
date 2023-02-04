@@ -23,7 +23,12 @@ public class LiveCounter : MonoBehaviour
             {
                 if (children[i].alive)
                 {
-                    children[i].getParanoid();
+                    if (children[i].state == children[i].defaultState)
+                    {
+                        children[i].getParanoid();
+                    }
+
+                    children[i].defaultState = StateMachine_Robust.STATE.PARANOID;
                 }
             }
 

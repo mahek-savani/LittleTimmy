@@ -25,7 +25,7 @@ public class StateMachine_Robust : MonoBehaviour
     Mesh viewMesh; */
 
     public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
-    private STATE state = STATE.IDLE;
+    public STATE state = STATE.IDLE;
     public Camera cam;
 
     private int currentDest = 0;
@@ -68,7 +68,7 @@ public class StateMachine_Robust : MonoBehaviour
         timeToSuspicion = 1f;
         timeToChase = 2f;
         suspiciousTime = 5f;
-        coolTime = 1000f;
+        coolTime = 2f;
 
         agent.speed = speedVar;
         getDefault();
@@ -90,32 +90,9 @@ public class StateMachine_Robust : MonoBehaviour
                 playerVisibleTimer -= Time.deltaTime;
             }
 
-            if (state == STATE.SUSPICIOUS || state == STATE.NOISE)
-            {
-                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
-            }
-            else if (state == STATE.CHASING)
-            {
-                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
-            }
-            else
-            {
-                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
-            }
-
             //Debug.Log(playerVisibleTimer);
 
             fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
-
-            if ((state == STATE.SUSPICIOUS || state == STATE.NOISE) && playerVisibleTimer >= timeToChase)
-            {
-                getChase();
-            }
-            else if ((state == STATE.IDLE || state == STATE.PATROLLING) && playerVisibleTimer >= timeToSuspicion)
-            {
-                getNoise(playerPos.position);
-            }
-
         }
 
         if (Input.GetKeyDown("backspace"))
@@ -129,6 +106,12 @@ public class StateMachine_Robust : MonoBehaviour
         switch (state) {
 
             case STATE.IDLE:
+                if ( playerVisibleTimer >= timeToSuspicion)
+                {
+                    getNoise(playerPos.position);
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
                 if (waitTime > 0)
                 {
                     waitTime -= Time.deltaTime;
@@ -149,6 +132,12 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
 
             case STATE.PATROLLING:
+                if ( playerVisibleTimer >= timeToSuspicion)
+                {
+                    getNoise(playerPos.position);
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
                 // Replace with a ray cast spotting function later
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]));
 /*                 if (Vector3.Distance(transform.position, playerPos.position) < 5)
@@ -174,10 +163,12 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
                 
             case STATE.CHASING:
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
+            
                 agent.SetDestination(playerPos.position);
                 if (fov.visibleTargets.Count != 0)
                 {
-                    coolTime = 1000f;
+                    coolTime = 2f;
                 }
                 else if (fov.visibleTargets.Count == 0)
                 {
@@ -194,6 +185,13 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
 
             case STATE.SUSPICIOUS:
+                if (playerVisibleTimer >= timeToChase)
+                {
+                    getChase();
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
+            
                 timeCounter -= Time.deltaTime;
 
                 if (timeCounter < Mathf.Epsilon)
@@ -213,6 +211,13 @@ public class StateMachine_Robust : MonoBehaviour
 
             // Investigate a noise or disturbance of some sort
             case STATE.NOISE:
+                if (playerVisibleTimer >= timeToChase)
+                {
+                    getChase();
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
+
                 if (fov.visibleTargets.Count != 0)
                 {
                     agent.SetDestination(playerPos.position);
@@ -225,6 +230,13 @@ public class StateMachine_Robust : MonoBehaviour
                 break;
 
             case STATE.PARANOID:
+                if ( playerVisibleTimer - timeToSuspicion >= Mathf.Epsilon)
+                {
+                    getNoise(playerPos.position);
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
                 if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
                 {
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
@@ -329,7 +341,8 @@ public class StateMachine_Robust : MonoBehaviour
 
         timeToSuspicion /= 2;
         timeToChase /= 2;
-        
+        playerVisibleTimer /= 2;
+
         state = STATE.PARANOID;
     }
 
@@ -367,6 +380,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             conscious = false;
             FOVMesh.enabled = false;
+            playerVisibleTimer = 0;
             getIdle(3.0f);
             myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
         }
