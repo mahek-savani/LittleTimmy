@@ -358,6 +358,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void die()
     {
         alive = false;
+        conscious = false;
         state = STATE.IDLE;
         waitTime = 10f;
         agent.isStopped = true;
