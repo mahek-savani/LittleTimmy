@@ -29,10 +29,6 @@ public class SwitchCameraView : MonoBehaviour
             int closestEnemyIndex = 0;
             for (int i = 0; i < enemyCameras.Length; i++)
             {
-                if (enemyCameras[i] == null)
-                {
-                    continue;
-                }
                 float distance = Vector3.Distance(playerTransform.position, enemyCameras[i].transform.position);
                 if (distance < closestDistance)
                 {
@@ -54,10 +50,6 @@ public class SwitchCameraView : MonoBehaviour
         playerCamera.gameObject.SetActive(true);
         for (int i = 0; i < enemyCameras.Length; i++)
         {
-            if (enemyCameras[i] == null)
-            {
-                continue;
-            }
             enemyCameras[i].gameObject.SetActive(false);
         }
     }
