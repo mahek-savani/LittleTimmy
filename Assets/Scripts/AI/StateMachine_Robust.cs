@@ -311,7 +311,7 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.IDLE;
     }
 
-    void getNoise(Vector3 source)
+    public void getNoise(Vector3 source)
     {
         agent.isStopped = false;
         myMesh.material.color = Color.yellow;
