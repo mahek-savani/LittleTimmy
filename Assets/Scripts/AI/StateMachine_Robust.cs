@@ -373,6 +373,14 @@ public class StateMachine_Robust : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+        data.enemyRemaining = data.enemyRemaining - 1;
+        Debug.Log(data.enemyRemaining);
+        if (data.enemyRemaining == 0)
+        {
+            data.endTime = System.DateTime.Now;
+            data.gameCompleted = true;
+        }
+        Debug.Log(data.gameCompleted);
     }
 
     void OnCollisionEnter(Collision collision)
