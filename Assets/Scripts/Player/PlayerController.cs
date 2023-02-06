@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject tmp_Pickup;
     TextMeshProUGUI tmp_Pickup_text;
 
-    private float pickupDelay;
+    public float pickupDelay;
 
     void Start()
     {
@@ -47,24 +47,28 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         else {
             pickupDelay = 0;
-            if(trapInHand) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+            else tmp_Pickup_text.text = "Inventory: Empty";
         }
 
         data.checkGameCompleted(data.gameCompleted);
     }
 
     void OnTriggerEnter(Collider triggerObject){
-        if(!trapInHand && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                trapInHand = triggerObject.gameObject;
-                triggerObject.gameObject.SetActive(false);
-                hasTrapInInventory = true;
-                tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+        if(pickupDelay <= 0){
+            if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                    trapInHand = triggerObject.gameObject;
+                    triggerObject.gameObject.SetActive(false);
+                    hasTrapInInventory = true;
+                    tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+            }
         }
+
     }
 
     void OnTriggerStay(Collider triggerObject){
         if(pickupDelay <= 0){
-            if(trapInHand){
+            if(hasTrapInInventory){
                 if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
                     // Swap object positions  
                     Vector3 newObjectPos = triggerObject.gameObject.transform.position;             

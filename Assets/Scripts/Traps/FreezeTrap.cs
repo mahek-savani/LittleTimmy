@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FreezeTrap : MonoBehaviour
 {
-    public Vector3 scaleChange = new Vector3(-0.25f, -0.25f, -0.25f);
+    //public Vector3 scaleChange = new Vector3(-0.25f, -0.25f, -0.25f);
 
     private bool triggered = false;
 
     void Start(){
         if(this.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-            this.transform.localScale += scaleChange;
+            this.transform.localScale = new Vector3(1f, 0.1f, 1f);
         }
     }
 
