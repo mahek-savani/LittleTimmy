@@ -7,6 +7,7 @@ public class TrapPlacer : MonoBehaviour
     public GameObject dropTrap;
     public GameObject player;
     public Transform cams;
+    public Transform target;
     public LayerMask canBeTrapped;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class TrapPlacer : MonoBehaviour
             {
                 GameObject trapPlaced = Instantiate(dropTrap, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                 trapPlaced.transform.LookAt(Hit.point + Hit.normal);
+                trapPlaced.layer = 8;
             }
         }
 
@@ -31,6 +33,8 @@ public class TrapPlacer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F)){
             Vector3 trapPosition = player.transform.position;
             GameObject trapPlaced = Instantiate(dropTrap, trapPosition, Quaternion.identity) as GameObject;
+            trapPlaced.layer = 8;
+            // trapPlaced.transform.LookAt(target.right);
         }
     }
 }
