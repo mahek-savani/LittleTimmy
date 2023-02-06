@@ -477,6 +477,13 @@ public class StateMachine_Robust : MonoBehaviour
         currentPosition = nearestPoint;
         agent.SetDestination(nearestPoint.position);
     }
+
+    public void MakeIncapacitated(float time){
+        conscious = false;
+        FOVMesh.enabled = false;
+        getIdle(time);
+        myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
+    }
 }
 /* 
     IEnumerator FindTargetsWithDelay(float delay) {
