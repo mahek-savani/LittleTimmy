@@ -9,6 +9,8 @@ public class PlayerDamage : MonoBehaviour
     public int currentHealth;
     
     public Health_Bar healthbar;
+
+    public PlayerController playerController;
     
 
     void Start()
@@ -17,16 +19,14 @@ public class PlayerDamage : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage( int damage)
     {
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
 
+        if (currentHealth == 0)
+        {
+            playerController.playerDie();
+        }
     }
 }
