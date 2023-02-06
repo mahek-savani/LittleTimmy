@@ -20,7 +20,7 @@ public class DropTrapActivation : MonoBehaviour
     {
         Debug.Log("Something touched the trap");
         other.GetComponent<StateMachine_Robust>().die();
-        //TODO: Ask Aaron if can tag NPC's, then can use this
+        //TODO: Ask Aaron if can tag NPCs, then can use this
         // if (other.CompareTag("Enemy"))
         // {
         //     StateMachine_Robust smr = other.transform.GetComponent<StateMachine_Robust>();

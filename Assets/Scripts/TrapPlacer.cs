@@ -31,7 +31,6 @@ public class TrapPlacer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F)){
             Vector3 trapPosition = player.transform.position;
             GameObject trapPlaced = Instantiate(dropTrap, trapPosition, Quaternion.identity) as GameObject;
-            trapPlaced.transform.LookAt(trapPosition);
         }
     }
 }
