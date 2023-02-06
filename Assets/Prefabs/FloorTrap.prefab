@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0467238, y: 1.0502324, z: 1.2146481}
-  m_Center: {x: 0.022241771, y: 0.025116265, z: -0.010543251}
+  m_Size: {x: 1.0467238, y: 1.0502324, z: 1}
+  m_Center: {x: 0.022241775, y: 0.025116285, z: 0}
 --- !u!1 &5408490336593474021
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 5408490336593474043}
   - component: {fileID: 5408490336593474042}
   m_Layer: 0
-  m_Name: DropTrap
+  m_Name: FloorTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5408490336593474021}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -130,7 +130,7 @@ Transform:
   - {fileID: 5408490335734735862}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!65 &5408490336593474043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142,8 +142,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0357764, y: 0.96132153, z: 1.1195498}
-  m_Center: {x: 0.027905703, y: -0.012212902, z: 0.0005418062}
+  m_Size: {x: 1.0357764, y: 0.96132153, z: 0.55675656}
+  m_Center: {x: 0.027905703, y: -0.012212902, z: 0.17864051}
 --- !u!114 &5408490336593474042
 MonoBehaviour:
   m_ObjectHideFlags: 0
