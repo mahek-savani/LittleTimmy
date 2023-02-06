@@ -98,15 +98,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log(data.gameCompleted);
     }
 
-    //Analytics start: If enenemy catches player, update end time and mark player as dead
-    private void OnCollisionEnter(Collision collision)
+
+
+    public void playerDie()
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemies"))
-        {
-            Debug.Log("collideEnemy");
-            StartCoroutine(playerDie(0f));
-            //data.timeToComplete = System.DateTime.Now;
-            //Debug.Log(data.timeToComplete);
-        }
+        StartCoroutine(playerDie(0f));
     }
+
 }
