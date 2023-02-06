@@ -27,6 +27,6 @@ public class playerMovement : MonoBehaviour
         float vertVal = Input.GetAxis("Vertical");
 
         transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
-
+        
     }
 }
