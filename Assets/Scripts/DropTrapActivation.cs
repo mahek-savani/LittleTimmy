@@ -19,14 +19,9 @@ public class DropTrapActivation : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Something touched the trap");
-        other.GetComponent<StateMachine_Robust>().die();
-        //TODO: Ask Aaron if can tag NPCs, then can use this
-        // if (other.CompareTag("Enemy"))
-        // {
-        //     StateMachine_Robust smr = other.transform.GetComponent<StateMachine_Robust>();
-        //     if(smr != null){
-        //         smr.die();
-        //     }
-        // }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        {
+            other.GetComponent<StateMachine_Robust>().die();
+        }
     }
 }

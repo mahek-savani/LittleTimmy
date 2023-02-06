@@ -19,7 +19,7 @@ public class TrapPlacer : MonoBehaviour
     void Update()
     {
         //Wall traps
-        if(Input.GetKeyDown(KeyCode.W)){
+        if(Input.GetKeyDown(KeyCode.R)){
             RaycastHit Hit;
             if(Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
             {
