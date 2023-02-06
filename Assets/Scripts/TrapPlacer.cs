@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrapPlacer : MonoBehaviour
 {
+    public GameObject noiseTrap;
     public GameObject dropTrap;
     public GameObject player;
     public Transform cams;
@@ -36,5 +37,14 @@ public class TrapPlacer : MonoBehaviour
             trapPlaced.layer = 8;
             // trapPlaced.transform.LookAt(target.right);
         }
+
+        //Noise traps
+        if(Input.GetKeyDown(KeyCode.N)){
+            Vector3 trapPosition = player.transform.position;
+            GameObject trapPlaced = Instantiate(noiseTrap, trapPosition, Quaternion.identity) as GameObject;
+            trapPlaced.layer = 8;
+            // trapPlaced.transform.LookAt(target.right);
+        }
+
     }
 }
