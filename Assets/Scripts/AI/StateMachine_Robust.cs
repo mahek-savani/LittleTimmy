@@ -24,43 +24,46 @@ public class StateMachine_Robust : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh; */
 
+
     public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
     public STATE state = STATE.IDLE;
-    public Camera cam;
+    public STATE defaultState = STATE.PATROLLING;
+    public int PLAYER_LAYER = 3;
+    public MeshRenderer myMesh;
+    public PlayerDamage playerDamage;
+    public bool alive = true;
+
 
     private int currentDest = 0;
     public NavMeshAgent agent;
     public Transform playerPos;
-    private Vector3 noiseSource;
-    public MeshRenderer myMesh;
-    public MeshRenderer FOVMesh;
-
     public Transform[] newPatrolPoints;
     public Transform graph;
     public float speedVar = 4;
-    private Dictionary<Transform, int> paranoidPoints = new Dictionary<Transform, int>();
-    float waitTime = 0.0f;
-    public STATE defaultState = STATE.PATROLLING;
-    public int PLAYER_LAYER = 3;
-    //float pointDist = 0.5f;
-    float suspiciousTime;
-    float timeCounter = 0f;
-    public FieldOfView fov;
-    float playerVisibleTimer = 0.0f;
-    private float timeToSuspicion;
-    private float timeToChase;
-    public Material alertFOV;
-    public Material passiveFOV;
-    bool conscious = true;
+
 
     public LiveCounter NPCManager;
+    private Vector3 noiseSource;
+    private Dictionary<Transform, int> paranoidPoints = new Dictionary<Transform, int>();
+    public float coolTime; // Specifies the amount of time (in seconds) for an NPC to stop chasing the player
 
+
+    public FieldOfView fov;
+    public MeshRenderer FOVMesh;
+    public Material alertFOV;
+    public Material passiveFOV;
+    
+    
+    //float pointDist = 0.5f;
+    float suspiciousTime;
+    float timeCounter = 0f; 
+    float playerVisibleTimer = 0.0f;
+    float waitTime = 0.0f;
+    private float timeToSuspicion;
+    private float timeToChase;
+    bool conscious = true;
     private Transform currentPosition;
 
-    // Specifies the amount of time (in seconds) for an NPC to stop chasing the player
-    public float coolTime;
-
-    public bool alive = true;
     void Start() {
         /*         viewMesh = new Mesh();
                 viewMesh.name = "View Mesh";
@@ -385,13 +388,14 @@ public class StateMachine_Robust : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == PLAYER_LAYER)
+        if (collision.gameObject.layer == PLAYER_LAYER && conscious && alive)
         {
             conscious = false;
             FOVMesh.enabled = false;
             playerVisibleTimer = 0;
             getIdle(3.0f);
             myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
+            playerDamage.TakeDamage(1);
         }
     }
 

@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
             pickupDelay = 0;
             if(trapInHand) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
         }
+
+        data.checkGameCompleted(data.gameCompleted);
     }
 
     void OnTriggerEnter(Collider triggerObject){
@@ -84,5 +86,27 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+    }
+
+    public IEnumerator playerDie(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject, 0.5f);
+        data.playerDeath = "yes";
+        data.endTime = System.DateTime.Now;
+        data.gameCompleted = true;
+        Debug.Log(data.gameCompleted);
+    }
+
+    //Analytics start: If enenemy catches player, update end time and mark player as dead
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        {
+            Debug.Log("collideEnemy");
+            StartCoroutine(playerDie(0f));
+            //data.timeToComplete = System.DateTime.Now;
+            //Debug.Log(data.timeToComplete);
+        }
     }
 }
