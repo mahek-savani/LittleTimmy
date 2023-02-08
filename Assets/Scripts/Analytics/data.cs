@@ -18,7 +18,7 @@ public class data
         {
 
             dataRes d = new dataRes();
-            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/data.json", d);
+            //RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/data.json", d);
             Debug.Log(d.enemyRemaining);
             gameCompleted = false;
             count = 1;

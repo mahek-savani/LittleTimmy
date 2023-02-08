@@ -358,6 +358,11 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.PATROLLING;
     }
 
+
+    public void dieIdle()
+    {
+        StartCoroutine("dieAsynchronous");
+    }
     public void die()
     {
         alive = false;
