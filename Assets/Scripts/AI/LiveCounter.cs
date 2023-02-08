@@ -40,4 +40,9 @@ public class LiveCounter : MonoBehaviour
     {
         --liveCounter;
     }
+
+    public int getNumLiving()
+    {
+        return gameObject.GetComponentsInChildren<StateMachine_Robust>().Length;
+    }
 }
