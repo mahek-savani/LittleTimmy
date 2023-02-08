@@ -18,7 +18,7 @@ public class DropTrapActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Something touched the trap");
+        // Debug.Log("Something touched the trap");
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             other.GetComponent<StateMachine_Robust>().die();
