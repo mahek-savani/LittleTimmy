@@ -6,6 +6,7 @@ public class LiveCounter : MonoBehaviour
 {
     private int totalLives;
     private int liveCounter;
+    public bool paranoidMode = false;
 
     private void Start()
     {
@@ -15,25 +16,29 @@ public class LiveCounter : MonoBehaviour
 
     private void Update()
     {
-        if (liveCounter <= totalLives / 2)
+        if (paranoidMode)
         {
-            StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
-
-            for (int i = 0; i < children.Length; i++)
-            {
-                if (children[i].alive)
+            if (liveCounter <= totalLives / 2)
                 {
-                    if (children[i].state == children[i].defaultState)
+                    StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
+
+                    for (int i = 0; i < children.Length; i++)
                     {
-                        children[i].getParanoid();
+                        if (children[i].alive)
+                        {
+                            if (children[i].state == children[i].defaultState)
+                            {
+                                children[i].getParanoid();
+                            }
+
+                            children[i].defaultState = StateMachine_Robust.STATE.PARANOID;
+                        }
                     }
 
-                    children[i].defaultState = StateMachine_Robust.STATE.PARANOID;
+                    liveCounter = totalLives * 2;
                 }
-            }
-
-            liveCounter = totalLives * 2;
         }
+
     }
 
     public void decrement()
@@ -43,6 +48,17 @@ public class LiveCounter : MonoBehaviour
 
     public int getNumLiving()
     {
-        return gameObject.GetComponentsInChildren<StateMachine_Robust>().Length;
+        int numLiving = 0;
+        StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
+
+        for (int i = 0; i < children.Length; i++)
+        {
+            if (children[i].alive)
+            {
+                numLiving++;
+            }
+        }
+
+        return numLiving;
     }
 }
