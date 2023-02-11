@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropTrapActivation : MonoBehaviour
+public class DropTrapActivation : BaseTrapClass
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+        trapName = "Instant Death";
     }
 
     // Update is called once per frame

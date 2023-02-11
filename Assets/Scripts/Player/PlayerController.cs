@@ -10,18 +10,23 @@ public class PlayerController : MonoBehaviour
     public float speed = 15f;
 
     public bool hasTrapInInventory;
+    public bool inSwapCommand;
     public GameObject trapInHand;
 
     // UI
     public GameObject tmp_Pickup;
+    public GameObject helpUI;
     TextMeshProUGUI tmp_Pickup_text;
+    TextMeshProUGUI helpText;
 
     public float pickupDelay;
 
     void Start()
     {
-         hasTrapInInventory = false;
-         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
+        inSwapCommand = false;
+        hasTrapInInventory = false;
+        tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
+        helpText = helpUI.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -47,29 +52,23 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         else {
             pickupDelay = 0;
-            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponent<BaseTrapClass>().trapName + " Trap";
             else tmp_Pickup_text.text = "Inventory: Empty";
         }
 
         data.checkGameCompleted(data.gameCompleted);
     }
 
-    void OnTriggerEnter(Collider triggerObject){
-        if(pickupDelay <= 0){
-            if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                    trapInHand = triggerObject.gameObject;
-                    triggerObject.gameObject.SetActive(false);
-                    hasTrapInInventory = true;
-                    tmp_Pickup_text.text = "Inventory: \n 1 Trap";
-            }
-        }
-
-    }
-
     void OnTriggerStay(Collider triggerObject){
         if(pickupDelay <= 0){
-            if(hasTrapInInventory){
-                if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
+            if(hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                inSwapCommand = true;
+
+                if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
+                    helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                }
+                
+                if(Input.GetKey(KeyCode.E)){ 
                     // Swap object positions  
                     Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
                     trapInHand.transform.position = newObjectPos;
@@ -84,12 +83,32 @@ public class PlayerController : MonoBehaviour
                     hasTrapInInventory = true; 
 
                     tmp_Pickup_text.text = "Trap Swapped!";
+                    pickupDelay = 1f;
 
+                    helpText.text = "";
+                    inSwapCommand = false;
+                }
+            } else {
+
+                if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
+                    helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                }
+
+                if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                    trapInHand = triggerObject.gameObject;
+                    triggerObject.gameObject.SetActive(false);
+                    hasTrapInInventory = true;
+
+                    helpText.text = "";
                     pickupDelay = 1f;
                 }
             }
-        }
-        
+        } 
+    }
+
+    void OnTriggerExit(){
+        helpText.text = "";
+        inSwapCommand = false;
     }
 
     public IEnumerator playerDie(float delay)
@@ -102,7 +121,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log(data.gameCompleted);
     }
 
-
+    // void CheckTrapType(){
+    //     if(trapInHand.GetComponent<FreezeTrap>()) trapName = "Freeze";
+    //     else if (trapInHand.GetComponent<NoiseTrapActivation>()) trapName = "Noise";
+    //     else if(trapInHand.GetComponent<DropTrapActivation>()) trapName = "Instant Death";
+    // }
 
     public void playerDie()
     {

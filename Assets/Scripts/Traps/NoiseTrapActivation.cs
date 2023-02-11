@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseTrapActivation : MonoBehaviour
+public class NoiseTrapActivation : BaseTrapClass
 {
     bool isTriggered = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        trapName = "Noise";
     }
 
     // Update is called once per frame
