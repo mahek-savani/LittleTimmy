@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class StateMachine_Robust : MonoBehaviour
 {
     // Enumerated type for possible states
-    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE};
+    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS};
 
 
 
@@ -40,10 +40,13 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies the amount of time for the NPC to stop chasing the player once they're out of the FOV
     public float coolTime = 2f;
 
+    // Specifies how long the NPC takes to wake up after being rendered unconscious
+    public float unconsciousTime = 3f;
+
     // A variable used to store the countdown from suspicious to passivity
     private float timeCounter = 0f; 
 
-    // Stores the countdown from idle to another state
+    // Stores the countdown from idle or unconscious to another state
     private float waitTime = 0.0f;
 
 
@@ -114,22 +117,19 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // While conscious, make the visual FOV redder as the player stays inside of it
-        if (conscious)
+        // Make the visual FOV redder as the player stays inside of it
+        if (fov.visibleTargets.Count != 0)
         {
-            if (fov.visibleTargets.Count != 0)
-            {
-                playerVisibleTimer += Time.deltaTime;
-            }
-            else
-            {
-                playerVisibleTimer -= Time.deltaTime;
-            }
-
-            //Debug.Log(playerVisibleTimer);
-
-            fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
+            playerVisibleTimer += Time.deltaTime;
         }
+        else
+        {
+            playerVisibleTimer -= Time.deltaTime;
+        }
+
+        //Debug.Log(playerVisibleTimer);
+
+        fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (Input.GetKeyDown("backspace"))
@@ -142,6 +142,22 @@ public class StateMachine_Robust : MonoBehaviour
 
         // The body of the state machine, checking the state every frame and acting accordingly
         switch (state) {
+
+            // The NPC can't hurt or see the player, and can't move until the timer runs out
+            case STATE.UNCONSCIOUS:
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, 0);
+                if (waitTime > 0)
+                {
+                    waitTime -= Time.deltaTime;
+                }
+                else
+                {
+                    conscious = true;
+                    FOVMesh.enabled = true;
+                    getSuspicious(transform.position);
+                }
+
+                break;
 
             // In the idle state, the NPC will remain motionless for some amount of specified time
             // If the NPC is conscious while idle, their FOV will be visible and they can aggro, else they can't
@@ -160,16 +176,7 @@ public class StateMachine_Robust : MonoBehaviour
                 }
                 else
                 {
-                    if (!conscious)
-                    {
-                        conscious = true;
-                        FOVMesh.enabled = true;
-                        getSuspicious(transform.position);
-                    }
-                    else
-                    {
-                        getDefault();
-                    }
+                    getDefault();
                 }
                 break;
 
@@ -323,14 +330,14 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
-    void getChase()
+    public void getChase()
     {
         agent.isStopped = false;
         myMesh.material.color = Color.red;
         state = STATE.CHASING;
     }
 
-    void getIdle(float time)
+    public void getIdle(float time)
     {
         myMesh.material.color = Color.blue;
         agent.isStopped = true;
@@ -338,12 +345,22 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.IDLE;
     }
 
-    void getIdle()
+    public void getIdle()
     {
         myMesh.material.color = Color.blue;
         agent.isStopped = true;
         waitTime = Mathf.Infinity;
         state = STATE.IDLE;
+    }
+
+    public void getUnconscious(float time)
+    {
+        agent.isStopped = true;
+        conscious = false;
+        FOVMesh.enabled = false;
+        state = STATE.UNCONSCIOUS;
+        waitTime = unconsciousTime;
+        myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
     }
 
     public void getNoise(Vector3 source)
@@ -354,7 +371,7 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(source);
     }
 
-    void getSuspicious(Vector3 source)
+    public void getSuspicious(Vector3 source)
     {
         agent.isStopped = false;
         myMesh.material.color = Color.yellow;
@@ -382,7 +399,7 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.PARANOID;
     }
 
-    void getPatrol()
+    public void getPatrol()
     {
         agent.isStopped = false;
         returnToPatrol();
@@ -423,11 +440,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
-            conscious = false;
-            FOVMesh.enabled = false;
-            playerVisibleTimer = 0;
-            getIdle(3.0f);
-            myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
+            getUnconscious(unconsciousTime);
             playerDamage.TakeDamage(1);
         }
     }
@@ -525,10 +538,7 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(nearestPoint.position);
     }
 
-    public void MakeIncapacitated(float time){
-        conscious = false;
-        FOVMesh.enabled = false;
-        getIdle(time);
-        myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
-    }
+    // public void MakeIncapacitated(float time){
+    //     getUnconscious(time);
+    // }
 }
