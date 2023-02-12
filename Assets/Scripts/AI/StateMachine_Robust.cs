@@ -104,8 +104,11 @@ public class StateMachine_Robust : MonoBehaviour
 
     [Header("Player Interaction")]
 
-    // Specifies how much damage this agent does to the player
-    public PlayerDamage playerDamage;
+    // The interface for damaging the player
+    public PlayerDamage damageInterface;
+
+    // The amount of damage this NPC will do to the player each hit
+    public int playerDamage = 1;
 
     // A timer storing the length of time the player has been in the agent's FOV
     public float playerVisibleTimer = 0.0f;
@@ -471,7 +474,7 @@ public class StateMachine_Robust : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
             getUnconscious(unconsciousTime);
-            playerDamage.TakeDamage(1);
+            damageInterface.TakeDamage(playerDamage);
         }
     }
 
