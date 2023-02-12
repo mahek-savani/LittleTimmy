@@ -97,6 +97,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Stores the current waypoint transform in suspicious / paranoid states
     private Transform currentPosition;
 
+    // The point being investigated when in noise mode
+    private Vector3 noiseSource;
+
 
 
     [Header("Player Interaction")]
@@ -247,10 +250,15 @@ public class StateMachine_Robust : MonoBehaviour
                 if (timeCounter < Mathf.Epsilon)
                 {
                     getDefault();
-                } else if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
+                }
+                else if (fov.visibleTargets.Count != 0)
+                {
+                    getNoise(playerPos.position);
+                }
+                else if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
-
+                    paranoidPoints[currentPosition] += 10000;
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
                     currentPosition = getRandomNeighbor(currentPoint);
@@ -272,12 +280,18 @@ public class StateMachine_Robust : MonoBehaviour
 
                 if (fov.visibleTargets.Count != 0)
                 {
+                    noiseSource = playerPos.position;
                     agent.SetDestination(playerPos.position);
                     transform.LookAt(playerPos.position, transform.up);
+                    timeCounter = suspiciousTime;
+                }
+                else if (Vector3.Distance(transform.position, noiseSource) < 0.5)
+                {
+                    getSuspicious(transform.position);
                 }
                 else
                 {
-                    getSuspicious(transform.position);
+                    timeCounter -= Time.deltaTime;
                 }
                 break;
 
@@ -368,6 +382,8 @@ public class StateMachine_Robust : MonoBehaviour
         agent.isStopped = false;
         myMesh.material.color = Color.yellow;
         state = STATE.NOISE;
+        noiseSource = source;
+        timeCounter = suspiciousTime;
         agent.SetDestination(source);
     }
 
@@ -381,7 +397,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         state = STATE.SUSPICIOUS;
 
-        timeCounter = suspiciousTime;
+        //timeCounter = suspiciousTime;
     }
 
     public void getParanoid()
@@ -427,7 +443,6 @@ public class StateMachine_Robust : MonoBehaviour
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
         data.enemyRemaining = data.enemyRemaining - 1;
-        Debug.Log(data.enemyRemaining);
         if (data.enemyRemaining == 0)
         {
             data.endTime = System.DateTime.Now;
