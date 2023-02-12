@@ -7,21 +7,20 @@ public class DropTrapActivation : BaseTrapClass
     // Start is called before the first frame update
     void Start()
     {
+        // Set name of trap to Instant Death
         trapName = "Instant Death";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log("Something touched the trap");
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        if (!isTriggered && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             other.GetComponent<StateMachine_Robust>().die();
+            isTriggered = true;
+
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            this.GetComponent<Renderer>().material.color = Color.grey;
         }
     }
 }

@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody pbody;
     public float speed = 15f;
 
-    public bool hasTrapInInventory;
-    public bool inSwapCommand;
-    public GameObject trapInHand;
+    public bool hasTrapInInventory; // Check if a trap already exists in inv
+    public bool inSwapCommand;      // This prevents player from swapping and dropping trap at the same time
+    public GameObject trapInHand;   // Set trap that we need to spawn
 
     // UI
     public GameObject tmp_Pickup;
@@ -60,53 +60,66 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerStay(Collider triggerObject){
+
+        // Setting a pickup delay so that the text doesn't flash rapidly
         if(pickupDelay <= 0){
-            if(hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                inSwapCommand = true;
 
-                if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
-                    helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
-                }
-                
-                if(Input.GetKey(KeyCode.E)){ 
-                    // Swap object positions  
-                    Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
-                    trapInHand.transform.position = newObjectPos;
+            // We need to know if the trigger box we've entered is a pickup object AND
+            // if the object has been triggered before or not
+            if(triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup") 
+            && !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
 
-                    // Swap object On/Off
-                    trapInHand.SetActive(true);
-                    triggerObject.gameObject.SetActive(false);
+                // Different logic depending on whether or not there is currently a trap
+                // in inventory
+                if(hasTrapInInventory){
+                    inSwapCommand = true;
 
-                    // Move the current object we are over into inventory
-                    // and ensure that hasTrapInInventory is true.
-                    trapInHand = triggerObject.gameObject;
-                    hasTrapInInventory = true; 
+                    if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
+                        helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                    }
+                    
+                    if(Input.GetKey(KeyCode.E)){ 
+                        // Swap object positions  
+                        Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
+                        trapInHand.transform.position = newObjectPos;
 
-                    tmp_Pickup_text.text = "Trap Swapped!";
-                    pickupDelay = 1f;
+                        // Swap object On/Off
+                        trapInHand.SetActive(true);
+                        triggerObject.gameObject.SetActive(false);
 
-                    helpText.text = "";
-                    inSwapCommand = false;
-                }
-            } else {
+                        // Move the current object we are over into inventory
+                        // and ensure that hasTrapInInventory is true.
+                        trapInHand = triggerObject.gameObject;
+                        hasTrapInInventory = true; 
 
-                if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
-                    helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
-                }
+                        tmp_Pickup_text.text = "Trap Swapped!";
+                        pickupDelay = 1f;
 
-                if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                    trapInHand = triggerObject.gameObject;
-                    triggerObject.gameObject.SetActive(false);
-                    hasTrapInInventory = true;
+                        helpText.text = "";
+                        inSwapCommand = false;
+                    }
+                } else {
 
-                    helpText.text = "";
-                    pickupDelay = 1f;
+                    if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
+                        helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                    }
+
+                    if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                        trapInHand = triggerObject.gameObject;
+                        triggerObject.gameObject.SetActive(false);
+                        hasTrapInInventory = true;
+
+                        helpText.text = "";
+                        pickupDelay = 1f;
+                    }
                 }
             }
         } 
     }
 
     void OnTriggerExit(){
+        // This is to ensure we clean the helpText and inSwapCommand bools
+        // in case we leave a trigger box without picking an object up
         helpText.text = "";
         inSwapCommand = false;
     }
@@ -120,12 +133,6 @@ public class PlayerController : MonoBehaviour
         data.gameCompleted = true;
         Debug.Log(data.gameCompleted);
     }
-
-    // void CheckTrapType(){
-    //     if(trapInHand.GetComponent<FreezeTrap>()) trapName = "Freeze";
-    //     else if (trapInHand.GetComponent<NoiseTrapActivation>()) trapName = "Noise";
-    //     else if(trapInHand.GetComponent<DropTrapActivation>()) trapName = "Instant Death";
-    // }
 
     public void playerDie()
     {
