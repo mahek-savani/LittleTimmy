@@ -113,6 +113,16 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
+
+
+    //[Header("Debugging")]
+
+    //// Determines whether or not 
+    //public bool showPath = true;
+
+    //public Color pathColor = new Color(1f, 1f, 1f, 1f);
+
+
     void Start() {
         if (patrolPoints.Length == 0)
         {
@@ -200,7 +210,7 @@ public class StateMachine_Robust : MonoBehaviour
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
                 // Assign new waypoint if current one has been reached
-                if (Vector3.Distance(transform.position, patrolPoints[currentDest].position) < 0.5)
+                if (Vector3.Distance(transform.position, patrolPoints[currentDest].position) < 0.9)
                 {
                     //Debug.Log(patrolPoints[currentDest].position);
                     if (currentDest < patrolPoints.Length - 1)
@@ -260,7 +270,7 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     getNoise(playerPos.position);
                 }
-                else if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
+                else if (Vector3.Distance(transform.position, currentPosition.position) < 0.9)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
                     paranoidPoints[currentPosition] += 10000;
@@ -311,7 +321,7 @@ public class StateMachine_Robust : MonoBehaviour
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
-                if (Vector3.Distance(transform.position, currentPosition.position) < 0.5)
+                if (Vector3.Distance(transform.position, currentPosition.position) < 0.9)
                 {
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
