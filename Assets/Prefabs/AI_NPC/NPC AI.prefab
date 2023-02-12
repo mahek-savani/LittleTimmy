@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8553408013823746383}
   - component: {fileID: 4202406000793646336}
   m_Layer: 0
-  m_Name: NPC1 Cam
+  m_Name: NPC Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3250395405517195541}
-  m_LocalRotation: {x: 0.39468312, y: 3e-45, z: -1e-45, w: 0.91881734}
+  m_LocalRotation: {x: 0.39468312, y: -1e-45, z: 1e-45, w: 0.91881734}
   m_LocalPosition: {x: 0, y: 13.390001, z: -12.710001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -205,29 +205,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   defaultState: 1
-  PLAYER_LAYER: 3
-  myMesh: {fileID: 6327803450025997517}
-  playerDamage: {fileID: 0}
   alive: 1
-  agent: {fileID: 6327803450025997513}
-  playerPos: {fileID: 0}
-  newPatrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  graph: {fileID: 0}
-  speedVar: 4
-  NPCManager: {fileID: 0}
+  conscious: 1
+  timeToSuspicion: 1
+  suspiciousTime: 5
+  timeToChase: 2
   coolTime: 0
+  unconsciousTime: 3
+  myMesh: {fileID: 6327803450025997517}
+  NPCManager: {fileID: 0}
   fov: {fileID: 6327803450025997512}
   FOVMesh: {fileID: 6327803451168946060}
   alertFOV: {fileID: 2100000, guid: 9646a033ad9fcfa4cb20a035b93879b6, type: 2}
   passiveFOV: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
+  agent: {fileID: 6327803450025997513}
+  graph: {fileID: 0}
+  patrolPoints: []
+  playerDamage: {fileID: 0}
+  playerVisibleTimer: 0
+  playerPos: {fileID: 0}
 --- !u!195 &6327803450025997513
 NavMeshAgent:
   m_ObjectHideFlags: 0

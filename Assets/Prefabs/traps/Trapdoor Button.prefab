@@ -108,12 +108,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1370967427630311967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd95c7d8db4bbe4d8a0d86ff3329eab, type: 3}
+  m_Script: {fileID: 11500000, guid: 263bb10158a12ed41a18b4f0b2055616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitActive: 0
-  buttonP: {fileID: 1370967429295379707}
-  enemyObj: {fileID: 0}
+  pitTrap: {fileID: 0}
+  buttonParent: {fileID: 0}
+  door: {fileID: 0}
 --- !u!1 &1370967429295379707
 GameObject:
   m_ObjectHideFlags: 0
