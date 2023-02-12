@@ -1900,11 +1900,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848203901}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &868974103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1036043363834537013, guid: 5f456ed1a92c8674b98396bdbb17afe0, type: 3}
-  m_PrefabInstance: {fileID: 924577237}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &868974108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1036043363834537000, guid: 5f456ed1a92c8674b98396bdbb17afe0, type: 3}
@@ -2178,8 +2173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0213936bf6cef64381b4274ac77f376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeTrap: {fileID: 1976572187}
-  buttonParent: {fileID: 868974103}
 --- !u!1001 &969007008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4504,6 +4497,7 @@ MonoBehaviour:
   hasTrapInInventory: 0
   trapInHand: {fileID: 0}
   tmp_Pickup: {fileID: 1987919600}
+  pickupDelay: 0
 --- !u!114 &1847924885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4516,8 +4510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b226809407adc4bd5bcd98765d0385ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseTrap: {fileID: 5408490336593474021, guid: c8542686cfff9452193eecad0c329b54, type: 3}
   dropTrap: {fileID: 5408490336593474021, guid: a101f71156ba34862addcc9b97da78fd, type: 3}
+  noiseTrap: {fileID: 5408490336593474021, guid: c8542686cfff9452193eecad0c329b54, type: 3}
   player: {fileID: 1847924877}
   cams: {fileID: 1156171063}
   target: {fileID: 1758023741}

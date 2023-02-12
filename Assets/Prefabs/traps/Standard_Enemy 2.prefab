@@ -214,18 +214,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59e5e40fa4fdbf498923a026ae25f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  state: 0
+  defaultState: 1
+  PLAYER_LAYER: 3
+  myMesh: {fileID: 5380935968173276261}
+  playerDamage: {fileID: 0}
+  alive: 1
   agent: {fileID: 5380935968173276257}
   playerPos: {fileID: 0}
-  myMesh: {fileID: 5380935968173276261}
   newPatrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   graph: {fileID: 0}
   speedVar: 2
-  defaultState: 1
-  PLAYER_LAYER: 3
+  NPCManager: {fileID: 0}
+  coolTime: 0
   fov: {fileID: 5380935968173276256}
+  FOVMesh: {fileID: 0}
   alertFOV: {fileID: 2100000, guid: 9646a033ad9fcfa4cb20a035b93879b6, type: 2}
   passiveFOV: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
 --- !u!195 &5380935968173276257
