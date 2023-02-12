@@ -17,7 +17,7 @@ public class FreezeTrap : BaseTrapClass
 
     void OnTriggerEnter(Collider triggerObject){
         if(!triggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
-            triggerObject.gameObject.GetComponent<StateMachine_Robust>().MakeIncapacitated(3.0f);
+            triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious(3.0f);
             triggered = true;
         }
     }

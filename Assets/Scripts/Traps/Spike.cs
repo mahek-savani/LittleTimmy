@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    void OnCollisionEnter(Collision c)
+    void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 7)
         {
