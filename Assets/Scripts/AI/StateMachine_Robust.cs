@@ -114,6 +114,11 @@ public class StateMachine_Robust : MonoBehaviour
     public Transform playerPos;
 
     void Start() {
+        if (patrolPoints.Length == 0)
+        {
+            defaultState = STATE.IDLE;
+        }
+
         getDefault();
     }
 
@@ -490,7 +495,7 @@ public class StateMachine_Robust : MonoBehaviour
         Transform bestPoint = transform;
         int largestWeight = -1;
 
-        for (int i = 0; i < wayPoint.neighbors.Length; i++)
+        for (int i = 0; i < wayPoint.neighbors.Count; i++)
         {
             Transform currentPoint = wayPoint.neighbors[i].transform;
             int diceRoll = Random.Range(1, 6);

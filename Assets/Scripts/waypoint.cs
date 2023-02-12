@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class waypoint : MonoBehaviour
 {
-    public GameObject[] neighbors;
+    public List<GameObject> neighbors = new List<GameObject>();
+
+    public void addNeighbor(GameObject newNeighbor)
+    {
+        neighbors.Add(newNeighbor);
+    }
 }
