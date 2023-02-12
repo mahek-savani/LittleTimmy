@@ -43,7 +43,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies how long the NPC takes to wake up after being rendered unconscious
     public float unconsciousTime = 3f;
 
-    // A variable used to store the countdown from suspicious to passivity
+    // A variable used to store the countdown from suspicious to passivity, or chase to suspicion
     private float timeCounter = 0f; 
 
     // Stores the countdown from idle or unconscious to another state
@@ -85,6 +85,15 @@ public class StateMachine_Robust : MonoBehaviour
     // The waypoint graph
     public Transform graph;
 
+    // The speed for chases
+    public float chaseSpeed = 12;
+
+    // Speed for suspicious and noise states
+    public float susSpeed = 5;
+
+    // Speed for patrolling
+    public float patrolSpeed = 5;
+    
     // An array of the waypoint (transforms) this agent will follow while on patrol
     public Transform[] patrolPoints;
 
@@ -236,13 +245,13 @@ public class StateMachine_Robust : MonoBehaviour
                 agent.SetDestination(playerPos.position);
                 if (fov.visibleTargets.Count != 0)
                 {
-                    coolTime = 2f;
+                    timeCounter = coolTime;
                 }
                 else if (fov.visibleTargets.Count == 0)
                 {
-                    coolTime -= Time.deltaTime;
+                    timeCounter -= Time.deltaTime;
 
-                    if (coolTime <= Mathf.Epsilon)
+                    if (timeCounter <= Mathf.Epsilon)
                     {
                         getNoise(playerPos.position);
                     }
@@ -366,6 +375,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         agent.isStopped = false;
         myMesh.material.color = Color.red;
+        agent.speed = chaseSpeed;
         state = STATE.CHASING;
     }
 
@@ -398,6 +408,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getNoise(Vector3 source)
     {
         agent.isStopped = false;
+        agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         state = STATE.NOISE;
         noiseSource = source;
@@ -408,6 +419,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getSuspicious(Vector3 source)
     {
         agent.isStopped = false;
+        agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         assignSuspiciousWalk(source);
 
@@ -436,6 +448,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getPatrol()
     {
         agent.isStopped = false;
+        agent.speed = patrolSpeed;
         returnToPatrol();
         myMesh.material.color = Color.cyan;
 
