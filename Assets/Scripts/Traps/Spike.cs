@@ -9,6 +9,7 @@ public class Spike : MonoBehaviour
     {
         if (c.gameObject.layer == 7)
         {
+            data.trapActiveOrder.Add("spikeTrap");
             StateMachine_Robust SM = c.gameObject.GetComponent<StateMachine_Robust>();
 
             SM.die();

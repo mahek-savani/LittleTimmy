@@ -23,6 +23,7 @@ public class NoiseTrapActivation : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             if(!isTriggered){
+                data.trapActiveOrder.Add("noiseTrap");
                 other.GetComponent<StateMachine_Robust>().getNoise(this.transform.position);
                 isTriggered = true;
             }

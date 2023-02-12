@@ -21,6 +21,7 @@ public class DropTrapActivation : MonoBehaviour
         // Debug.Log("Something touched the trap");
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
+            data.trapActiveOrder.Add("dropTrap");
             other.GetComponent<StateMachine_Robust>().die();
         }
     }

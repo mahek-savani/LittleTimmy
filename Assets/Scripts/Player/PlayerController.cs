@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
             else tmp_Pickup_text.text = "Inventory: Empty";
         }
 
-        data.checkGameCompleted(data.gameCompleted);
+       
     }
 
     void OnTriggerEnter(Collider triggerObject){
@@ -95,11 +96,14 @@ public class PlayerController : MonoBehaviour
     public IEnumerator playerDie(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject);
         data.playerDeath = "yes";
         data.endTime = System.DateTime.Now;
         data.gameCompleted = true;
         Debug.Log(data.gameCompleted);
+        data.levelName = SceneManager.GetActiveScene().name;
+        Debug.Log(data.levelName);
+        data.checkGameCompleted(data.gameCompleted);
     }
 
 

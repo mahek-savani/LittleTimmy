@@ -16,6 +16,7 @@ public class FreezeTrap : MonoBehaviour
 
     void OnTriggerEnter(Collider triggerObject){
         if(!triggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
+            data.trapActiveOrder.Add("freezeTrap");
             triggerObject.gameObject.GetComponent<StateMachine_Robust>().MakeIncapacitated(3.0f);
             triggered = true;
         }
