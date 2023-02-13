@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoiseTrapActivation : MonoBehaviour
 {
-    bool isTriggered = false;
+    public bool isTriggered;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +19,12 @@ public class NoiseTrapActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Something touched the noise trap");
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             if(!isTriggered){
                 other.GetComponent<StateMachine_Robust>().getNoise(this.transform.position);
-                isTriggered = true;
+                Debug.Log("getNoise called");
             }
-            Debug.Log(this.transform.position);
         }
     }
 }

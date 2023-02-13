@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody pbody;
+    public NoiseTrapActivation noiseTrapActivation;
     public float speed = 15f;
 
     public bool hasTrapInInventory;
@@ -77,6 +78,12 @@ public class PlayerController : MonoBehaviour
                     // Swap object On/Off
                     trapInHand.SetActive(true);
                     triggerObject.gameObject.SetActive(false);
+                    if(trapInHand.tag == "NoiseTrap"){
+                        noiseTrapActivation.isTriggered = false;
+                    }
+                    if(triggerObject.gameObject.tag == "NoiseTrap"){
+                        noiseTrapActivation.isTriggered = true;
+                    }
 
                     // Move the current object we are over into inventory
                     // and ensure that hasTrapInInventory is true.
