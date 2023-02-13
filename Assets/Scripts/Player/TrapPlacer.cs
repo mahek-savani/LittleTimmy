@@ -56,6 +56,10 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.layer = 8;
 
                 trapPlaced.SetActive(true);
+                //trapPlaced.GetComponentInChildren<MeshRenderer>().enabled = true;
+                MeshRenderer[] kids = trapPlaced.GetComponentsInChildren<MeshRenderer>();
+                kids[1].enabled = true;
+                //trapPlaced.GetComponent<MeshRenderer>().enabled = true;
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 1f;
             }
