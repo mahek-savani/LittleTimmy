@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class EndZone : MonoBehaviour
 {
     public LiveCounter NPCManager;
-    public Object nextScene;
+    //public Object nextScene;
+
+    public int nextScene;
 
     public Material open_mat;
     public Material close_mat;
@@ -35,7 +37,7 @@ public class EndZone : MonoBehaviour
                 Debug.Log(data.gameCompleted);
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.checkGameCompleted(data.gameCompleted);
-                SceneManager.LoadScene(nextScene.name);
+                SceneManager.LoadScene(nextScene);
             }
         }
         resetData();
