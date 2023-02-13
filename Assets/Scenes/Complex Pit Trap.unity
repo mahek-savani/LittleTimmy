@@ -20047,15 +20047,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5135131
+      value: -3.27
       objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0429821
+      value: 1.394
       objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.225558
+      value: 16.97
       objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20449,7 +20449,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38310
+  m_Name: pb_Mesh38872
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21006,6 +21006,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2876180185629961313, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}
   m_PrefabInstance: {fileID: 1531047096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &966544419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1779025141434929923, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+  m_PrefabInstance: {fileID: 720139762}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &967702729
 GameObject:
@@ -23768,10 +23773,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2762713670264431874, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: noiseTrap
+      value: 
+      objectReference: {fileID: 966544419}
     - target: {fileID: 2762713670264431876, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: 10f6de29d4c1c4e8f970c73ec235bea2, type: 2}
+      objectReference: {fileID: 13400000, guid: 55a58587252a6e645877da9aee9ceaa9, type: 2}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_RootOrder
       value: 6
