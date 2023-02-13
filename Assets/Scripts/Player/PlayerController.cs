@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider triggerObject){
         if(pickupDelay <= 0){
             if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                Debug.Log("Inside trigger enter");
                     trapInHand = triggerObject.gameObject;
                     triggerObject.gameObject.SetActive(false);
                     hasTrapInInventory = true;
@@ -71,19 +72,19 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay <= 0){
             if(hasTrapInInventory){
                 if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
+                    Debug.Log("Inside triggerstay");
                     // Swap object positions  
                     Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
                     trapInHand.transform.position = newObjectPos;
 
+                    if(trapInHand.tag == "NoiseTrap"){
+                        Debug.Log("noiseTrapActivation set false");
+                        noiseTrapActivation.isTriggered = false;
+                    }
                     // Swap object On/Off
                     trapInHand.SetActive(true);
                     triggerObject.gameObject.SetActive(false);
-                    if(trapInHand.tag == "NoiseTrap"){
-                        noiseTrapActivation.isTriggered = false;
-                    }
-                    if(triggerObject.gameObject.tag == "NoiseTrap"){
-                        noiseTrapActivation.isTriggered = true;
-                    }
+                    
 
                     // Move the current object we are over into inventory
                     // and ensure that hasTrapInInventory is true.
