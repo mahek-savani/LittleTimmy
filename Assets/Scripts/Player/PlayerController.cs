@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         else {
             pickupDelay = 0;
-            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponent<BaseTrapClass>().trapName + " Trap";
+            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
             else tmp_Pickup_text.text = "Inventory: Empty";
         }
 
@@ -66,16 +66,16 @@ public class PlayerController : MonoBehaviour
 
             // We need to know if the trigger box we've entered is a pickup object AND
             // if the object has been triggered before or not
-            if(triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup") 
-            && !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
+            if(triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")) {
+            //&& !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
 
                 // Different logic depending on whether or not there is currently a trap
                 // in inventory
                 if(hasTrapInInventory){
                     inSwapCommand = true;
 
-                    if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
-                        helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                    if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                        helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     }
                     
                     if(Input.GetKey(KeyCode.E)){ 
@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour
                     }
                 } else {
 
-                    if(triggerObject.gameObject.GetComponent<BaseTrapClass>()){
-                        helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponent<BaseTrapClass>().trapName + " Trap!";
+                    if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                        helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     }
 
                     if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){

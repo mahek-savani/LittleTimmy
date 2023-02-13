@@ -6,7 +6,7 @@ using TMPro;
 public class TrapPlacer : MonoBehaviour
 {
     //public GameObject dropTrap;
-    //public GameObject noiseTrap;
+    public GameObject noiseTrap;
     public GameObject trapInInventory;
     public PlayerController player;
     public Transform cams;
@@ -48,21 +48,40 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.layer = 8;
 
                 trapPlaced.SetActive(true);
+
+                NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
+
+                if (cloud != null)
+                {
+                    cloud.visible();
+                    //Debug.Log(trapPlaced)
+                }
+
+                // MeshRenderer[] kids = trapPlaced.GetComponentsInChildren<MeshRenderer>();
+                // if (kids.Length == 2)
+                // {
+                //     kids[1].enabled = true;
+                // }
+
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 1f;
+
                 // trapPlaced.transform.LookAt(target.right);
             }
 
-            //Noise traps
-            /*if(Input.GetKeyDown(KeyCode.N)){
-                Vector3 trapPosition = player.transform.position;
-                GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
-                trapPlaced.layer = 8;
+            // Noise traps
+            // if(Input.GetKeyDown(KeyCode.E)){
+            //     Vector3 trapPosition = player.transform.position;
+            //     GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
+            //     trapPlaced.layer = 8;
 
-                trapPlaced.SetActive(true);
-                player.hasTrapInInventory = false;
-                player.pickupDelay = 1f;
-            }*/
+            //     trapPlaced.SetActive(true);
+            //     //trapPlaced.GetComponentInChildren<MeshRenderer>().enabled = true;
+
+            //     //trapPlaced.GetComponent<MeshRenderer>().enabled = true;
+            //     player.hasTrapInInventory = false;
+            //     player.pickupDelay = 1f;
+            // }
         }
         
     }

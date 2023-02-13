@@ -479,7 +479,7 @@ public class StateMachine_Robust : MonoBehaviour
             data.endTime = System.DateTime.Now;
             data.gameCompleted = true;
         }
-        Debug.Log(data.gameCompleted);
+        //Debug.Log(data.gameCompleted);
     }
 
     void OnCollisionEnter(Collision collision)

@@ -9,21 +9,35 @@ public class NoiseTrapActivation : BaseTrapClass
     {
         // Set name of trap to Noise
         trapName = "Noise";
+        isTriggered = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Something touched the noise trap");
+        //Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
+            //Debug.Log("Enemy Inside sphere");
             if(!isTriggered){
-                other.GetComponent<StateMachine_Robust>().getNoise(this.transform.position);
+                // Debug.Log(transform.position);
+                other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+                //Debug.Log("getNoise called");
                 isTriggered = true;
 
-                this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-                this.GetComponent<Renderer>().material.color = Color.grey;
+                // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                // this.GetComponent<Renderer>().material.color = Color.grey;
             }
-            Debug.Log(this.transform.position);
         }
+    }
+
+    public void visible()
+    {
+        transform.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void invisible()
+    {
+        transform.GetComponent<MeshRenderer>().enabled = false;
     }
 }
