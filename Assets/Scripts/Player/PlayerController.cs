@@ -125,6 +125,15 @@ public class PlayerController : MonoBehaviour
         inSwapCommand = false;
     }
 
+    void resetData()
+    {
+        data.startTime = System.DateTime.Now;
+        data.endTime = System.DateTime.Now;
+        data.playerDeath = "no";
+        data.levelName = "demo";
+        data.gameCompleted = false;
+        data.trapActiveOrder = new List<string>();
+    }
     public IEnumerator playerDie(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -136,6 +145,7 @@ public class PlayerController : MonoBehaviour
         data.levelName = SceneManager.GetActiveScene().name;
         Debug.Log(data.levelName);
         data.checkGameCompleted(data.gameCompleted);
+        resetData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
