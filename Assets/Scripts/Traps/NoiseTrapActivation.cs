@@ -17,6 +17,7 @@ public class NoiseTrapActivation : MonoBehaviour
             if(!isTriggered){
                 // Debug.Log(transform.position);
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
                 Debug.Log("getNoise called");
                 isTriggered = true;
             }
