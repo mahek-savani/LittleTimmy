@@ -19,7 +19,7 @@ public class NoiseTrapActivation : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.layer);
+        Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             Debug.Log("Enemy Inside sphere");

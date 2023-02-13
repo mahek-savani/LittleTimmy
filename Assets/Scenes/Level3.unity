@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3956,6 +3956,14 @@ PrefabInstance:
       propertyPath: isTriggered
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2811719289467326676, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+      propertyPath: m_Radius
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811719289467326676, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7588791816632741555, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_TagString
       value: NoiseTrap
@@ -4659,7 +4667,6 @@ MonoBehaviour:
   playerCamera: {fileID: 275464032}
   enemyCameras:
   - {fileID: 1233096375}
-  - {fileID: 0}
   switchTime: 5
   playerTransform: {fileID: 1847924883}
 --- !u!114 &1847924893 stripped
@@ -5384,6 +5391,14 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5036583715105960771, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
+      propertyPath: m_Radius
+      value: 0.5000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5036583715105960771, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5036583715105960773, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: obstacleMask.m_Bits
       value: 576
@@ -5484,6 +5499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5036583715976278019, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5167205520529337871, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5494,7 +5513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5167205520529337871, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9188174
+      value: 0.91881734
       objectReference: {fileID: 0}
     - target: {fileID: 5167205520529337871, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5502,11 +5521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5167205520529337871, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000012139952
+      value: 0.000000024812469
       objectReference: {fileID: 0}
     - target: {fileID: 5167205520529337871, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000052147837
+      value: -0.000000010658335
       objectReference: {fileID: 0}
     - target: {fileID: 6473634302120615351, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
       propertyPath: m_Priority
