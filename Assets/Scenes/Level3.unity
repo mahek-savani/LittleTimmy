@@ -443,25 +443,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}
---- !u!1 &194419918 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7588791816632741555, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-  m_PrefabInstance: {fileID: 1689870018}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &194419923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194419918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 634b4724e22d6464d84cc77a7f33594a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trapName: 
-  isTriggered: 0
 --- !u!64 &207730402 stripped
 MeshCollider:
   m_CorrespondingSourceObject: {fileID: 6622883554078769723, guid: 77a7b2cae5b3a5843bf2bc9e9a35c540, type: 3}
@@ -3566,15 +3547,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.39468312
+      value: 0.3946831
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000024812463
+      value: 0.000000017813367
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000010658332
+      value: -0.000000007651831
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -3954,9 +3935,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 6.6
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 9.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3979,8 +3960,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758023738}
-  m_LocalRotation: {x: 0.44972372, y: 0, z: 0, w: 0.89316773}
-  m_LocalPosition: {x: -27.081, y: 19.436, z: -28.024}
+  m_LocalRotation: {x: 0.5157859, y: 0, z: 0, w: 0.8567176}
+  m_LocalPosition: {x: -26.3, y: 46.95, z: -48.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
