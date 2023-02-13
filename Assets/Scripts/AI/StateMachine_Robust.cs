@@ -226,7 +226,7 @@ public class StateMachine_Robust : MonoBehaviour
                     agent.SetDestination(playerPos.position);
                     transform.LookAt(playerPos.position, transform.up);
                 }
-                else
+                else if (Vector3.Distance(transform.position, noiseSource) < 0.9)
                 {
                     getSuspicious(transform.position);
                 }
