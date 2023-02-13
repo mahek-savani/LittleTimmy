@@ -476,7 +476,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         alive = false;
         conscious = false;
-        state = STATE.IDLE;
+        state = STATE.UNCONSCIOUS;
         waitTime = 10f;
         agent.isStopped = true;
         fov.viewMeshFilter.mesh.Clear();
