@@ -25,6 +25,8 @@ public class NoiseTrapActivation : BaseTrapClass
                 //Debug.Log("getNoise called");
                 isTriggered = true;
 
+                data.trapActiveOrder.Add("noiseTrap");
+
                 // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 // this.GetComponent<Renderer>().material.color = Color.grey;
             }

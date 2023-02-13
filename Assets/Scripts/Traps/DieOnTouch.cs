@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DieOnTouch : MonoBehaviour
 {
@@ -11,7 +12,19 @@ public class DieOnTouch : MonoBehaviour
         //Debug.Log("It's activating");
         if (!pitTrap.trapActive && c.gameObject.layer == 7)
         {
-            c.GetComponent<StateMachine_Robust>().die();
+            Debug.Log("Enenmy on pit");
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.name == "tutorialPitTrap")
+            {
+                data.trapActiveOrder.Add("pitTrap");
+                c.GetComponent<StateMachine_Robust>().dieIdle();
+            }
+            else
+            {
+                data.trapActiveOrder.Add("pitTrap");
+                c.GetComponent<StateMachine_Robust>().die();
+            }
         }
     }
+    
 }

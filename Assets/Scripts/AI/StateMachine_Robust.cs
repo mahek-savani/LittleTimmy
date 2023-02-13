@@ -164,7 +164,7 @@ public class StateMachine_Robust : MonoBehaviour
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (Input.GetKeyDown("backspace"))
         {
-            if (gameObject.name == "NPC 1")
+            if (gameObject.name == "NPC AI")
             {
                 die();
             }
@@ -455,6 +455,11 @@ public class StateMachine_Robust : MonoBehaviour
         state = STATE.PATROLLING;
     }
 
+
+    public void dieIdle()
+    {
+        StartCoroutine("dieAsynchronous");
+    }
     public void die()
     {
         alive = false;
@@ -473,13 +478,6 @@ public class StateMachine_Robust : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
-        data.enemyRemaining = data.enemyRemaining - 1;
-        if (data.enemyRemaining == 0)
-        {
-            data.endTime = System.DateTime.Now;
-            data.gameCompleted = true;
-        }
-        //Debug.Log(data.gameCompleted);
     }
 
     void OnCollisionEnter(Collision collision)

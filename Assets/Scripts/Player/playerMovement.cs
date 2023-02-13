@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class playerMovement : MonoBehaviour
     public Rigidbody pbody;
     public float speed = 15f;
 
+    private void Start()
+    {
+        data.startTime = System.DateTime.Now;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -27,17 +32,20 @@ public class playerMovement : MonoBehaviour
         float vertVal = Input.GetAxis("Vertical");
 
         transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
-        data.checkGameCompleted(data.gameCompleted);
+        
     }
 
     public IEnumerator playerDie(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject);
         data.playerDeath = "yes";
         data.endTime = System.DateTime.Now;
         data.gameCompleted = true;
         Debug.Log(data.gameCompleted);
+        data.levelName = SceneManager.GetActiveScene().name;
+        Debug.Log(data.levelName);
+        data.checkGameCompleted(data.gameCompleted);
     }
     //Analytics start: If enenemy catches player, update end time and mark player as dead
     private void OnCollisionEnter(Collision collision)

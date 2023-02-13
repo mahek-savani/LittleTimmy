@@ -19,6 +19,8 @@ public class FreezeTrap : BaseTrapClass
             triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious(3.0f);
             isTriggered = true;
 
+            data.trapActiveOrder.Add("freezeTrap");
+
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             this.GetComponent<Renderer>().material.color = Color.grey;
         }
