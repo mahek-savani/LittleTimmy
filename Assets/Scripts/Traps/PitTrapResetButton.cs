@@ -6,6 +6,7 @@ public class PitTrapResetButton : MonoBehaviour
 {
     public PitTrap pitTrap;
     public GameObject buttonParent;
+    public GameObject buttonTrigger;
     public MeshCollider door;
     public GameObject trapDoor;
     public void OnTriggerEnter(Collider c)
@@ -18,6 +19,7 @@ public class PitTrapResetButton : MonoBehaviour
                 pitTrap.trapActive = true;
                 door.enabled = true;
                 trapDoor.transform.Rotate(0f, 0f, -85f, Space.Self);
+                buttonTrigger.transform.localScale += new Vector3(0, 1, 0);
             }
         }
     }
