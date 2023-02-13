@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseTrapActivation : MonoBehaviour
+public class NoiseTrapActivation : BaseTrapClass
 {
-    bool isTriggered = false;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Set name of trap to Noise
+        trapName = "Noise";
     }
 
     void OnTriggerEnter(Collider other)
@@ -25,6 +19,9 @@ public class NoiseTrapActivation : MonoBehaviour
             if(!isTriggered){
                 other.GetComponent<StateMachine_Robust>().getNoise(this.transform.position);
                 isTriggered = true;
+
+                this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                this.GetComponent<Renderer>().material.color = Color.grey;
             }
             Debug.Log(this.transform.position);
         }
