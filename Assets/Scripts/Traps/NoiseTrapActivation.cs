@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoiseTrapActivation : MonoBehaviour
 {
-    public bool isTriggered = true;
+    public bool isTriggered = false;
     //public Transform cylinder;
 
 
@@ -17,7 +17,7 @@ public class NoiseTrapActivation : MonoBehaviour
             if(!isTriggered){
                 // Debug.Log(transform.position);
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
-                //Debug.Log("getNoise called");
+                Debug.Log("getNoise called");
                 isTriggered = true;
             }
         }

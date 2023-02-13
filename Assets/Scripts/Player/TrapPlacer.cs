@@ -36,8 +36,8 @@ public class TrapPlacer : MonoBehaviour
                 }
             }
 
-            //Floor traps
-            if(Input.GetKeyDown(KeyCode.E)){
+            //Floor and noise traps
+            if(Input.GetKeyDown(KeyCode.F)){
                 Vector3 trapPosition = player.transform.position;
                 GameObject trapPlaced = Instantiate(dropTrap, trapPosition, Quaternion.identity) as GameObject;
                 trapPlaced.layer = 8;
@@ -45,11 +45,12 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.SetActive(true);
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 1f;
+
                 // trapPlaced.transform.LookAt(target.right);
             }
 
-            //Noise traps
-            if(Input.GetKeyDown(KeyCode.N)){
+            // Noise traps
+            if(Input.GetKeyDown(KeyCode.E)){
                 Vector3 trapPosition = player.transform.position;
                 GameObject trapPlaced = Instantiate(noiseTrap, trapPosition, Quaternion.identity) as GameObject;
                 trapPlaced.layer = 8;

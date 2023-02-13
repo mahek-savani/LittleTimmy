@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody pbody;
-    public NoiseTrapActivation noiseTrapActivation;
     public float speed = 15f;
 
     public bool hasTrapInInventory;
@@ -77,10 +76,6 @@ public class PlayerController : MonoBehaviour
                     Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
                     trapInHand.transform.position = newObjectPos;
 
-                    if(trapInHand.tag == "NoiseTrap"){
-                        Debug.Log("noiseTrapActivation set false");
-                        noiseTrapActivation.isTriggered = false;
-                    }
                     // Swap object On/Off
                     trapInHand.SetActive(true);
                     triggerObject.gameObject.SetActive(false);
