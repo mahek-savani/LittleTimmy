@@ -17,6 +17,7 @@ public class PitTrapButton : MonoBehaviour
                 pitTrap.playAnimation();
                 pitTrap.trapActive = false;
                 door.enabled = false;
+                data.trapActiveOrder.Add("pitTrap");
                 //Destroy(gameObject);
             }
         }

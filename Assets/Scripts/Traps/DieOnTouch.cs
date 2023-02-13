@@ -16,12 +16,10 @@ public class DieOnTouch : MonoBehaviour
             Scene scene = SceneManager.GetActiveScene();
             if (scene.name == "tutorialPitTrap")
             {
-                data.trapActiveOrder.Add("pitTrap");
                 c.GetComponent<StateMachine_Robust>().dieIdle();
             }
             else
             {
-                data.trapActiveOrder.Add("pitTrap");
                 c.GetComponent<StateMachine_Robust>().die();
             }
         }
