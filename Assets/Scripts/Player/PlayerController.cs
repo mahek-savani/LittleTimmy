@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
         data.levelName = SceneManager.GetActiveScene().name;
         Debug.Log(data.levelName);
         data.checkGameCompleted(data.gameCompleted);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void playerDie()
