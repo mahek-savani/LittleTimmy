@@ -7,10 +7,9 @@ public class SwitchCameraView : MonoBehaviour
 {
     public CinemachineVirtualCamera playerCamera;
     public CinemachineVirtualCamera[] enemyCameras;
-
     public float switchTime = 5f;
-
     public Transform playerTransform;
+    private bool isPlayerCamera = true;
 
     private void Start()
     {
@@ -20,46 +19,48 @@ public class SwitchCameraView : MonoBehaviour
             enemyCameras[i].gameObject.SetActive(false);
         }
     }
-
-    private void Update()
+private void Update()
     {
         if (Input.GetKeyDown("c"))
         {
-            float closestDistance = float.MaxValue;
-            int closestEnemyIndex = 0;
-            for (int i = 0; i < enemyCameras.Length; i++)
+            if (isPlayerCamera)
             {
-                if (enemyCameras[i] == null)
+                float closestDistance = float.MaxValue;
+                int closestEnemyIndex = 0;
+                for (int i = 0; i < enemyCameras.Length; i++)
                 {
-                    continue;
+                    if (enemyCameras[i] == null)
+                    {
+                        continue;
+                    }
+                    float distance = Vector3.Distance(playerTransform.position, enemyCameras[i].transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemyIndex = i;
+                    }
                 }
-                float distance = Vector3.Distance(playerTransform.position, enemyCameras[i].transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestEnemyIndex = i;
-                }
+                Debug.Log(closestEnemyIndex);
+
+                playerCamera.gameObject.SetActive(false);
+                enemyCameras[closestEnemyIndex].gameObject.SetActive(true);
+
+                isPlayerCamera = false;
             }
-            Debug.Log(closestEnemyIndex);
-
-            playerCamera.gameObject.SetActive(false);
-            enemyCameras[closestEnemyIndex].gameObject.SetActive(true);
-            
-            Invoke("SwitchToPlayerCamera", switchTime);
-        }
-    }
-
-    private void SwitchToPlayerCamera()
-    {
-        playerCamera.gameObject.SetActive(true);
-        for (int i = 0; i < enemyCameras.Length; i++)
-        {
-            if (enemyCameras[i] == null)
+            else
             {
-                continue;
+                playerCamera.gameObject.SetActive(true);
+                for (int i = 0; i < enemyCameras.Length; i++)
+                {
+                    if (enemyCameras[i] == null)
+                    {
+                        continue;
+                    }
+                    enemyCameras[i].gameObject.SetActive(false);
+                }
+
+                isPlayerCamera = true;
             }
-            enemyCameras[i].gameObject.SetActive(false);
         }
     }
 }
-
