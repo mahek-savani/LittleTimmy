@@ -141,9 +141,9 @@ public class PlayerController : MonoBehaviour
         data.playerDeath = "yes";
         data.endTime = System.DateTime.Now;
         data.gameCompleted = true;
-        Debug.Log(data.gameCompleted);
+        //Debug.Log(data.gameCompleted);
         data.levelName = SceneManager.GetActiveScene().name;
-        Debug.Log(data.levelName);
+        //Debug.Log(data.levelName);
         data.checkGameCompleted(data.gameCompleted);
         resetData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

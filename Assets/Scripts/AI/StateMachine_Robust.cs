@@ -21,8 +21,11 @@ public class StateMachine_Robust : MonoBehaviour
     // Determines whether this agent is alive or dying
     public bool alive = true;
 
-    //A boolean determining whether the NPC is currently conscious
+    // A boolean determining whether the NPC is currently conscious
     public bool conscious = true;
+
+    // Determines whether the enemy will become suspicious after getting hit-stunned
+    public bool passive = false;
 
 
 
@@ -184,7 +187,16 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     conscious = true;
                     FOVMesh.enabled = true;
-                    getSuspicious(transform.position);
+
+                    if (passive)
+                    {
+                        getIdle();
+                    }
+                    else
+                    {
+                        getSuspicious(transform.position);
+                    }
+                    
                 }
 
                 break;
@@ -456,10 +468,10 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
 
-    public void dieIdle()
-    {
-        StartCoroutine("dieAsynchronous");
-    }
+    //public void dieIdle()
+    //{
+    //    StartCoroutine("dieAsynchronous");
+    //}
     public void die()
     {
         alive = false;
