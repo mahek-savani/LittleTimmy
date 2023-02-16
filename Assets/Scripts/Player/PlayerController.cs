@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -9,19 +10,24 @@ public class PlayerController : MonoBehaviour
     public Rigidbody pbody;
     public float speed = 15f;
 
-    public bool hasTrapInInventory;
-    public GameObject trapInHand;
+    public bool hasTrapInInventory; // Check if a trap already exists in inv
+    public bool inSwapCommand;      // This prevents player from swapping and dropping trap at the same time
+    public GameObject trapInHand;   // Set trap that we need to spawn
 
     // UI
     public GameObject tmp_Pickup;
+    public GameObject helpUI;
     TextMeshProUGUI tmp_Pickup_text;
+    TextMeshProUGUI helpText;
 
     public float pickupDelay;
 
     void Start()
     {
-         hasTrapInInventory = false;
-         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
+        inSwapCommand = false;
+        hasTrapInInventory = false;
+        tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
+        helpText = helpUI.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -47,62 +53,101 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         else {
             pickupDelay = 0;
-            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory: \n 1 Trap";
+            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
             else tmp_Pickup_text.text = "Inventory: Empty";
         }
 
-        data.checkGameCompleted(data.gameCompleted);
-    }
-
-    void OnTriggerEnter(Collider triggerObject){
-        if(pickupDelay <= 0){
-            if(!hasTrapInInventory && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                    trapInHand = triggerObject.gameObject;
-                    triggerObject.gameObject.SetActive(false);
-                    hasTrapInInventory = true;
-                    tmp_Pickup_text.text = "Inventory: \n 1 Trap";
-            }
-        }
-
+       
     }
 
     void OnTriggerStay(Collider triggerObject){
+
+        // Setting a pickup delay so that the text doesn't flash rapidly
         if(pickupDelay <= 0){
-            if(hasTrapInInventory){
-                if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){ 
-                    // Swap object positions  
-                    Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
-                    trapInHand.transform.position = newObjectPos;
 
-                    // Swap object On/Off
-                    trapInHand.SetActive(true);
-                    triggerObject.gameObject.SetActive(false);
+            // We need to know if the trigger box we've entered is a pickup object AND
+            // if the object has been triggered before or not
+            if(triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")) {
+            //&& !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
 
-                    // Move the current object we are over into inventory
-                    // and ensure that hasTrapInInventory is true.
-                    trapInHand = triggerObject.gameObject;
-                    hasTrapInInventory = true; 
+                // Different logic depending on whether or not there is currently a trap
+                // in inventory
+                if(hasTrapInInventory){
+                    inSwapCommand = true;
 
-                    tmp_Pickup_text.text = "Trap Swapped!";
+                    if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                        helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
+                    }
+                    
+                    if(Input.GetKey(KeyCode.E)){ 
+                        // Swap object positions  
+                        Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
+                        trapInHand.transform.position = newObjectPos;
 
-                    pickupDelay = 1f;
+                        // Swap object On/Off
+                        trapInHand.SetActive(true);
+                        triggerObject.gameObject.SetActive(false);
+
+                        // Move the current object we are over into inventory
+                        // and ensure that hasTrapInInventory is true.
+                        trapInHand = triggerObject.gameObject;
+                        hasTrapInInventory = true; 
+
+                        tmp_Pickup_text.text = "Trap Swapped!";
+                        pickupDelay = 1f;
+
+                        helpText.text = "";
+                        inSwapCommand = false;
+                    }
+                } else {
+
+                    if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                        helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
+                    }
+
+                    if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
+                        trapInHand = triggerObject.gameObject;
+                        triggerObject.gameObject.SetActive(false);
+                        hasTrapInInventory = true;
+
+                        helpText.text = "";
+                        pickupDelay = 1f;
+                    }
                 }
             }
-        }
-        
+        } 
     }
 
+    void OnTriggerExit(){
+        // This is to ensure we clean the helpText and inSwapCommand bools
+        // in case we leave a trigger box without picking an object up
+        helpText.text = "";
+        inSwapCommand = false;
+    }
+
+    void resetData()
+    {
+        data.startTime = System.DateTime.Now;
+        data.endTime = System.DateTime.Now;
+        data.playerDeath = "no";
+        data.levelName = "demo";
+        data.gameCompleted = false;
+        data.trapActiveOrder = new List<string>();
+    }
     public IEnumerator playerDie(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject);
         data.playerDeath = "yes";
         data.endTime = System.DateTime.Now;
         data.gameCompleted = true;
-        Debug.Log(data.gameCompleted);
+        //Debug.Log(data.gameCompleted);
+        data.levelName = SceneManager.GetActiveScene().name;
+        //Debug.Log(data.levelName);
+        data.checkGameCompleted(data.gameCompleted);
+        resetData();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-
 
     public void playerDie()
     {

@@ -1,32 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TrapPlacer : MonoBehaviour
 {
-    public GameObject dropTrap;
+    //public GameObject dropTrap;
     public GameObject noiseTrap;
+    public GameObject trapInInventory;
     public PlayerController player;
     public Transform cams;
     public Transform target;
     public LayerMask canBeTrapped;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    public bool placedTrapBefore = false;
 
     // Update is called once per frame
     void Update()
     {
-        if(player.hasTrapInInventory){
-            dropTrap = player.trapInHand;
+        if(player.hasTrapInInventory && (player.pickupDelay == 0 && !player.inSwapCommand)){
+            trapInInventory = player.trapInHand;
+
+            if(!placedTrapBefore){
+                player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";
+                placedTrapBefore = true;
+            }
+
             //Wall traps
             if(Input.GetKeyDown(KeyCode.R)){
                 RaycastHit Hit;
                 if(Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
                 {
-                    GameObject trapPlaced = Instantiate(dropTrap, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
+                    GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                     trapPlaced.transform.LookAt(Hit.point + Hit.normal);
                     trapPlaced.layer = 8;
 
@@ -37,27 +42,46 @@ public class TrapPlacer : MonoBehaviour
             }
 
             //Floor traps
-            if(Input.GetKeyDown(KeyCode.F)){
+            if(Input.GetKeyDown(KeyCode.E)){
                 Vector3 trapPosition = player.transform.position;
-                GameObject trapPlaced = Instantiate(dropTrap, trapPosition, Quaternion.identity) as GameObject;
+                GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
                 trapPlaced.layer = 8;
 
                 trapPlaced.SetActive(true);
+
+                NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
+
+                if (cloud != null)
+                {
+                    cloud.visible();
+                    //Debug.Log(trapPlaced)
+                }
+
+                // MeshRenderer[] kids = trapPlaced.GetComponentsInChildren<MeshRenderer>();
+                // if (kids.Length == 2)
+                // {
+                //     kids[1].enabled = true;
+                // }
+
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 1f;
+
                 // trapPlaced.transform.LookAt(target.right);
             }
 
-            //Noise traps
-            if(Input.GetKeyDown(KeyCode.N)){
-                Vector3 trapPosition = player.transform.position;
-                GameObject trapPlaced = Instantiate(noiseTrap, trapPosition, Quaternion.identity) as GameObject;
-                trapPlaced.layer = 8;
+            // Noise traps
+            // if(Input.GetKeyDown(KeyCode.E)){
+            //     Vector3 trapPosition = player.transform.position;
+            //     GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
+            //     trapPlaced.layer = 8;
 
-                trapPlaced.SetActive(true);
-                player.hasTrapInInventory = false;
-                player.pickupDelay = 1f;
-            }
+            //     trapPlaced.SetActive(true);
+            //     //trapPlaced.GetComponentInChildren<MeshRenderer>().enabled = true;
+
+            //     //trapPlaced.GetComponent<MeshRenderer>().enabled = true;
+            //     player.hasTrapInInventory = false;
+            //     player.pickupDelay = 1f;
+            // }
         }
         
     }
