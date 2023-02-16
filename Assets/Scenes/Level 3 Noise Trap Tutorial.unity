@@ -2635,7 +2635,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: a3095cb7cba74834ea0f823c52df3879, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9d9a430cbe8118c4f989ab741aaf95b2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1169117875
 GameObject:
@@ -4603,6 +4603,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1897312355}
     m_Modifications:
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1116547767830329562}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: pitTrap
+      value: 
+      objectReference: {fileID: 6095608660892815583}
     - target: {fileID: 1370967427630311967, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: m_Layer
       value: 2

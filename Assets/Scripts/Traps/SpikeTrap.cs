@@ -8,6 +8,6 @@ public class SpikeTrap : MonoBehaviour
     // Start is called before the first frame update
     public void playAnimation()
     {
-        gameObject.GetComponent<Animation>().Play("spikeTrapAnim");
+        gameObject.GetComponent<Animation>().Play();
     }
 }
