@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using static Unity.VisualScripting.Member;
 
 public class StateMachine_Robust : MonoBehaviour
 {
@@ -234,7 +236,7 @@ public class StateMachine_Robust : MonoBehaviour
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
                 // Assign new waypoint if current one has been reached
-                if (Vector3.Distance(transform.position, patrolPoints[currentDest].position) < 0.9)
+                if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //Debug.Log(patrolPoints[currentDest].position);
                     if (currentDest < patrolPoints.Length - 1)
@@ -294,7 +296,7 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     getNoise(playerPos.position);
                 }
-                else if (Vector3.Distance(transform.position, currentPosition.position) < 0.9)
+                else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
                     paranoidPoints[currentPosition] += 10000;
@@ -319,12 +321,12 @@ public class StateMachine_Robust : MonoBehaviour
 
                 if (fov.visibleTargets.Count != 0)
                 {
-                    noiseSource = playerPos.position;
+                    noiseSource = noiseSource = getPointNearestNavMesh(playerPos.position);
                     agent.SetDestination(playerPos.position);
                     transform.LookAt(playerPos.position, transform.up);
                     timeCounter = suspiciousTime;
                 }
-                else if (Vector3.Distance(transform.position, noiseSource) < 0.5)
+                else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     getSuspicious(transform.position);
                 }
@@ -345,7 +347,7 @@ public class StateMachine_Robust : MonoBehaviour
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
-                if (Vector3.Distance(transform.position, currentPosition.position) < 0.9)
+                if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
@@ -423,9 +425,10 @@ public class StateMachine_Robust : MonoBehaviour
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         state = STATE.NOISE;
-        noiseSource = source;
+
+        noiseSource = getPointNearestNavMesh(source);
         timeCounter = suspiciousTime;
-        agent.SetDestination(source);
+        agent.SetDestination(noiseSource);
     }
 
     public void getSuspicious(Vector3 source)
@@ -492,6 +495,14 @@ public class StateMachine_Robust : MonoBehaviour
         Destroy(gameObject);
     }
 
+    Vector3 getPointNearestNavMesh(Vector3 source)
+    {
+        NavMeshHit destHit;
+
+        NavMesh.SamplePosition(source, out destHit, 100f, NavMesh.AllAreas);
+
+        return destHit.position;
+    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)

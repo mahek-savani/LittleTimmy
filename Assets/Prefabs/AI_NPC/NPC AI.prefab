@@ -207,6 +207,7 @@ MonoBehaviour:
   defaultState: 1
   alive: 1
   conscious: 1
+  passive: 0
   timeToSuspicion: 0.3
   suspiciousTime: 5
   timeToChase: 1
@@ -244,7 +245,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
