@@ -7,7 +7,7 @@ public class EndZone : MonoBehaviour
 {
     public LiveCounter NPCManager;
     //public Object nextScene;
-
+    private int ttrCount = 0;
     public int nextScene;
 
     public Material open_mat;
@@ -16,6 +16,12 @@ public class EndZone : MonoBehaviour
         if (NPCManager.getNumLiving() != 0){
             this.gameObject.GetComponent<MeshRenderer>().material = close_mat;
         } else {
+            if(ttrCount == 0)
+            {
+                Debug.Log("hi");
+                data.ttrstart = System.DateTime.Now;
+                ttrCount = 1;
+            }
             this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
         }
     }
@@ -27,6 +33,9 @@ public class EndZone : MonoBehaviour
         data.levelName = "demo";
         data.gameCompleted = false;
         data.trapActiveOrder = new List<string>();
+        data.healthRemaining = 0;
+        data.enemyHit = 0;
+        data.ttrstart = System.DateTime.Now;
     }
     void OnTriggerStay(Collider playerObject){
         Debug.Log(NPCManager.getNumLiving());
@@ -37,9 +46,9 @@ public class EndZone : MonoBehaviour
                 Debug.Log(data.gameCompleted);
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.checkGameCompleted(data.gameCompleted);
+                resetData();
                 SceneManager.LoadScene(nextScene);
             }
         }
-        resetData();
     }
 }

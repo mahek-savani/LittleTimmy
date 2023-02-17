@@ -11,6 +11,9 @@ public class data
     public static bool gameCompleted = false;
     public static string levelName = "demo";
     public static List<string> trapActiveOrder = new List<string>();
+    public static int healthRemaining = 0;
+    public static int enemyHit = 0;
+    public static System.DateTime ttrstart = System.DateTime.Now;
     public static void checkGameCompleted(bool checkComplete)
     {
         //Debug.Log(gameCompleted);
@@ -33,6 +36,9 @@ public class dataRes
     //public int enemyRemaining;
     public string levelName;
     public List<string> trapActiveOrder;
+    public int healthRemaining;
+    public int enemyHit;
+    public string ttrstart;
     public dataRes()
     {
         startTime = data.startTime.ToString();
@@ -40,6 +46,9 @@ public class dataRes
         playerDeath = data.playerDeath;
         levelName = data.levelName;
         trapActiveOrder = data.trapActiveOrder;
+        healthRemaining = data.healthRemaining;
+        enemyHit = data.enemyHit;
+        ttrstart = data.ttrstart.ToString();
         //enemyRemaining = data.enemyRemaining;
     }
 
