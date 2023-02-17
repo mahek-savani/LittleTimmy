@@ -9,4 +9,12 @@ public class MainMenu : MonoBehaviour
         //Debug.Log("Pressed Play");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void PressedLevelSelect(){
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+    }
+
+    public void PressedBack(){
+        SceneManager.LoadScene(0);
+    }
 }
