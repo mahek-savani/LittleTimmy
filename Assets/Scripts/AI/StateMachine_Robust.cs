@@ -152,6 +152,13 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 distOffMesh = getPointNearestNavMesh(playerPos.position) - playerPos.position;
+
+        if (distOffMesh.magnitude >= 1f)
+        {
+            fov.visibleTargets.Clear();
+        }
+
         // Make the visual FOV redder as the player stays inside of it
         if (fov.visibleTargets.Count != 0)
         {
@@ -257,6 +264,7 @@ public class StateMachine_Robust : MonoBehaviour
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
             
                 agent.SetDestination(playerPos.position);
+
                 if (fov.visibleTargets.Count != 0)
                 {
                     timeCounter = coolTime;
@@ -436,7 +444,8 @@ public class StateMachine_Robust : MonoBehaviour
         agent.isStopped = false;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
-        assignSuspiciousWalk(source);
+
+        assignSuspiciousWalk(getPointNearestNavMesh(source));
 
         returnToSuspicion();
 
@@ -499,7 +508,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         NavMeshHit destHit;
 
-        NavMesh.SamplePosition(source, out destHit, 100f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(source, out destHit, 500f, NavMesh.AllAreas);
 
         return destHit.position;
     }
