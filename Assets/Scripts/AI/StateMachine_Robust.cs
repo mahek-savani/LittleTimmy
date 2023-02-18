@@ -147,6 +147,11 @@ public class StateMachine_Robust : MonoBehaviour
         }
 
         getDefault();
+
+        if (passive)
+        {
+            FOVMesh.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -160,7 +165,7 @@ public class StateMachine_Robust : MonoBehaviour
         }
 
         // Make the visual FOV redder as the player stays inside of it
-        if (fov.visibleTargets.Count != 0)
+        if (fov.visibleTargets.Count != 0 && !passive)
         {
             playerVisibleTimer += Time.deltaTime;
         }
@@ -195,14 +200,13 @@ public class StateMachine_Robust : MonoBehaviour
                 else
                 {
                     conscious = true;
-                    FOVMesh.enabled = true;
-
                     if (passive)
                     {
                         getIdle();
                     }
                     else
                     {
+                        FOVMesh.enabled = true;
                         getSuspicious(transform.position);
                     }
                     
