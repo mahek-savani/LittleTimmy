@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spikeTrap: {fileID: 8916128872130425185}
   buttonParent: {fileID: 3738750155902833537}
+  spikeResetButton: {fileID: 0}
 --- !u!1 &3738750155902833537
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,7 +970,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916128872130425188}
-  - component: {fileID: 8916128872130425187}
   - component: {fileID: 8916128872130425186}
   - component: {fileID: 8916128872130425185}
   m_Layer: 0
@@ -996,22 +996,6 @@ Transform:
   m_Father: {fileID: 4432235302748411267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!111 &8916128872130425187
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916128872130425189}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: a26c3576762961d4a8f8df51ff92ade9, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: a26c3576762961d4a8f8df51ff92ade9, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!65 &8916128872130425186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1047,6 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916128872167221926}
+  - component: {fileID: 5516333881842928012}
   m_Layer: 0
   m_Name: spikeGrid
   m_TagString: Untagged
@@ -1080,6 +1065,26 @@ Transform:
   m_Father: {fileID: 8916128872130425188}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5516333881842928012
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916128872167221927}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 442c7d6a60f1e40f88d7f23d239f7865, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8916128872445731923
 GameObject:
   m_ObjectHideFlags: 0
