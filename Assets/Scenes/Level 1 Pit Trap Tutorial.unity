@@ -330,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: currentNavMesh
       value: 
-      objectReference: {fileID: 23800000, guid: f8ed6eb5469c892429b208135cb1e3b0, type: 2}
+      objectReference: {fileID: 23800000, guid: 50929c915d9ea7e498c2324d5e8e6f4b, type: 2}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -338,18 +338,6 @@ PrefabInstance:
     - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0884
-      objectReference: {fileID: 0}
-    - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0884
-      objectReference: {fileID: 0}
-    - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0884
       objectReference: {fileID: 0}
     - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -410,6 +398,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2119912444}
     - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: navMesh
+      value: 
+      objectReference: {fileID: 1138264139}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: pitTrap
       value: 
       objectReference: {fileID: 1115496236}
@@ -417,6 +409,10 @@ PrefabInstance:
       propertyPath: fallTrigger
       value: 
       objectReference: {fileID: 473224334}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: currentNavMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 50929c915d9ea7e498c2324d5e8e6f4b, type: 2}
     - target: {fileID: 1370967429295379686, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1069,7 +1065,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: eefda94f174ecdc48852ea15114b30df, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 50929c915d9ea7e498c2324d5e8e6f4b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1169401523
 PrefabInstance:

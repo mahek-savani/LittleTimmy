@@ -116,8 +116,6 @@ MonoBehaviour:
   door: {fileID: 0}
   trapDoor: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
   fallTrigger: {fileID: 0}
-  navMesh: {fileID: 0}
-  currentNavMesh: {fileID: 0}
 --- !u!1 &1370967429295379707
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +130,7 @@ GameObject:
   - component: {fileID: 1370967429295379705}
   - component: {fileID: 6695246122708595312}
   m_Layer: 2
-  m_Name: Trapdoor Button
+  m_Name: Experimental Trap door button for falling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,6 +227,7 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 90a0eecde62fc0a4d9294147b1ef8976, type: 2}
   m_Animations:
+  - {fileID: 7400000, guid: 90a0eecde62fc0a4d9294147b1ef8976, type: 2}
   - {fileID: 7400000, guid: 90a0eecde62fc0a4d9294147b1ef8976, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0

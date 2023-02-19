@@ -11,8 +11,8 @@ public class PitTrapButton : MonoBehaviour
     public MeshCollider door;
     public GameObject trapDoor;
     public GameObject fallTrigger;
-    public NavMeshSurface navMesh;
-    public NavMeshData currentNavMesh;
+    //public NavMeshSurface navMesh;
+    //public NavMeshData currentNavMesh;
 
     public void OnTriggerEnter(Collider c)
     {
