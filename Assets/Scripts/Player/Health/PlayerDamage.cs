@@ -38,4 +38,10 @@ public class PlayerDamage : MonoBehaviour
             playerController.playerDie();
         }
     }
+
+    public void HealDamage()
+    {
+        currentHealth++;
+        healthbar.SetHealth(currentHealth);
+    }
 }

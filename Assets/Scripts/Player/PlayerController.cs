@@ -107,13 +107,21 @@ public class PlayerController : MonoBehaviour
 
                     if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                         helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
+                    } else {
+                        helpText.text = "[E] PICK UP Health!";
                     }
 
-                    if(Input.GetKey(KeyCode.E) && triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-                        trapInHand = triggerObject.gameObject;
-                        triggerObject.gameObject.SetActive(false);
-                        hasTrapInInventory = true;
-
+                if(Input.GetKey(KeyCode.E)) {
+                        if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                            trapInHand = triggerObject.gameObject;
+                            triggerObject.gameObject.SetActive(false);
+                            hasTrapInInventory = true;
+                        } else {
+                            if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
+                                gameObject.GetComponent<PlayerDamage>().HealDamage();
+                                Destroy(triggerObject.gameObject);
+                            }                            
+                        }
                         helpText.text = "";
                         pickupDelay = 1f;
                     }

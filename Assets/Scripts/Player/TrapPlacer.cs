@@ -31,7 +31,9 @@ public class TrapPlacer : MonoBehaviour
                 RaycastHit Hit;
                 if(Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
                 {
-                    GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
+                    //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
+                    GameObject trapPlaced = trapInInventory;
+                    trapPlaced.transform.position = (Hit.point + Hit.normal * .001f);
                     trapPlaced.transform.LookAt(Hit.point + Hit.normal);
                     trapPlaced.layer = 8;
 
@@ -44,8 +46,10 @@ public class TrapPlacer : MonoBehaviour
             //Floor traps
             if(Input.GetKeyDown(KeyCode.E)){
                 Vector3 trapPosition = player.transform.position;
-                GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
-                trapPlaced.layer = 8;
+                //GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
+                GameObject trapPlaced = trapInInventory;
+                //trapPlaced.layer = 8;
+                trapPlaced.transform.position = trapPosition;
 
                 trapPlaced.SetActive(true);
 
@@ -54,7 +58,6 @@ public class TrapPlacer : MonoBehaviour
                 if (cloud != null)
                 {
                     cloud.visible();
-                    //Debug.Log(trapPlaced)
                 }
 
                 // MeshRenderer[] kids = trapPlaced.GetComponentsInChildren<MeshRenderer>();
