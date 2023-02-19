@@ -816,18 +816,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1683873656564429112, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: navMesh
       value: 
-      objectReference: {fileID: 2100000, guid: bc70b805e3a564b51813c5f4e9ec2780, type: 2}
-    - target: {fileID: 2580884269985083678, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bc70b805e3a564b51813c5f4e9ec2780, type: 2}
-    - target: {fileID: 3526237150026030535, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 751082408}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -1155,6 +1147,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997512, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: viewRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327803450025997513, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+      propertyPath: m_AutoRepath
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}

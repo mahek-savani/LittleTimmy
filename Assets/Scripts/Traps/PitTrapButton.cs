@@ -29,14 +29,20 @@ public class PitTrapButton : MonoBehaviour
 
                 trapDoor.layer = LayerMask.NameToLayer("Ignore Raycast");
 
-                navMesh.UpdateNavMesh(currentNavMesh);
-
                 //navMesh.RemoveData();
+                //navMesh.BuildNavMesh();
 
-                
+                //navMesh.UpdateNavMesh(currentNavMesh);
 
                 //Destroy(gameObject);
             }
         }
     }
+
+    //IEnumerator rebuildNavMesh()
+    //{
+    //    yield return new WaitUntil(collisionChecked);
+    //    navMesh.RemoveData();
+    //    navMesh.BuildNavMesh();
+    //}
 }
