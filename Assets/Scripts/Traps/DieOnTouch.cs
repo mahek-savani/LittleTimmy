@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class DieOnTouch : MonoBehaviour
 {
     public PitTrap pitTrap;
+    public PlayerController playercontroller;
 
     void OnTriggerStay(Collider c)
     {
@@ -24,6 +25,16 @@ public class DieOnTouch : MonoBehaviour
             // {
             //     c.GetComponent<StateMachine_Robust>().die();
             // }
+        }
+        
+        if (!pitTrap.trapActive && c.gameObject.layer == 3)
+        {
+            PlayerDamage damageInterface = c.gameObject.GetComponent<PlayerDamage>();
+
+            damageInterface.TakeDamage(1);
+            
+            playercontroller.RespawnPlayer();
+            
         }
     }
     

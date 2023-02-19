@@ -19883,6 +19883,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4829147723175761802, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 1941646818}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -23298,6 +23302,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 113af31bd9622f0468ba05dc4d2c960b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1941646818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+  m_PrefabInstance: {fileID: 2050362512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e13db61444faf84e9f5a134f8041e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2005122657

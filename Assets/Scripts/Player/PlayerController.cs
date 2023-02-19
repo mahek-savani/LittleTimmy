@@ -22,12 +22,18 @@ public class PlayerController : MonoBehaviour
 
     public float pickupDelay;
 
+    public Vector3 spawnPosition;  //To get this position in the respawn script
+    public Quaternion spawnRotation;
+
     void Start()
     {
         inSwapCommand = false;
         hasTrapInInventory = false;
         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
         helpText = helpUI.GetComponent<TextMeshProUGUI>();
+
+        spawnPosition = transform.position;  //To get these coordinates in the respawn
+        spawnRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -152,6 +158,13 @@ public class PlayerController : MonoBehaviour
     public void playerDie()
     {
         StartCoroutine(playerDie(0f));
+        
+    }
+
+      public void RespawnPlayer()
+    {
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
     }
 
 }

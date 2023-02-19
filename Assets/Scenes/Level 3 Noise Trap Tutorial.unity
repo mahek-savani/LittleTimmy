@@ -801,6 +801,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292889503}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &297226048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6327803450025997104, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+  m_PrefabInstance: {fileID: 1663830020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &297226057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297226048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931097e2e429b8b4daac91ccc4431692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playercontroller: {fileID: 0}
 --- !u!4 &311007588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2992135343491645883, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
@@ -6357,6 +6375,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4829147723175761802, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 1847924895}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
