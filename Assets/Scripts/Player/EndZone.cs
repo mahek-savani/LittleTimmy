@@ -36,6 +36,8 @@ public class EndZone : MonoBehaviour
         data.healthRemaining = 0;
         data.enemyHit = 0;
         data.ttrstart = System.DateTime.Now;
+        data.userLevelComplete = false;
+        data.attempts = 1;
     }
     void OnTriggerStay(Collider playerObject){
         Debug.Log(NPCManager.getNumLiving());
@@ -43,9 +45,11 @@ public class EndZone : MonoBehaviour
             if(NPCManager.getNumLiving() == 0){
                 data.endTime = System.DateTime.Now;
                 data.gameCompleted = true;
+                data.userLevelComplete = true;
                 Debug.Log(data.gameCompleted);
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.checkGameCompleted(data.gameCompleted);
+                data.checkUserLevelCompleted();
                 resetData();
                 SceneManager.LoadScene(nextScene);
             }

@@ -14,6 +14,8 @@ public class data
     public static int healthRemaining = 0;
     public static int enemyHit = 0;
     public static System.DateTime ttrstart = System.DateTime.Now;
+    public static int attempts=1;
+    public static bool userLevelComplete = false;
     public static void checkGameCompleted(bool checkComplete)
     {
         //Debug.Log(gameCompleted);
@@ -24,10 +26,30 @@ public class data
             //Debug.Log(d.enemyRemaining);
             //gameCompleted = false;
         }
+        
+    }
+
+    public static void checkUserLevelCompleted()
+    {
+        if (data.userLevelComplete)
+        {
+            dataPerUser d1 = new dataPerUser();
+            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/userData.json", d1);
+        }
     }
 
 }
 
+public class dataPerUser
+{
+    public int attempts;
+    public string levelName;
+    public dataPerUser()
+    {
+        attempts = data.attempts;
+        levelName = data.levelName;
+    }
+}
 public class dataRes
 {
     public string startTime;
