@@ -8,18 +8,24 @@ public class PitTrapButton : MonoBehaviour
     public GameObject buttonParent;
     public GameObject resetButton;
     public MeshCollider door;
+    float animDirection = -1f; 
+    float animDirectionFw = 1f; 
+
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)
         {
             if (pitTrap.trapActive)
             {
+                buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
                 pitTrap.playAnimation();
                 pitTrap.trapActive = false;
                 door.enabled = false;
                 data.trapActiveOrder.Add("pitTrap");
-                resetButton.transform.localScale += new Vector3(0, 0.63f, 0);
+                // resetButton.transform.localScale += new Vector3(0, 0.63f, 0);
+                resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
+                resetButton.GetComponent<Animation>().Play("buttonAnim");
                 //Destroy(gameObject);
             }
         }

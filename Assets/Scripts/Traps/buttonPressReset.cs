@@ -10,6 +10,7 @@ public class buttonPressReset : MonoBehaviour
     public GameObject trapButton;
     public GameObject spikeTrapWorking;
     float animDirection = -1f; 
+    float animDirectionFw = 1f; 
 
     public void OnTriggerEnter(Collider c)
     {
@@ -17,12 +18,15 @@ public class buttonPressReset : MonoBehaviour
         {
             if (!spikeTrap.trapActive)
             {
+                buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
                 spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
                 spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
-                trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
+                // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
+                trapButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
+                trapButton.GetComponent<Animation>().Play("buttonAnim");
                 //Destroy(gameObject);
             }
         }
