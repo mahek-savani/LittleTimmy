@@ -61,4 +61,14 @@ public class LiveCounter : MonoBehaviour
 
         return numLiving;
     }
+
+    public void cease()
+    {
+        StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
+
+        for (int i = 0; i < children.Length; i++)
+        {
+            children[i].enabled = false;
+        }
+    }
 }

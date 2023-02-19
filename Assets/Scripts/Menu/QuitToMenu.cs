@@ -7,6 +7,6 @@ public class QuitToMenu : MonoBehaviour
 {
     public void onClick()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }

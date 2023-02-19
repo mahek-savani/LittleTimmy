@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     public float pickupDelay;
 
+    public GameObject gameOverPanel;
+
+    public LiveCounter npcManager;
+
     void Start()
     {
         inSwapCommand = false;
@@ -146,11 +150,13 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(data.levelName);
         data.checkGameCompleted(data.gameCompleted);
         resetData();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameOverPanel.SetActive(true);
     }
 
     public void playerDie()
     {
+        npcManager.cease();
         StartCoroutine(playerDie(0f));
     }
 
