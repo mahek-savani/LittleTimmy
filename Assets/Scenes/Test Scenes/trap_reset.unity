@@ -449,7 +449,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127657529}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: 0, w: 0}
   m_LocalPosition: {x: -45.7, y: 1.09, z: -7.2}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -457,7 +457,7 @@ Transform:
   - {fileID: 1513025905}
   m_Father: {fileID: 550479081}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
 --- !u!111 &127657531
 Animation:
   m_ObjectHideFlags: 0
@@ -1241,6 +1241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3738750155420560736, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: spikeResetButton
+      value: 
+      objectReference: {fileID: 127657529}
     - target: {fileID: 3738750155902833564, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.4
@@ -1527,6 +1531,11 @@ MeshFilter:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2078390526553534258, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
   m_PrefabInstance: {fileID: 31230974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &816819975 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3738750155902833537, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+  m_PrefabInstance: {fileID: 550479080}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &848203901
 GameObject:
@@ -2378,7 +2387,7 @@ GameObject:
   - component: {fileID: 1513025909}
   - component: {fileID: 1513025908}
   - component: {fileID: 1513025907}
-  - component: {fileID: 1513025906}
+  - component: {fileID: 1513025910}
   m_Layer: 0
   m_Name: buttonTrigger
   m_TagString: Untagged
@@ -2401,20 +2410,6 @@ Transform:
   m_Father: {fileID: 127657530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &1513025906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513025904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0773a0c01f19ac42a207e3eebd26ef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spikeTrap: {fileID: 550479082}
-  buttonParent: {fileID: 127657529}
 --- !u!136 &1513025907
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2479,6 +2474,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513025904}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1513025910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513025904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566378a835caf48bc962614a23bd5026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spikeTrap: {fileID: 550479082}
+  spikeGrid: {fileID: 1924413851}
+  buttonParent: {fileID: 127657529}
+  trapButton: {fileID: 816819975}
 --- !u!1 &1564380270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5014333708128783131, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
@@ -2985,7 +2996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923584986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.8519, y: -0.8106, z: 4.99}
+  m_LocalPosition: {x: -8, y: -0.8106, z: 4.99}
   m_LocalScale: {x: 1.1216382, y: 0.29124013, z: 2.42391}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3022,6 +3033,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 166ce09b16bbc2e4397db8244a0bba95, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1 &1924413851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916128872167221927, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+  m_PrefabInstance: {fileID: 550479080}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1940600101
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,8 +3162,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065399706}
   m_LocalRotation: {x: -0, y: 0.6992754, z: -0, w: 0.7148524}
-  m_LocalPosition: {x: -24.8094, y: -0.8106, z: 2.9877}
-  m_LocalScale: {x: 0.5090774, y: 0.29124013, z: 2.257128}
+  m_LocalPosition: {x: -24.6228, y: -0.8106, z: 3.1}
+  m_LocalScale: {x: 0.5254042, y: 0.29124013, z: 2.3628478}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1138264138}

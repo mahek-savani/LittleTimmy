@@ -5,16 +5,19 @@ using UnityEngine;
 public class buttonPressReset : MonoBehaviour
 {
     public SpikeTrap spikeTrap;
+    public GameObject spikeGrid;
     public GameObject buttonParent;
+    public GameObject trapButton;
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)
         {
             if (!spikeTrap.trapActive)
             {
-                buttonParent.GetComponent<Animation>().Play("buttonResetAnim");
-                spikeTrap.playAnimation();
+                buttonParent.GetComponent<Animation>().Play("buttonAnim");
+                spikeGrid.transform.localScale += new Vector3(0, 0, 16f);
                 spikeTrap.trapActive = true;
+                trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //Destroy(gameObject);
             }
         }
