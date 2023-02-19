@@ -15,7 +15,7 @@ public class buttonPressReset : MonoBehaviour
             if (!spikeTrap.trapActive)
             {
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
-                spikeGrid.transform.localScale += new Vector3(0, 0, 16f);
+                spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
                 trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //Destroy(gameObject);
