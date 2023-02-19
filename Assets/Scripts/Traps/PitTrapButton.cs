@@ -30,8 +30,13 @@ public class PitTrapButton : MonoBehaviour
 
                 // resetButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //changing pit trap's reset trigger button's animation direction to backward
-                resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
-                resetButton.GetComponent<Animation>().Play("buttonAnim");
+
+                if (resetButton)
+                {
+                    resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
+                    resetButton.GetComponent<Animation>().Play("buttonAnim");
+                }
+
 
                 //Destroy(gameObject);
             }
