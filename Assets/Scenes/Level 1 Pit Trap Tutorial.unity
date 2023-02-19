@@ -323,6 +323,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: navMesh
+      value: 
+      objectReference: {fileID: 1138264139}
+    - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: currentNavMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: f8ed6eb5469c892429b208135cb1e3b0, type: 2}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -385,6 +393,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+--- !u!1 &473224334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3526237150026030535, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+  m_PrefabInstance: {fileID: 473224333}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &544942823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -400,6 +413,10 @@ PrefabInstance:
       propertyPath: pitTrap
       value: 
       objectReference: {fileID: 1115496236}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: fallTrigger
+      value: 
+      objectReference: {fileID: 473224334}
     - target: {fileID: 1370967429295379686, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: m_RootOrder
       value: 0

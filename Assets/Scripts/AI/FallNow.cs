@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class FallNow : MonoBehaviour
 {
 
-    public Transform fallPoint;
     public NavMeshSurface navMesh;
     public NavMeshData currentNavMesh;
 
