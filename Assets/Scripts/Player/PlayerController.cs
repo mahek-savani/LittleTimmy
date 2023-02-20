@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     public float pickupDelay;
 
+    public Vector3 spawnPosition;  //To get this position in the respawn script
+    public Quaternion spawnRotation;
+
     public GameObject gameOverPanel;
 
     public LiveCounter npcManager;
@@ -32,6 +35,9 @@ public class PlayerController : MonoBehaviour
         hasTrapInInventory = false;
         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
         helpText = helpUI.GetComponent<TextMeshProUGUI>();
+
+        spawnPosition = transform.position;  //To get these coordinates in the respawn
+        spawnRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -166,6 +172,13 @@ public class PlayerController : MonoBehaviour
     {
         npcManager.cease();
         StartCoroutine(playerDie(0f));
+        
+    }
+
+      public void RespawnPlayer()
+    {
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
     }
 
 }

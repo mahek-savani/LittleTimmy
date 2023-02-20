@@ -316,11 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &379025686 stripped
-MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 5510807269329563888, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
-  m_PrefabInstance: {fileID: 1788332557}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &548954039
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +659,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1370967429295379686, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1370967429295379686, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -713,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 1918072945449608811, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: door
       value: 
-      objectReference: {fileID: 379025686}
+      objectReference: {fileID: 1485314313}
     - target: {fileID: 1918072945449608811, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: pitTrap
       value: 
@@ -725,7 +720,7 @@ PrefabInstance:
     - target: {fileID: 5771797189520818529, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: door
       value: 
-      objectReference: {fileID: 379025686}
+      objectReference: {fileID: 0}
     - target: {fileID: 5771797189520818529, guid: b6ff7ad04c266bf4b8bc747e6e0f5f05, type: 3}
       propertyPath: pitTrap
       value: 
@@ -973,7 +968,7 @@ Transform:
   - {fileID: 611913569}
   - {fileID: 1298037190}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1138264139
 MonoBehaviour:
@@ -1287,19 +1282,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9188174
+      value: 0.91881734
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3946831
+      value: 0.39468312
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017813365
+      value: 0.000000012139958
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007651829
+      value: -0.0000000052147877
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -1349,6 +1344,11 @@ Transform:
   m_Father: {fileID: 1138264138}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1485314313 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5510807269329563888, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
+  m_PrefabInstance: {fileID: 1788332557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1758023738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1608,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4829147723175761802, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 1776833885}
     - target: {fileID: 4829147724036388294, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -1618,7 +1622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829147724036388295, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.14
+      value: -16.95
       objectReference: {fileID: 0}
     - target: {fileID: 4829147724036388295, guid: 75ee0ed448dc86a4ca563a638fd06e6f, type: 3}
       propertyPath: m_LocalPosition.y
