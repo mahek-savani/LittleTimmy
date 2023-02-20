@@ -151,6 +151,9 @@ public class PlayerController : MonoBehaviour
         data.levelName = "demo";
         data.gameCompleted = false;
         data.trapActiveOrder = new List<string>();
+        data.healthRemaining = 0;
+        data.enemyHit = 0;
+        data.ttrstart = System.DateTime.Now;
     }
     public IEnumerator playerDie(float delay)
     {
@@ -166,6 +169,8 @@ public class PlayerController : MonoBehaviour
         resetData();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverPanel.SetActive(true);
+        data.attempts = data.attempts + 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void playerDie()

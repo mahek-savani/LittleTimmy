@@ -16,7 +16,8 @@ public class PlayerDamage : MonoBehaviour
     private Color origColor;
 
     void Start()
-    {   
+    {
+        data.healthRemaining = maxHealth;
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
         origColor = this.GetComponent<Renderer>().material.color;
@@ -30,6 +31,8 @@ public class PlayerDamage : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        data.healthRemaining = currentHealth;
+        data.enemyHit = data.enemyHit + 1;
         healthbar.SetHealth(currentHealth);
         this.GetComponent<Renderer>().material.color = Color.red;
         timeRed = 0.3f;
