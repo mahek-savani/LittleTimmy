@@ -300,6 +300,10 @@ MonoBehaviour:
   tmp_Pickup: {fileID: 0}
   helpUI: {fileID: 0}
   pickupDelay: 0
+  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
+  gameOverPanel: {fileID: 2078390528302790816, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  npcManager: {fileID: 0}
 --- !u!114 &2762713670264431872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113af31bd9622f0468ba05dc4d2c960b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
-  currentHealth: 0
+  maxHealth: 3
+  currentHealth: 3
   healthbar: {fileID: 0}
   playerController: {fileID: 2762713670264431873}
 --- !u!114 &2762713670264431874

@@ -40,7 +40,7 @@ private void Update()
                         closestEnemyIndex = i;
                     }
                 }
-                Debug.Log(closestEnemyIndex);
+                //Debug.Log(closestEnemyIndex);
 
                 playerCamera.gameObject.SetActive(false);
                 enemyCameras[closestEnemyIndex].gameObject.SetActive(true);

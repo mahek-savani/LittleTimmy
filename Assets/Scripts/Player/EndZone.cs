@@ -18,7 +18,7 @@ public class EndZone : MonoBehaviour
         } else {
             if(ttrCount == 0)
             {
-                Debug.Log("hi");
+                //Debug.Log("hi");
                 data.ttrstart = System.DateTime.Now;
                 ttrCount = 1;
             }
@@ -46,7 +46,7 @@ public class EndZone : MonoBehaviour
                 data.endTime = System.DateTime.Now;
                 data.gameCompleted = true;
                 data.userLevelComplete = true;
-                Debug.Log(data.gameCompleted);
+                //Debug.Log(data.gameCompleted);
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.checkGameCompleted(data.gameCompleted);
                 data.checkUserLevelCompleted();

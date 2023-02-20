@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class Experimental_PitTrapButton : MonoBehaviour
+public class Experimental_Reset_Button : MonoBehaviour
 {
     public PitTrap pitTrap;
     public GameObject buttonParent;
@@ -13,30 +13,43 @@ public class Experimental_PitTrapButton : MonoBehaviour
     public GameObject trapDoor;
     public GameObject fallTrigger;
     public GameObject resetButton;
-    //public NavMeshSurface navMesh;
-    //public NavMeshData currentNavMesh;
+
+    public NavMeshSurface navMesh;
 
     //backward direction
     float animDirection = -1f;
     //forward direction
     float animDirectionFw = 1f;
 
+    private void Update()
+    {
+        navMesh.RemoveData();
+        navMesh.BuildNavMesh();
+    }
+
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)
         {
-            if (pitTrap.trapActive)
+            if (!pitTrap.trapActive)
             {
                 //changing pit trap's trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
-                pitTrap.playAnimation();
-                pitTrap.trapActive = false;
-                door.enabled = false;
-                data.trapActiveOrder.Add("pitTrap");
-                fallTrigger.SetActive(true);
+                //pitTrap.playAnimation();
 
-                trapDoor.layer = LayerMask.NameToLayer("Ignore Raycast");
+                //changing pit trap's animation direction to backward
+                trapDoor.GetComponent<Animation>()["trapDoorAnim"].speed = animDirection;
+                trapDoor.GetComponent<Animation>().Play("trapDoorAnim");
+
+                pitTrap.trapActive = true;
+                door.enabled = true;
+                data.trapActiveOrder.Add("pitTrap");
+                fallTrigger.SetActive(false);
+
+                trapDoor.layer = LayerMask.NameToLayer("CanTrap");
+
+
 
 
                 if (resetButton)
