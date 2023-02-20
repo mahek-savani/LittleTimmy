@@ -52,6 +52,7 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.transform.position = trapPosition;
 
                 trapPlaced.SetActive(true);
+                trapPlaced.GetComponentInChildren<BaseTrapClass>().isTriggered = false;
 
                 NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
 
