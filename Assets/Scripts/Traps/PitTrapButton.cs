@@ -26,7 +26,7 @@ public class PitTrapButton : MonoBehaviour
                 pitTrap.playAnimation();
                 pitTrap.trapActive = false;
                 door.enabled = false;
-                data.trapActiveOrder.Add("pitTrap");
+                data.trapActiveOrder.Add("pitTrap-0");
 
                 // resetButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //changing pit trap's reset trigger button's animation direction to backward

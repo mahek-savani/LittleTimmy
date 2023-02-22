@@ -16,6 +16,8 @@ public class data
     public static System.DateTime ttrstart = System.DateTime.Now;
     public static int attempts=1;
     public static bool userLevelComplete = false;
+    public static int NPCChase = 0;
+    public static int NPCSuspicion = 0;
     public static void checkGameCompleted(bool checkComplete)
     {
         //Debug.Log(gameCompleted);
@@ -61,6 +63,8 @@ public class dataRes
     public int healthRemaining;
     public int enemyHit;
     public string ttrstart;
+    public int NPCChase;
+    public int NPCSuspicion;
     public dataRes()
     {
         startTime = data.startTime.ToString();
@@ -72,6 +76,8 @@ public class dataRes
         enemyHit = data.enemyHit;
         ttrstart = data.ttrstart.ToString();
         //enemyRemaining = data.enemyRemaining;
+        NPCChase = data.NPCChase;
+        NPCSuspicion = data.NPCSuspicion;
     }
 
 }

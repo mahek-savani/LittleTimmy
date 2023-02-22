@@ -55,7 +55,7 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.GetComponentInChildren<BaseTrapClass>().isTriggered = false;
 
                 NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
-
+                data.trapActiveOrder.Add("noiseTrap-0");
                 if (cloud != null)
                 {
                     cloud.visible();

@@ -154,6 +154,8 @@ public class PlayerController : MonoBehaviour
         data.healthRemaining = 0;
         data.enemyHit = 0;
         data.ttrstart = System.DateTime.Now;
+        data.NPCChase = 0;
+        data.NPCSuspicion = 0;
     }
     public IEnumerator playerDie(float delay)
     {

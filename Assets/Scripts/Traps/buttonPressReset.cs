@@ -30,7 +30,6 @@ public class buttonPressReset : MonoBehaviour
 
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
-
                 // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //changing spike trap's trigger button's animation direction to backward
                 trapButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
