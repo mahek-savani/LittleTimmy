@@ -27,7 +27,6 @@ public class buttonPressReset : MonoBehaviour
                 //changing spike trap's animation direction to backward
                 spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
                 spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
-
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
                 // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);

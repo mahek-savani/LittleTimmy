@@ -171,7 +171,6 @@ public class PlayerController : MonoBehaviour
         resetData();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverPanel.SetActive(true);
-        data.attempts = data.attempts + 1;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
