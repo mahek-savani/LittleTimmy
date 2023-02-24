@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
                 // Different logic depending on whether or not there is currently a trap
                 // in inventory
-                if(hasTrapInInventory){
+                if(hasTrapInInventory && triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                     inSwapCommand = true;
 
                     if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){

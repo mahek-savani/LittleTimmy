@@ -13,6 +13,12 @@ public class FreezeTrap : BaseTrapClass
         }
     }
 
+    void Update(){
+        if(!isTriggered){
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
     void OnTriggerEnter(Collider triggerObject){
         // If an enemy enters the trigger box, freeze enemy and deactivate trap
         if(!isTriggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
@@ -22,7 +28,7 @@ public class FreezeTrap : BaseTrapClass
             data.trapActiveOrder.Add("freezeTrap");
 
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            this.GetComponent<Renderer>().material.color = Color.grey;
+            //this.GetComponent<Renderer>().material.color = Color.grey;
         }
     }
 }
