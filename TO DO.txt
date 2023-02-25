@@ -1,0 +1,4 @@
+Try disabling automatic repathing for the agents, or otherwise stop them from moving away from the hole once the navmesh is updated.
+
+Try clearing the navmesh data on the button press, then rebuilding it on the next frame, or otherwise find a way to rebuild the navmesh after the agent-trigger collision is checked.
+
