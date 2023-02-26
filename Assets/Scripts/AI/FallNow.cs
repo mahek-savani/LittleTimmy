@@ -9,6 +9,10 @@ public class FallNow : MonoBehaviour
 
     public NavMeshSurface navMesh;
     public NavMeshData currentNavMesh;
+    public PitTrap trap;
+    private bool lastTrapState = true;
+    public GameObject obstacle;
+    private bool rebuildNavMesh = false;
 
     private void OnTriggerStay(Collider c)
     {
@@ -26,6 +30,14 @@ public class FallNow : MonoBehaviour
             SM.die();
             SM.enabled = false;
             SM.agent.enabled = false;
+
+            if (lastTrapState != trap.trapActive)
+            {
+                rebuildNavMesh = true;
+                lastTrapState = trap.trapActive;
+            }
+
+            
            
             //SM.enabled = false;
 
@@ -37,8 +49,12 @@ public class FallNow : MonoBehaviour
 
     private void LateUpdate()
     {
-        navMesh.RemoveData();
-        navMesh.BuildNavMesh();
+        if (rebuildNavMesh){
+            obstacle.SetActive(!obstacle.activeSelf);
+            navMesh.RemoveData();
+            navMesh.BuildNavMesh();
+            rebuildNavMesh = false;
+        }
     }
 
     //public checkCollision()

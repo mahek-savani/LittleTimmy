@@ -13,6 +13,8 @@ public class Experimental_PitTrapButton : MonoBehaviour
     public GameObject trapDoor;
     public GameObject fallTrigger;
     public GameObject resetButton;
+
+    public GameObject obstacle;
     //public NavMeshSurface navMesh;
     //public NavMeshData currentNavMesh;
 
@@ -35,6 +37,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 door.enabled = false;
                 data.trapActiveOrder.Add("pitTrap");
                 fallTrigger.SetActive(true);
+                //obstacle.SetActive(true);
 
                 trapDoor.layer = LayerMask.NameToLayer("Ignore Raycast");
 
