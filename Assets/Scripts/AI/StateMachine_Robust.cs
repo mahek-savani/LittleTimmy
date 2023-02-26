@@ -526,6 +526,15 @@ public class StateMachine_Robust : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        if (state == STATE.PATROLLING && collision.gameObject.layer == LayerMask.NameToLayer("Enemies") && conscious && alive)
+        {
+            collisionSoFar = 0f;
+        }
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
             getUnconscious(unconsciousTime);
@@ -535,14 +544,6 @@ public class StateMachine_Robust : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
         }
         else if (state == STATE.PATROLLING && collision.gameObject.layer == LayerMask.NameToLayer("Enemies") && conscious && alive)
-        {
-            collisionSoFar = 0f;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (state == STATE.PATROLLING && collision.gameObject.layer == LayerMask.NameToLayer("Enemies") && conscious && alive)
         {
             collisionSoFar += Time.deltaTime;
             if (collisionSoFar >= collisionTime)
