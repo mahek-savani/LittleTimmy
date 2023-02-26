@@ -13,19 +13,16 @@ public class Experimental_Reset_Button : MonoBehaviour
     public GameObject trapDoor;
     public GameObject fallTrigger;
     public GameObject resetButton;
+    public GameObject obstacle;
 
     public NavMeshSurface navMesh;
+
+    public UpdateNavMesh manager;
 
     //backward direction
     float animDirection = -1f;
     //forward direction
     float animDirectionFw = 1f;
-
-    private void Update()
-    {
-        navMesh.RemoveData();
-        navMesh.BuildNavMesh();
-    }
 
     public void OnTriggerEnter(Collider c)
     {
@@ -45,11 +42,18 @@ public class Experimental_Reset_Button : MonoBehaviour
                 pitTrap.trapActive = true;
                 door.enabled = true;
                 data.trapActiveOrder.Add("pitTrap");
+                //fallTrigger.SetActive(false);
+
+                //trapDoor.layer = LayerMask.NameToLayer("CanTrap");
+
+                //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
+                
+
+                //obstacle.SetActive(false);
                 fallTrigger.SetActive(false);
 
-                trapDoor.layer = LayerMask.NameToLayer("CanTrap");
-
-
+                //manager.resetting = true;
+                //manager.rebuildNavMesh = true;
 
 
                 if (resetButton)

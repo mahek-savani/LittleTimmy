@@ -1,18 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class FallNow : MonoBehaviour
 {
-
     public NavMeshSurface navMesh;
     public NavMeshData currentNavMesh;
+    public PitTrap trap;
+    //private bool lastTrapState = true;
+    public GameObject obstacle;
+    public bool operated = false;
+    public UpdateNavMesh manager;
+    //public GameObject offLink;
+    public NavMeshObstacle navObstacle;
+
+    private void OnEnable()
+    {
+        StartCoroutine(enableObstacle());
+    }
+
+    private void OnDisable()
+    {
+        navObstacle.enabled = false;
+    }
+
+    private IEnumerator enableObstacle()
+    {
+        //yield return new WaitForNextFrameUnit();
+        //yield return new WaitForNextFrameUnit();
+        yield return new WaitForSeconds(1f / 60f);
+        navObstacle.enabled = true;
+    }
 
     private void OnTriggerStay(Collider c)
     {
-        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled == true)
+        if (!(manager.rebuildNavMesh) && c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled)
         {
             StateMachine_Robust SM = c.gameObject.GetComponent<StateMachine_Robust>();
 
@@ -26,6 +51,15 @@ public class FallNow : MonoBehaviour
             SM.die();
             SM.enabled = false;
             SM.agent.enabled = false;
+
+            //operated = true;
+
+            //if (lastTrapState != trap.trapActive)
+            //{
+            //    lastTrapState = trap.trapActive;
+            //}
+
+            
            
             //SM.enabled = false;
 
@@ -35,11 +69,21 @@ public class FallNow : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
-    {
-        navMesh.RemoveData();
-        navMesh.BuildNavMesh();
-    }
+    //private void LateUpdate()
+    //{
+    //    operated = true;
+    //}
+
+    //private void LateUpdate()
+    //{
+    //    if (rebuildNavMesh){
+    //        obstacle.SetActive(!obstacle.activeSelf);
+    //        navMesh.RemoveData();
+    //        navMesh.BuildNavMesh();
+    //        //offLink.SetActive(!offlink.activeSelf);
+    //        rebuildNavMesh = false;
+    //    }
+    //}
 
     //public checkCollision()
     //{

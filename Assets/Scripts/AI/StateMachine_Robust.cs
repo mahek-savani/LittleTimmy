@@ -64,6 +64,12 @@ public class StateMachine_Robust : MonoBehaviour
     // The NPC manager parenting this agent
     public LiveCounter NPCManager;
 
+    // How long the NPC will wait before moving onto a non-colliding waypoint
+    private float collisionTime;
+
+    // The amount of time the NPC has been colliding with another
+    private float collisionSoFar = 0f;
+
 
 
     [Header("FOV Visualization")]
@@ -141,6 +147,7 @@ public class StateMachine_Robust : MonoBehaviour
 
 
     void Start() {
+        collisionTime = Random.Range(1.0f, 3.0f);
         if (patrolPoints.Length == 0)
         {
             defaultState = STATE.IDLE;
@@ -448,6 +455,7 @@ public class StateMachine_Robust : MonoBehaviour
         agent.isStopped = false;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
+        timeCounter = suspiciousTime;
 
         assignSuspiciousWalk(getPointNearestNavMesh(source));
 
@@ -518,6 +526,15 @@ public class StateMachine_Robust : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        if (state == STATE.PATROLLING && collision.gameObject.layer == LayerMask.NameToLayer("Enemies") && conscious && alive)
+        {
+            collisionSoFar = 0f;
+        }
+
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
             getUnconscious(unconsciousTime);
@@ -526,6 +543,28 @@ public class StateMachine_Robust : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
         }
+        else if (state == STATE.PATROLLING && collision.gameObject.layer == LayerMask.NameToLayer("Enemies") && conscious && alive)
+        {
+            collisionSoFar += Time.deltaTime;
+            if (collisionSoFar >= collisionTime)
+            {
+                if (currentDest < patrolPoints.Length - 1)
+                {
+                    currentDest++;
+                }
+                else
+                {
+                    currentDest = 0;
+                }
+                agent.SetDestination(patrolPoints[currentDest].position);
+                collisionSoFar = -1000f;
+            }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        collisionSoFar = -2f;
     }
 
     // Maps a weight to each waypoint
