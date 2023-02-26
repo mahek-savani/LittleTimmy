@@ -14,6 +14,8 @@ public class FallNow : MonoBehaviour
     public GameObject obstacle;
     private bool rebuildNavMesh = false;
 
+    //public GameObject offLink;
+
     private void OnTriggerStay(Collider c)
     {
         if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled == true)
@@ -53,6 +55,7 @@ public class FallNow : MonoBehaviour
             obstacle.SetActive(!obstacle.activeSelf);
             navMesh.RemoveData();
             navMesh.BuildNavMesh();
+            //offLink.SetActive(!offlink.activeSelf);
             rebuildNavMesh = false;
         }
     }

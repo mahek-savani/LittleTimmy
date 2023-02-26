@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755284497593668370}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Doom Mechanism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 3526237150026030535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.55, y: 18.454, z: -6.83}
-  m_LocalScale: {x: 2.4407, y: 4.1219187, z: 2.4407}
+  m_LocalScale: {x: 3.197317, y: 4.1219187, z: 4.016416}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1755284497593668370}
@@ -147,6 +147,7 @@ MonoBehaviour:
   navMesh: {fileID: 0}
   currentNavMesh: {fileID: 23800000, guid: f8ed6eb5469c892429b208135cb1e3b0, type: 2}
   trap: {fileID: 1698815297257003253}
+  obstacle: {fileID: 6714407615219652414}
 --- !u!208 &2057371171
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4829147724036388295}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Experimental Trapdoor with Falling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +324,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5510807269910041315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7617264, y: 2.560543, z: -3.9230733}
+  m_LocalPosition: {x: 0.7617264, y: 2.49, z: -3.9230733}
   m_LocalScale: {x: 0.110783145, y: 0.15617065, z: 4.0296154}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -454,7 +455,7 @@ Transform:
   m_GameObject: {fileID: 6714407615219652414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.55, y: 18.454, z: -6.83}
-  m_LocalScale: {x: 3.4066508, y: 4.1219187, z: 4.758379}
+  m_LocalScale: {x: 4.038925, y: 4.886947, z: 5.6415343}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1755284497593668370}
@@ -475,7 +476,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6714407615219652414}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -519,7 +520,7 @@ BoxCollider:
   m_GameObject: {fileID: 6714407615219652414}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -536,6 +537,6 @@ NavMeshObstacle:
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
-  m_CarveOnlyStationary: 1
+  m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 0
