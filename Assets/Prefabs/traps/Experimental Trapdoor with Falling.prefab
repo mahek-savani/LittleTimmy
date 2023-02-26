@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 3526237150026030535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.55, y: 18.454, z: -6.83}
-  m_LocalScale: {x: 1.5881628, y: 2.0474286, z: 2.9071484}
+  m_LocalScale: {x: 2.9576356, y: 2.0474286, z: 4.2357154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1755284497593668370}
@@ -148,7 +148,8 @@ MonoBehaviour:
   currentNavMesh: {fileID: 23800000, guid: f8ed6eb5469c892429b208135cb1e3b0, type: 2}
   trap: {fileID: 1698815297257003253}
   obstacle: {fileID: 6714407615219652414}
-  rebuildNavMesh: 0
+  operated: 0
+  manager: {fileID: 0}
 --- !u!208 &2057371171
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -156,15 +157,15 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3526237150026030535}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
-  m_CarveOnlyStationary: 1
+  m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_TimeToStationary: 0
 --- !u!1 &4829147724036388294
 GameObject:
   m_ObjectHideFlags: 0
