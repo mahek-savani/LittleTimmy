@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class FallNow : MonoBehaviour
 {
-
     public NavMeshSurface navMesh;
     public NavMeshData currentNavMesh;
     public PitTrap trap;
@@ -48,16 +47,16 @@ public class FallNow : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
-    {
-        if (rebuildNavMesh){
-            obstacle.SetActive(!obstacle.activeSelf);
-            navMesh.RemoveData();
-            navMesh.BuildNavMesh();
-            //offLink.SetActive(!offlink.activeSelf);
-            rebuildNavMesh = false;
-        }
-    }
+    //private void LateUpdate()
+    //{
+    //    if (rebuildNavMesh){
+    //        obstacle.SetActive(!obstacle.activeSelf);
+    //        navMesh.RemoveData();
+    //        navMesh.BuildNavMesh();
+    //        //offLink.SetActive(!offlink.activeSelf);
+    //        rebuildNavMesh = false;
+    //    }
+    //}
 
     //public checkCollision()
     //{
