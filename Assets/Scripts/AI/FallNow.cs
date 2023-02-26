@@ -11,13 +11,18 @@ public class FallNow : MonoBehaviour
     public PitTrap trap;
     //private bool lastTrapState = true;
     public GameObject obstacle;
-    public bool rebuildNavMesh = false;
-
+    public bool operated = false;
+    public UpdateNavMesh manager;
     //public GameObject offLink;
+
+    private void OnEnable()
+    {
+        operated = false;
+    }
 
     private void OnTriggerStay(Collider c)
     {
-        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled == true)
+        if (!(manager.rebuildNavMesh) && c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled)
         {
             StateMachine_Robust SM = c.gameObject.GetComponent<StateMachine_Robust>();
 
@@ -31,6 +36,8 @@ public class FallNow : MonoBehaviour
             SM.die();
             SM.enabled = false;
             SM.agent.enabled = false;
+
+            operated = true;
 
             //if (lastTrapState != trap.trapActive)
             //{

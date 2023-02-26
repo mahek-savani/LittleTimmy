@@ -284,6 +284,7 @@ MonoBehaviour:
   trapDoor: {fileID: 1528035086}
   fallTrigger: {fileID: 2057371165}
   resetButton: {fileID: 1868926839}
+  obstacle: {fileID: 889413150}
   navMesh: {fileID: 751082408}
   manager: {fileID: 928607368}
 --- !u!114 &450042496 stripped
@@ -622,6 +623,9 @@ MonoBehaviour:
   fallTrigger: {fileID: 2057371165}
   door: {fileID: 781629026}
   trapDoor: {fileID: 1528035086}
+  resetting: 0
+  fallBox: {fileID: 2057371167}
+  NPCManager: {fileID: 0}
 --- !u!4 &928607369
 Transform:
   m_ObjectHideFlags: 0
@@ -1163,10 +1167,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2057371171, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057371171, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_TimeToStationary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057371171, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_CarveOnlyStationary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 928607368}
     - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: navMesh
       value: 
       objectReference: {fileID: 751082408}
+    - target: {fileID: 3526237150026030535, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_Name
       value: Trapdoor Parent
@@ -1214,6 +1238,14 @@ PrefabInstance:
     - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017214521943928714, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9576356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017214521943928714, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.2357154
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
@@ -1753,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997515, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.99536
+      value: 21.97
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997515, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2132,6 +2164,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3526237150026030535, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
   m_PrefabInstance: {fileID: 1338257775}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2057371167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+  m_PrefabInstance: {fileID: 1338257775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057371165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544a544b91f6273478f28376295c5651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2135261359
 PrefabInstance:
   m_ObjectHideFlags: 0

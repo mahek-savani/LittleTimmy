@@ -13,6 +13,7 @@ public class Experimental_Reset_Button : MonoBehaviour
     public GameObject trapDoor;
     public GameObject fallTrigger;
     public GameObject resetButton;
+    public GameObject obstacle;
 
     public NavMeshSurface navMesh;
 
@@ -46,9 +47,13 @@ public class Experimental_Reset_Button : MonoBehaviour
                 //trapDoor.layer = LayerMask.NameToLayer("CanTrap");
 
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
+                
+
+                obstacle.SetActive(false);
+                fallTrigger.SetActive(false);
+
+                manager.resetting = true;
                 manager.rebuildNavMesh = true;
-
-
 
 
                 if (resetButton)
