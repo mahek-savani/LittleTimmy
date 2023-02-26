@@ -41,6 +41,8 @@ public class Experimental_PitTrapButton : MonoBehaviour
 
                 trapDoor.layer = LayerMask.NameToLayer("Ignore Raycast");
 
+                fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
+
 
                 if (resetButton)
                 {
