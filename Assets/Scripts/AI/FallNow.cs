@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,10 +15,24 @@ public class FallNow : MonoBehaviour
     public bool operated = false;
     public UpdateNavMesh manager;
     //public GameObject offLink;
+    public NavMeshObstacle navObstacle;
 
     private void OnEnable()
     {
-        operated = false;
+        StartCoroutine(enableObstacle());
+    }
+
+    private void OnDisable()
+    {
+        navObstacle.enabled = false;
+    }
+
+    private IEnumerator enableObstacle()
+    {
+        //yield return new WaitForNextFrameUnit();
+        //yield return new WaitForNextFrameUnit();
+        yield return new WaitForSeconds(1f / 60f);
+        navObstacle.enabled = true;
     }
 
     private void OnTriggerStay(Collider c)
@@ -37,7 +52,7 @@ public class FallNow : MonoBehaviour
             SM.enabled = false;
             SM.agent.enabled = false;
 
-            operated = true;
+            //operated = true;
 
             //if (lastTrapState != trap.trapActive)
             //{
@@ -53,6 +68,11 @@ public class FallNow : MonoBehaviour
             //SM.agent.destination = fallPoint.position;
         }
     }
+
+    //private void LateUpdate()
+    //{
+    //    operated = true;
+    //}
 
     //private void LateUpdate()
     //{

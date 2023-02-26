@@ -23,24 +23,29 @@ public class UpdateNavMesh : MonoBehaviour
         Animation doorAnimation = trapDoor.GetComponent<Animation>();
         //if (rebuildNavMesh && fallBox.operated)
         //{
-        if (rebuildNavMesh)
-        {
-            if (!resetting)
-            {
-                door.layer = LayerMask.NameToLayer("Default");
-                navMesh.RemoveData();
-                navMesh.BuildNavMesh();
-                rebuildNavMesh = false;
-            }
-            else if (!doorAnimation.isPlaying)
-            {
-                door.layer = LayerMask.NameToLayer("Default");
-                navMesh.RemoveData();
-                navMesh.BuildNavMesh();
-                rebuildNavMesh = false;
-            }
+        //if (rebuildNavMesh)
+        //{
+        //    if (!resetting)
+        //    {
+        //        door.layer = LayerMask.NameToLayer("Default");
+        //        navMesh.RemoveData();
+        //        navMesh.BuildNavMesh();
+        //        rebuildNavMesh = false;
+        //    }
+        //    else if (!doorAnimation.isPlaying)
+        //    {
+        //        door.layer = LayerMask.NameToLayer("Default");
+        //        navMesh.RemoveData();
+        //        navMesh.BuildNavMesh();
+        //        rebuildNavMesh = false;
+        //    }
 
-        }
+        //}
+
+        //if (fallTrigger.GetComponent<FallNow>().operated)
+        //{
+        //    fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
+        //}
 
         //    //if (!resetting)
         //    //{

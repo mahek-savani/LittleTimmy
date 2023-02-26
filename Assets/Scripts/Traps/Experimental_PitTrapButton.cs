@@ -47,8 +47,8 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //obstacle.SetActive(true);
                 fallTrigger.SetActive(true);
 
-                manager.resetting = false;
-                manager.rebuildNavMesh = true;
+                //manager.resetting = false;
+                //manager.rebuildNavMesh = true;
 
 
 

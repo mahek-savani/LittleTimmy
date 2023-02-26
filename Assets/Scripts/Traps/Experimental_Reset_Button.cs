@@ -49,11 +49,11 @@ public class Experimental_Reset_Button : MonoBehaviour
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
                 
 
-                obstacle.SetActive(false);
+                //obstacle.SetActive(false);
                 fallTrigger.SetActive(false);
 
-                manager.resetting = true;
-                manager.rebuildNavMesh = true;
+                //manager.resetting = true;
+                //manager.rebuildNavMesh = true;
 
 
                 if (resetButton)
