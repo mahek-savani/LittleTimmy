@@ -154,6 +154,8 @@ public class PlayerController : MonoBehaviour
         data.healthRemaining = 0;
         data.enemyHit = 0;
         data.ttrstart = System.DateTime.Now;
+        data.NPCChase = 0;
+        data.NPCSuspicion = 0;
     }
     public IEnumerator playerDie(float delay)
     {
@@ -169,7 +171,6 @@ public class PlayerController : MonoBehaviour
         resetData();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverPanel.SetActive(true);
-        data.attempts = data.attempts + 1;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

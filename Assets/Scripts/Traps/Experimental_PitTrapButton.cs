@@ -37,7 +37,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 pitTrap.playAnimation();
                 pitTrap.trapActive = false;
                 door.enabled = false;
-                data.trapActiveOrder.Add("pitTrap");
+                data.trapActiveOrder.Add("pitTrap-0");
                 //fallTrigger.SetActive(true);
                 //obstacle.SetActive(true);
 

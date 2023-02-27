@@ -7,6 +7,7 @@ public class RetryLevel : MonoBehaviour
 {
     public void onClick()
     {
+        data.attempts = data.attempts + 1;
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
     }

@@ -40,8 +40,7 @@ public class NoiseTrapActivation : BaseTrapClass
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 //Debug.Log("getNoise called");
                 isTriggered = true;
-
-                data.trapActiveOrder.Add("noiseTrap");
+                data.trapActiveOrder.Add("noiseTrap-1");
 
                 // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 // this.GetComponent<Renderer>().material.color = Color.grey;

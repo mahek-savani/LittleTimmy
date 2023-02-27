@@ -7,6 +7,7 @@ public class DieOnTouch : MonoBehaviour
 {
     public PitTrap pitTrap;
     public PlayerController playercontroller;
+    private int check = 0;
 
     void OnTriggerStay(Collider c)
     {
@@ -15,8 +16,13 @@ public class DieOnTouch : MonoBehaviour
         {
             //Debug.Log("Enenmy on pit");
             //Scene scene = SceneManager.GetActiveScene();
+            
             c.GetComponent<StateMachine_Robust>().die();
-
+            if (check == 0)
+            {
+                data.trapActiveOrder.Add("pitTrap-1");
+                check = 1;
+            }
             // if (scene.name == "tutorialPitTrap")
             // {
             //     c.GetComponent<StateMachine_Robust>().dieIdle();

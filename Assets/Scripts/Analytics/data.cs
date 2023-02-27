@@ -16,6 +16,9 @@ public class data
     public static System.DateTime ttrstart = System.DateTime.Now;
     public static int attempts=1;
     public static bool userLevelComplete = false;
+    public static int NPCChase = 0;
+    public static int NPCSuspicion = 0;
+    //public static List<string> trapRedeployment = new List<string>();
     public static void checkGameCompleted(bool checkComplete)
     {
         //Debug.Log(gameCompleted);
@@ -31,11 +34,16 @@ public class data
 
     public static void checkUserLevelCompleted()
     {
+        /*
         if (data.userLevelComplete)
         {
             dataPerUser d1 = new dataPerUser();
             RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/userData.json", d1);
         }
+        */
+
+        dataPerUser d1 = new dataPerUser();
+        RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/userData.json", d1);
     }
 
 }
@@ -44,10 +52,12 @@ public class dataPerUser
 {
     public int attempts;
     public string levelName;
+    public bool userLevelComplete;
     public dataPerUser()
     {
         attempts = data.attempts;
         levelName = data.levelName;
+        userLevelComplete = data.userLevelComplete;
     }
 }
 public class dataRes
@@ -61,6 +71,9 @@ public class dataRes
     public int healthRemaining;
     public int enemyHit;
     public string ttrstart;
+    public int NPCChase;
+    public int NPCSuspicion;
+    public List<string> trapRedeployment;
     public dataRes()
     {
         startTime = data.startTime.ToString();
@@ -72,6 +85,9 @@ public class dataRes
         enemyHit = data.enemyHit;
         ttrstart = data.ttrstart.ToString();
         //enemyRemaining = data.enemyRemaining;
+        NPCChase = data.NPCChase;
+        NPCSuspicion = data.NPCSuspicion;
+        //trapRedeployment = data.trapRedeployment;
     }
 
 }

@@ -410,6 +410,7 @@ public class StateMachine_Robust : MonoBehaviour
         myMesh.material.color = Color.red;
         agent.speed = chaseSpeed;
         state = STATE.CHASING;
+        data.NPCChase = data.NPCChase + 1;
     }
 
     public void getIdle(float time)
@@ -463,6 +464,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         state = STATE.SUSPICIOUS;
 
+        data.NPCSuspicion = data.NPCSuspicion + 1;
         //timeCounter = suspiciousTime;
     }
 

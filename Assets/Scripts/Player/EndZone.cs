@@ -38,6 +38,8 @@ public class EndZone : MonoBehaviour
         data.ttrstart = System.DateTime.Now;
         data.userLevelComplete = false;
         data.attempts = 1;
+        data.NPCChase = 0;
+        data.NPCSuspicion = 0;
     }
     void OnTriggerStay(Collider playerObject){
         Debug.Log(NPCManager.getNumLiving());
