@@ -39,7 +39,7 @@ public class buttonPressReset : MonoBehaviour
                 trapButton.GetComponent<Animation>().Play("buttonAnim");
 
                 //BUGFIX: Reset the hitbox size to original large size after reset
-                hitboxsize.ResetHitBoxSize();
+                //hitboxsize.ResetHitBoxSize();
 
                 //Destroy(gameObject);
             }
