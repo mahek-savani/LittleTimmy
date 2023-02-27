@@ -7,13 +7,7 @@ using UnityEngine.AI;
 
 public class FallNow : MonoBehaviour
 {
-    public NavMeshSurface navMesh;
-    public NavMeshData currentNavMesh;
-    public PitTrap trap;
     //private bool lastTrapState = true;
-    public GameObject obstacle;
-    public bool operated = false;
-    public UpdateNavMesh manager;
     //public GameObject offLink;
     public NavMeshObstacle navObstacle;
 
