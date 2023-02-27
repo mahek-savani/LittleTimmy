@@ -980,6 +980,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5929014613790003123, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 2113959543}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
 --- !u!1 &498071686
@@ -20920,8 +20924,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5247919480052230978, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: nextScene
-      value: 
-      objectReference: {fileID: 102900000, guid: 83c325de9247219489d2fb2a3313abe5, type: 3}
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5247919480052230978, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: NPCManager
       value: 
@@ -23593,11 +23597,11 @@ PrefabInstance:
       objectReference: {fileID: 1517339860}
     - target: {fileID: 2762713670264431872, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: maxHealth
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431872, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: currentHealth
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: helpUI
@@ -23775,6 +23779,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101582872}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2113959543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+  m_PrefabInstance: {fileID: 2050362512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e13db61444faf84e9f5a134f8041e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2133259456
 PrefabInstance:
   m_ObjectHideFlags: 0

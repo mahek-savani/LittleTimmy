@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpikeTrap : MonoBehaviour
 {
     public bool trapActive = true;
-    public HitBoxSize hitboxsize;
+    //public HitBoxSize hitboxsize;
     public GameObject hitBox;
     //forward direction
     float animDirection = 1.0f;
