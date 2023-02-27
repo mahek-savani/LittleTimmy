@@ -5510,6 +5510,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699126891}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1726225589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432235303236770623, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+  m_PrefabInstance: {fileID: 4432235301492116228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726225590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726225589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0a5363c8c1f474c9b7aa1194e09d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalposition: {x: 0, y: 0, z: 0}
+  originalscale: {x: 0, y: 0, z: 0}
+  newscale: {x: 0, y: 0, z: 0}
+  newposition: {x: 0, y: 0, z: 0}
 --- !u!1 &1771900511
 GameObject:
   m_ObjectHideFlags: 0
@@ -7220,6 +7241,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: HitBox
+      value: 
+      objectReference: {fileID: 1726225589}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: hitboxsize
+      value: 
+      objectReference: {fileID: 1726225590}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
 --- !u!4 &5343310299224973203

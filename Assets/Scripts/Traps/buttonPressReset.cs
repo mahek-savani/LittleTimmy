@@ -14,6 +14,8 @@ public class buttonPressReset : MonoBehaviour
     //forward direction
     float animDirectionFw = 1f; 
 
+    public HitBoxSize hitboxsize;
+
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)
@@ -35,6 +37,9 @@ public class buttonPressReset : MonoBehaviour
                 //changing spike trap's trigger button's animation direction to backward
                 trapButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
                 trapButton.GetComponent<Animation>().Play("buttonAnim");
+
+                //BUGFIX: Reset the hitbox size to original large size after reset
+                hitboxsize.ResetHitBoxSize();
 
                 //Destroy(gameObject);
             }
