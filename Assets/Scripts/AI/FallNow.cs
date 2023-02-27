@@ -22,22 +22,22 @@ public class FallNow : MonoBehaviour
         StartCoroutine(enableObstacle());
     }
 
-    private void OnDisable()
-    {
-        navObstacle.enabled = false;
-    }
+    //private void OnDisable()
+    //{
+    //    navObstacle.enabled = false;
+    //}
 
     private IEnumerator enableObstacle()
     {
         //yield return new WaitForNextFrameUnit();
         //yield return new WaitForNextFrameUnit();
-        yield return new WaitForSeconds(1f / 60f);
+        yield return new WaitForSeconds(1f / 20f);
         navObstacle.enabled = true;
     }
 
     private void OnTriggerStay(Collider c)
     {
-        if (!(manager.rebuildNavMesh) && c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled)
+        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && c.gameObject.GetComponent<StateMachine_Robust>().enabled)
         {
             StateMachine_Robust SM = c.gameObject.GetComponent<StateMachine_Robust>();
 

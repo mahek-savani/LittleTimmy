@@ -21261,6 +21261,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 203072547}
     - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: trapDoor
+      value: 
+      objectReference: {fileID: 203072545}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: fallTrigger
       value: 
       objectReference: {fileID: 118004804}
@@ -21782,6 +21786,7 @@ MonoBehaviour:
   fallTrigger: {fileID: 118004804}
   resetButton: {fileID: 1337193306}
   navMesh: {fileID: 630729426}
+  colorDelay: 2
 --- !u!1 &1284586107
 GameObject:
   m_ObjectHideFlags: 0

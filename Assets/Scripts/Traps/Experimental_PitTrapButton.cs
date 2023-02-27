@@ -14,9 +14,6 @@ public class Experimental_PitTrapButton : MonoBehaviour
     public GameObject fallTrigger;
     public GameObject resetButton;
 
-    public GameObject obstacle;
-
-    public UpdateNavMesh manager;
     //public NavMeshSurface navMesh;
     //public NavMeshData currentNavMesh;
 

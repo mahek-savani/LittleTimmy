@@ -13,11 +13,8 @@ public class Experimental_Reset_Button : MonoBehaviour
     public GameObject trapDoor;
     public GameObject fallTrigger;
     public GameObject resetButton;
-    public GameObject obstacle;
 
     public NavMeshSurface navMesh;
-
-    public UpdateNavMesh manager;
     public float colorDelay = 2f;
     float colorBit = 0f;
 
@@ -76,6 +73,7 @@ public class Experimental_Reset_Button : MonoBehaviour
 
                 //obstacle.SetActive(false);
                 fallTrigger.SetActive(false);
+                fallTrigger.GetComponent<NavMeshObstacle>().enabled = false;
 
                 //manager.resetting = true;
                 //manager.rebuildNavMesh = true;
