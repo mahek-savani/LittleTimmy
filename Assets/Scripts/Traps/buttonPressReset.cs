@@ -9,10 +9,32 @@ public class buttonPressReset : MonoBehaviour
     public GameObject buttonParent;
     public GameObject trapButton;
     public GameObject spikeTrapWorking;
+
+    public float colorDelay = 2f;
+    float colorBit = 0f;
     //backward direction
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+
+    void Update(){
+        if(!spikeTrap.trapActive){
+            if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
+            else {
+                colorDelay = 2;
+                if(colorBit == 0)
+                { 
+                    buttonParent.GetComponent<Renderer>().material.color = Color.red;
+                    colorBit = 1;
+                }
+                else
+                {
+                    buttonParent.GetComponent<Renderer>().material.color = Color.white;
+                    colorBit = 0;
+                }
+            }            
+        }
+    }
 
     public void OnTriggerEnter(Collider c)
     {
@@ -23,6 +45,7 @@ public class buttonPressReset : MonoBehaviour
                 //changing spike trap's reset trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
+                buttonParent.GetComponent<Renderer>().material.color = Color.white;
 
                 //changing spike trap's animation direction to backward
                 spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;

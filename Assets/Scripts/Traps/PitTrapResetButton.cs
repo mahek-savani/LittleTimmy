@@ -9,11 +9,33 @@ public class PitTrapResetButton : MonoBehaviour
     public GameObject trapButton;
     public MeshCollider door;
     public GameObject trapDoor;
+
+    public float colorDelay = 2f;
+    float colorBit = 0f;
+
     //backward direction
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
 
+    void Update(){
+        if(!pitTrap.trapActive){
+            if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
+            else {
+                colorDelay = 2;
+                if(colorBit == 0)
+                { 
+                    buttonParent.GetComponent<Renderer>().material.color = Color.red;
+                    colorBit = 1;
+                }
+                else
+                {
+                    buttonParent.GetComponent<Renderer>().material.color = Color.white;
+                    colorBit = 0;
+                }
+            }            
+        }
+    }
 
     public void OnTriggerEnter(Collider c)
     {
