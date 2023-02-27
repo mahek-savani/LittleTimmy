@@ -42,7 +42,7 @@ public class EndZone : MonoBehaviour
         data.NPCSuspicion = 0;
     }
     void OnTriggerStay(Collider playerObject){
-        Debug.Log(NPCManager.getNumLiving());
+        //Debug.Log(NPCManager.getNumLiving());
         if (playerObject.gameObject.layer == LayerMask.NameToLayer("Player")){
             if(NPCManager.getNumLiving() == 0){
                 data.endTime = System.DateTime.Now;

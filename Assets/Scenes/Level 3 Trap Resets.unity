@@ -2773,6 +2773,7 @@ MonoBehaviour:
   buttonParent: {fileID: 164643041}
   trapButton: {fileID: 110299603}
   spikeTrapWorking: {fileID: 422350783}
+  hitboxsize: {fileID: 2016633304}
 --- !u!1 &744413488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,11 +4522,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000007263832
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000003120222
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -7175,6 +7176,27 @@ MonoBehaviour:
   m_Center: {x: -0.1261549, y: 1, z: 2.3317256}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!1 &2016633302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432235303236770623, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+  m_PrefabInstance: {fileID: 4432235301492116228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2016633304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016633302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0a5363c8c1f474c9b7aa1194e09d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalposition: {x: 0, y: 0, z: 0}
+  originalscale: {x: 0, y: 0, z: 0}
+  newscale: {x: 0, y: 0, z: 0}
+  newposition: {x: 0, y: 0, z: 0}
 --- !u!1 &2049625171
 GameObject:
   m_ObjectHideFlags: 0
@@ -7661,6 +7683,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: trap
+      value: 
+      objectReference: {fileID: 422350787}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: HitBox
+      value: 
+      objectReference: {fileID: 2016633302}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: hitBox
+      value: 
+      objectReference: {fileID: 2016633302}
+    - target: {fileID: 8916128872130425185, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: hitboxsize
+      value: 
+      objectReference: {fileID: 2016633304}
     - target: {fileID: 8916128872130425188, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.01
