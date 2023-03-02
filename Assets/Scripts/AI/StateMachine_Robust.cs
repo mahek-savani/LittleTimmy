@@ -120,6 +120,9 @@ public class StateMachine_Robust : MonoBehaviour
     // The point being investigated when in noise mode
     private Vector3 noiseSource;
 
+    // Renders a line to a target the NPC is moving to
+    public LineRenderer targetLine;
+
 
 
     [Header("Player Interaction")]
@@ -279,7 +282,12 @@ public class StateMachine_Robust : MonoBehaviour
             // Transitions into suspicion when the player stays out of the enemy FOV for long enough
             case STATE.CHASING:
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
-            
+
+                targetLine.SetPosition(0, transform.position);
+                targetLine.SetPosition(1, playerPos.position);
+
+
+
                 agent.SetDestination(playerPos.position);
 
                 if (fov.visibleTargets.Count != 0)
@@ -341,6 +349,11 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     getChase();
                 }
+
+                //Debug.DrawLine(transform.position, noiseSource, Color.yellow, 0.0f);
+
+                targetLine.SetPosition(0, transform.position);
+                targetLine.SetPosition(1, noiseSource);
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
 
@@ -413,15 +426,20 @@ public class StateMachine_Robust : MonoBehaviour
     public void getChase()
     {
         agent.isStopped = false;
+        targetLine.enabled = true;
         myMesh.material.color = Color.red;
         agent.speed = chaseSpeed;
         state = STATE.CHASING;
+
+        targetLine.material.color = Color.yellow;
+
         data.NPCChase = data.NPCChase + 1;
     }
 
     public void getIdle(float time)
     {
         myMesh.material.color = Color.blue;
+        targetLine.enabled = false;
         agent.isStopped = true;
         waitTime = time;
         state = STATE.IDLE;
@@ -430,6 +448,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getIdle()
     {
         myMesh.material.color = Color.blue;
+        targetLine.enabled = false;
         agent.isStopped = true;
         waitTime = Mathf.Infinity;
         state = STATE.IDLE;
@@ -438,6 +457,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getUnconscious(float time)
     {
         agent.isStopped = true;
+        targetLine.enabled = false;
         conscious = false;
         FOVMesh.enabled = false;
         state = STATE.UNCONSCIOUS;
@@ -448,9 +468,12 @@ public class StateMachine_Robust : MonoBehaviour
     public void getNoise(Vector3 source)
     {
         agent.isStopped = false;
+        targetLine.enabled = true;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         state = STATE.NOISE;
+
+        targetLine.material.color = Color.red;
 
         noiseSource = getPointNearestNavMesh(source);
         timeCounter = suspiciousTime;
@@ -467,6 +490,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getSuspicious(Vector3 source)
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         timeCounter = suspiciousTime;
@@ -484,6 +508,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getParanoid()
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         myMesh.material.color = new Color(252/255f, 139/255f, 0f);
         assignParanoidWalk();
 
@@ -499,6 +524,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getPatrol()
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         agent.speed = patrolSpeed;
         returnToPatrol();
         myMesh.material.color = Color.cyan;
@@ -515,6 +541,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         alive = false;
         conscious = false;
+        targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = 10f;
         agent.isStopped = true;
