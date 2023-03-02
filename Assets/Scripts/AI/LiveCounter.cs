@@ -71,4 +71,19 @@ public class LiveCounter : MonoBehaviour
             children[i].enabled = false;
         }
     }
+
+    // Moves all enemies in the chase state to the suspicious state
+    public void stopChase()
+    {
+        StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
+        ;
+
+        for (int i = 0; i < children.Length; i++)
+        {
+            if (children[i].state == StateMachine_Robust.STATE.CHASING)
+            {
+                children[i].forceSuspicious();
+            }
+        }
+    }
 }

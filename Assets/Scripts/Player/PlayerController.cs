@@ -185,6 +185,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
+        npcManager.stopChase();
     }
 
 }

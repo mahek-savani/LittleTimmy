@@ -457,6 +457,13 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(noiseSource);
     }
 
+    // Forcibly transitions into suspicious state, even if currently chasing
+    public void forceSuspicious()
+    {
+        playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToSuspicion);
+        getSuspicious(transform.position);
+    }
+
     public void getSuspicious(Vector3 source)
     {
         agent.isStopped = false;
