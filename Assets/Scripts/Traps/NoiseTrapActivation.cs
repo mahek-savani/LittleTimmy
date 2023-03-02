@@ -26,8 +26,9 @@ public class NoiseTrapActivation : BaseTrapClass
         //Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
+            StateMachine_Robust SM = other.gameObject.GetComponent<StateMachine_Robust>();
             //Debug.Log("Enemy Inside sphere");
-            if(!isTriggered){
+            if(!isTriggered && SM.conscious && SM.alive){
                 // Debug.Log(transform.position);
                if (!walledOff(transform.position, other.transform.position))
                {
