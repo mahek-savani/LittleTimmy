@@ -136,6 +136,10 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
+    [Header("Debugging")]
+
+    public bool DEBUG = false;
+
 
 
     //[Header("Debugging")]
@@ -191,12 +195,9 @@ public class StateMachine_Robust : MonoBehaviour
         }
 
         // Kill NPC 1 on hitting backspace (for debug purposes)
-        if (Input.GetKeyDown("backspace"))
+        if (DEBUG && Input.GetKeyDown("backspace"))
         {
-            if (gameObject.name == "NPC AI")
-            {
-                die();
-            }
+            die();
         } 
 
         // The body of the state machine, checking the state every frame and acting accordingly
