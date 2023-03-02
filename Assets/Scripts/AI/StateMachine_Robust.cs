@@ -185,6 +185,11 @@ public class StateMachine_Robust : MonoBehaviour
 
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
+        if (agent.isOnOffMeshLink)
+        {
+            agent.speed = susSpeed / 2;
+        }
+
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (Input.GetKeyDown("backspace"))
         {
