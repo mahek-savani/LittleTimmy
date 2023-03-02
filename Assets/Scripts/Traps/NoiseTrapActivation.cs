@@ -10,6 +10,7 @@ public class NoiseTrapActivation : BaseTrapClass
     public Transform startLink;
     public Transform endLink;
     public Transform floor;
+    public LayerMask obstacleMask;
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +29,17 @@ public class NoiseTrapActivation : BaseTrapClass
             //Debug.Log("Enemy Inside sphere");
             if(!isTriggered){
                 // Debug.Log(transform.position);
-                startLink.SetPositionAndRotation(new Vector3(other.transform.position.x, floor.position.y,
-                                                         other.transform.position.z), other.transform.rotation);
-                endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
-                                         transform.position.z), transform.rotation);
-                offLink.activated = true;
-                offLink.startTransform = startLink;
-                offLink.endTransform = endLink;
+               if (!walledOff(transform.position, other.transform.position))
+               {
+                    startLink.SetPositionAndRotation(new Vector3(other.transform.position.x, floor.position.y,
+                    other.transform.position.z), other.transform.rotation);
+                    endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
+                    transform.position.z), transform.rotation);
+                    offLink.activated = true;
+                    offLink.startTransform = startLink;
+                    offLink.endTransform = endLink;
+               }
+
 
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -58,5 +63,14 @@ public class NoiseTrapActivation : BaseTrapClass
     {
         transform.GetComponent<MeshRenderer>().enabled = false;
         transform.GetComponent<SphereCollider>().enabled = false;
+    }
+
+    private bool walledOff(Vector3 firstPoint, Vector3 secondPoint)
+    {
+        Vector3 direction = (secondPoint - firstPoint);
+        float maxDist = direction.magnitude;
+        direction.Normalize();
+
+        return Physics.Raycast(firstPoint, direction, maxDist, obstacleMask);
     }
 }
