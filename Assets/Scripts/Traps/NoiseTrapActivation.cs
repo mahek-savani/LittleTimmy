@@ -31,13 +31,14 @@ public class NoiseTrapActivation : BaseTrapClass
                 // Debug.Log(transform.position);
                if (!walledOff(transform.position, other.transform.position))
                {
+                    offLink.enabled = true;
                     startLink.SetPositionAndRotation(new Vector3(other.transform.position.x, floor.position.y,
                     other.transform.position.z), other.transform.rotation);
                     endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
                     transform.position.z), transform.rotation);
-                    offLink.activated = true;
                     offLink.startTransform = startLink;
                     offLink.endTransform = endLink;
+                    offLink.GetComponent<workingOffLinkScript>().enabled = true;
                }
 
 

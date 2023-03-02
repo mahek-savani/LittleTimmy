@@ -351,7 +351,7 @@ public class StateMachine_Robust : MonoBehaviour
                     transform.LookAt(playerPos.position, transform.up);
                     timeCounter = suspiciousTime;
                 }
-                else if (agent.remainingDistance <= Mathf.Epsilon)
+                else if (agent.remainingDistance <= 0.12)
                 {
                     getSuspicious(transform.position);
                 }
