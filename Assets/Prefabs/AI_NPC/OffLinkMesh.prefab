@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4365956427272848189}
   - component: {fileID: 4365956427272848188}
+  - component: {fileID: 6376686605587944586}
   m_Layer: 0
   m_Name: OffLinkMesh
   m_TagString: Untagged
@@ -72,7 +73,7 @@ OffMeshLink:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4365956427272848186}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_AreaIndex: 0
   m_AgentTypeID: 0
@@ -82,6 +83,18 @@ OffMeshLink:
   m_BiDirectional: 1
   m_Activated: 1
   m_AutoUpdatePositions: 1
+--- !u!114 &6376686605587944586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365956427272848186}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17041417f4303334cb843adc5450221c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4365956427571809800
 GameObject:
   m_ObjectHideFlags: 0
