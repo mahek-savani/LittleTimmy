@@ -34,9 +34,11 @@ public class PlayerController : MonoBehaviour
 
     private bool eDown;
 
+    public Collider myTrigger;
+
     void Start()
     {
-        inSwapCommand = false;
+        //inSwapCommand = false;
         hasTrapInInventory = false;
         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
         helpText = helpUI.GetComponent<TextMeshProUGUI>();
@@ -94,7 +96,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        inSwapCommand = false;
+        myTrigger = null;
     }
 
     void OnTriggerStay(Collider triggerObject){
@@ -111,37 +114,42 @@ public class PlayerController : MonoBehaviour
                 // in inventory
                 if(hasTrapInInventory && triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                     inSwapCommand = true;
+                    myTrigger = triggerObject;
+                    //StartCoroutine(swapOff());
 
                     if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                         helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     }
                     
-                    if(eDown){
-                        // Swap object positions  
-                        Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
-                        trapInHand.transform.position = newObjectPos;
+                    //if(eDown){
+                    //    // Swap object positions  
+                    //    Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
+                    //    trapInHand.transform.position = newObjectPos;
 
-                        // Swap object On/Off
-                        trapInHand.SetActive(true);
-                        triggerObject.gameObject.SetActive(false);
+                    //    // Swap object On/Off
+                    //    trapInHand.SetActive(true);
+                    //    triggerObject.gameObject.SetActive(false);
 
-                        // Move the current object we are over into inventory
-                        // and ensure that hasTrapInInventory is true.
-                        trapInHand = triggerObject.gameObject;
-                        hasTrapInInventory = true; 
+                    //    // Move the current object we are over into inventory
+                    //    // and ensure that hasTrapInInventory is true.
+                    //    trapInHand = triggerObject.gameObject;
+                    //    hasTrapInInventory = true; 
 
-                        tmp_Pickup_text.text = "Trap Swapped!";
-                        //pickupDelay = 1f;
+                    //    tmp_Pickup_text.text = "Trap Swapped!";
+                    //    //pickupDelay = 1f;
 
-                        helpText.text = "";
-                        inSwapCommand = false;
+                    //    helpText.text = "";
+                    //    inSwapCommand = false;
 
-                        //eDown = false;
-                        TP.eLocked = 1;
-                    }
+                    //    //eDown = false;
+                    //    TP.eLocked = 1;
+                    //}
                 } else {
 
-                    if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                    //inSwapCommand = false;
+                    //myTrigger = null;
+
+                    if (triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                         helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     } else {
                         helpText.text = "[E] PICK UP Health!";
@@ -164,7 +172,9 @@ public class PlayerController : MonoBehaviour
 
                         //eDown = false;
 
-                        TP.eLocked = 1;
+                        //TP.eLocked = 1;
+
+                        StartCoroutine(transferControl());
                     }
                 }
             }
@@ -175,7 +185,30 @@ public class PlayerController : MonoBehaviour
         // This is to ensure we clean the helpText and inSwapCommand bools
         // in case we leave a trigger box without picking an object up
         helpText.text = "";
+        //inSwapCommand = false;
+    }
+
+    public void swapTraps()
+    {
+        //    // Swap object positions  
+        Vector3 newObjectPos = myTrigger.gameObject.transform.position;
+        trapInHand.transform.position = newObjectPos;
+
+        // Swap object On/Off
+        trapInHand.SetActive(true);
+        myTrigger.gameObject.SetActive(false);
+
+        // Move the current object we are over into inventory
+        // and ensure that hasTrapInInventory is true.
+        trapInHand = myTrigger.gameObject;
+        hasTrapInInventory = true;
+
+        tmp_Pickup_text.text = "Trap Swapped!";
+        //pickupDelay = 1f;
+
+        helpText.text = "";
         inSwapCommand = false;
+        myTrigger = null;
     }
 
     void resetData()
@@ -222,6 +255,19 @@ public class PlayerController : MonoBehaviour
         transform.rotation = spawnRotation;
         npcManager.stopChase();
     }
+
+    IEnumerator transferControl()
+    {
+        yield return new WaitForEndOfFrame();
+        TP.eLocked = 1;
+    }
+
+    //IEnumerator swapOff()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    inSwapCommand = false;
+    //    myTrigger = null;
+    //}
 
     // Unlocks the semaphore for the E key
     //IEnumerator unLockE()

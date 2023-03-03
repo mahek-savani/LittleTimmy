@@ -21,18 +21,21 @@ public class TrapPlacer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if(player.hasTrapInInventory && (player.pickupDelay == 0 && !player.inSwapCommand)){
+        if (player.hasTrapInInventory && (player.pickupDelay == 0 && !player.inSwapCommand))
+        {
             trapInInventory = player.trapInHand;
 
-            if(!placedTrapBefore){
+            if (!placedTrapBefore)
+            {
                 player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";
                 placedTrapBefore = true;
             }
 
             //Wall traps
-            if(Input.GetKeyDown(KeyCode.R)){
+            if (Input.GetKeyDown(KeyCode.R))
+            {
                 RaycastHit Hit;
-                if(Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
+                if (Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
                 {
                     //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                     GameObject trapPlaced = trapInInventory;
@@ -47,8 +50,8 @@ public class TrapPlacer : MonoBehaviour
             }
 
             //Floor traps
-            if(Input.GetKeyDown(KeyCode.E) && eLocked == 1){
-
+            if (Input.GetKeyDown(KeyCode.E) && eLocked == 1)
+            {
                 Vector3 trapPosition = player.transform.position;
                 //GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
                 GameObject trapPlaced = trapInInventory;
@@ -92,13 +95,20 @@ public class TrapPlacer : MonoBehaviour
             //     GameObject trapPlaced = Instantiate(trapInInventory, trapPosition, Quaternion.identity) as GameObject;
             //     trapPlaced.layer = 8;
 
-                //     trapPlaced.SetActive(true);
-                //     //trapPlaced.GetComponentInChildren<MeshRenderer>().enabled = true;
+            //     trapPlaced.SetActive(true);
+            //     //trapPlaced.GetComponentInChildren<MeshRenderer>().enabled = true;
 
-                //     //trapPlaced.GetComponent<MeshRenderer>().enabled = true;
-                //     player.hasTrapInInventory = false;
-                //     player.pickupDelay = 1f;
-                // }
+            //     //trapPlaced.GetComponent<MeshRenderer>().enabled = true;
+            //     player.hasTrapInInventory = false;
+            //     player.pickupDelay = 1f;
+            // }
+        }
+        else if (player.hasTrapInInventory && (player.pickupDelay == 0 && player.inSwapCommand))
+        {
+            if (Input.GetKeyDown(KeyCode.E) && eLocked == 1)
+            {
+                player.swapTraps();
+            }
         }
 
 
