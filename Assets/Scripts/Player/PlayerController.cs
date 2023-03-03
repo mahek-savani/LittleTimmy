@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     TextMeshProUGUI tmp_Pickup_text;
     TextMeshProUGUI helpText;
 
-    public float pickupDelay;
+    public float pickupDelay = 0f;
 
     public Vector3 spawnPosition;  //To get this position in the respawn script
     public Quaternion spawnRotation;
@@ -28,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOverPanel;
 
     public LiveCounter npcManager;
+
+    public TrapPlacer TP;
+
+    private bool eDown;
 
     void Start()
     {
@@ -60,14 +65,36 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
 
-        if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
-        else {
-            pickupDelay = 0;
+        // if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
+        // else {
+        //     pickupDelay = 0;
             if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
             else tmp_Pickup_text.text = "Inventory: Empty";
+        //}
+
+        if (Input.GetKeyDown(KeyCode.E) && TP.eLocked == 2)
+        {
+            eDown = true;
+        }
+        else if (TP.eLocked == 1)
+        {
+            eDown = false;
         }
 
-       
+        //if (Input.GetKeyDown(KeyCode.E) && TP.eLocked == 1)
+        //{
+        //    TP.eLocked = 2;
+        //    //StartCoroutine(unregisterE());
+        //}
+        //else if (Input.GetKeyUp(KeyCode.E) && TP.eLocked == 2)
+        //{
+        //    StartCoroutine(unLockE());
+        //}
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 
     void OnTriggerStay(Collider triggerObject){
@@ -89,7 +116,7 @@ public class PlayerController : MonoBehaviour
                         helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     }
                     
-                    if(Input.GetKey(KeyCode.E)){ 
+                    if(eDown){
                         // Swap object positions  
                         Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
                         trapInHand.transform.position = newObjectPos;
@@ -104,10 +131,13 @@ public class PlayerController : MonoBehaviour
                         hasTrapInInventory = true; 
 
                         tmp_Pickup_text.text = "Trap Swapped!";
-                        pickupDelay = 1f;
+                        //pickupDelay = 1f;
 
                         helpText.text = "";
                         inSwapCommand = false;
+
+                        //eDown = false;
+                        TP.eLocked = 1;
                     }
                 } else {
 
@@ -117,8 +147,9 @@ public class PlayerController : MonoBehaviour
                         helpText.text = "[E] PICK UP Health!";
                     }
 
-                if(Input.GetKey(KeyCode.E)) {
-                        if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
+                if(eDown) {
+
+                        if (triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                             trapInHand = triggerObject.gameObject;
                             triggerObject.gameObject.SetActive(false);
                             hasTrapInInventory = true;
@@ -129,7 +160,11 @@ public class PlayerController : MonoBehaviour
                             }                            
                         }
                         helpText.text = "";
-                        pickupDelay = 1f;
+                        //pickupDelay = 1f;
+
+                        //eDown = false;
+
+                        TP.eLocked = 1;
                     }
                 }
             }
@@ -188,4 +223,17 @@ public class PlayerController : MonoBehaviour
         npcManager.stopChase();
     }
 
+    // Unlocks the semaphore for the E key
+    //IEnumerator unLockE()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    TP.eLocked = 0;
+    //}
+
+    //// Tells the system to stop registering E after this frame
+    //IEnumerator unregisterE()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    eDown = false;
+    //}
 }
