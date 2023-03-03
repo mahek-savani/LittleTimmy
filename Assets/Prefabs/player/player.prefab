@@ -49,7 +49,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 15
+  m_Priority: 20
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 2762713670264431879}
   m_Follow: {fileID: 2762713670264431879}
@@ -302,8 +302,11 @@ MonoBehaviour:
   pickupDelay: 0
   spawnPosition: {x: 0, y: 0, z: 0}
   spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  gameOverPanel: {fileID: 2078390528302790816, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  gameOverPanel: {fileID: 0}
   npcManager: {fileID: 0}
+  TP: {fileID: 2762713670264431874}
+  canPause: 1
+  pauseScreen: {fileID: 0}
 --- !u!114 &2762713670264431872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +343,7 @@ MonoBehaviour:
   canBeTrapped:
     serializedVersion: 2
     m_Bits: 512
+  eLocked: 2
   placedTrapBefore: 0
 --- !u!114 &1941646822
 MonoBehaviour:

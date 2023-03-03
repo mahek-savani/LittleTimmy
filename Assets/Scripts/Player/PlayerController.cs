@@ -32,9 +32,12 @@ public class PlayerController : MonoBehaviour
 
     public TrapPlacer TP;
 
+    public bool canPause = true;
+    public GameObject pauseScreen;
+
     private bool eDown;
 
-    public Collider myTrigger;
+    private Collider myTrigger;
 
     void Start()
     {
@@ -92,6 +95,11 @@ public class PlayerController : MonoBehaviour
         //{
         //    StartCoroutine(unLockE());
         //}
+
+        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        {
+            pauseGame();
+        }
     }
 
     private void FixedUpdate()
@@ -226,6 +234,7 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator playerDie(float delay)
     {
+        canPause = false;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
         data.playerDeath = "yes";
@@ -243,6 +252,7 @@ public class PlayerController : MonoBehaviour
 
     public void playerDie()
     {
+        canPause = false;
         npcManager.cease();
         StartCoroutine(playerDie(0f));
         
@@ -259,6 +269,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         TP.eLocked = 1;
+    }
+
+    void pauseGame()
+    {
+        pauseScreen.SetActive(true);
+        //Time.timeScale = 0;
     }
 
     //IEnumerator swapOff()

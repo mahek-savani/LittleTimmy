@@ -372,6 +372,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 94.179016, y: 0, z: 0}
+--- !u!1 &672418718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 859528062539505975, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 2135261359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &734109197
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +921,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: TP
+      value: 
+      objectReference: {fileID: 1720725725}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: helpUI
       value: 
       objectReference: {fileID: 848124944}
@@ -931,6 +940,10 @@ PrefabInstance:
       propertyPath: trapInHand
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 672418718}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: gameOverPanel
       value: 
@@ -1586,6 +1599,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e13db61444faf84e9f5a134f8041e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1720725725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2762713670264431874, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+  m_PrefabInstance: {fileID: 1156509653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b226809407adc4bd5bcd98765d0385ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812733770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,6 +2118,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6034469255442225172, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+      propertyPath: PC
+      value: 
+      objectReference: {fileID: 1720725722}
     - target: {fileID: 6867222865493068287, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
       propertyPath: m_IsActive
       value: 0
