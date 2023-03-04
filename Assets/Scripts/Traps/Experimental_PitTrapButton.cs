@@ -22,6 +22,13 @@ public class Experimental_PitTrapButton : MonoBehaviour
     //forward direction
     float animDirectionFw = 1f;
 
+    public static event System.Action ExperimentalPitButtonPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+    }
+
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)
@@ -54,6 +61,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 {
                     resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
                     resetButton.GetComponent<Animation>().Play("buttonAnim");
+                    resetButton.GetComponent<Renderer>().material.color = startingMaterialColor;
                 }
 
                 //navMesh.RemoveData();
@@ -62,6 +70,9 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //navMesh.UpdateNavMesh(currentNavMesh);
 
                 //Destroy(gameObject);
+                if(ExperimentalPitButtonPushed != null) ExperimentalPitButtonPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+                trapDoor.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
             }
         }
     }

@@ -7,10 +7,18 @@ public class buttonPress : MonoBehaviour
     public SpikeTrap spikeTrap;
     public GameObject buttonParent;
     public GameObject spikeResetButton;
+    public GameObject spikeTrapWorking;
     //backward direction
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+
+    public static event System.Action SpikeTrapButtonPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+    }
 
     public void OnTriggerEnter(Collider c)
     {
@@ -30,10 +38,14 @@ public class buttonPress : MonoBehaviour
                     //changing spike trap's reset trigger button's animation direction to backward
                     spikeResetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
                     spikeResetButton.GetComponent<Animation>().Play("buttonAnim");
+                    spikeResetButton.GetComponent<Renderer>().material.color = startingMaterialColor;
                 }
 
                 spikeTrap.trapActive = false;
                 //Destroy(gameObject);
+                if(SpikeTrapButtonPushed != null) SpikeTrapButtonPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+                spikeTrapWorking.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
             }
         }
     }

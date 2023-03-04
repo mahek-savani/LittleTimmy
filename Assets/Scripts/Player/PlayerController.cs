@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour
         if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         else {
             pickupDelay = 0;
-            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
-            else tmp_Pickup_text.text = "Inventory: Empty";
+            if(hasTrapInInventory) tmp_Pickup_text.text = trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
+            else tmp_Pickup_text.text = "Empty";
         }
 
        
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
                         trapInHand = triggerObject.gameObject;
                         hasTrapInInventory = true; 
 
-                        tmp_Pickup_text.text = "Trap Swapped!";
+                        tmp_Pickup_text.text = "Trap Swap!";
                         pickupDelay = 1f;
 
                         helpText.text = "";
