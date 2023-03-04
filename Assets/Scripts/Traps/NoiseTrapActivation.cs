@@ -10,6 +10,8 @@ public class NoiseTrapActivation : BaseTrapClass
     public Transform startLink;
     public Transform endLink;
     public Transform floor;
+    public Color activeColor = new Color(1f, 0f, 0f, 1f);
+    public Color inactiveColor = new Color(1f, 0.843f, 0f, 1f);
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class NoiseTrapActivation : BaseTrapClass
         // Set name of trap to Noise
         trapName = "Noise";
         isTriggered = false;
+        transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
         invisible();
     }
 
@@ -45,6 +48,10 @@ public class NoiseTrapActivation : BaseTrapClass
                 // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 // this.GetComponent<Renderer>().material.color = Color.grey;
             }
+            else
+            {
+                transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
+            }
         }
     }
 
@@ -52,6 +59,7 @@ public class NoiseTrapActivation : BaseTrapClass
     {
         transform.GetComponent<MeshRenderer>().enabled = true;
         transform.GetComponent<SphereCollider>().enabled = true;
+        transform.parent.GetComponent<Renderer>().material.color = activeColor;
     }
 
     public void invisible()
