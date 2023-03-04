@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -68,12 +69,23 @@ public class PlayerController : MonoBehaviour
         float horVal = Input.GetAxis("Horizontal");
         float vertVal = Input.GetAxis("Vertical");
 
-        transform.Translate(new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed));
+        if (Mathf.Abs(horVal) > Mathf.Epsilon && Mathf.Abs(vertVal) > Mathf.Epsilon)
+        {
+            horVal = Mathf.Sign(horVal) / (Mathf.Sqrt(2));
+            vertVal = Mathf.Sign(vertVal) / (Mathf.Sqrt(2));
+        }
+
+        Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        
+        //Debug.Log((newPosUnscaled - transform.position).magnitude);
+        transform.Translate(newPos);
+         
+
 
         // if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         // else {
         //     pickupDelay = 0;
-            if(hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
+            if (hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
             else tmp_Pickup_text.text = "Inventory: Empty";
         //}
 
