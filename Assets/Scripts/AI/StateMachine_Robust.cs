@@ -48,6 +48,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies how long the NPC takes to wake up after being rendered unconscious
     public float unconsciousTime = 3f;
 
+    // Denotes the state the NPC transitions to out of unconsciousness
+    public STATE idleState = STATE.SUSPICIOUS;
+
     // A variable used to store the countdown from suspicious to passivity, or chase to suspicion
     private float timeCounter = 0f; 
 
@@ -214,7 +217,8 @@ public class StateMachine_Robust : MonoBehaviour
                     else
                     {
                         FOVMesh.enabled = true;
-                        getSuspicious(transform.position);
+                        getCustom(idleState, transform.position);
+                        //getSuspicious(transform.position);
                     }
                     
                 }
@@ -404,6 +408,36 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
+    void getCustom(STATE newState, Vector3? location = null)
+    {
+        if (location == null)
+        {
+            location = new Vector3(0, 0, 0);
+        }
+
+        switch (newState)
+        {
+            case STATE.PATROLLING:
+                getPatrol();
+                break;
+            case STATE.PARANOID:
+                getParanoid();
+                break;
+            case STATE.IDLE:
+                getIdle();
+                break;
+            case STATE.NOISE:
+                getNoise((Vector3) location);
+                break;
+            case STATE.SUSPICIOUS:
+                getSuspicious((Vector3) location);
+                break;
+            case STATE.CHASING:
+                getChase();
+                break;
+        }
+    }
+
     public void getChase()
     {
         agent.isStopped = false;
@@ -430,6 +464,16 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
     public void getUnconscious(float time)
+    {
+        agent.isStopped = true;
+        conscious = false;
+        FOVMesh.enabled = false;
+        state = STATE.UNCONSCIOUS;
+        waitTime = time;
+        myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
+    }
+
+    public void getUnconscious()
     {
         agent.isStopped = true;
         conscious = false;
@@ -539,7 +583,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
-            getUnconscious(unconsciousTime);
+            getUnconscious();
             damageInterface.TakeDamage(playerDamage);
 
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
