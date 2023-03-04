@@ -25,8 +25,8 @@ public class Experimental_Reset_Button : MonoBehaviour
 
     private void Update()
     {
-        navMesh.RemoveData();
-        navMesh.BuildNavMesh();
+        //navMesh.RemoveData();
+        //navMesh.BuildNavMesh();
 
         if(!pitTrap.trapActive){
             if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
