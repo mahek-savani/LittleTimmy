@@ -248,12 +248,7 @@ public class StateMachine_Robust : MonoBehaviour
             // When waking up from unconsciousness, the NPC will become suspicious
             // When ceasing awake idling, the NPC will return to their default state
             case STATE.IDLE:
-                if ( playerVisibleTimer >= timeToSuspicion)
-                {
-                    getNoise(playerPos.position);
-                }
 
-                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
 
                 if (agent.remainingDistance <= Mathf.Epsilon)
@@ -277,6 +272,14 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     getDefault();
                 }
+
+                if (playerVisibleTimer >= timeToSuspicion)
+                {
+                    getNoise(playerPos.position);
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
                 break;
 
             // While patrolling, the NPC will walk between waypoints in the order of their list
@@ -784,6 +787,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myBody.velocity = Vector3.zero;
         agent.isStopped = true;
+        myBody.ResetInertiaTensor();
     }
 
     //public void start()
