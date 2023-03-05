@@ -541,7 +541,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             getUnconscious(unconsciousTime);
             damageInterface.TakeDamage(playerDamage);
-
+            data.enemyHit = data.enemyHit + 1;
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
         }

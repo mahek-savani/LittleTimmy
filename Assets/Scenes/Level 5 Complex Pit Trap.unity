@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4489743, g: 0.4957019, b: 0.5572678, a: 1}
+  m_IndirectSpecularColor: {r: 0.44904083, g: 0.49567676, b: 0.55724716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19729,6 +19729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Noise Trap
       objectReference: {fileID: 0}
+    - target: {fileID: 1779025141434929923, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+      propertyPath: m_TagString
+      value: noiseTrap
+      objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929924, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -21602,7 +21606,7 @@ GameObject:
   - component: {fileID: 1155217952}
   m_Layer: 0
   m_Name: CM vcam1
-  m_TagString: Untagged
+  m_TagString: levelCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23587,6 +23591,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1119044883, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_TagString
+      value: playerCam
+      objectReference: {fileID: 0}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 

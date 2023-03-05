@@ -17,6 +17,7 @@ public class buttonPressRot : MonoBehaviour
 
                 spikeTrapRot.playAnimation();
                 spikeTrapRot.trapActive = false;
+                data.spikeTrap.Add(0);
             }
         }
     }

@@ -89,8 +89,10 @@ public class PlayerController : MonoBehaviour
                         helpText.text = "[E] SWAP to " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
                     }
                     
-                    if(Input.GetKey(KeyCode.E)){ 
+                    if(Input.GetKey(KeyCode.E)){
                         // Swap object positions  
+                        string temp = triggerObject.gameObject.tag;
+                        data.addTrapVal(temp);
                         Vector3 newObjectPos = triggerObject.gameObject.transform.position;             
                         trapInHand.transform.position = newObjectPos;
 
@@ -121,6 +123,7 @@ public class PlayerController : MonoBehaviour
                         if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                             trapInHand = triggerObject.gameObject;
                             triggerObject.gameObject.SetActive(false);
+                           
                             hasTrapInInventory = true;
                         } else {
                             if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
@@ -143,32 +146,14 @@ public class PlayerController : MonoBehaviour
         inSwapCommand = false;
     }
 
-    void resetData()
-    {
-        data.startTime = System.DateTime.Now;
-        data.endTime = System.DateTime.Now;
-        data.playerDeath = "no";
-        data.levelName = "demo";
-        data.gameCompleted = false;
-        data.trapActiveOrder = new List<string>();
-        data.healthRemaining = 0;
-        data.enemyHit = 0;
-        data.ttrstart = System.DateTime.Now;
-        data.NPCChase = 0;
-        data.NPCSuspicion = 0;
-    }
+    
     public IEnumerator playerDie(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
         data.playerDeath = "yes";
-        data.endTime = System.DateTime.Now;
-        data.gameCompleted = true;
-        //Debug.Log(data.gameCompleted);
         data.levelName = SceneManager.GetActiveScene().name;
-        //Debug.Log(data.levelName);
-        data.checkGameCompleted(data.gameCompleted);
-        resetData();
+        data.checkData();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverPanel.SetActive(true);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);

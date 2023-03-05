@@ -13,6 +13,7 @@ public class TrapPlacer : MonoBehaviour
     public Transform target;
     public LayerMask canBeTrapped;
 
+    public bool trapTemp = false;
     public bool placedTrapBefore = false;
 
     // Update is called once per frame
@@ -20,6 +21,12 @@ public class TrapPlacer : MonoBehaviour
     {
         if(player.hasTrapInInventory && (player.pickupDelay == 0 && !player.inSwapCommand)){
             trapInInventory = player.trapInHand;
+
+            if (!trapTemp)
+            {
+                data.addTrapVal(player.trapInHand.gameObject.tag.ToString());
+                trapTemp = true;
+            }
 
             if(!placedTrapBefore){
                 player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";
@@ -55,7 +62,10 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.GetComponentInChildren<BaseTrapClass>().isTriggered = false;
 
                 NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
-                data.trapActiveOrder.Add("noiseTrap-0");
+                //data.trapActiveOrder.Add("noiseTrap-0");
+                //Debug.Log(trapPlaced);
+                //Debug.Log(trapInInventory.gameObject.tag);
+                //data.noiseTrap.Add(0);
                 if (cloud != null)
                 {
                     cloud.visible();
@@ -69,6 +79,7 @@ public class TrapPlacer : MonoBehaviour
 
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 1f;
+                trapTemp = false;
 
                 // trapPlaced.transform.LookAt(target.right);
             }

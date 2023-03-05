@@ -24,7 +24,8 @@ public class buttonPress : MonoBehaviour
 
                 spikeTrap.playAnimation();
                 // spikeResetButton.transform.localScale += new Vector3(0, 0.63f, 0);
-                data.trapActiveOrder.Add("spikeTrap-0");
+                //data.trapActiveOrder.Add("spikeTrap-0");
+                data.spikeTrap.Add(0);
                 if (spikeResetButton)
                 {
                     //changing spike trap's reset trigger button's animation direction to backward

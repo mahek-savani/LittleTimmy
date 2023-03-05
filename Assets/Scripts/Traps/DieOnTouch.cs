@@ -20,7 +20,7 @@ public class DieOnTouch : MonoBehaviour
             c.GetComponent<StateMachine_Robust>().die();
             if (check == 0)
             {
-                data.trapActiveOrder.Add("pitTrap-1");
+                data.pitTrap.Add(1);
                 check = 1;
             }
             // if (scene.name == "tutorialPitTrap")

@@ -18,6 +18,8 @@ public class SwitchCameraView : MonoBehaviour
         {
             enemyCameras[i].gameObject.SetActive(false);
         }
+        
+        data.playerCam.Add(System.DateTime.Now.ToString());
     }
 private void Update()
     {
@@ -41,7 +43,8 @@ private void Update()
                     }
                 }
                 //Debug.Log(closestEnemyIndex);
-
+                data.playerCam.Add(System.DateTime.Now.ToString());
+                data.levelCam.Add(System.DateTime.Now.ToString());
                 playerCamera.gameObject.SetActive(false);
                 enemyCameras[closestEnemyIndex].gameObject.SetActive(true);
 
@@ -58,7 +61,8 @@ private void Update()
                     }
                     enemyCameras[i].gameObject.SetActive(false);
                 }
-
+                data.playerCam.Add(System.DateTime.Now.ToString());
+                data.levelCam.Add(System.DateTime.Now.ToString());
                 isPlayerCamera = true;
             }
         }

@@ -25,34 +25,15 @@ public class EndZone : MonoBehaviour
             this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
         }
     }
-    void resetData()
-    {
-        data.startTime = System.DateTime.Now;
-        data.endTime = System.DateTime.Now;
-        data.playerDeath = "no";
-        data.levelName = "demo";
-        data.gameCompleted = false;
-        data.trapActiveOrder = new List<string>();
-        data.healthRemaining = 0;
-        data.enemyHit = 0;
-        data.ttrstart = System.DateTime.Now;
-        data.userLevelComplete = false;
-        data.attempts = 1;
-        data.NPCChase = 0;
-        data.NPCSuspicion = 0;
-    }
+    
     void OnTriggerStay(Collider playerObject){
         //Debug.Log(NPCManager.getNumLiving());
         if (playerObject.gameObject.layer == LayerMask.NameToLayer("Player")){
             if(NPCManager.getNumLiving() == 0){
-                data.endTime = System.DateTime.Now;
-                data.gameCompleted = true;
-                data.userLevelComplete = true;
-                //Debug.Log(data.gameCompleted);
                 data.levelName = SceneManager.GetActiveScene().name;
-                data.checkGameCompleted(data.gameCompleted);
+                data.userLevelComplete = true;
                 data.checkUserLevelCompleted();
-                resetData();
+                data.checkData();                
                 SceneManager.LoadScene(nextScene);
             }
         }

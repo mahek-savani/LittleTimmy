@@ -16,7 +16,7 @@ public class DropTrapActivation : BaseTrapClass
         // Debug.Log("Something touched the trap");
         if (!isTriggered && other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
-            data.trapActiveOrder.Add("dropTrap");
+            //data.trapActiveOrder.Add("dropTrap");
             other.GetComponent<StateMachine_Robust>().die();
             isTriggered = true;
 

@@ -63,7 +63,7 @@ public class Experimental_Reset_Button : MonoBehaviour
 
                 pitTrap.trapActive = true;
                 door.enabled = true;
-                data.trapActiveOrder.Add("pitTrap");
+                //data.trapActiveOrder.Add("pitTrap");
                 //fallTrigger.SetActive(false);
 
                 //trapDoor.layer = LayerMask.NameToLayer("CanTrap");
