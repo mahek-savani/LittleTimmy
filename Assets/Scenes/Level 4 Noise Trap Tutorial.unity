@@ -1090,11 +1090,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2876180185629961313, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}
   m_PrefabInstance: {fileID: 398864645}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &448795811 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2078390526553534258, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
-  m_PrefabInstance: {fileID: 1197922551}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &454565068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2021,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765493725}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &766296444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6149088222488944803, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1197922551}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &776411579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6295,7 +6295,7 @@ PrefabInstance:
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: tmp_Pickup
       value: 
-      objectReference: {fileID: 448795811}
+      objectReference: {fileID: 766296444}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: gameOverPanel
       value: 

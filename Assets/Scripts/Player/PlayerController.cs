@@ -85,8 +85,8 @@ public class PlayerController : MonoBehaviour
         // if(pickupDelay > 0) pickupDelay -= 1f * Time.deltaTime;
         // else {
         //     pickupDelay = 0;
-            if (hasTrapInInventory) tmp_Pickup_text.text = "Inventory:\n1 " + trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
-            else tmp_Pickup_text.text = "Inventory: Empty";
+            if (hasTrapInInventory) tmp_Pickup_text.text = trapInHand.GetComponentInChildren<BaseTrapClass>().trapName + " Trap";
+            else tmp_Pickup_text.text = "Empty";
         //}
 
         if (Input.GetKeyDown(KeyCode.E) && TP.eLocked == 2)
@@ -121,15 +121,17 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerStay(Collider triggerObject){
+        int a;
 
         // Setting a pickup delay so that the text doesn't flash rapidly
         if(pickupDelay <= 0){
+            a = 4;
 
             // We need to know if the trigger box we've entered is a pickup object AND
             // if the object has been triggered before or not
             if(triggerObject.gameObject.layer == LayerMask.NameToLayer("Pickup")) {
-            //&& !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
-
+                //&& !triggerObject.gameObject.GetComponent<BaseTrapClass>().isTriggered ){
+                a = 2;
                 // Different logic depending on whether or not there is currently a trap
                 // in inventory
                 if(hasTrapInInventory && triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
@@ -171,30 +173,26 @@ public class PlayerController : MonoBehaviour
 
                     if (triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
                         helpText.text = "[E] PICK UP the " + triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName + " Trap!";
-                    }
+                        
+                        if (eDown)
+                        {
+                            trapInHand = triggerObject.gameObject;
+                            triggerObject.gameObject.SetActive(false);
+                            hasTrapInInventory = true;
 
-                if(eDown) {
+                            string temp = triggerObject.gameObject.tag;
+                            data.addTrapVal(temp);
 
-                    if (triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>()){
-                        trapInHand = triggerObject.gameObject;
-                        triggerObject.gameObject.SetActive(false);
-                        hasTrapInInventory = true;
+                            helpText.text = "";
+                            //pickupDelay = 1f;
 
-                        string temp = triggerObject.gameObject.tag;
-                        data.addTrapVal(temp);
-                    } else {
-                    
-                    }
-                    helpText.text = "";
-                    //pickupDelay = 1f;
+                            //eDown = false;
 
-                    //eDown = false;
+                            //TP.eLocked = 1;
 
-                    //TP.eLocked = 1;
-
-                    StartCoroutine(transferControl());
-                }
-                if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
+                            StartCoroutine(transferControl());
+                        }
+                    } else if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
                         gameObject.GetComponent<PlayerDamage>().HealDamage();
                         Destroy(triggerObject.gameObject);
                     }     
@@ -225,7 +223,7 @@ public class PlayerController : MonoBehaviour
         trapInHand = myTrigger.gameObject;
         hasTrapInInventory = true;
 
-        tmp_Pickup_text.text = "Trap Swapped!";
+        tmp_Pickup_text.text = "Trap Swap!";
         //pickupDelay = 1f;
 
         helpText.text = "";
