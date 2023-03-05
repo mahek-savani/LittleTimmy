@@ -69,24 +69,13 @@ public class PlayerController : MonoBehaviour
         float horVal = Input.GetAxis("Horizontal");
         float vertVal = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(horVal) > Mathf.Epsilon && Mathf.Abs(vertVal) > Mathf.Epsilon)
-        {
-            //horVal = Mathf.Sign(horVal) * 0.70710678f;
-            //vertVal = Mathf.Sign(vertVal) * 0.70710678f;
-
-            horVal = Mathf.Sign(horVal) * 0.70f;
-            vertVal = Mathf.Sign(vertVal) * 0.70f;
-        }
-
-        Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
-        Vector3 newPosUnscaled = new Vector3(horVal, 0, vertVal);
-
-        //Debug.Log("Transform position: " + transform.position);
-        Debug.Log("Displacement vector: " + newPosUnscaled);
-
-        //Debug.Log("Displacement magnitude: " + newPosUnscaled.magnitude);
+        //Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        Vector3 newPos = new Vector3(horVal, 0, vertVal);
+        newPos *= Time.deltaTime * speed;
+        //newPos.Normalize();
+        //Debug.Log("Translation vector: " + newPos);
+        //Debug.Log("Vector magnitude: " + newPos.magnitude);
         
-        //Debug.Log((newPosUnscaled - transform.position).magnitude);
         transform.Translate(newPos);
          
 
