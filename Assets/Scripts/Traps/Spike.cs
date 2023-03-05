@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
+    public bool isTrapMoving = false;
+
     void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 7)
@@ -19,9 +21,17 @@ public class Spike : MonoBehaviour
 
         if (c.gameObject.layer == 3)
         {
+            Debug.Log("Hit the player");
+            
             PlayerDamage damageInterface = c.gameObject.GetComponent<PlayerDamage>();
 
             damageInterface.TakeDamage(1);
+        }
+
+        if (c.gameObject.layer == 12)
+        {
+            Debug.Log("Hit the obstacle");
+            isTrapMoving = false;
         }
     }
 }
