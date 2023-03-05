@@ -1910,7 +1910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -3875,11 +3875,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924968049}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &936045315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2078390526553534258, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
-  m_PrefabInstance: {fileID: 1653686535}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &989135895
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,7 +6438,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 723
+    m_Bits: 579
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -6453,7 +6448,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: ea6c88746d151c344829bf722cc41c6b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d09226908910093439a5d0bd886a10a2, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1653686535
 PrefabInstance:
@@ -6560,6 +6555,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+--- !u!1 &1653686536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 859528062539505975, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1653686535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1653686537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6149088222488944803, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1653686535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1654227398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6618,7 +6623,11 @@ PrefabInstance:
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: tmp_Pickup
       value: 
-      objectReference: {fileID: 936045315}
+      objectReference: {fileID: 1653686537}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1653686536}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: pickupDelay
       value: 0

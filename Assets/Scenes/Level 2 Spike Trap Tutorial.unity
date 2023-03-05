@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44024113, g: 0.48888516, b: 0.5690632, a: 1}
+  m_IndirectSpecularColor: {r: 0.4402231, g: 0.4888504, b: 0.56901324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3123,7 +3123,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1038371509 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2078390526553534258, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_CorrespondingSourceObject: {fileID: 859528062539505975, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
   m_PrefabInstance: {fileID: 1038371507}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1038371510 stripped
@@ -3137,6 +3137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a8dbe13e2cb07439993d389431e9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1038371511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6149088222488944803, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1038371507}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1048320506
 GameObject:
   m_ObjectHideFlags: 0
@@ -5021,7 +5026,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 531
+    m_Bits: 579
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -5031,7 +5036,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: b140bd602bfa413408ff35c8058525ce, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 3f5b6f7f2fc479b439a29e77817de123, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1654227398
 PrefabInstance:
@@ -5055,7 +5060,7 @@ PrefabInstance:
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 
-      objectReference: {fileID: 76228758}
+      objectReference: {fileID: 2127838364}
     - target: {fileID: 2762713670264431872, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: healthbar
       value: 
@@ -5090,6 +5095,10 @@ PrefabInstance:
       objectReference: {fileID: 554259373}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: tmp_Pickup
+      value: 
+      objectReference: {fileID: 1038371511}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: pauseScreen
       value: 
       objectReference: {fileID: 1038371509}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
