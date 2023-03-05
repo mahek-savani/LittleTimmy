@@ -2752,6 +2752,11 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
 --- !u!1 &1197922552 stripped
 GameObject:
+  m_CorrespondingSourceObject: {fileID: 1619458538, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1197922551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1197922553 stripped
+GameObject:
   m_CorrespondingSourceObject: {fileID: 859528062539505975, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
   m_PrefabInstance: {fileID: 1197922551}
   m_PrefabAsset: {fileID: 0}
@@ -6220,6 +6225,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 752008085}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: SwitchCamFill
+      value: 
+      objectReference: {fileID: 1197922552}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 
       objectReference: {fileID: 275464032}
@@ -6254,7 +6263,7 @@ PrefabInstance:
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: pauseScreen
       value: 
-      objectReference: {fileID: 1197922552}
+      objectReference: {fileID: 1197922553}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: gameOverPanel
       value: 
