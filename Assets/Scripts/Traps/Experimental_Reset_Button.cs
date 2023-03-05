@@ -28,6 +28,7 @@ public class Experimental_Reset_Button : MonoBehaviour
 
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+        buttonParent.GetComponent<Renderer>().material.color = Color.grey;
     }
 
     private void Update()

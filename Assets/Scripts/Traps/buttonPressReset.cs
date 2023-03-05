@@ -22,6 +22,7 @@ public class buttonPressReset : MonoBehaviour
 
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+        buttonParent.GetComponent<Renderer>().material.color = Color.grey;
     }
 
     void Update(){
