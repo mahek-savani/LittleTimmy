@@ -5,4 +5,5 @@ using UnityEngine;
 public class SpikeTrap : MonoBehaviour
 {
     public bool trapActive = true;
+    public Vector3 originalPos;
 }
