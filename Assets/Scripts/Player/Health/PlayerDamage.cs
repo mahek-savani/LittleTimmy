@@ -33,8 +33,14 @@ public class PlayerDamage : MonoBehaviour
         currentHealth -= damage;
         data.healthRemaining = currentHealth;
         data.healthLost = data.healthLost + 1;
-        healthbar.SetHealth(currentHealth);
+       
+        healthbar.SetHealth(currentHealth);         //Give Damage
+        StartCoroutine(healthbar.ShakeHealth());  //Shake the Health Bar
+
         this.GetComponent<Renderer>().material.color = Color.red;
+
+        
+
         timeRed = 0.3f;
         if (currentHealth == 0)
         {

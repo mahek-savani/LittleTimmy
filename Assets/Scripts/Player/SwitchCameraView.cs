@@ -10,6 +10,7 @@ public class SwitchCameraView : MonoBehaviour
     public float switchTime = 5f;
     public Transform playerTransform;
     private bool isPlayerCamera = true;
+    public GameObject SwitchCamFill;
 
     private void Start()
     {
@@ -45,13 +46,18 @@ private void Update()
                 //Debug.Log(closestEnemyIndex);
                 data.playerCam.Add(System.DateTime.Now.ToString());
                 data.levelCam.Add(System.DateTime.Now.ToString());
+                
+                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(0,1,0,1); //Change the color of icon to show that it is active
+               
                 playerCamera.gameObject.SetActive(false);
                 enemyCameras[closestEnemyIndex].gameObject.SetActive(true);
 
                 isPlayerCamera = false;
             }
             else
-            {
+            {   
+                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(1,1,1,1); //Change the color of icon to show that it is inactive
+
                 playerCamera.gameObject.SetActive(true);
                 for (int i = 0; i < enemyCameras.Length; i++)
                 {
