@@ -19,6 +19,13 @@ public class buttonPressReset : MonoBehaviour
     float animDirectionFw = 1f; 
     public float movementSpeed = -15f;
 
+    public static event System.Action SpikeTrapResetPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+    }
+
     void Update(){
         if(!spikeTrap.trapActive){
             if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
@@ -26,12 +33,12 @@ public class buttonPressReset : MonoBehaviour
                 colorDelay = 2;
                 if(colorBit == 0)
                 { 
-                    buttonParent.GetComponent<Renderer>().material.color = Color.red;
+                    buttonParent.GetComponent<Renderer>().material.color = Color.green;
                     colorBit = 1;
                 }
                 else
                 {
-                    buttonParent.GetComponent<Renderer>().material.color = Color.white;
+                    buttonParent.GetComponent<Renderer>().material.color = startingMaterialColor;
                     colorBit = 0;
                 }
             }            
@@ -51,7 +58,6 @@ public class buttonPressReset : MonoBehaviour
                 //changing spike trap's reset trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
-                buttonParent.GetComponent<Renderer>().material.color = Color.white;
 
                 //changing spike trap's animation direction to backward
                 // spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
@@ -67,6 +73,10 @@ public class buttonPressReset : MonoBehaviour
                 //hitboxsize.ResetHitBoxSize();
 
                 //Destroy(gameObject);
+                if(SpikeTrapResetPushed != null) SpikeTrapResetPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+                trapButton.GetComponent<Renderer>().material.color = startingMaterialColor;
+                spikeTrapWorking.transform.GetChild(0).GetComponent<Renderer>().material.color = startingMaterialColor;  
             }
         }
     }
