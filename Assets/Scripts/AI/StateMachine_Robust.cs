@@ -11,7 +11,7 @@ public class StateMachine_Robust : MonoBehaviour
     public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS};
     
     // Specifies a cardinal direction to look in for the idle state
-    public enum DIRECTION { NORTH, SOUTH, EAST, WEST};
+    public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE};
 
 
 
@@ -78,6 +78,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The mesh of the NPC agent
     public MeshRenderer myMesh;
+
+    // The rigidbody of the agent
+    public Rigidbody myBody;
 
     // The NPC manager parenting this agent
     public LiveCounter NPCManager;
@@ -526,6 +529,9 @@ public class StateMachine_Robust : MonoBehaviour
             case DIRECTION.WEST:
                 idleDir = new Vector3(-1, 0, 0);
                 break;
+            case DIRECTION.HARDCODE:
+                idleDir = new Vector3(1, 0, -1);
+                break;
         }
 
         state = STATE.IDLE;
@@ -773,6 +779,17 @@ public class StateMachine_Robust : MonoBehaviour
         currentPosition = nearestPoint;
         agent.SetDestination(nearestPoint.position);
     }
+
+    public void stop()
+    {
+        myBody.velocity = Vector3.zero;
+        agent.isStopped = true;
+    }
+
+    //public void start()
+    //{
+
+    //}
 
     // public void MakeIncapacitated(float time){
     //     getUnconscious(time);

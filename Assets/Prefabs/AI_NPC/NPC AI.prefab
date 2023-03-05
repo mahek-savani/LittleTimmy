@@ -208,12 +208,16 @@ MonoBehaviour:
   alive: 1
   conscious: 1
   passive: 0
+  defaultIdlePos: {fileID: 0}
+  defaultIdleDir: 0
   timeToSuspicion: 0.3
   suspiciousTime: 5
   timeToChase: 1
   coolTime: 2
   unconsciousTime: 3
+  idleState: 2
   myMesh: {fileID: 6327803450025997517}
+  myBody: {fileID: 6327803450025997519}
   NPCManager: {fileID: 597644910372517495, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
   fov: {fileID: 6327803450025997512}
   FOVMesh: {fileID: 6327803451168946060}
