@@ -32,7 +32,7 @@ public class PlayerDamage : MonoBehaviour
     {
         currentHealth -= damage;
         data.healthRemaining = currentHealth;
-        data.enemyHit = data.enemyHit + 1;
+        data.healthLost = data.healthLost + 1;
         healthbar.SetHealth(currentHealth);
         this.GetComponent<Renderer>().material.color = Color.red;
         timeRed = 0.3f;

@@ -179,6 +179,9 @@ public class PlayerController : MonoBehaviour
                         trapInHand = triggerObject.gameObject;
                         triggerObject.gameObject.SetActive(false);
                         hasTrapInInventory = true;
+
+                        string temp = triggerObject.gameObject.tag;
+                        data.addTrapVal(temp);
                     } else {
                     
                     }
@@ -230,33 +233,28 @@ public class PlayerController : MonoBehaviour
         myTrigger = null;
     }
 
-    void resetData()
-    {
-        data.startTime = System.DateTime.Now;
-        data.endTime = System.DateTime.Now;
-        data.playerDeath = "no";
-        data.levelName = "demo";
-        data.gameCompleted = false;
-        data.trapActiveOrder = new List<string>();
-        data.healthRemaining = 0;
-        data.enemyHit = 0;
-        data.ttrstart = System.DateTime.Now;
-        data.NPCChase = 0;
-        data.NPCSuspicion = 0;
-    }
+    // void resetData()
+    // {
+    //     data.startTime = System.DateTime.Now;
+    //     data.endTime = System.DateTime.Now;
+    //     data.playerDeath = "no";
+    //     data.levelName = "demo";
+    //     data.gameCompleted = false;
+    //     //data.trapActiveOrder = new List<string>();
+    //     data.healthRemaining = 0;
+    //     data.enemyHit = 0;
+    //     data.ttrstart = System.DateTime.Now;
+    //     data.NPCChase = 0;
+    //     data.NPCSuspicion = 0;
+    // }
     public IEnumerator playerDie(float delay)
     {
         canPause = false;
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
         data.playerDeath = "yes";
-        data.endTime = System.DateTime.Now;
-        data.gameCompleted = true;
-        //Debug.Log(data.gameCompleted);
         data.levelName = SceneManager.GetActiveScene().name;
-        //Debug.Log(data.levelName);
-        data.checkGameCompleted(data.gameCompleted);
-        resetData();
+        data.checkData();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOverPanel.SetActive(true);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -18,6 +18,10 @@ public class TrapPlacer : MonoBehaviour
 
     public bool placedTrapBefore = false;
 
+    // Trap pickup analytics logic; integrate after merge
+    /*                 data.addTrapVal(player.trapInHand.gameObject.tag.ToString());
+                trapTemp = true;*/
+
     // Update is called once per frame
     void LateUpdate()
     {
@@ -62,7 +66,10 @@ public class TrapPlacer : MonoBehaviour
                 trapPlaced.GetComponentInChildren<BaseTrapClass>().isTriggered = false;
 
                 NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
-                data.trapActiveOrder.Add("noiseTrap-0");
+                //data.trapActiveOrder.Add("noiseTrap-0");
+                //Debug.Log(trapPlaced);
+                //Debug.Log(trapInInventory.gameObject.tag);
+                //data.noiseTrap.Add(0);
                 if (cloud != null)
                 {
                     cloud.visible();
@@ -76,6 +83,8 @@ public class TrapPlacer : MonoBehaviour
 
                 player.hasTrapInInventory = false;
                 player.pickupDelay = 0f;
+
+                data.addTrapVal(player.trapInHand.gameObject.tag.ToString());
 
                 // trapPlaced.transform.LookAt(target.right);
 
