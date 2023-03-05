@@ -9,6 +9,9 @@ public class StateMachine_Robust : MonoBehaviour
 {
     // Enumerated type for possible states
     public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS};
+    
+    // Specifies a cardinal direction to look in for the idle state
+    public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE};
 
 
 
@@ -29,6 +32,18 @@ public class StateMachine_Robust : MonoBehaviour
     // Determines whether the enemy will become suspicious after getting hit-stunned
     public bool passive = false;
 
+    // The default position for an idle NPC
+    public waypoint defaultIdlePos;
+
+    // The default direction to face for an idle NPC
+    public DIRECTION defaultIdleDir = DIRECTION.NORTH;
+
+    // The current idle position for the NPC
+    private Vector3 idlePos;
+
+    // The current idle direction for the NPC
+    private Vector3 idleDir;
+
 
 
     [Header("Transition Settings")]
@@ -48,6 +63,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies how long the NPC takes to wake up after being rendered unconscious
     public float unconsciousTime = 3f;
 
+    // Denotes the state the NPC transitions to out of unconsciousness
+    public STATE idleState = STATE.SUSPICIOUS;
+
     // A variable used to store the countdown from suspicious to passivity, or chase to suspicion
     private float timeCounter = 0f; 
 
@@ -60,6 +78,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The mesh of the NPC agent
     public MeshRenderer myMesh;
+
+    // The rigidbody of the agent
+    public Rigidbody myBody;
 
     // The NPC manager parenting this agent
     public LiveCounter NPCManager;
@@ -223,7 +244,8 @@ public class StateMachine_Robust : MonoBehaviour
                     else
                     {
                         FOVMesh.enabled = true;
-                        getSuspicious(transform.position);
+                        getCustom(idleState, transform.position);
+                        //getSuspicious(transform.position);
                     }
                     
                 }
@@ -235,12 +257,22 @@ public class StateMachine_Robust : MonoBehaviour
             // When waking up from unconsciousness, the NPC will become suspicious
             // When ceasing awake idling, the NPC will return to their default state
             case STATE.IDLE:
-                if ( playerVisibleTimer >= timeToSuspicion)
-                {
-                    getNoise(playerPos.position);
-                }
 
-                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
+
+                if (agent.remainingDistance <= Mathf.Epsilon)
+                {
+                    agent.isStopped = true;
+                    transform.LookAt(transform.position + idleDir);
+                }
+                
+
+                
+                // if (Vector3.Distance(idlePos, transform.position) > 0.12)
+                // {
+                
+                
+                // }
                 if (waitTime > 0)
                 {
                     waitTime -= Time.deltaTime;
@@ -249,6 +281,14 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     getDefault();
                 }
+
+                if (playerVisibleTimer >= timeToSuspicion)
+                {
+                    getNoise(playerPos.position);
+                }
+
+                playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
                 break;
 
             // While patrolling, the NPC will walk between waypoints in the order of their list
@@ -423,6 +463,36 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
+    void getCustom(STATE newState, Vector3? location = null)
+    {
+        if (location == null)
+        {
+            location = new Vector3(0, 0, 0);
+        }
+
+        switch (newState)
+        {
+            case STATE.PATROLLING:
+                getPatrol();
+                break;
+            case STATE.PARANOID:
+                getParanoid();
+                break;
+            case STATE.IDLE:
+                getIdle();
+                break;
+            case STATE.NOISE:
+                getNoise((Vector3) location);
+                break;
+            case STATE.SUSPICIOUS:
+                getSuspicious((Vector3) location);
+                break;
+            case STATE.CHASING:
+                getChase();
+                break;
+        }
+    }
+
     public void getChase()
     {
         agent.isStopped = false;
@@ -436,21 +506,60 @@ public class StateMachine_Robust : MonoBehaviour
         data.NPCChase = data.NPCChase + 1;
     }
 
-    public void getIdle(float time)
+    public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
         myMesh.material.color = Color.blue;
-        targetLine.enabled = false;
-        agent.isStopped = true;
+        // agent.isStopped = true;
+        idlePos = pos;
+        agent.SetDestination(idlePos);
         waitTime = time;
+
+        switch (dir)
+        {
+            case DIRECTION.NORTH:
+                idleDir = new Vector3(0, 0, 1);
+                break;
+            case DIRECTION.SOUTH:
+                idleDir = new Vector3(0, 0, -1);
+                break;
+            case DIRECTION.EAST:
+                idleDir = new Vector3(1, 0, 0);
+                break;
+            case DIRECTION.WEST:
+                idleDir = new Vector3(-1, 0, 0);
+                break;
+        }
+
         state = STATE.IDLE;
     }
 
     public void getIdle()
     {
         myMesh.material.color = Color.blue;
-        targetLine.enabled = false;
-        agent.isStopped = true;
+        //agent.isStopped = true;
         waitTime = Mathf.Infinity;
+        idlePos = defaultIdlePos.transform.position;
+        agent.SetDestination(idlePos);
+
+        switch (defaultIdleDir)
+        {
+            case DIRECTION.NORTH:
+                idleDir = new Vector3(0, 0, 1);
+                break;
+            case DIRECTION.SOUTH:
+                idleDir = new Vector3(0, 0, -1);
+                break;
+            case DIRECTION.EAST:
+                idleDir = new Vector3(1, 0, 0);
+                break;
+            case DIRECTION.WEST:
+                idleDir = new Vector3(-1, 0, 0);
+                break;
+            case DIRECTION.HARDCODE:
+                idleDir = new Vector3(1, 0, -1);
+                break;
+        }
+
         state = STATE.IDLE;
     }
 
@@ -458,6 +567,16 @@ public class StateMachine_Robust : MonoBehaviour
     {
         agent.isStopped = true;
         targetLine.enabled = false;
+        conscious = false;
+        FOVMesh.enabled = false;
+        state = STATE.UNCONSCIOUS;
+        waitTime = time;
+        myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
+    }
+
+    public void getUnconscious()
+    {
+        agent.isStopped = true;
         conscious = false;
         FOVMesh.enabled = false;
         state = STATE.UNCONSCIOUS;
@@ -579,7 +698,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
-            getUnconscious(unconsciousTime);
+            getUnconscious();
             damageInterface.TakeDamage(playerDamage);
             data.enemyHit = data.enemyHit + 1;
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
@@ -701,6 +820,18 @@ public class StateMachine_Robust : MonoBehaviour
         currentPosition = nearestPoint;
         agent.SetDestination(nearestPoint.position);
     }
+
+    public void stop()
+    {
+        myBody.velocity = Vector3.zero;
+        agent.isStopped = true;
+        myBody.ResetInertiaTensor();
+    }
+
+    //public void start()
+    //{
+
+    //}
 
     // public void MakeIncapacitated(float time){
     //     getUnconscious(time);

@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3250395405517195541}
-  m_LocalRotation: {x: 0.39468312, y: 5.981966e-29, z: -3.7294162e-29, w: 0.91881734}
+  m_LocalRotation: {x: 0.39468312, y: -1e-45, z: 1e-45, w: 0.91881734}
   m_LocalPosition: {x: 0, y: 13.390001, z: -12.710001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -209,12 +209,16 @@ MonoBehaviour:
   alive: 1
   conscious: 1
   passive: 0
+  defaultIdlePos: {fileID: 0}
+  defaultIdleDir: 0
   timeToSuspicion: 0.3
   suspiciousTime: 5
   timeToChase: 1
   coolTime: 2
   unconsciousTime: 3
+  idleState: 2
   myMesh: {fileID: 6327803450025997517}
+  myBody: {fileID: 6327803450025997519}
   NPCManager: {fileID: 597644910372517495, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
   fov: {fileID: 6327803450025997512}
   FOVMesh: {fileID: 6327803451168946060}
@@ -286,7 +290,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6327803450025997104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
