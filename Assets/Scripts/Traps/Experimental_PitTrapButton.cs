@@ -51,7 +51,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
                 //obstacle.SetActive(true);
                 fallTrigger.SetActive(true);
-                fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
+                //fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
 
                 //manager.resetting = false;
                 //manager.rebuildNavMesh = true;
