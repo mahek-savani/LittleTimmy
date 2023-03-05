@@ -9,6 +9,9 @@ public class StateMachine_Robust : MonoBehaviour
 {
     // Enumerated type for possible states
     public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS};
+    
+    // Specifies a cardinal direction to look in for the idle state
+    public enum DIRECTION { NORTH, SOUTH, EAST, WEST};
 
 
 
@@ -28,6 +31,18 @@ public class StateMachine_Robust : MonoBehaviour
 
     // Determines whether the enemy will become suspicious after getting hit-stunned
     public bool passive = false;
+
+    // The default position for an idle NPC
+    public waypoint defaultIdlePos;
+
+    // The default direction to face for an idle NPC
+    public DIRECTION defaultIdleDir = DIRECTION.NORTH;
+
+    // The current idle position for the NPC
+    private Vector3 idlePos;
+
+    // The current idle direction for the NPC
+    private Vector3 idleDir;
 
 
 
@@ -236,6 +251,21 @@ public class StateMachine_Robust : MonoBehaviour
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
+
+                if (agent.remainingDistance <= Mathf.Epsilon)
+                {
+                    agent.isStopped = true;
+                    transform.LookAt(transform.position + idleDir);
+                }
+                
+
+                
+                // if (Vector3.Distance(idlePos, transform.position) > 0.12)
+                // {
+                
+                
+                // }
                 if (waitTime > 0)
                 {
                     waitTime -= Time.deltaTime;
@@ -447,19 +477,57 @@ public class StateMachine_Robust : MonoBehaviour
         data.NPCChase = data.NPCChase + 1;
     }
 
-    public void getIdle(float time)
+    public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
         myMesh.material.color = Color.blue;
-        agent.isStopped = true;
+        // agent.isStopped = true;
+        idlePos = pos;
+        agent.SetDestination(idlePos);
         waitTime = time;
+
+        switch (dir)
+        {
+            case DIRECTION.NORTH:
+                idleDir = new Vector3(0, 0, 1);
+                break;
+            case DIRECTION.SOUTH:
+                idleDir = new Vector3(0, 0, -1);
+                break;
+            case DIRECTION.EAST:
+                idleDir = new Vector3(1, 0, 0);
+                break;
+            case DIRECTION.WEST:
+                idleDir = new Vector3(-1, 0, 0);
+                break;
+        }
+
         state = STATE.IDLE;
     }
 
     public void getIdle()
     {
         myMesh.material.color = Color.blue;
-        agent.isStopped = true;
+        //agent.isStopped = true;
         waitTime = Mathf.Infinity;
+        idlePos = defaultIdlePos.transform.position;
+        agent.SetDestination(idlePos);
+
+        switch (defaultIdleDir)
+        {
+            case DIRECTION.NORTH:
+                idleDir = new Vector3(0, 0, 1);
+                break;
+            case DIRECTION.SOUTH:
+                idleDir = new Vector3(0, 0, -1);
+                break;
+            case DIRECTION.EAST:
+                idleDir = new Vector3(1, 0, 0);
+                break;
+            case DIRECTION.WEST:
+                idleDir = new Vector3(-1, 0, 0);
+                break;
+        }
+
         state = STATE.IDLE;
     }
 
