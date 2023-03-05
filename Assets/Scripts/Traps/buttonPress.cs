@@ -15,7 +15,7 @@ public class buttonPress : MonoBehaviour
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
-    public float movementSpeed = 15f;
+    public float movementSpeed = 30f;
 
     public void Update(){
         if (spike.isTrapMoving){

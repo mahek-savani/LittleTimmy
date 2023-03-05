@@ -17,7 +17,7 @@ public class buttonPressReset : MonoBehaviour
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
-    public float movementSpeed = -15f;
+    //public float movementSpeed = -30f;
 
     public static event System.Action SpikeTrapResetPushed;
     private Color startingMaterialColor;
@@ -43,9 +43,6 @@ public class buttonPressReset : MonoBehaviour
                 }
             }            
         }
-        if (spike.isTrapMovingBack){
-            spikeGrid.transform.position = spikeTrap.originalPos;
-        }
     }
 
     public void OnTriggerEnter(Collider c)
@@ -54,7 +51,9 @@ public class buttonPressReset : MonoBehaviour
         {
             if (!spikeTrap.trapActive)
             {
-                spike.isTrapMovingBack = true;
+                //spike.isTrapMovingBack = true;
+
+                spikeGrid.transform.position = spikeTrap.originalPos;
                 //changing spike trap's reset trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
