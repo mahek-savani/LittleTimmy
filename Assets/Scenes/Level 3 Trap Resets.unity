@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44026437, g: 0.48881567, b: 0.56899005, a: 1}
+  m_IndirectSpecularColor: {r: 0.4402231, g: 0.4888504, b: 0.56901324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1898,19 +1898,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9188174
+      value: 0.91881734
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.39468312
+      value: 0.39468315
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017813363
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000000765183
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -1926,9 +1926,10 @@ GameObject:
   - component: {fileID: 474962124}
   - component: {fileID: 474962123}
   - component: {fileID: 474962122}
-  m_Layer: 0
+  - component: {fileID: 474962125}
+  m_Layer: 13
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2012,6 +2013,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474962120}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &474962125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474962120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93eb19a5bd44b64a96e6bc5d6bcbd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttachedSpikeTrap: {fileID: 422350787}
+  AttachedPitTrap: {fileID: 0}
+  startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &486752745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4797,11 +4813,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000007263832
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000003120222
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -8200,6 +8216,10 @@ PrefabInstance:
       propertyPath: spikeResetButton
       value: 
       objectReference: {fileID: 164643041}
+    - target: {fileID: 3738750155420560736, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: spikeTrapWorking
+      value: 
+      objectReference: {fileID: 422350783}
     - target: {fileID: 3738750155420560741, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: m_Layer
       value: 2

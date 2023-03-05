@@ -8,10 +8,18 @@ public class PitTrapButton : MonoBehaviour
     public GameObject buttonParent;
     public GameObject resetButton;
     public MeshCollider door;
+    public GameObject trapdoor;
     //backward direction
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+
+    public static event System.Action PitTrapButtonPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+    }
 
     public void OnTriggerEnter(Collider c)
     {
@@ -35,10 +43,14 @@ public class PitTrapButton : MonoBehaviour
                 {
                     resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
                     resetButton.GetComponent<Animation>().Play("buttonAnim");
+                    resetButton.GetComponent<Renderer>().material.color = startingMaterialColor;
                 }
 
 
                 //Destroy(gameObject);
+                if(PitTrapButtonPushed != null) PitTrapButtonPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;  
+                trapdoor.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
             }
         }
     }
