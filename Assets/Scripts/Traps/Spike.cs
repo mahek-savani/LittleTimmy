@@ -26,7 +26,7 @@ public class Spike : MonoBehaviour
             damageInterface.TakeDamage(1);
         }
 
-        if (c.gameObject.layer == 12)
+        if (c.gameObject.layer == 14)
         {
             isTrapMoving = false;
             isTrapMovingBack = false;

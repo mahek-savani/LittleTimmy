@@ -17,10 +17,6 @@ public class buttonPress : MonoBehaviour
     float animDirectionFw = 1f; 
     public float movementSpeed = 15f;
 
-    public void Start(){
-        spikeTrap.originalPos = spikeGrid.transform.position;
-    }
-
     public void Update(){
         if (spike.isTrapMoving){
             spikeGrid.transform.position += spikeTrapObject.transform.rotation * transform.forward * Time.deltaTime * movementSpeed;
@@ -31,6 +27,7 @@ public class buttonPress : MonoBehaviour
     private Color startingMaterialColor;
 
     void Start(){
+        spikeTrap.originalPos = spikeGrid.transform.position;
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
     }
 
