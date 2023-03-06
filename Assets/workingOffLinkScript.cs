@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class workingOffLinkScript : MonoBehaviour
 {
+    public float dieTime = 2.0f;
     void OnEnable()
     {
         StartCoroutine("waitToDie");
@@ -13,7 +14,7 @@ public class workingOffLinkScript : MonoBehaviour
 
     IEnumerator waitToDie()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(dieTime);
         gameObject.GetComponent<OffMeshLink>().enabled = false;
         gameObject.GetComponent<workingOffLinkScript>().enabled = false;
     }

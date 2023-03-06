@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class NoiseTrapActivation : BaseTrapClass
 {
     public OffMeshLink offLink;
+    public workingOffLinkScript offLinkScript;
     public Transform startLink;
     public Transform endLink;
     public Transform floor;
@@ -16,6 +17,11 @@ public class NoiseTrapActivation : BaseTrapClass
     public Color inactiveColor = new Color(1f, 0.843f, 0f, 1f);
 
     private GameObject ring;
+
+    private bool calculateOffLink = false;
+    private Transform enemyTransform;
+    private StateMachine_Robust enemyMachine;
+    private NavMeshAgent enemyAgent;
 
     //public Transform myTransform;
 
@@ -35,9 +41,37 @@ public class NoiseTrapActivation : BaseTrapClass
     //    }
     //}
 
+    private void Update()
+    {
+        if (!offLinkScript.enabled)
+        {
+            calculateOffLink = false;
+        }
+        //if (calculateOffLink && !walledOff(transform.position, enemyTransform.position))
+        if (calculateOffLink && !walledOff(transform.position, enemyTransform.position))
+        {
+            //enemyAgent.isStopped = true;
+            enemyAgent.enabled = false;
+            
+            offLink.enabled = true;
+            startLink.SetPositionAndRotation(new Vector3(enemyTransform.position.x, floor.position.y,
+            enemyTransform.position.z), enemyTransform.rotation);
+            endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
+            transform.position.z), transform.rotation);
+            offLink.startTransform = startLink;
+            offLink.endTransform = endLink;
+            offLink.GetComponent<workingOffLinkScript>().enabled = true;
+            calculateOffLink = false;
+
+            enemyAgent.enabled = true;
+            enemyMachine.getNoise(endLink.position);
+        }
+    }
+
     public void respawnMe()
     {
         isTriggered = false;
+        calculateOffLink = false;
         transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
         invisible();
         gameObject.GetComponentInParent<Respawn>().respawnMe();
@@ -69,18 +103,12 @@ public class NoiseTrapActivation : BaseTrapClass
             StateMachine_Robust SM = other.gameObject.GetComponent<StateMachine_Robust>();
             //Debug.Log("Enemy Inside sphere");
             if(!isTriggered && SM.conscious && SM.alive){
+                calculateOffLink = true;
+                enemyTransform = other.transform;
+                offLink.GetComponent<workingOffLinkScript>().enabled = true;
+                enemyMachine = SM;
+                enemyAgent = other.gameObject.GetComponent<NavMeshAgent>();
                 // Debug.Log(transform.position);
-               if (!walledOff(transform.position, other.transform.position))
-               {
-                    offLink.enabled = true;
-                    startLink.SetPositionAndRotation(new Vector3(other.transform.position.x, floor.position.y,
-                    other.transform.position.z), other.transform.rotation);
-                    endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
-                    transform.position.z), transform.rotation);
-                    offLink.startTransform = startLink;
-                    offLink.endTransform = endLink;
-                    offLink.GetComponent<workingOffLinkScript>().enabled = true;
-               }
 
 
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
