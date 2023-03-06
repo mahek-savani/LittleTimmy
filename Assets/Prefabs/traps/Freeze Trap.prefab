@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3170616001608613117}
   - component: {fileID: 3170616001608613118}
   - component: {fileID: 3170616001608613106}
+  - component: {fileID: 1654153004}
+  - component: {fileID: 1654152998}
   m_Layer: 8
   m_Name: Freeze Trap
   m_TagString: Untagged
@@ -115,6 +117,34 @@ MonoBehaviour:
   isTriggered: 1
   activeColor: {r: 0.298, g: 0.831, b: 1, a: 1}
   inactiveColor: {r: 0.392, g: 0.392, b: 0.392, a: 1}
+--- !u!54 &1654153004
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170616001608613119}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1654152998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170616001608613119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 766f0a5462fd1c7418f3957c065c5b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6257940860159766255
 PrefabInstance:
   m_ObjectHideFlags: 0

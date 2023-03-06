@@ -27,6 +27,10 @@ public class NPCDieOnTouch : MonoBehaviour
                 {
                     c.gameObject.GetComponent<NoiseTrapActivation>().respawnMe();
                 }
+                else if (c.gameObject.GetComponent<FreezeTrap>())
+                {
+                    c.gameObject.GetComponent<FreezeTrap>().respawnMe();
+                }
             }
 
         }

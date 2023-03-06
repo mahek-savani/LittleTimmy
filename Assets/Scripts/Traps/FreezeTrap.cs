@@ -5,7 +5,16 @@ using UnityEngine;
 public class FreezeTrap : BaseTrapClass
 {
     public Color activeColor = new Color(0.298f, 0.831f, 1f, 1f);
-    public Color inactiveColor = new Color(0.392f, 0.392f, 0.392f, 1f); 
+    public Color inactiveColor = new Color(0.392f, 0.392f, 0.392f, 1f);
+
+    private GameObject ring;
+
+    public void respawnMe()
+    {
+        isTriggered = true;
+        transform.GetComponent<Renderer>().material.color = inactiveColor;
+        gameObject.GetComponent<Respawn>().respawnMe();
+    }
 
     void Start(){
         // Set trap to "Freeze" and if trap is a Pickup, we might
@@ -15,15 +24,21 @@ public class FreezeTrap : BaseTrapClass
         if(this.gameObject.layer == LayerMask.NameToLayer("Pickup")){
             this.transform.localScale = new Vector3(1f, 0.1f, 1f);
         }
+
+        GameObject particle = this.gameObject.transform.GetChild(0).gameObject;
+        ring = particle.transform.GetChild(1).gameObject;
+        //ring.GetComponent<ParticleSystem>().startColor = Color.white;
     }
 
     void Update(){
         if(!isTriggered){
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            ring.GetComponent<ParticleSystem>().startColor = new Color(18/255f, 174/255f, 1f);
             transform.GetComponent<Renderer>().material.color = activeColor;
         }
         else
         {
+
             transform.GetComponent<Renderer>().material.color = inactiveColor;
         }
     }
@@ -39,7 +54,12 @@ public class FreezeTrap : BaseTrapClass
 
             //data.trapActiveOrder.Add("freezeTrap");
             data.freezeTrap.Add(1);
-            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            //this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+            ring.GetComponent<ParticleSystem>().startColor = Color.white;
+            ring.GetComponent<ParticleSystem>().Clear();
+            //ring.GetComponent<ParticleSystem>().Emit(1);
+
             //this.GetComponent<Renderer>().material.color = Color.grey;
         }
     }
