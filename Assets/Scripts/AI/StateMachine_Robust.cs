@@ -551,6 +551,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
+        targetLine.enabled = false;
         idlePos = pos;
         agent.SetDestination(idlePos);
         waitTime = time;
@@ -578,6 +579,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
+        targetLine.enabled = false;
         waitTime = Mathf.Infinity;
         idlePos = defaultIdlePos.transform.position;
         agent.SetDestination(idlePos);
@@ -620,6 +622,7 @@ public class StateMachine_Robust : MonoBehaviour
         agent.isStopped = true;
         conscious = false;
         FOVMesh.enabled = false;
+        targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = unconsciousTime;
         myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
