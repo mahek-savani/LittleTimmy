@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapName: 
   isTriggered: 1
+  activeColor: {r: 0.298, g: 0.831, b: 1, a: 1}
+  inactiveColor: {r: 0.392, g: 0.392, b: 0.392, a: 1}
 --- !u!1001 &6257940860159766255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167,6 +169,30 @@ PrefabInstance:
     - target: {fileID: 4690214624780574440, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876674567508110, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876674567508110, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.80835915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876674567508110, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.18431371
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876675826400335, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876675826400335, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347876675826400335, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.07075471
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe0dca850d786148b0a703ffac596ae, type: 3}

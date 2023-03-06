@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44026437, g: 0.48881567, b: 0.56899005, a: 1}
+  m_IndirectSpecularColor: {r: 0.4402231, g: 0.4888504, b: 0.56901324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1800,7 +1800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9188174
+      value: 0.91881734
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1808,11 +1808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017813363
+      value: -0.00000002481247
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000007651829
+      value: 0.0000000106583355
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -3350,7 +3350,7 @@ Transform:
   m_GameObject: {fileID: 838701438}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -32.85, y: 12.290001, z: -8.85}
-  m_LocalScale: {x: 11.340914, y: 1, z: 0.3}
+  m_LocalScale: {x: 11.340914, y: 1, z: 0.40794}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1272175804}
@@ -8166,6 +8166,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3738750155420560736, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: movementSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3738750155420560736, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: spikeResetButton
       value: 
       objectReference: {fileID: 164643041}
@@ -8184,6 +8188,10 @@ PrefabInstance:
     - target: {fileID: 4432235302748411266, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: m_Name
       value: Spike Trap Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432235302748411266, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
+      propertyPath: m_TagString
+      value: Spike
       objectReference: {fileID: 0}
     - target: {fileID: 4432235302748411267, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
       propertyPath: m_RootOrder
@@ -8229,5 +8237,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1726225590, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}

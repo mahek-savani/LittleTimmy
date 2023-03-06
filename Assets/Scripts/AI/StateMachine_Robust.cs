@@ -715,7 +715,10 @@ public class StateMachine_Robust : MonoBehaviour
         targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = 10f;
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
         fov.viewMeshFilter.mesh.Clear();
         NPCManager.decrement();
         myMesh.material.color = Color.black;

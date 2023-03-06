@@ -5287,6 +5287,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4829147724036388294, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: m_TagString
+      value: ExperimentalPit
+      objectReference: {fileID: 0}
     - target: {fileID: 4829147724036388295, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6726,6 +6730,10 @@ PrefabInstance:
     - target: {fileID: 3170616001608613119, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
       propertyPath: m_Name
       value: Freeze Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 3170616001608613119, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
+      propertyPath: m_TagString
+      value: freezeTrap
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
@@ -8285,6 +8293,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1119044883, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_TagString
+      value: playerCam
+      objectReference: {fileID: 0}
     - target: {fileID: 1119044885, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_Priority
       value: 10
