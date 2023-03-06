@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         //    StartCoroutine(unLockE());
         //}
 
-        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        if (Input.GetKeyDown(KeyCode.Q) && canPause)
         {
             pauseGame();
         }
