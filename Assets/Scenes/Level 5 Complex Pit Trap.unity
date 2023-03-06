@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45134205, g: 0.5009293, b: 0.5724083, a: 1}
+  m_IndirectSpecularColor: {r: 0.4513957, g: 0.5008993, b: 0.57238466, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8789,5 +8789,9 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[7]
       value: 
       objectReference: {fileID: 1172097832}
+    - target: {fileID: 1251455731357091727, guid: ef954bda6bd5d294c80d7728cc5b37e6, type: 3}
+      propertyPath: viewAngle
+      value: 360
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef954bda6bd5d294c80d7728cc5b37e6, type: 3}
