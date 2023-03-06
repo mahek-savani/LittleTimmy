@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 717739889044231974}
   - component: {fileID: 717739889044231969}
   - component: {fileID: 717739889044231968}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Wire_Activate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ MeshRenderer:
   m_GameObject: {fileID: 717739889044231971}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -94,7 +94,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 717739889044231971}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
