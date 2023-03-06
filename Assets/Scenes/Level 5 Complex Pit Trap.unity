@@ -2105,10 +2105,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1941646817}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
-      propertyPath: timeToSuspicion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -8679,6 +8675,10 @@ PrefabInstance:
       propertyPath: damageInterface
       value: 
       objectReference: {fileID: 1941646817}
+    - target: {fileID: 1251455731357091725, guid: ef954bda6bd5d294c80d7728cc5b37e6, type: 3}
+      propertyPath: timeToSuspicion
+      value: 0.00001
+      objectReference: {fileID: 0}
     - target: {fileID: 1251455731357091725, guid: ef954bda6bd5d294c80d7728cc5b37e6, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 

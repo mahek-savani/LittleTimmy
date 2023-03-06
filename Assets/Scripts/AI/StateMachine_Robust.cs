@@ -164,6 +164,13 @@ public class StateMachine_Robust : MonoBehaviour
 
     public bool DEBUG = false;
 
+    public Transform myTransform;
+
+    private Vector3 ogPosition = new Vector3();
+    private Quaternion ogRotation = new Quaternion();
+
+    private bool justStarted = true;
+
 
 
     //[Header("Debugging")]
@@ -173,9 +180,39 @@ public class StateMachine_Robust : MonoBehaviour
 
     //public Color pathColor = new Color(1f, 1f, 1f, 1f);
 
+    IEnumerator assignOGTransform()
+    {
+        yield return new WaitForFixedUpdate();
+        ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+        ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+        //transform.SetPositionAndRotation(ogPosition, ogRotation);
+    }
 
-    void Start() {
+    //IEnumerator updateToOG()
+    //{
+    //    yield return new WaitForFixedUpdate();
+    //    transform.SetPositionAndRotation(ogPosition, ogRotation);
+    //}
+
+    private void FixedUpdate()
+    {
+        if (justStarted)
+        {
+            ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+            ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+            transform.SetPositionAndRotation(ogPosition, ogRotation);
+            justStarted = false;
+        }
+    }
+
+    private void Start()
+    {
+        //StartCoroutine(assignOGTransform());
+    }
+    void OnEnable() {
+        
         collisionTime = Random.Range(1.0f, 3.0f);
+
         if (patrolPoints.Length == 0)
         {
             defaultState = STATE.IDLE;
@@ -264,6 +301,10 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     agent.isStopped = true;
                     transform.LookAt(transform.position + idleDir);
+                }
+                else
+                {
+                    agent.isStopped = false;
                 }
                 
 
