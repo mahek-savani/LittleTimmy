@@ -171,6 +171,8 @@ public class StateMachine_Robust : MonoBehaviour
 
     private bool justStarted = true;
 
+    public Material FOVPassive;
+
 
 
     //[Header("Debugging")]
@@ -210,7 +212,8 @@ public class StateMachine_Robust : MonoBehaviour
         //StartCoroutine(assignOGTransform());
     }
     void OnEnable() {
-        
+        fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;
+
         collisionTime = Random.Range(1.0f, 3.0f);
 
         if (patrolPoints.Length == 0)
@@ -223,6 +226,10 @@ public class StateMachine_Robust : MonoBehaviour
         if (passive)
         {
             FOVMesh.enabled = false;
+        }
+        else
+        {
+            FOVMesh.enabled = true;
         }
     }
 
@@ -719,7 +726,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
-        fov.viewMeshFilter.mesh.Clear();
+        FOVMesh.enabled = false;
         NPCManager.decrement();
         myMesh.material.color = Color.black;
         //Destroy(fov.gameObject);
