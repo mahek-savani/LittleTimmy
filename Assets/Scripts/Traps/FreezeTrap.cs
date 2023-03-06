@@ -31,9 +31,10 @@ public class FreezeTrap : BaseTrapClass
     void OnTriggerEnter(Collider triggerObject){
         // If an enemy enters the trigger box, freeze enemy and deactivate trap
         if(!isTriggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
-            triggerObject.gameObject.GetComponent<StateMachine_Robust>().stop();
+            triggerObject.gameObject.GetComponent<StateMachine_Robust>().stop(transform.position);
             triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious();
-            
+
+
             isTriggered = true;
 
             //data.trapActiveOrder.Add("freezeTrap");

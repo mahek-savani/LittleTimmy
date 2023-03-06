@@ -274,6 +274,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else
                 {
                     conscious = true;
+                    agent.enabled = true;
+                    //myBody.isKinematic = false;
                     if (passive)
                     {
                         getIdle();
@@ -413,6 +415,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+                    //paranoidPoints[currentPosition] = Mathf.RoundToInt(Mathf.Pow(paranoidPoints[currentPosition], 2f));
+
                     paranoidPoints[currentPosition] += 10000;
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
@@ -619,7 +623,11 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious()
     {
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
+        
         conscious = false;
         FOVMesh.enabled = false;
         targetLine.enabled = false;
@@ -797,20 +805,21 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
     // Given a waypoint, returns a random neighbor according to paranoidPoints
+    // Neighbors with lower weights are preferred
     Transform getRandomNeighbor(waypoint wayPoint)
     {
         Transform bestPoint = transform;
-        int largestWeight = -1;
+        int smallestWeight = 1000000000;
 
         for (int i = 0; i < wayPoint.neighbors.Count; i++)
         {
             Transform currentPoint = wayPoint.neighbors[i].transform;
-            int diceRoll = Random.Range(1, 6);
+            int diceRoll = Random.Range(1, 50);
 
             int weight = paranoidPoints[currentPoint] + diceRoll;
-            if (weight > largestWeight)
+            if (weight < smallestWeight)
             {
-                largestWeight = weight;
+                smallestWeight = weight;
                 bestPoint = currentPoint;
             }
         }
@@ -865,11 +874,17 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(nearestPoint.position);
     }
 
-    public void stop()
+    public void stop(Vector3 position)
     {
-        myBody.velocity = Vector3.zero;
         agent.isStopped = true;
-        myBody.ResetInertiaTensor();
+        agent.enabled = false;
+        //myBody.angularVelocity = Vector3.zero;
+        //myBody.velocity = Vector3.zero;
+
+        //myBody.ResetInertiaTensor();
+        //myBody.mass = 1000000;
+        //myTransform.SetPositionAndRotation(position, myTransform.rotation);
+        //myBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
     }
 
     //public void start()
