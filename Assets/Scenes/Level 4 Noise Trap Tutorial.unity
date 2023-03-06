@@ -4431,33 +4431,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Noise Trap
       objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929923, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929923, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_TagString
-      value: noiseTrap
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929924, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.99999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 1779025141434929926, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4499,34 +4475,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1872710468045970104, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1872710468045970104, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: isTriggered
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959585992479894045, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 13.212521
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959585992479894045, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.404174
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959585992479894045, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 13.212521
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959585992479894045, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959585992479894045, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.23
-      objectReference: {fileID: 0}
     - target: {fileID: 2128366959035838618, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
       propertyPath: floor
       value: 
@@ -4543,32 +4491,7 @@ PrefabInstance:
       propertyPath: startLink
       value: 
       objectReference: {fileID: 1443949876}
-    - target: {fileID: 2128366959035838618, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 2811719289467326676, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_Radius
-      value: 0.50000006
-      objectReference: {fileID: 0}
-    - target: {fileID: 2811719289467326676, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7588791816632741555, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7588791816632741555, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_TagString
-      value: NoiseTrap
-      objectReference: {fileID: 0}
-    - target: {fileID: 8799665274418558756, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1872710468045970104, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
 --- !u!1 &1715967901
 GameObject:

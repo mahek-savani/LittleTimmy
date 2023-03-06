@@ -11,13 +11,23 @@ public class NPCDieOnTouch : MonoBehaviour
 
     void OnTriggerStay(Collider c)
     {
-        if (!pitTrap.trapActive && c.gameObject.layer == 3)
+        if (!pitTrap.trapActive)
         {
-            PlayerDamage damageInterface = c.gameObject.GetComponent<PlayerDamage>();
+            if (c.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                PlayerDamage damageInterface = c.gameObject.GetComponent<PlayerDamage>();
 
-            damageInterface.TakeDamage(1);
+                damageInterface.TakeDamage(1);
 
-            playercontroller.RespawnPlayer();
+                playercontroller.RespawnPlayer();
+            }
+            else if (c.gameObject.layer == LayerMask.NameToLayer("Pickup") || c.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast"))
+            {
+                if (c.gameObject.GetComponent<NoiseTrapActivation>())
+                {
+                    c.gameObject.GetComponent<NoiseTrapActivation>().respawnMe();
+                }
+            }
 
         }
     }

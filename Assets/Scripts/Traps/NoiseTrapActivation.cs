@@ -14,6 +14,32 @@ public class NoiseTrapActivation : BaseTrapClass
     public Color activeColor = new Color(1f, 0f, 0f, 1f);
     public Color inactiveColor = new Color(1f, 0.843f, 0f, 1f);
 
+    //public Transform myTransform;
+
+    //private Vector3 ogPosition = new Vector3();
+    //private Quaternion ogRotation = new Quaternion();
+
+    //private bool justStarted = true;
+
+    //private void FixedUpdate()
+    //{
+    //    if (justStarted)
+    //    {
+    //        ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+    //        ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+    //        //transform.SetPositionAndRotation(ogPosition, ogRotation);
+    //        justStarted = false;
+    //    }
+    //}
+
+    public void respawnMe()
+    {
+        isTriggered = false;
+        transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
+        invisible();
+        gameObject.GetComponentInParent<Respawn>().respawnMe();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

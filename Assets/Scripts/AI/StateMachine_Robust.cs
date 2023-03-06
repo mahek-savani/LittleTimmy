@@ -180,13 +180,13 @@ public class StateMachine_Robust : MonoBehaviour
 
     //public Color pathColor = new Color(1f, 1f, 1f, 1f);
 
-    IEnumerator assignOGTransform()
-    {
-        yield return new WaitForFixedUpdate();
-        ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
-        ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
-        //transform.SetPositionAndRotation(ogPosition, ogRotation);
-    }
+    // IEnumerator assignOGTransform()
+    // {
+    //     yield return new WaitForFixedUpdate();
+    //     ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+    //     ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+    //     //transform.SetPositionAndRotation(ogPosition, ogRotation);
+    // }
 
     //IEnumerator updateToOG()
     //{
