@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             eDown = true;
         }
-        else if (TP.eLocked == 1)
+        else if (TP.eLocked == 1 || Input.GetKeyUp(KeyCode.E))
         {
             eDown = false;
         }
