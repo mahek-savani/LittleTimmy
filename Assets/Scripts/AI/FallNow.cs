@@ -36,7 +36,7 @@ public class FallNow : MonoBehaviour
             StateMachine_Robust SM = c.gameObject.GetComponent<StateMachine_Robust>();
 
 
-
+            data.pitTrap.Add(1);
             //SM.die();
 
             //SM.die();
