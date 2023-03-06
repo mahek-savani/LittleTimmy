@@ -21,11 +21,11 @@ public class NPCDieOnTouch : MonoBehaviour
 
                 playercontroller.RespawnPlayer();
             }
-            else if (c.gameObject.layer == LayerMask.NameToLayer("Pickup") || c.gameObject.layer == LayerMask.NameToLayer("Ignore Raycast"))
+            else if (c.gameObject.layer == LayerMask.NameToLayer("Pickup"))
             {
-                if (c.gameObject.GetComponent<NoiseTrapActivation>())
+                if (c.gameObject.GetComponent<Respawn>())
                 {
-                    c.gameObject.GetComponent<NoiseTrapActivation>().respawnMe();
+                    c.gameObject.GetComponent<Respawn>().respawnMe();
                 }
                 else if (c.gameObject.GetComponent<FreezeTrap>())
                 {
