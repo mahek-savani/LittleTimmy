@@ -20,7 +20,7 @@ public class SwitchCameraView : MonoBehaviour
             enemyCameras[i].gameObject.SetActive(false);
         }
         
-        data.playerCam.Add(System.DateTime.Now.ToString());
+        data.levelCam.Add(System.DateTime.Now.ToString());
     }
 private void Update()
     {
@@ -44,8 +44,8 @@ private void Update()
                     }
                 }
                 //Debug.Log(closestEnemyIndex);
-                data.playerCam.Add(System.DateTime.Now.ToString());
                 data.levelCam.Add(System.DateTime.Now.ToString());
+                data.playerCam.Add(System.DateTime.Now.ToString());
                 
                 SwitchCamFill.GetComponent<CameraIconColor>().SetColor(0,1,0,1); //Change the color of icon to show that it is active
                
@@ -67,8 +67,8 @@ private void Update()
                     }
                     enemyCameras[i].gameObject.SetActive(false);
                 }
-                data.playerCam.Add(System.DateTime.Now.ToString());
                 data.levelCam.Add(System.DateTime.Now.ToString());
+                data.playerCam.Add(System.DateTime.Now.ToString());
                 isPlayerCamera = true;
             }
         }
