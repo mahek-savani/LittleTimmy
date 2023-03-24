@@ -5,6 +5,7 @@ using UnityEngine;
 public class buttonPressReset : MonoBehaviour
 {
     public SpikeTrap spikeTrap;
+    public Spike spike;
     public GameObject spikeGrid;
     public GameObject buttonParent;
     public GameObject trapButton;
@@ -16,6 +17,15 @@ public class buttonPressReset : MonoBehaviour
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+    //public float movementSpeed = -30f;
+
+    public static event System.Action SpikeTrapResetPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+        buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+    }
 
     void Update(){
         if(!spikeTrap.trapActive){
@@ -24,12 +34,12 @@ public class buttonPressReset : MonoBehaviour
                 colorDelay = 2;
                 if(colorBit == 0)
                 { 
-                    buttonParent.GetComponent<Renderer>().material.color = Color.red;
+                    buttonParent.GetComponent<Renderer>().material.color = Color.green;
                     colorBit = 1;
                 }
                 else
                 {
-                    buttonParent.GetComponent<Renderer>().material.color = Color.white;
+                    buttonParent.GetComponent<Renderer>().material.color = startingMaterialColor;
                     colorBit = 0;
                 }
             }            
@@ -42,14 +52,16 @@ public class buttonPressReset : MonoBehaviour
         {
             if (!spikeTrap.trapActive)
             {
+                //spike.isTrapMovingBack = true;
+
+                spikeGrid.transform.position = spikeTrap.originalPos;
                 //changing spike trap's reset trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
-                buttonParent.GetComponent<Renderer>().material.color = Color.white;
 
                 //changing spike trap's animation direction to backward
-                spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
-                spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
+                // spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
+                // spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
                 // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
@@ -61,6 +73,10 @@ public class buttonPressReset : MonoBehaviour
                 //hitboxsize.ResetHitBoxSize();
 
                 //Destroy(gameObject);
+                if(SpikeTrapResetPushed != null) SpikeTrapResetPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+                trapButton.GetComponent<Renderer>().material.color = startingMaterialColor;
+                spikeTrapWorking.transform.GetChild(0).GetComponent<Renderer>().material.color = startingMaterialColor;  
             }
         }
     }

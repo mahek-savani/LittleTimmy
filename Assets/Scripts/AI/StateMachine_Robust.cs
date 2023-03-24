@@ -141,6 +141,9 @@ public class StateMachine_Robust : MonoBehaviour
     // The point being investigated when in noise mode
     private Vector3 noiseSource;
 
+    // Renders a line to a target the NPC is moving to
+    public LineRenderer targetLine;
+
 
 
     [Header("Player Interaction")]
@@ -157,6 +160,17 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
+    [Header("Debugging")]
+
+    public bool DEBUG = false;
+
+    public Transform myTransform;
+
+    private Vector3 ogPosition = new Vector3();
+    private Quaternion ogRotation = new Quaternion();
+
+    private bool justStarted = true;
+
 
 
     //[Header("Debugging")]
@@ -166,9 +180,39 @@ public class StateMachine_Robust : MonoBehaviour
 
     //public Color pathColor = new Color(1f, 1f, 1f, 1f);
 
+    // IEnumerator assignOGTransform()
+    // {
+    //     yield return new WaitForFixedUpdate();
+    //     ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+    //     ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+    //     //transform.SetPositionAndRotation(ogPosition, ogRotation);
+    // }
 
-    void Start() {
+    //IEnumerator updateToOG()
+    //{
+    //    yield return new WaitForFixedUpdate();
+    //    transform.SetPositionAndRotation(ogPosition, ogRotation);
+    //}
+
+    private void FixedUpdate()
+    {
+        if (justStarted)
+        {
+            ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+            ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+            transform.SetPositionAndRotation(ogPosition, ogRotation);
+            justStarted = false;
+        }
+    }
+
+    private void Start()
+    {
+        //StartCoroutine(assignOGTransform());
+    }
+    void OnEnable() {
+        
         collisionTime = Random.Range(1.0f, 3.0f);
+
         if (patrolPoints.Length == 0)
         {
             defaultState = STATE.IDLE;
@@ -206,13 +250,15 @@ public class StateMachine_Robust : MonoBehaviour
 
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
-        // Kill NPC 1 on hitting backspace (for debug purposes)
-        if (Input.GetKeyDown("backspace"))
+        if (agent.isOnOffMeshLink)
         {
-            if (gameObject.name == "NPC AI")
-            {
-                die();
-            }
+            agent.speed = susSpeed / 2;
+        }
+
+        // Kill NPC 1 on hitting backspace (for debug purposes)
+        if (DEBUG && Input.GetKeyDown("backspace"))
+        {
+            die();
         } 
 
         // The body of the state machine, checking the state every frame and acting accordingly
@@ -228,6 +274,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else
                 {
                     conscious = true;
+                    agent.enabled = true;
+                    //myBody.isKinematic = false;
                     if (passive)
                     {
                         getIdle();
@@ -255,6 +303,10 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     agent.isStopped = true;
                     transform.LookAt(transform.position + idleDir);
+                }
+                else
+                {
+                    agent.isStopped = false;
                 }
                 
 
@@ -313,7 +365,12 @@ public class StateMachine_Robust : MonoBehaviour
             // Transitions into suspicion when the player stays out of the enemy FOV for long enough
             case STATE.CHASING:
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
-            
+
+                targetLine.SetPosition(0, transform.position);
+                targetLine.SetPosition(1, playerPos.position);
+
+
+
                 agent.SetDestination(playerPos.position);
 
                 if (fov.visibleTargets.Count != 0)
@@ -358,6 +415,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+                    //paranoidPoints[currentPosition] = Mathf.RoundToInt(Mathf.Pow(paranoidPoints[currentPosition], 2f));
+
                     paranoidPoints[currentPosition] += 10000;
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
@@ -376,6 +435,11 @@ public class StateMachine_Robust : MonoBehaviour
                     getChase();
                 }
 
+                //Debug.DrawLine(transform.position, noiseSource, Color.yellow, 0.0f);
+
+                targetLine.SetPosition(0, transform.position);
+                targetLine.SetPosition(1, noiseSource);
+
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
 
                 if (fov.visibleTargets.Count != 0)
@@ -385,7 +449,7 @@ public class StateMachine_Robust : MonoBehaviour
                     transform.LookAt(playerPos.position, transform.up);
                     timeCounter = suspiciousTime;
                 }
-                else if (agent.remainingDistance <= Mathf.Epsilon)
+                else if (agent.remainingDistance <= 0.12)
                 {
                     getSuspicious(transform.position);
                 }
@@ -477,9 +541,13 @@ public class StateMachine_Robust : MonoBehaviour
     public void getChase()
     {
         agent.isStopped = false;
+        targetLine.enabled = true;
         myMesh.material.color = Color.red;
         agent.speed = chaseSpeed;
         state = STATE.CHASING;
+
+        targetLine.material.color = Color.yellow;
+
         data.NPCChase = data.NPCChase + 1;
     }
 
@@ -487,6 +555,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
+        targetLine.enabled = false;
         idlePos = pos;
         agent.SetDestination(idlePos);
         waitTime = time;
@@ -514,6 +583,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
+        targetLine.enabled = false;
         waitTime = Mathf.Infinity;
         idlePos = defaultIdlePos.transform.position;
         agent.SetDestination(idlePos);
@@ -543,6 +613,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getUnconscious(float time)
     {
         agent.isStopped = true;
+        targetLine.enabled = false;
         conscious = false;
         FOVMesh.enabled = false;
         state = STATE.UNCONSCIOUS;
@@ -552,9 +623,14 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious()
     {
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
+        
         conscious = false;
         FOVMesh.enabled = false;
+        targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = unconsciousTime;
         myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
@@ -563,18 +639,29 @@ public class StateMachine_Robust : MonoBehaviour
     public void getNoise(Vector3 source)
     {
         agent.isStopped = false;
+        targetLine.enabled = true;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         state = STATE.NOISE;
+
+        targetLine.material.color = Color.red;
 
         noiseSource = getPointNearestNavMesh(source);
         timeCounter = suspiciousTime;
         agent.SetDestination(noiseSource);
     }
 
+    // Forcibly transitions into suspicious state, even if currently chasing
+    public void forceSuspicious()
+    {
+        playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToSuspicion);
+        getSuspicious(transform.position);
+    }
+
     public void getSuspicious(Vector3 source)
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         agent.speed = susSpeed;
         myMesh.material.color = Color.yellow;
         timeCounter = suspiciousTime;
@@ -592,6 +679,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getParanoid()
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         myMesh.material.color = new Color(252/255f, 139/255f, 0f);
         assignParanoidWalk();
 
@@ -607,6 +695,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getPatrol()
     {
         agent.isStopped = false;
+        targetLine.enabled = false;
         agent.speed = patrolSpeed;
         returnToPatrol();
         myMesh.material.color = Color.cyan;
@@ -623,9 +712,13 @@ public class StateMachine_Robust : MonoBehaviour
     {
         alive = false;
         conscious = false;
+        targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = 10f;
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
         fov.viewMeshFilter.mesh.Clear();
         NPCManager.decrement();
         myMesh.material.color = Color.black;
@@ -662,7 +755,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             getUnconscious();
             damageInterface.TakeDamage(playerDamage);
-
+            data.enemyHit = data.enemyHit + 1;
             collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
         }
@@ -715,20 +808,21 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
     // Given a waypoint, returns a random neighbor according to paranoidPoints
+    // Neighbors with lower weights are preferred
     Transform getRandomNeighbor(waypoint wayPoint)
     {
         Transform bestPoint = transform;
-        int largestWeight = -1;
+        int smallestWeight = 1000000000;
 
         for (int i = 0; i < wayPoint.neighbors.Count; i++)
         {
             Transform currentPoint = wayPoint.neighbors[i].transform;
-            int diceRoll = Random.Range(1, 6);
+            int diceRoll = Random.Range(1, 50);
 
             int weight = paranoidPoints[currentPoint] + diceRoll;
-            if (weight > largestWeight)
+            if (weight < smallestWeight)
             {
-                largestWeight = weight;
+                smallestWeight = weight;
                 bestPoint = currentPoint;
             }
         }
@@ -783,11 +877,17 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(nearestPoint.position);
     }
 
-    public void stop()
+    public void stop(Vector3 position)
     {
-        myBody.velocity = Vector3.zero;
         agent.isStopped = true;
-        myBody.ResetInertiaTensor();
+        agent.enabled = false;
+        //myBody.angularVelocity = Vector3.zero;
+        //myBody.velocity = Vector3.zero;
+
+        //myBody.ResetInertiaTensor();
+        //myBody.mass = 1000000;
+        //myTransform.SetPositionAndRotation(position, myTransform.rotation);
+        //myBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
     }
 
     //public void start()

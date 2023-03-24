@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3738750155420560743}
   - component: {fileID: 3738750155420560740}
   - component: {fileID: 3738750155420560736}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: buttonTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,9 +112,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikeTrap: {fileID: 8916128872130425185}
+  spike: {fileID: 4432235303236770617}
+  spikeGrid: {fileID: 8916128872167221927}
+  spikeTrapObject: {fileID: 8916128872130425189}
   buttonParent: {fileID: 3738750155902833537}
   spikeResetButton: {fileID: 0}
-  spikeResetButton: {fileID: 0}
+  spikeTrapWorking: {fileID: 8916128872130425189}
+  movementSpeed: 30
 --- !u!1 &3738750155902833537
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +132,7 @@ GameObject:
   - component: {fileID: 3738750155902833538}
   - component: {fileID: 3738750155902833539}
   - component: {fileID: 3738750155902833567}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spike Trap Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,8 +146,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3738750155902833537}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -50.29, y: 1.09, z: -1.59}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1.69, y: 1.1, z: 50.27}
   m_LocalScale: {x: 1, y: 0.7493099, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -241,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4432235302748411267}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spike Trap Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +282,9 @@ GameObject:
   - component: {fileID: 4432235303236770619}
   - component: {fileID: 4432235303236770618}
   - component: {fileID: 4432235303236770617}
-  m_Layer: 0
+  - component: {fileID: 2016633304}
+  - component: {fileID: 1726225590}
+  m_Layer: 2
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,8 +299,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4432235303236770623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.5, y: 1.46, z: 17.8}
-  m_LocalScale: {x: 6.8889546, y: 1, z: 5.950385}
+  m_LocalPosition: {x: -41.55, y: 1.311, z: 14.95}
+  m_LocalScale: {x: 4.5713034, y: 1.5618, z: 0.40274507}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8916128872167221926}
@@ -375,6 +381,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf224726f2272f44a73c6872144c64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTrapMoving: 0
+  isTrapMovingBack: 0
+--- !u!114 &2016633304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432235303236770623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0a5363c8c1f474c9b7aa1194e09d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalposition: {x: 0, y: 0, z: 0}
+  originalscale: {x: 0, y: 0, z: 0}
+  newscale: {x: 0, y: 0, z: 0}
+  newposition: {x: 0, y: 0, z: 0}
+--- !u!114 &1726225590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432235303236770623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0a5363c8c1f474c9b7aa1194e09d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalposition: {x: 0, y: 0, z: 0}
+  originalscale: {x: 0, y: 0, z: 0}
+  newscale: {x: 0, y: 0, z: 0}
+  newposition: {x: 0, y: 0, z: 0}
 --- !u!1 &8916128871503007076
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +427,7 @@ GameObject:
   - component: {fileID: 8916128871503007073}
   - component: {fileID: 8916128871503007074}
   - component: {fileID: 8916128871503007075}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +524,7 @@ GameObject:
   - component: {fileID: 8916128871693379925}
   - component: {fileID: 8916128871693379926}
   - component: {fileID: 8916128871693379927}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +604,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128871693379912}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -582,7 +622,7 @@ GameObject:
   - component: {fileID: 8916128871706309166}
   - component: {fileID: 8916128871706309167}
   - component: {fileID: 8916128871706309152}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +702,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128871706309153}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -680,7 +720,7 @@ GameObject:
   - component: {fileID: 8916128871921401577}
   - component: {fileID: 8916128871921401578}
   - component: {fileID: 8916128871921401579}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +800,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128871921401580}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -778,7 +818,7 @@ GameObject:
   - component: {fileID: 8916128871982227319}
   - component: {fileID: 8916128871982227304}
   - component: {fileID: 8916128871982227305}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +898,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128871982227306}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -876,7 +916,7 @@ GameObject:
   - component: {fileID: 8916128871991965187}
   - component: {fileID: 8916128871991965188}
   - component: {fileID: 8916128871991965189}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +996,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128871991965190}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -974,7 +1014,7 @@ GameObject:
   - component: {fileID: 8916128872130425186}
   - component: {fileID: 8916128872130425185}
   - component: {fileID: 1561806916}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spikeTrap Working
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,8 +1028,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128872130425189}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.7, y: 1.2457, z: -7.58}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 33.38, y: 1.18, z: 87.85}
   m_LocalScale: {x: 1.1856, y: 1.1856, z: 1.1856}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -997,7 +1037,7 @@ Transform:
   - {fileID: 8916128872167221926}
   m_Father: {fileID: 4432235302748411267}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!65 &8916128872130425186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1024,6 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapActive: 1
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!111 &1561806916
 Animation:
   m_ObjectHideFlags: 0
@@ -1049,7 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916128872167221926}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spikeGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,7 +1105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128872167221927}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.26, y: -0.8105808, z: 1.98}
+  m_LocalPosition: {x: 1.26, y: -0.8105808, z: 2.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1094,7 +1135,7 @@ GameObject:
   - component: {fileID: 8916128872445731920}
   - component: {fileID: 8916128872445731921}
   - component: {fileID: 8916128872445731922}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1174,7 +1215,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128872445731923}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1192,7 +1233,7 @@ GameObject:
   - component: {fileID: 8916128872574973362}
   - component: {fileID: 8916128872574973363}
   - component: {fileID: 8916128872574973364}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1313,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128872574973365}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1290,7 +1331,7 @@ GameObject:
   - component: {fileID: 8916128872949160217}
   - component: {fileID: 8916128872949160218}
   - component: {fileID: 8916128872949160219}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1411,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128872949160220}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1388,7 +1429,7 @@ GameObject:
   - component: {fileID: 8916128873139177670}
   - component: {fileID: 8916128873139177671}
   - component: {fileID: 8916128873139177720}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1509,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128873139177721}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1486,7 +1527,7 @@ GameObject:
   - component: {fileID: 8916128873232363760}
   - component: {fileID: 8916128873232363761}
   - component: {fileID: 8916128873232363762}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: spike (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1566,7 +1607,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916128873232363763}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

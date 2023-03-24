@@ -23,6 +23,14 @@ public class Experimental_Reset_Button : MonoBehaviour
     //forward direction
     float animDirectionFw = 1f;
 
+    public static event System.Action ExperimentalResetPushed;
+    private Color startingMaterialColor;
+
+    void Start(){
+        startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
+        buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+    }
+
     private void Update()
     {
         //navMesh.RemoveData();
@@ -34,12 +42,12 @@ public class Experimental_Reset_Button : MonoBehaviour
                 colorDelay = 2;
                 if(colorBit == 0)
                 { 
-                    buttonParent.GetComponent<Renderer>().material.color = Color.red;
+                    buttonParent.GetComponent<Renderer>().material.color = Color.green;
                     colorBit = 1;
                 }
                 else
                 {
-                    buttonParent.GetComponent<Renderer>().material.color = Color.white;
+                    buttonParent.GetComponent<Renderer>().material.color = startingMaterialColor;
                     colorBit = 0;
                 }
             }            
@@ -63,7 +71,7 @@ public class Experimental_Reset_Button : MonoBehaviour
 
                 pitTrap.trapActive = true;
                 door.enabled = true;
-                data.trapActiveOrder.Add("pitTrap");
+                //data.trapActiveOrder.Add("pitTrap");
                 //fallTrigger.SetActive(false);
 
                 //trapDoor.layer = LayerMask.NameToLayer("CanTrap");
@@ -91,6 +99,10 @@ public class Experimental_Reset_Button : MonoBehaviour
                 //navMesh.UpdateNavMesh(currentNavMesh);
 
                 //Destroy(gameObject);
+                if(ExperimentalResetPushed != null) ExperimentalResetPushed();
+                buttonParent.GetComponent<Renderer>().material.color = Color.grey;
+                resetButton.GetComponent<Renderer>().material.color = startingMaterialColor;
+                trapDoor.transform.GetChild(0).GetComponent<Renderer>().material.color = startingMaterialColor;
             }
         }
     }
