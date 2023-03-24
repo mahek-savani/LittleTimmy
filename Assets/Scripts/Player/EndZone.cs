@@ -9,6 +9,7 @@ public class EndZone : MonoBehaviour
     //public Object nextScene;
     private int ttrCount = 0;
     public int nextScene;
+    private bool switchView = false;
 
     public Material open_mat;
     public Material close_mat;
@@ -23,10 +24,14 @@ public class EndZone : MonoBehaviour
                 ttrCount = 1;
             }
             this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
-            SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
-            if (cameraView != null)
+            if (!switchView)
             {
-                cameraView.SetPanEndZone(true);
+                switchView = true;
+                SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
+                if (cameraView != null)
+                {
+                    cameraView.SetPanEndZone(true);
+                }
             }
         }
     }
