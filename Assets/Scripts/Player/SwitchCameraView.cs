@@ -6,15 +6,19 @@ using Cinemachine;
 public class SwitchCameraView : MonoBehaviour
 {
     public CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera endZoneCamera;
     public CinemachineVirtualCamera[] enemyCameras;
     public float switchTime = 5f;
     public Transform playerTransform;
     private bool isPlayerCamera = true;
     public GameObject SwitchCamFill;
 
+    private bool panEndZone = false;
+
     private void Start()
     {
         playerCamera.gameObject.SetActive(true);
+        endZoneCamera.gameObject.SetActive(false);
         for (int i = 0; i < enemyCameras.Length; i++)
         {
             enemyCameras[i].gameObject.SetActive(false);
@@ -22,7 +26,7 @@ public class SwitchCameraView : MonoBehaviour
         
         data.levelCam.Add(System.DateTime.Now.ToString());
     }
-private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("c"))
         {
@@ -72,5 +76,22 @@ private void Update()
                 isPlayerCamera = true;
             }
         }
+        if(panEndZone)
+        {
+            panEndZone = false;
+            playerCamera.gameObject.SetActive(false);
+            endZoneCamera.gameObject.SetActive(true);
+            StartCoroutine(EndZoneView());
+        }
+    }
+    public void SetPanEndZone(bool value)
+    {
+        panEndZone = value;
+    }
+    private IEnumerator EndZoneView()
+    {
+        yield return new WaitForSeconds(2f);
+        endZoneCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
     }
 }
