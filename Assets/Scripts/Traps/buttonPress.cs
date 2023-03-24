@@ -5,6 +5,9 @@ using UnityEngine;
 public class buttonPress : MonoBehaviour
 {
     public SpikeTrap spikeTrap;
+    public Spike spike;
+    public GameObject spikeGrid;
+    public GameObject spikeTrapObject;
     public GameObject buttonParent;
     public GameObject spikeResetButton;
     public GameObject spikeTrapWorking;
@@ -12,11 +15,19 @@ public class buttonPress : MonoBehaviour
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+    public float movementSpeed = 30f;
+
+    public void Update(){
+        if (spike.isTrapMoving){
+            spikeGrid.transform.position += spikeTrapObject.transform.rotation * transform.forward * Time.deltaTime * movementSpeed;
+        }
+    }
 
     public static event System.Action SpikeTrapButtonPushed;
     private Color startingMaterialColor;
 
     void Start(){
+        spikeTrap.originalPos = spikeGrid.transform.position;
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
     }
 
@@ -26,11 +37,12 @@ public class buttonPress : MonoBehaviour
         {
             if (spikeTrap.trapActive)
             {
+                spike.isTrapMoving = true;
                 //changing spike trap's trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
 
-                spikeTrap.playAnimation();
+                // spikeTrap.playAnimation();
                 // spikeResetButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //data.trapActiveOrder.Add("spikeTrap-0");
                 data.spikeTrap.Add(0);

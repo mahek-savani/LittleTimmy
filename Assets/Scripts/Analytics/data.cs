@@ -44,10 +44,10 @@ public class data
             trapActive trap = new trapActive();
             camera c = new camera();
             TimeCheck t = new TimeCheck();
-            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/data.json", d);
-            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/trapActive.json", trap);
-            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/cams.json", c);
-            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/time.json", t);
+            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/midtermWeek/data.json", d);
+            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/midtermWeek/trapActive.json", trap);
+            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/midtermWeek/cams.json", c);
+            RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/midtermWeek/time.json", t);
             //Debug.Log(d.enemyRemaining);
             //gameCompleted = false;
         }
@@ -77,7 +77,7 @@ public class data
 
         dataPerUser d1 = new dataPerUser();
         //string d2 = JsonUtility.ToJson(d1);
-        RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/userData.json", d1);
+        RestClient.Post("https://littletimmy-23966-default-rtdb.firebaseio.com/midtermWeek/userData.json", d1);
         
     }
 

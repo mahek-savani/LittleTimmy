@@ -164,6 +164,15 @@ public class StateMachine_Robust : MonoBehaviour
 
     public bool DEBUG = false;
 
+    public Transform myTransform;
+
+    private Vector3 ogPosition = new Vector3();
+    private Quaternion ogRotation = new Quaternion();
+
+    private bool justStarted = true;
+
+    public Material FOVPassive;
+
 
 
     //[Header("Debugging")]
@@ -173,9 +182,40 @@ public class StateMachine_Robust : MonoBehaviour
 
     //public Color pathColor = new Color(1f, 1f, 1f, 1f);
 
+    // IEnumerator assignOGTransform()
+    // {
+    //     yield return new WaitForFixedUpdate();
+    //     ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+    //     ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+    //     //transform.SetPositionAndRotation(ogPosition, ogRotation);
+    // }
 
-    void Start() {
+    //IEnumerator updateToOG()
+    //{
+    //    yield return new WaitForFixedUpdate();
+    //    transform.SetPositionAndRotation(ogPosition, ogRotation);
+    //}
+
+    private void FixedUpdate()
+    {
+        if (justStarted)
+        {
+            ogPosition.Set(myTransform.position.x, myTransform.position.y, myTransform.position.z);
+            ogRotation.Set(myTransform.rotation.x, myTransform.rotation.y, myTransform.rotation.z, myTransform.rotation.w);
+            transform.SetPositionAndRotation(ogPosition, ogRotation);
+            justStarted = false;
+        }
+    }
+
+    private void Start()
+    {
+        //StartCoroutine(assignOGTransform());
+    }
+    void OnEnable() {
+        fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;
+
         collisionTime = Random.Range(1.0f, 3.0f);
+
         if (patrolPoints.Length == 0)
         {
             defaultState = STATE.IDLE;
@@ -186,6 +226,10 @@ public class StateMachine_Robust : MonoBehaviour
         if (passive)
         {
             FOVMesh.enabled = false;
+        }
+        else
+        {
+            FOVMesh.enabled = true;
         }
     }
 
@@ -237,6 +281,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else
                 {
                     conscious = true;
+                    agent.enabled = true;
+                    //myBody.isKinematic = false;
                     if (passive)
                     {
                         getIdle();
@@ -264,6 +310,10 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     agent.isStopped = true;
                     transform.LookAt(transform.position + idleDir);
+                }
+                else
+                {
+                    agent.isStopped = false;
                 }
                 
 
@@ -372,6 +422,8 @@ public class StateMachine_Robust : MonoBehaviour
                 else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //waypoint currentPoint = graph.GetChild(currentDest).GetComponent<waypoint>();
+                    //paranoidPoints[currentPosition] = Mathf.RoundToInt(Mathf.Pow(paranoidPoints[currentPosition], 2f));
+
                     paranoidPoints[currentPosition] += 10000;
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
@@ -510,6 +562,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
+        targetLine.enabled = false;
         idlePos = pos;
         agent.SetDestination(idlePos);
         waitTime = time;
@@ -537,6 +590,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
+        targetLine.enabled = false;
         waitTime = Mathf.Infinity;
         idlePos = defaultIdlePos.transform.position;
         agent.SetDestination(idlePos);
@@ -576,9 +630,14 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious()
     {
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
+        
         conscious = false;
         FOVMesh.enabled = false;
+        targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = unconsciousTime;
         myMesh.material.color = new Color(145 / 255f, 145 / 255f, 145 / 255f);
@@ -663,8 +722,11 @@ public class StateMachine_Robust : MonoBehaviour
         targetLine.enabled = false;
         state = STATE.UNCONSCIOUS;
         waitTime = 10f;
-        agent.isStopped = true;
-        fov.viewMeshFilter.mesh.Clear();
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
+        FOVMesh.enabled = false;
         NPCManager.decrement();
         myMesh.material.color = Color.black;
         //Destroy(fov.gameObject);
@@ -753,20 +815,21 @@ public class StateMachine_Robust : MonoBehaviour
     }
 
     // Given a waypoint, returns a random neighbor according to paranoidPoints
+    // Neighbors with lower weights are preferred
     Transform getRandomNeighbor(waypoint wayPoint)
     {
         Transform bestPoint = transform;
-        int largestWeight = -1;
+        int smallestWeight = 1000000000;
 
         for (int i = 0; i < wayPoint.neighbors.Count; i++)
         {
             Transform currentPoint = wayPoint.neighbors[i].transform;
-            int diceRoll = Random.Range(1, 6);
+            int diceRoll = Random.Range(1, 50);
 
             int weight = paranoidPoints[currentPoint] + diceRoll;
-            if (weight > largestWeight)
+            if (weight < smallestWeight)
             {
-                largestWeight = weight;
+                smallestWeight = weight;
                 bestPoint = currentPoint;
             }
         }
@@ -821,11 +884,17 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(nearestPoint.position);
     }
 
-    public void stop()
+    public void stop(Vector3 position)
     {
-        myBody.velocity = Vector3.zero;
         agent.isStopped = true;
-        myBody.ResetInertiaTensor();
+        agent.enabled = false;
+        //myBody.angularVelocity = Vector3.zero;
+        //myBody.velocity = Vector3.zero;
+
+        //myBody.ResetInertiaTensor();
+        //myBody.mass = 1000000;
+        //myTransform.SetPositionAndRotation(position, myTransform.rotation);
+        //myBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
     }
 
     //public void start()

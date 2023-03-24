@@ -5,6 +5,7 @@ using UnityEngine;
 public class buttonPressReset : MonoBehaviour
 {
     public SpikeTrap spikeTrap;
+    public Spike spike;
     public GameObject spikeGrid;
     public GameObject buttonParent;
     public GameObject trapButton;
@@ -16,6 +17,7 @@ public class buttonPressReset : MonoBehaviour
     float animDirection = -1f; 
     //forward direction
     float animDirectionFw = 1f; 
+    //public float movementSpeed = -30f;
 
     public static event System.Action SpikeTrapResetPushed;
     private Color startingMaterialColor;
@@ -50,13 +52,16 @@ public class buttonPressReset : MonoBehaviour
         {
             if (!spikeTrap.trapActive)
             {
+                //spike.isTrapMovingBack = true;
+
+                spikeGrid.transform.position = spikeTrap.originalPos;
                 //changing spike trap's reset trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
 
                 //changing spike trap's animation direction to backward
-                spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
-                spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
+                // spikeTrapWorking.GetComponent<Animation>()["Spike Tutorial Hallway Anim"].speed = animDirection;
+                // spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
                 // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);

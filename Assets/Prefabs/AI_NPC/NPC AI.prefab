@@ -236,6 +236,8 @@ MonoBehaviour:
   playerVisibleTimer: 0
   playerPos: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
   DEBUG: 0
+  myTransform: {fileID: 6327803450025997515}
+  FOVPassive: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
 --- !u!195 &6327803450025997513
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -277,7 +279,7 @@ MonoBehaviour:
     m_Bits: 8
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 16960
   visibleTargets: []
   meshResolution: 1
   edgeResolveIter: 4

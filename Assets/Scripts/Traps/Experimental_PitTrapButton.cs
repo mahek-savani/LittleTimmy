@@ -51,7 +51,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
                 //obstacle.SetActive(true);
                 fallTrigger.SetActive(true);
-                fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
+                //fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
 
                 //manager.resetting = false;
                 //manager.rebuildNavMesh = true;
@@ -74,7 +74,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //Destroy(gameObject);
                 if(ExperimentalPitButtonPushed != null) ExperimentalPitButtonPushed();
                 buttonParent.GetComponent<Renderer>().material.color = Color.grey;
-                trapDoor.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
+                trapDoor.transform.GetComponent<Renderer>().material.color = Color.grey;
             }
         }
     }

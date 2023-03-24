@@ -69,15 +69,13 @@ public class PlayerController : MonoBehaviour
         float horVal = Input.GetAxis("Horizontal");
         float vertVal = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(horVal) > Mathf.Epsilon && Mathf.Abs(vertVal) > Mathf.Epsilon)
-        {
-            horVal = Mathf.Sign(horVal) / (Mathf.Sqrt(2));
-            vertVal = Mathf.Sign(vertVal) / (Mathf.Sqrt(2));
-        }
-
-        Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        //Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        Vector3 newPos = new Vector3(horVal, 0, vertVal);
+        newPos *= Time.deltaTime * speed;
+        //newPos.Normalize();
+        //Debug.Log("Translation vector: " + newPos);
+        //Debug.Log("Vector magnitude: " + newPos.magnitude);
         
-        //Debug.Log((newPosUnscaled - transform.position).magnitude);
         transform.Translate(newPos);
          
 
@@ -93,7 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             eDown = true;
         }
-        else if (TP.eLocked == 1)
+        else if (TP.eLocked == 1 || Input.GetKeyUp(KeyCode.E))
         {
             eDown = false;
         }
@@ -108,7 +106,7 @@ public class PlayerController : MonoBehaviour
         //    StartCoroutine(unLockE());
         //}
 
-        if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+        if (Input.GetKeyDown(KeyCode.Q) && canPause)
         {
             pauseGame();
         }

@@ -11,7 +11,7 @@ public class WireChange : MonoBehaviour
     [SerializeField]private Color startingMaterialColor;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         if(AttachedPitTrap) startingMaterialColor = AttachedPitTrap.transform.GetChild(0).GetComponent<Renderer>().material.color;
         else if (AttachedSpikeTrap) startingMaterialColor = AttachedSpikeTrap.transform.GetChild(0).GetComponent<Renderer>().material.color;
@@ -38,14 +38,26 @@ public class WireChange : MonoBehaviour
         else GetComponent<Renderer>().material.color = startingMaterialColor;
     }
 
-    //void ChangeToActiveColor()
-    //{
-    //    if(gameObject.layer == LayerMask.NameToLayer("Reset Wires")) 
-    //    {
-    //        if(gameObject.CompareTag("Pit") && AttachedPitTrap.trapActive)
-    //            GetComponent<Renderer>().material.color = startingMaterialColor;
-    //    }
-    //}
+    void OnDestroy()
+    {
+        if (gameObject.CompareTag("Pit"))
+        {
+            PitTrapButton.PitTrapButtonPushed -= ChangeActiveColor;
+            PitTrapResetButton.PitTrapResetButtonPushed -= ChangeActiveColor;
+        }
+
+        if (gameObject.CompareTag("Spike"))
+        {
+            buttonPress.SpikeTrapButtonPushed -= ChangeActiveColor;
+            buttonPressReset.SpikeTrapResetPushed -= ChangeActiveColor;
+        }
+
+        if (gameObject.CompareTag("ExperimentalPit"))
+        {
+            Experimental_PitTrapButton.ExperimentalPitButtonPushed -= ChangeActiveColor;
+            Experimental_Reset_Button.ExperimentalResetPushed -= ChangeActiveColor;
+        }
+    }
 
     void ChangeActiveColor()
     {
