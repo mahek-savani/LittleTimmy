@@ -9,6 +9,7 @@ public class SwitchCameraView : MonoBehaviour
     public CinemachineVirtualCamera playerCamera;
     public CinemachineVirtualCamera endZoneCamera;
     public CinemachineVirtualCamera spikeTrapCamera;
+    public CinemachineVirtualCamera resetButtonCamera;
     public CinemachineVirtualCamera[] enemyCameras;
     public float switchTime = 5f;
     public Transform playerTransform;
@@ -17,6 +18,7 @@ public class SwitchCameraView : MonoBehaviour
 
     private bool panEndZone = false;
     private bool panSpikeTrap = false;
+    private bool panResetButton = false;
 
     private void Start()
     {
@@ -26,6 +28,11 @@ public class SwitchCameraView : MonoBehaviour
         if(sceneName == "Level 2 Spike Trap Tutorial")
         {
             spikeTrapCamera.gameObject.SetActive(false);
+        }
+        if(sceneName == "Level 3 Trap Resets")
+        {
+            spikeTrapCamera.gameObject.SetActive(false);
+            resetButtonCamera.gameObject.SetActive(false);
         }
         for (int i = 0; i < enemyCameras.Length; i++)
         {
@@ -96,7 +103,16 @@ public class SwitchCameraView : MonoBehaviour
             panSpikeTrap = false;
             playerCamera.gameObject.SetActive(false);
             spikeTrapCamera.gameObject.SetActive(true);
+            resetButtonCamera.gameObject.SetActive(false);
             StartCoroutine(SpikeTrapView());
+        }
+        if(panResetButton)
+        {
+            panResetButton = false;
+            playerCamera.gameObject.SetActive(false);
+            spikeTrapCamera.gameObject.SetActive(false);
+            resetButtonCamera.gameObject.SetActive(true);
+            StartCoroutine(ResetButtonButton());
         }
     }
 
@@ -110,6 +126,11 @@ public class SwitchCameraView : MonoBehaviour
         panSpikeTrap = value;
     }
 
+    public void SetPanResetButton(bool value)
+    {
+        panResetButton = value;
+    }
+
     private IEnumerator EndZoneView()
     {
         yield return new WaitForSeconds(3f);
@@ -120,6 +141,14 @@ public class SwitchCameraView : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         spikeTrapCamera.gameObject.SetActive(false);
+        resetButtonCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
+    }
+    private IEnumerator ResetButtonButton()
+    {
+        yield return new WaitForSeconds(3f);
+        spikeTrapCamera.gameObject.SetActive(false);
+        resetButtonCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
     }
 }
