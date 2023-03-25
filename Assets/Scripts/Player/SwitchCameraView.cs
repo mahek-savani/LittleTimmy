@@ -103,7 +103,6 @@ public class SwitchCameraView : MonoBehaviour
             panSpikeTrap = false;
             playerCamera.gameObject.SetActive(false);
             spikeTrapCamera.gameObject.SetActive(true);
-            resetButtonCamera.gameObject.SetActive(false);
             StartCoroutine(SpikeTrapView());
         }
         if(panResetButton)
@@ -141,7 +140,6 @@ public class SwitchCameraView : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         spikeTrapCamera.gameObject.SetActive(false);
-        resetButtonCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
     }
     private IEnumerator ResetButtonButton()
