@@ -353,8 +353,19 @@ public class StateMachine_Robust : MonoBehaviour
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
+                //if (fov.visibleTargets.Count != 0)
+                //{
+                //    getNoise(playerPos.position);
+                //}
                 // Assign new waypoint if current one has been reached
-                if (agent.remainingDistance <= Mathf.Epsilon)
+                if (fov.visibleTargets.Count != 0)
+                {
+                    //noiseSource = noiseSource = getPointNearestNavMesh(playerPos.position);
+                    //agent.SetDestination(playerPos.position);
+                    transform.LookAt(playerPos.position, transform.up);
+                    // timeCounter = suspiciousTime;
+                }
+                else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //Debug.Log(patrolPoints[currentDest].position);
                     if (currentDest < patrolPoints.Length - 1)
