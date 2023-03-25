@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class SwitchCameraView : MonoBehaviour
 {
     public CinemachineVirtualCamera playerCamera;
     public CinemachineVirtualCamera endZoneCamera;
+    public CinemachineVirtualCamera spikeTrapCamera;
     public CinemachineVirtualCamera[] enemyCameras;
     public float switchTime = 5f;
     public Transform playerTransform;
@@ -14,11 +16,17 @@ public class SwitchCameraView : MonoBehaviour
     public GameObject SwitchCamFill;
 
     private bool panEndZone = false;
+    private bool panSpikeTrap = false;
 
     private void Start()
     {
         playerCamera.gameObject.SetActive(true);
         endZoneCamera.gameObject.SetActive(false);
+        string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "Level 2 Spike Trap Tutorial")
+        {
+            spikeTrapCamera.gameObject.SetActive(false);
+        }
         for (int i = 0; i < enemyCameras.Length; i++)
         {
             enemyCameras[i].gameObject.SetActive(false);
@@ -83,15 +91,35 @@ public class SwitchCameraView : MonoBehaviour
             endZoneCamera.gameObject.SetActive(true);
             StartCoroutine(EndZoneView());
         }
+        if(panSpikeTrap)
+        {
+            panSpikeTrap = false;
+            playerCamera.gameObject.SetActive(false);
+            spikeTrapCamera.gameObject.SetActive(true);
+            StartCoroutine(SpikeTrapView());
+        }
     }
+
     public void SetPanEndZone(bool value)
     {
         panEndZone = value;
     }
+
+    public void SetPanSpikeTrap(bool value)
+    {
+        panSpikeTrap = value;
+    }
+
     private IEnumerator EndZoneView()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         endZoneCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
+    }
+    private IEnumerator SpikeTrapView()
+    {
+        yield return new WaitForSeconds(5f);
+        spikeTrapCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
     }
 }

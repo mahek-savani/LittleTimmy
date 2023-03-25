@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class buttonPress : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class buttonPress : MonoBehaviour
     //forward direction
     float animDirectionFw = 1f; 
     public float movementSpeed = 30f;
+
+    private bool switchView = false;
 
     public void Update(){
         if (spike.isTrapMoving){
@@ -59,6 +62,20 @@ public class buttonPress : MonoBehaviour
                 if(SpikeTrapButtonPushed != null) SpikeTrapButtonPushed();
                 buttonParent.GetComponent<Renderer>().material.color = Color.grey;
                 spikeTrapWorking.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
+
+                string sceneName = SceneManager.GetActiveScene().name;
+                if(sceneName == "Level 2 Spike Trap Tutorial")
+                {
+                    if (!switchView)
+                    {
+                        switchView = true;
+                        SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
+                        if (cameraView != null)
+                        {
+                            cameraView.SetPanSpikeTrap(true);
+                        }
+                    }
+                }
             }
         }
     }
