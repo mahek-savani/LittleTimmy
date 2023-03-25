@@ -262,6 +262,8 @@ public class StateMachine_Robust : MonoBehaviour
             agent.speed = susSpeed / 2;
         }
 
+        //Debug.Log(state);
+
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (DEBUG && Input.GetKeyDown("backspace"))
         {
@@ -305,23 +307,22 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.IDLE:
 
 
-
-                if (agent.remainingDistance <= Mathf.Epsilon)
+                if (agent.remainingDistance <= Mathf.Epsilon && !agent.isStopped)
                 {
                     agent.isStopped = true;
                     transform.LookAt(transform.position + idleDir);
                 }
-                else
-                {
-                    agent.isStopped = false;
-                }
-                
+                //else
+                //{
+                //    agent.isStopped = false;
+                //}
 
-                
+
+
                 // if (Vector3.Distance(idlePos, transform.position) > 0.12)
                 // {
-                
-                
+
+
                 // }
                 if (waitTime > 0)
                 {
