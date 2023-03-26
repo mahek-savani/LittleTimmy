@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EndZone : MonoBehaviour
 {
+    public TutorialManager tutorialManager;
     public LiveCounter NPCManager;
     //public Object nextScene;
     private int ttrCount = 0;
@@ -12,6 +13,7 @@ public class EndZone : MonoBehaviour
 
     public Material open_mat;
     public Material close_mat;
+    public GameObject endZoneSketch;
     void LateUpdate(){
         if (NPCManager.getNumLiving() != 0){
             this.gameObject.GetComponent<MeshRenderer>().material = close_mat;
@@ -36,6 +38,18 @@ public class EndZone : MonoBehaviour
                 data.checkData();                
                 SceneManager.LoadScene(nextScene);
             }
+            if (tutorialManager && !tutorialManager.endTrapSketch)
+            {
+                endZoneSketch.SetActive(true);
+                tutorialManager.endTrapSketch = true;
+            }
         }
+        
     }
+    void OnTriggerExit(Collider c){
+        if (endZoneSketch && c.gameObject.layer == 3)
+        {
+            endZoneSketch.SetActive(false);
+        }
+     }
 }
