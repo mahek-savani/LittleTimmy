@@ -33,13 +33,15 @@ public class FreezeTrap : BaseTrapClass
     void Update(){
         if(!isTriggered){
             //this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            ring.GetComponent<ParticleSystem>().startColor = new Color(18/255f, 174/255f, 1f);
+            // ring.GetComponent<ParticleSystem>().startColor = new Color(18/255f, 174/255f, 1f);
             transform.GetComponent<Renderer>().material.color = activeColor;
+              ring.GetComponent<ParticleSystem>().enableEmission =false;
         }
         else
         {
 
             transform.GetComponent<Renderer>().material.color = inactiveColor;
+              ring.GetComponent<ParticleSystem>().enableEmission  = true;
         }
     }
 
@@ -47,7 +49,7 @@ public class FreezeTrap : BaseTrapClass
         // If an enemy enters the trigger box, freeze enemy and deactivate trap
         if(!isTriggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
             triggerObject.gameObject.GetComponent<StateMachine_Robust>().stop(transform.position);
-            triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious();
+            triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious(3.5f);
 
 
             isTriggered = true;
@@ -56,7 +58,7 @@ public class FreezeTrap : BaseTrapClass
             data.freezeTrap.Add(1);
             //this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
-            ring.GetComponent<ParticleSystem>().startColor = Color.white;
+            // ring.GetComponent<ParticleSystem>().startColor = Color.white;
             ring.GetComponent<ParticleSystem>().Clear();
             //ring.GetComponent<ParticleSystem>().Emit(1);
 
