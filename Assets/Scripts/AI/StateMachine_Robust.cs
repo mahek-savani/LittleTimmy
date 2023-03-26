@@ -632,7 +632,10 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious(float time)
     {
-        agent.isStopped = true;
+        if (agent.enabled)
+        {
+            agent.isStopped = true;
+        }
         targetLine.enabled = false;
         conscious = false;
         FOVMesh.enabled = false;
