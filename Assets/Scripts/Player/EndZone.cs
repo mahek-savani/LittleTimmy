@@ -41,7 +41,6 @@ public class EndZone : MonoBehaviour
             if (tutorialManager && !tutorialManager.endTrapSketch)
             {
                 endZoneSketch.SetActive(true);
-                tutorialManager.endTrapSketch = true;
             }
         }
         
@@ -49,6 +48,7 @@ public class EndZone : MonoBehaviour
     void OnTriggerExit(Collider c){
         if (endZoneSketch && c.gameObject.layer == 3)
         {
+            tutorialManager.endTrapSketch = true;
             endZoneSketch.SetActive(false);
         }
      }

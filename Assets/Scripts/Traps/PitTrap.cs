@@ -21,13 +21,13 @@ public class PitTrap : MonoBehaviour
         if (tutorialManager && c.gameObject.layer == 3 && !tutorialManager.trapSketch)
         {
             trapSketch.SetActive(true);
-            tutorialManager.trapSketch = true;
         }
      }
 
      void OnTriggerExit(Collider c){
         if (trapSketch && c.gameObject.layer == 3)
         {
+            tutorialManager.trapSketch = true;
             trapSketch.SetActive(false);
         }
      }
