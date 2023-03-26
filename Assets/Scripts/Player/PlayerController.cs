@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     private Collider myTrigger;
 
+    private PopUpSystem pop;
+
     void Start()
     {
         //inSwapCommand = false;
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
         spawnPosition = transform.position;  //To get these coordinates in the respawn
         spawnRotation = transform.rotation;
+
+        pop = this.GetComponent<PopUpSystem>();
     }
 
     // Update is called once per frame
@@ -106,9 +110,17 @@ public class PlayerController : MonoBehaviour
         //    StartCoroutine(unLockE());
         //}
 
-        if (Input.GetKeyDown(KeyCode.Q) && canPause)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            pauseGame();
+            if (canPause)
+            {
+                pauseGame();
+            } else
+            {
+                if (pop) pop.PopDown();
+                canPause = true;
+                Time.timeScale = 1;
+            }
         }
     }
 
@@ -189,6 +201,14 @@ public class PlayerController : MonoBehaviour
                             //TP.eLocked = 1;
 
                             StartCoroutine(transferControl());
+
+                            if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName == "Noise" && 
+                                SceneManager.GetActiveScene().name == "Level 4 Noise Trap Tutorial" && !TP.placedTrapBefore)
+                            {
+                                string popupText = "This is a Noise Trap! Use it to lure in enemies!";
+                                canPause = false;
+                                if (pop) pop.PopUp(popupText);
+                            }
                         }
                     } else if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
                         gameObject.GetComponent<PlayerDamage>().HealDamage();
