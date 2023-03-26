@@ -10,7 +10,7 @@ public class EndZone : MonoBehaviour
     private int ttrCount = 0;
     public int nextScene;
     private bool switchView = false;
-    private float timeGap = 1f;
+    private float timeGap = 2f;
 
     public Material open_mat;
     public Material close_mat;
