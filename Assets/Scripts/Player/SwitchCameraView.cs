@@ -2,19 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class SwitchCameraView : MonoBehaviour
 {
     public CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera endZoneCamera;
+    public CinemachineVirtualCamera spikeTrapCamera;
+    public CinemachineVirtualCamera resetButtonCamera;
     public CinemachineVirtualCamera[] enemyCameras;
     public float switchTime = 5f;
     public Transform playerTransform;
     private bool isPlayerCamera = true;
     public GameObject SwitchCamFill;
 
+    private bool panEndZone = false;
+    private bool panSpikeTrap = false;
+    private bool panResetButton = false;
+
     private void Start()
     {
         playerCamera.gameObject.SetActive(true);
+        endZoneCamera.gameObject.SetActive(false);
+        string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "Level 2 Spike Trap Tutorial")
+        {
+            spikeTrapCamera.gameObject.SetActive(false);
+        }
+        if(sceneName == "Level 3 Trap Resets")
+        {
+            spikeTrapCamera.gameObject.SetActive(false);
+            resetButtonCamera.gameObject.SetActive(false);
+        }
         for (int i = 0; i < enemyCameras.Length; i++)
         {
             enemyCameras[i].gameObject.SetActive(false);
@@ -22,7 +41,7 @@ public class SwitchCameraView : MonoBehaviour
         
         data.levelCam.Add(System.DateTime.Now.ToString());
     }
-private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("c"))
         {
@@ -72,5 +91,62 @@ private void Update()
                 isPlayerCamera = true;
             }
         }
+        if(panEndZone)
+        {
+            panEndZone = false;
+            playerCamera.gameObject.SetActive(false);
+            endZoneCamera.gameObject.SetActive(true);
+            StartCoroutine(EndZoneView());
+        }
+        if(panSpikeTrap)
+        {
+            panSpikeTrap = false;
+            playerCamera.gameObject.SetActive(false);
+            spikeTrapCamera.gameObject.SetActive(true);
+            StartCoroutine(SpikeTrapView());
+        }
+        if(panResetButton)
+        {
+            panResetButton = false;
+            playerCamera.gameObject.SetActive(false);
+            spikeTrapCamera.gameObject.SetActive(false);
+            resetButtonCamera.gameObject.SetActive(true);
+            StartCoroutine(ResetButtonButton());
+        }
+    }
+
+    public void SetPanEndZone(bool value)
+    {
+        panEndZone = value;
+    }
+
+    public void SetPanSpikeTrap(bool value)
+    {
+        panSpikeTrap = value;
+    }
+
+    public void SetPanResetButton(bool value)
+    {
+        panResetButton = value;
+    }
+
+    private IEnumerator EndZoneView()
+    {
+        yield return new WaitForSeconds(3f);
+        endZoneCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
+    }
+    private IEnumerator SpikeTrapView()
+    {
+        yield return new WaitForSeconds(5f);
+        spikeTrapCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
+    }
+    private IEnumerator ResetButtonButton()
+    {
+        yield return new WaitForSeconds(3f);
+        spikeTrapCamera.gameObject.SetActive(false);
+        resetButtonCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
     }
 }

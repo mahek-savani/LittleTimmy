@@ -3732,6 +3732,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1710835520006146679, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+      propertyPath: m_Priority
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710835520006146679, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5247919480052230978, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: nextScene
       value: 5
@@ -3798,6 +3806,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+--- !u!114 &1189461789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1710835520006146679, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+  m_PrefabInstance: {fileID: 1189461788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1197922551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6137,6 +6156,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: ExperimentalPit
       objectReference: {fileID: 0}
+    - target: {fileID: 6227817794325984928, guid: 93f20b4084d3b6345be3c70d7c960dbc, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 1847924895}
     - target: {fileID: 7239237675278549548, guid: 93f20b4084d3b6345be3c70d7c960dbc, type: 3}
       propertyPath: playercontroller
       value: 
@@ -7633,6 +7656,10 @@ PrefabInstance:
       propertyPath: SwitchCamFill
       value: 
       objectReference: {fileID: 1197922552}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: endZoneCamera
+      value: 
+      objectReference: {fileID: 1189461789}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 

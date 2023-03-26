@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45134205, g: 0.5009293, b: 0.5724083, a: 1}
+  m_IndirectSpecularColor: {r: 0.45137691, g: 0.5009603, b: 0.5724783, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2425,6 +2425,10 @@ PrefabInstance:
       propertyPath: trapDoor
       value: 
       objectReference: {fileID: 725903165}
+    - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
+      propertyPath: dieTrigger
+      value: 
+      objectReference: {fileID: 1219510750}
     - target: {fileID: 544942825, guid: 8e6d13346bad6e543a5d521ffbb3e52b, type: 3}
       propertyPath: fallTrigger
       value: 
@@ -4918,6 +4922,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+--- !u!114 &1015733789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1710835520006146679, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+  m_PrefabInstance: {fileID: 1015733788}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1044441184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4941,6 +4956,10 @@ PrefabInstance:
       propertyPath: trapDoor
       value: 
       objectReference: {fileID: 725903165}
+    - target: {fileID: 4817937719579261850, guid: e4eaa30c566a27b47bcf3215a683d098, type: 3}
+      propertyPath: dieTrigger
+      value: 
+      objectReference: {fileID: 1219510750}
     - target: {fileID: 4817937719579261850, guid: e4eaa30c566a27b47bcf3215a683d098, type: 3}
       propertyPath: fallTrigger
       value: 
@@ -6025,6 +6044,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 195697161901309117, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 2113959543}
     - target: {fileID: 2134829716886908273, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
       propertyPath: navObstacle
       value: 
@@ -6091,6 +6114,11 @@ PrefabInstance:
       objectReference: {fileID: 2113959543}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+--- !u!1 &1219510750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8873907989124349207, guid: 0482f9aa96e10994a9b8e0d64cb02c3d, type: 3}
+  m_PrefabInstance: {fileID: 1219510749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!191 &1220818108 stripped
 OffMeshLink:
   m_CorrespondingSourceObject: {fileID: 4365956427272848188, guid: dbba952fd97f99d4f87938ece050d430, type: 3}
@@ -7939,7 +7967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3170616001608613107, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.25
+      value: -7.76
       objectReference: {fileID: 0}
     - target: {fileID: 3170616001608613107, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9625,6 +9653,10 @@ PrefabInstance:
       propertyPath: SwitchCamFill
       value: 
       objectReference: {fileID: 1517339858}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: endZoneCamera
+      value: 
+      objectReference: {fileID: 1015733789}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 

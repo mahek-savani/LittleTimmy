@@ -9,6 +9,8 @@ public class EndZone : MonoBehaviour
     //public Object nextScene;
     private int ttrCount = 0;
     public int nextScene;
+    private bool switchView = false;
+    private float timeGap = 2f;
 
     public Material open_mat;
     public Material close_mat;
@@ -22,7 +24,16 @@ public class EndZone : MonoBehaviour
                 data.ttrstart = System.DateTime.Now;
                 ttrCount = 1;
             }
-            this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
+            StartCoroutine(TurnGreen());
+            if (!switchView)
+            {
+                switchView = true;
+                SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
+                if (cameraView != null)
+                {
+                    cameraView.SetPanEndZone(true);
+                }
+            }
         }
     }
     
@@ -37,5 +48,11 @@ public class EndZone : MonoBehaviour
                 SceneManager.LoadScene(nextScene);
             }
         }
+    }
+
+    private IEnumerator TurnGreen()
+    {
+        yield return new WaitForSeconds(timeGap);
+        this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
     }
 }
