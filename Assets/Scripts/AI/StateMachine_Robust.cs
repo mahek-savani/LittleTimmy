@@ -244,6 +244,7 @@ public class StateMachine_Robust : MonoBehaviour
         }
 
         // Make the visual FOV redder as the player stays inside of it
+        //Debug.Log(fov.visibleTargets.Count);
         if (fov.visibleTargets.Count != 0 && !passive)
         {
             playerVisibleTimer += Time.deltaTime;
