@@ -771,6 +771,15 @@ public class StateMachine_Robust : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        /*if ((collision.gameObject.layer == LayerMask.NameToLayer("safeCloset")|| collision.gameObject.layer == LayerMask.NameToLayer("safePlayer")) && conscious && alive)
+        {
+            //getUnconscious();
+            //state = STATE.PATROLLING;
+            agent.SetDestination(patrolPoints[currentDest].position);
+         
+            //collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            //collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
+        }*/
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
             getUnconscious();
