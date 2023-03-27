@@ -72,9 +72,10 @@ public class NoiseTrapActivation : BaseTrapClass
     {
         isTriggered = false;
         calculateOffLink = false;
-        transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
+        transform.parent.GetComponent<Renderer>().material.color = Color.grey;
         invisible();
         gameObject.GetComponentInParent<Respawn>().respawnMe();
+        ring.GetComponent<ParticleSystem>().enableEmission =true; 
     }
 
     // Start is called before the first frame update
@@ -118,15 +119,14 @@ public class NoiseTrapActivation : BaseTrapClass
                 //data.trapActiveOrder.Add("noiseTrap-1");
                 data.noiseTrap.Add(1);
 
-                ring.GetComponent<ParticleSystem>().startColor = Color.white;
+                // ring.GetComponent<ParticleSystem>().startColor = Color.white;
                 ring.GetComponent<ParticleSystem>().Clear();
-                // this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-                // this.GetComponent<Renderer>().material.color = Color.grey;
+                ring.GetComponent<ParticleSystem>().enableEmission =true;   //Enable the ring  (if you dont want to remove ring then delete this and false line in void visible)
+                
+                transform.parent.GetComponent<Renderer>().material.color = Color.grey;
+
             }
-            else
-            {
-                transform.parent.GetComponent<Renderer>().material.color = inactiveColor;
-            }
+  
         }
     }
 
@@ -135,8 +135,8 @@ public class NoiseTrapActivation : BaseTrapClass
         transform.GetComponent<MeshRenderer>().enabled = true;
         transform.GetComponent<SphereCollider>().enabled = true;
         transform.parent.GetComponent<Renderer>().material.color = activeColor;
-
-        ring.GetComponent<ParticleSystem>().startColor = Color.yellow;
+        ring.GetComponent<ParticleSystem>().enableEmission =false;  //Disable the ring
+        // ring.GetComponent<ParticleSystem>().startColor = Color.yellow;
     }
 
     public void invisible()
