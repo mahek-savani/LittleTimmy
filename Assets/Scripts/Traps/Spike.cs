@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Spike : MonoBehaviour
 {
     public bool isTrapMoving = false;
     public bool isTrapMovingBack = false;
+    private bool switchView = false;
 
     void OnTriggerEnter(Collider c)
     {
@@ -30,6 +32,19 @@ public class Spike : MonoBehaviour
         {
             isTrapMoving = false;
             //isTrapMovingBack = false;
+            string sceneName = SceneManager.GetActiveScene().name;
+            if(sceneName == "Level 3 Trap Resets")
+            {
+                if (!switchView)
+                {
+                    switchView = true;
+                    SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
+                    if (cameraView != null)
+                    {
+                        cameraView.SetPanResetButton(true);
+                    }
+                }
+            }
         }
     }
 }

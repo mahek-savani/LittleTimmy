@@ -244,6 +244,7 @@ public class StateMachine_Robust : MonoBehaviour
         }
 
         // Make the visual FOV redder as the player stays inside of it
+        //Debug.Log(fov.visibleTargets.Count);
         if (fov.visibleTargets.Count != 0 && !passive)
         {
             playerVisibleTimer += Time.deltaTime;
@@ -261,6 +262,8 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.speed = susSpeed / 2;
         }
+
+        //Debug.Log(state);
 
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (DEBUG && Input.GetKeyDown("backspace"))
@@ -305,23 +308,22 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.IDLE:
 
 
-
-                if (agent.remainingDistance <= Mathf.Epsilon)
+                if (agent.remainingDistance <= Mathf.Epsilon && !agent.isStopped)
                 {
                     agent.isStopped = true;
                     transform.LookAt(transform.position + idleDir);
                 }
-                else
-                {
-                    agent.isStopped = false;
-                }
-                
+                //else
+                //{
+                //    agent.isStopped = false;
+                //}
 
-                
+
+
                 // if (Vector3.Distance(idlePos, transform.position) > 0.12)
                 // {
-                
-                
+
+
                 // }
                 if (waitTime > 0)
                 {
@@ -352,8 +354,19 @@ public class StateMachine_Robust : MonoBehaviour
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
 
+                //if (fov.visibleTargets.Count != 0)
+                //{
+                //    getNoise(playerPos.position);
+                //}
                 // Assign new waypoint if current one has been reached
-                if (agent.remainingDistance <= Mathf.Epsilon)
+                if (fov.visibleTargets.Count != 0)
+                {
+                    //noiseSource = noiseSource = getPointNearestNavMesh(playerPos.position);
+                    //agent.SetDestination(playerPos.position);
+                    transform.LookAt(playerPos.position, transform.up);
+                    // timeCounter = suspiciousTime;
+                }
+                else if (agent.remainingDistance <= Mathf.Epsilon)
                 {
                     //Debug.Log(patrolPoints[currentDest].position);
                     if (currentDest < patrolPoints.Length - 1)
@@ -761,6 +774,15 @@ public class StateMachine_Robust : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+        /*if ((collision.gameObject.layer == LayerMask.NameToLayer("safeCloset")|| collision.gameObject.layer == LayerMask.NameToLayer("safePlayer")) && conscious && alive)
+        {
+            //getUnconscious();
+            //state = STATE.PATROLLING;
+            agent.SetDestination(patrolPoints[currentDest].position);
+         
+            //collision.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            //collision.gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
+        }*/
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && conscious && alive)
         {
             getUnconscious();

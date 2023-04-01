@@ -22,7 +22,7 @@ public class FreezeTrap : BaseTrapClass
         trapName = "Freeze";
         transform.GetComponent<Renderer>().material.color = inactiveColor;
         if(this.gameObject.layer == LayerMask.NameToLayer("Pickup")){
-            this.transform.localScale = new Vector3(1f, 0.1f, 1f);
+            this.transform.localScale = new Vector3(2f, 0.1f, 2f);
         }
 
         GameObject particle = this.gameObject.transform.GetChild(0).gameObject;
