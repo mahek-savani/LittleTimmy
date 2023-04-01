@@ -59,8 +59,10 @@ public class NoiseTrapActivation : BaseTrapClass
             endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
             transform.position.z), transform.rotation);
             offLink.startTransform = startLink;
+            //offLink.startTransform = new Vector3(enemyTransform.position.x, floor.position.y, enemyTransform.position.z);
             offLink.endTransform = endLink;
-            offLink.GetComponent<workingOffLinkScript>().enabled = true;
+            workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
+            offScript.enabled = true;
             calculateOffLink = false;
 
             enemyAgent.enabled = true;
@@ -106,10 +108,15 @@ public class NoiseTrapActivation : BaseTrapClass
             if(!isTriggered && SM.conscious && SM.alive){
                 calculateOffLink = true;
                 enemyTransform = other.transform;
-                offLink.GetComponent<workingOffLinkScript>().enabled = true;
+                workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
+                offScript.enabled = true;
+                offScript.enemyTransform = enemyTransform;
+                offScript.floor = floor;
                 enemyMachine = SM;
                 enemyAgent = other.gameObject.GetComponent<NavMeshAgent>();
                 // Debug.Log(transform.position);
+
+                
 
 
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);

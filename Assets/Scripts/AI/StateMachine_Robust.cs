@@ -289,7 +289,7 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     conscious = true;
                     agent.enabled = true;
-                    //myBody.isKinematic = false;
+                    myBody.isKinematic = false;
                     if (passive)
                     {
                         getIdle();
@@ -913,10 +913,12 @@ public class StateMachine_Robust : MonoBehaviour
         agent.SetDestination(nearestPoint.position);
     }
 
-    public void stop(Vector3 position)
+    public void stop(float seconds)
     {
         agent.isStopped = true;
         agent.enabled = false;
+        myBody.isKinematic = true;
+        getUnconscious(seconds);
         //myBody.angularVelocity = Vector3.zero;
         //myBody.velocity = Vector3.zero;
 
@@ -924,6 +926,31 @@ public class StateMachine_Robust : MonoBehaviour
         //myBody.mass = 1000000;
         //myTransform.SetPositionAndRotation(position, myTransform.rotation);
         //myBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
+    }
+
+    public void stop()
+    {
+        agent.isStopped = true;
+        agent.enabled = false;
+        myBody.isKinematic = true;
+        getUnconscious(Mathf.Infinity);
+    }
+
+    public void start()
+    {
+        conscious = true;
+        agent.enabled = true;
+        myBody.isKinematic = false;
+        if (passive)
+        {
+            getIdle();
+        }
+        else
+        {
+            FOVMesh.enabled = true;
+            getCustom(idleState, transform.position);
+            //getSuspicious(transform.position);
+        }
     }
 
     //public void start()
