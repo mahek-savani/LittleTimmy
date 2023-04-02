@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -156,6 +157,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerStay(Collider triggerObject){
         int a;
 
+        
         // Setting a pickup delay so that the text doesn't flash rapidly
         if(pickupDelay <= 0){
             a = 4;
@@ -248,11 +250,32 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    void OnTriggerExit(){
+    void OnTriggerExit(Collider triggerObject){
         // This is to ensure we clean the helpText and inSwapCommand bools
         // in case we leave a trigger box without picking an object up
         helpText.text = "";
         //inSwapCommand = false;
+
+        if(triggerObject.gameObject.layer == LayerMask.NameToLayer("pitTrapTutorial") &&
+            SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
+        {
+            Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
+            canPause = false;
+            if (pop) pop.PopUpImage(image);
+        }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("endZoneTutorial") &&
+            SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
+        {
+            Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
+            canPause = false;
+            if (pop) pop.PopUpImage(image);
+        }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("navTutorial") &&
+            SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
+        {
+            Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
+            canPause = false;
+            if (pop) pop.PopUpImage(image);
+        }
+
     }
 
     public void swapTraps()
