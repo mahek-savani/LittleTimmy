@@ -8,7 +8,7 @@ using static Unity.VisualScripting.Member;
 public class StateMachine_Robust : MonoBehaviour
 {
     // Enumerated type for possible states
-    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS};
+    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS, FROZEN};
     
     // Specifies a cardinal direction to look in for the idle state
     public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE};
@@ -71,6 +71,30 @@ public class StateMachine_Robust : MonoBehaviour
 
     // Stores the countdown from idle or unconscious to another state
     private float waitTime = 0.0f;
+
+    // Stores the state of the NPC when it's frozen
+    private STATE stateCache;
+
+    // Stores whether the NPC is stopped when frozen
+    private bool stopCache;
+
+    // Stores the NPC's current destination when frozen
+    private Vector3 destinationCache;
+
+    // Stores the NPC's current path when frozen
+    private NavMeshPath pathCache;
+
+    private float speedCache;
+
+    private Vector3 massCache;
+
+    private Vector3 inertiaCache;
+
+    private Quaternion inertiaRotationCache;
+
+    private Vector3 velocityCache;
+
+    private Vector3 angularVelocityCache;
 
 
 
@@ -236,6 +260,10 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (agent.pathPending)
+        //{
+        //    return;
+        //}
         Vector3 distOffMesh = getPointNearestNavMesh(playerPos.position) - playerPos.position;
 
         if (distOffMesh.magnitude >= 1f)
@@ -249,7 +277,7 @@ public class StateMachine_Robust : MonoBehaviour
         //Debug.Log(fov.visibleTargets.Count);
         fov.FindVisibleTargets();
 
-        if (fov.visibleTargets.Count != 0 && !passive)
+        if (fov.visibleTargets.Count != 0 && !passive && state != STATE.FROZEN)
         {
             playerVisibleTimer += Time.deltaTime;
         }
@@ -269,14 +297,11 @@ public class StateMachine_Robust : MonoBehaviour
 
         //Debug.Log(state);
 
-        // Kill NPC 1 on hitting backspace (for debug purposes)
-        if (DEBUG && Input.GetKeyDown("backspace"))
-        {
-            die();
-        } 
-
         // The body of the state machine, checking the state every frame and acting accordingly
         switch (state) {
+
+            case STATE.FROZEN:
+                break;
 
             // The NPC can't hurt or see the player, and can't move until the timer runs out
             case STATE.UNCONSCIOUS:
@@ -468,7 +493,7 @@ public class StateMachine_Robust : MonoBehaviour
 
                 if (fov.visibleTargets.Count != 0)
                 {
-                    noiseSource = noiseSource = getPointNearestNavMesh(playerPos.position);
+                    noiseSource = getPointNearestNavMesh(playerPos.position);
                     agent.SetDestination(playerPos.position);
                     transform.LookAt(playerPos.position, transform.up);
                     timeCounter = suspiciousTime;
@@ -503,6 +528,20 @@ public class StateMachine_Robust : MonoBehaviour
                 }
 
                 break;
+        }
+
+        // Kill NPC 1 on hitting backspace (for debug purposes)
+        if (DEBUG && Input.GetKeyDown("backspace"))
+        {
+            //die();
+            if (state != STATE.FROZEN)
+            {
+                getFrozen();
+            }
+            else
+            {
+                unFreeze();
+            }
         }
     }
 
@@ -928,29 +967,62 @@ public class StateMachine_Robust : MonoBehaviour
         //myBody.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
     }
 
-    public void stop()
+    //public void stop()
+    //{
+    //    getFrozen();
+    //}
+
+    public void getFrozen()
     {
+        velocityCache = myBody.velocity;
+        angularVelocityCache = myBody.angularVelocity;
+        inertiaCache = myBody.inertiaTensor;
+        massCache = myBody.centerOfMass;
+        inertiaRotationCache = myBody.inertiaTensorRotation;
+        destinationCache = agent.destination;
+        pathCache = agent.path;
+        //speedCache = agent.speed;
+        stopCache = agent.isStopped;
         agent.isStopped = true;
         agent.enabled = false;
         myBody.isKinematic = true;
-        getUnconscious(Mathf.Infinity);
+        stateCache = state;
+        //myBody.constraints = RigidbodyConstraints.FreezeAll;
+
+        state = STATE.FROZEN;
     }
 
-    public void start()
+    public void unFreeze()
     {
+        
+
+        state = stateCache;
         conscious = true;
         agent.enabled = true;
-        myBody.isKinematic = false;
-        if (passive)
-        {
-            getIdle();
-        }
-        else
-        {
-            FOVMesh.enabled = true;
-            getCustom(idleState, transform.position);
-            //getSuspicious(transform.position);
-        }
+        
+        state = stateCache;
+        agent.isStopped = stopCache;
+        agent.destination = destinationCache;
+        agent.path = pathCache;
+
+        //myBody.isKinematic = false;
+        myBody.constraints = RigidbodyConstraints.None;
+        myBody.velocity = velocityCache;
+        myBody.angularVelocity = angularVelocityCache;
+        myBody.inertiaTensor = inertiaCache;
+        myBody.centerOfMass = massCache;
+        myBody.inertiaTensorRotation = inertiaRotationCache;
+        
+        //agent.speed = speedCache;
+
+        //agent.ResetPath();
+        //agent.SetDestination(destinationCache);
+        //agent.path = pathCache;
+        //agent.CalculatePath(agent.destination);
+
+        //agent.Resume();
+
+
     }
 
     //public void start()
