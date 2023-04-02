@@ -10,7 +10,7 @@ public class RetryLevel : MonoBehaviour
         data.attempts = data.attempts + 1;
         foreach (GameObject obj in SceneManager.GetActiveScene().GetRootGameObjects())
         {
-           Destroy(obj);
+            Destroy(obj);
         }
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);

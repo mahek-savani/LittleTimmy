@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1119044885}
   m_Layer: 0
   m_Name: CM vcam2
-  m_TagString: playerCam
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1119044884
 Transform:
   m_ObjectHideFlags: 0
@@ -176,7 +176,6 @@ GameObject:
   - component: {fileID: 2762713670264431872}
   - component: {fileID: 2762713670264431874}
   - component: {fileID: 1941646822}
-  - component: {fileID: 1847924902}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -358,27 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680ee5fcff42e4145a9a6862aaec1f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  endZoneCamera: {fileID: 0}
-  spikeTrapCamera: {fileID: 0}
-  resetButtonCamera: {fileID: 0}
+  playerCamera: {fileID: 1119044885}
   enemyCameras:
   - {fileID: 0}
   switchTime: 5
   playerTransform: {fileID: 2762713670264431879}
-  SwitchCamFill: {fileID: 0}
---- !u!114 &1847924902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762713670264431897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6002fbe4310bf4e4a8e05bc26fb6588f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popUpBox: {fileID: 0}
-  animator: {fileID: 0}
-  popUpText: {fileID: 0}

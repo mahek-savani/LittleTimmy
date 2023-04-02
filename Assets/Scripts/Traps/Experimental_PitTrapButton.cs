@@ -12,7 +12,6 @@ public class Experimental_PitTrapButton : MonoBehaviour
     public MeshCollider door;
     public GameObject trapDoor;
     public GameObject fallTrigger;
-    public GameObject dieTrigger;
     public GameObject resetButton;
 
     //public NavMeshSurface navMesh;
@@ -52,7 +51,6 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
                 //obstacle.SetActive(true);
                 fallTrigger.SetActive(true);
-                dieTrigger.SetActive(true);
                 //fallTrigger.GetComponent<NavMeshObstacle>().enabled = true;
 
                 //manager.resetting = false;
