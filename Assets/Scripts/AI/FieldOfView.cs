@@ -28,21 +28,26 @@ public class FieldOfView : MonoBehaviour
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
 
-        StartCoroutine("FindTargetsWithDelay", .2f);
+        //StartCoroutine("FindTargetsWithDelay", 0f);
     }
 
-    IEnumerator FindTargetsWithDelay(float delay) {
-        while (true) {
-            yield return new WaitForSeconds(delay);
-            FindVisibleTargets();
-        }
-    }
+    //IEnumerator FindTargetsWithDelay(float delay) {
+    //    while (true) {
+    //        yield return new WaitForSeconds(delay);
+    //        FindVisibleTargets();
+    //    }
+    //}
+
+    //private void Update()
+    //{
+    //    FindVisibleTargets();
+    //}
 
     void LateUpdate() {
         DrawFieldOfView();
     }
 
-    void FindVisibleTargets() {
+    public void FindVisibleTargets() {
         // visibleTargets List is our list of all transforms
         // This list only updated using the targetMask (set layer to Target)
         visibleTargets.Clear();

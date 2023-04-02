@@ -70,17 +70,21 @@ public class PlayerController : MonoBehaviour
         //pbody.MovePosition(transform.position + velocity);
 
 
-        float horVal = Input.GetAxis("Horizontal");
-        float vertVal = Input.GetAxis("Vertical");
+        //float horVal = Input.GetAxis("Horizontal");
+        //float vertVal = Input.GetAxis("Vertical");
 
-        //Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
-        Vector3 newPos = new Vector3(horVal, 0, vertVal);
-        newPos *= Time.deltaTime * speed;
-        //newPos.Normalize();
-        //Debug.Log("Translation vector: " + newPos);
-        //Debug.Log("Vector magnitude: " + newPos.magnitude);
-        
-        transform.Translate(newPos);
+        ////Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        //Vector3 newPos = new Vector3(horVal, 0, vertVal);
+        //newPos *= Time.deltaTime * speed;
+        ////newPos.Normalize();
+        ////Debug.Log("Translation vector: " + newPos);
+        ////Debug.Log("Vector magnitude: " + newPos.magnitude);
+
+
+        //pbody.velocity = newPos * 100;
+        //pbody.AddForce(newPos, ForceMode.VelocityChange);
+        //pbody.MovePosition(transform.position + newPos);
+        //transform.Translate(newPos);
          
 
 
@@ -128,6 +132,25 @@ public class PlayerController : MonoBehaviour
     {
         inSwapCommand = false;
         myTrigger = null;
+
+        float horVal = Input.GetAxis("Horizontal");
+        float vertVal = Input.GetAxis("Vertical");
+
+        //Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
+        Vector3 newPos = new Vector3(horVal, 0, vertVal);
+        newPos *= Time.deltaTime * speed;
+        //newPos.Normalize();
+        //Debug.Log("Translation vector: " + newPos);
+        //Debug.Log("Vector magnitude: " + newPos.magnitude);
+        newPos *= 40;
+        //Vector3 temp = pbody.velocity;
+        //temp.x = newPos.x;
+        //temp.z = newPos.z;
+        //temp.y = pbody.velocity.y;
+        //pbody.velocity = temp;
+
+        pbody.velocity = new Vector3(newPos.x, pbody.velocity.y, newPos.z);
+        pbody.AddForce(Physics.gravity * 2, ForceMode.Acceleration);
     }
 
     void OnTriggerStay(Collider triggerObject){
