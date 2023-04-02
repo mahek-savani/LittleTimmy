@@ -43,6 +43,8 @@ public class NoiseTrapActivation : BaseTrapClass
 
     private void Update()
     {
+  
+
         if (!offLinkScript.enabled)
         {
             calculateOffLink = false;
@@ -70,6 +72,9 @@ public class NoiseTrapActivation : BaseTrapClass
 
     public void respawnMe()
     {
+                // Play Noisetrap sound when placed
+        FindObjectOfType<AudioManager>().Stop("NoiseTrapSound");
+
         isTriggered = false;
         calculateOffLink = false;
         transform.parent.GetComponent<Renderer>().material.color = Color.grey;
@@ -101,9 +106,14 @@ public class NoiseTrapActivation : BaseTrapClass
         //Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
+                    // Play Noisetrap sound when placed
+          FindObjectOfType<AudioManager>().Stop("NoiseTrapSound");
+
             StateMachine_Robust SM = other.gameObject.GetComponent<StateMachine_Robust>();
             //Debug.Log("Enemy Inside sphere");
             if(!isTriggered && SM.conscious && SM.alive){
+
+
                 calculateOffLink = true;
                 enemyTransform = other.transform;
                 offLink.GetComponent<workingOffLinkScript>().enabled = true;
@@ -114,8 +124,14 @@ public class NoiseTrapActivation : BaseTrapClass
 
                 other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
+                
+
+
+
                 //Debug.Log("getNoise called");
+
                 isTriggered = true;
+
                 //data.trapActiveOrder.Add("noiseTrap-1");
                 data.noiseTrap.Add(1);
 
@@ -125,6 +141,7 @@ public class NoiseTrapActivation : BaseTrapClass
                 
                 transform.parent.GetComponent<Renderer>().material.color = Color.grey;
 
+
             }
   
         }
@@ -132,6 +149,10 @@ public class NoiseTrapActivation : BaseTrapClass
 
     public void visible()
     {
+        // Play Noisetrap sound when placed
+          FindObjectOfType<AudioManager>().Play("NoiseTrapSound");
+
+
         transform.GetComponent<MeshRenderer>().enabled = true;
         transform.GetComponent<SphereCollider>().enabled = true;
         transform.parent.GetComponent<Renderer>().material.color = activeColor;
@@ -141,6 +162,9 @@ public class NoiseTrapActivation : BaseTrapClass
 
     public void invisible()
     {
+                // Play Noisetrap sound when placed
+          FindObjectOfType<AudioManager>().Stop("NoiseTrapSound");
+
         transform.GetComponent<MeshRenderer>().enabled = false;
         transform.GetComponent<SphereCollider>().enabled = false;
         ring.GetComponent<ParticleSystem>().startColor = Color.white;

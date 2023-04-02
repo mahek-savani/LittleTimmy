@@ -52,6 +52,10 @@ public class FreezeTrap : BaseTrapClass
             triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious(3.5f);
 
 
+        // Play freeze sound
+          FindObjectOfType<AudioManager>().Play("FreezeSound");
+
+
             isTriggered = true;
 
             //data.trapActiveOrder.Add("freezeTrap");

@@ -44,7 +44,12 @@ public class PlayerDamage : MonoBehaviour
         timeRed = 0.3f;
         if (currentHealth == 0)
         {
+                       //Play death sound
+          FindObjectOfType<AudioManager>().Play("PlayerDeathSound");
+          FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
+          FindObjectOfType<AudioManager>().Stop("NPCFootSteps"); 
             playerController.playerDie();
+   
         }
     }
 

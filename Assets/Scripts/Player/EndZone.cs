@@ -40,11 +40,19 @@ public class EndZone : MonoBehaviour
     void OnTriggerStay(Collider playerObject){
         //Debug.Log(NPCManager.getNumLiving());
         if (playerObject.gameObject.layer == LayerMask.NameToLayer("Player")){
+
+
+
+
             if(NPCManager.getNumLiving() == 0){
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.userLevelComplete = true;
                 data.checkUserLevelCompleted();
                 data.checkData();                
+
+                // Play Finish Sound
+                FindObjectOfType<AudioManager>().Play("FinishSound");
+
                 SceneManager.LoadScene(nextScene);
             }
         }

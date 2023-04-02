@@ -122,6 +122,23 @@ public class PlayerController : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+    
+
+
+        // Footsteps Sound Code
+        if (Input.GetKeyDown(KeyCode.W) | Input.GetKeyDown(KeyCode.A) | Input.GetKeyDown(KeyCode.S) |Input.GetKeyDown(KeyCode.D))
+        {   
+            
+            FindObjectOfType<AudioManager>().Play("PlayerFootSteps");
+        }
+
+        else if(Input.GetKeyUp(KeyCode.W) | Input.GetKeyUp(KeyCode.A) | Input.GetKeyUp(KeyCode.S) | Input.GetKeyUp(KeyCode.D))
+        {
+            if (!(Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) |Input.GetKey(KeyCode.D)))
+            {
+                FindObjectOfType<AudioManager>().Stop("PlayerFootSteps");
+            }
+        }
     }
 
     private void FixedUpdate()
