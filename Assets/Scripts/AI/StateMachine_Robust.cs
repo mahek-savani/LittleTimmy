@@ -84,6 +84,10 @@ public class StateMachine_Robust : MonoBehaviour
     // Stores the NPC's current path when frozen
     private NavMeshPath pathCache;
 
+    private Vector3 aiVelocityCache;
+
+    private Vector3 positionCache;
+
     private float speedCache;
 
     private Vector3 massCache;
@@ -974,44 +978,60 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getFrozen()
     {
-        velocityCache = myBody.velocity;
-        angularVelocityCache = myBody.angularVelocity;
-        inertiaCache = myBody.inertiaTensor;
-        massCache = myBody.centerOfMass;
-        inertiaRotationCache = myBody.inertiaTensorRotation;
-        destinationCache = agent.destination;
-        pathCache = agent.path;
-        //speedCache = agent.speed;
-        stopCache = agent.isStopped;
-        agent.isStopped = true;
-        agent.enabled = false;
-        myBody.isKinematic = true;
+        //velocityCache = myBody.velocity;
+        //angularVelocityCache = myBody.angularVelocity;
+        //inertiaCache = myBody.inertiaTensor;
+        //massCache = myBody.centerOfMass;
+        //inertiaRotationCache = myBody.inertiaTensorRotation;
+
+        //destinationCache = agent.destination;
+        //pathCache = agent.path;
+        //aiVelocityCache = agent.velocity;
+        //positionCache = agent.nextPosition;
+
+        ////speedCache = agent.speed;
+        //stopCache = agent.isStopped;
+        //agent.isStopped = true;
+        //agent.enabled = false;
+        //myBody.isKinematic = true;
+        //stateCache = state;
+        ////myBody.constraints = RigidbodyConstraints.FreezeAll;
+        ///
+
         stateCache = state;
-        //myBody.constraints = RigidbodyConstraints.FreezeAll;
+        stopCache = agent.isStopped;
+        //agent.isStopped = true;
+        agent.enabled = false;
+
 
         state = STATE.FROZEN;
     }
 
     public void unFreeze()
     {
-        
-
         state = stateCache;
-        conscious = true;
         agent.enabled = true;
-        
-        state = stateCache;
         agent.isStopped = stopCache;
-        agent.destination = destinationCache;
-        agent.path = pathCache;
+
+        //state = stateCache;
+        //conscious = true;
+        //agent.enabled = true;
+
+        
+        //state = stateCache;
+        //agent.isStopped = stopCache;
+        //agent.destination = destinationCache;
+        //agent.path = pathCache;
+        //agent.velocity = aiVelocityCache;
+        //agent.nextPosition = positionCache;
 
         //myBody.isKinematic = false;
-        myBody.constraints = RigidbodyConstraints.None;
-        myBody.velocity = velocityCache;
-        myBody.angularVelocity = angularVelocityCache;
-        myBody.inertiaTensor = inertiaCache;
-        myBody.centerOfMass = massCache;
-        myBody.inertiaTensorRotation = inertiaRotationCache;
+        ////myBody.constraints = RigidbodyConstraints.None;
+        //myBody.velocity = velocityCache;
+        //myBody.angularVelocity = angularVelocityCache;
+        //myBody.inertiaTensor = inertiaCache;
+        //myBody.centerOfMass = massCache;
+        //myBody.inertiaTensorRotation = inertiaRotationCache;
         
         //agent.speed = speedCache;
 
