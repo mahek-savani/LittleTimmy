@@ -2201,6 +2201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Freeze Trap
       objectReference: {fileID: 0}
+    - target: {fileID: 3170616001608613119, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
+      propertyPath: m_TagString
+      value: freezeTrap
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4a6cc33f5951f49a2e8172a2c5b2fd, type: 3}
 --- !u!1001 &1012106573
@@ -2352,6 +2356,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hopefully working pit trap
       objectReference: {fileID: 0}
+    - target: {fileID: 6227817794325984928, guid: 93f20b4084d3b6345be3c70d7c960dbc, type: 3}
+      propertyPath: playercontroller
+      value: 
+      objectReference: {fileID: 1788931072}
     - target: {fileID: 7239237675278549548, guid: 93f20b4084d3b6345be3c70d7c960dbc, type: 3}
       propertyPath: playercontroller
       value: 
@@ -2513,8 +2521,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6034469255442225172, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+      propertyPath: PC
+      value: 
+      objectReference: {fileID: 1788931072}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+--- !u!1 &1082700797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7131151724063229740, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1082700796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126081436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2721,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 676889804}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: npcManager
+      value: 
+      objectReference: {fileID: 1820652360}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: tmp_Pickup
       value: 
       objectReference: {fileID: 505081470}
@@ -2711,6 +2732,10 @@ PrefabInstance:
       propertyPath: pauseScreen
       value: 
       objectReference: {fileID: 194014243}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 1082700797}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_RootOrder
       value: 9
