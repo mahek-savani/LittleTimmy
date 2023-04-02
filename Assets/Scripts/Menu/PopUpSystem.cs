@@ -13,14 +13,7 @@ public class PopUpSystem : MonoBehaviour
     {
         popUpBox.SetActive(true);
         popUpText.text = text;
-
-        StartCoroutine(PauseGameForPopUp());
-    }
-
-    IEnumerator PauseGameForPopUp()
-    {
         animator.SetTrigger("pop");
-        yield return new WaitForSecondsRealtime(0.8f);
         Time.timeScale = 0;
     }
 
@@ -28,5 +21,6 @@ public class PopUpSystem : MonoBehaviour
     {
         animator.SetTrigger("close");
         popUpBox.SetActive(false);
+        Time.timeScale = 1;
     }
 }

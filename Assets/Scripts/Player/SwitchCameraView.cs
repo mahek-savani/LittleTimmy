@@ -96,6 +96,7 @@ public class SwitchCameraView : MonoBehaviour
             panEndZone = false;
             playerCamera.gameObject.SetActive(false);
             endZoneCamera.gameObject.SetActive(true);
+            playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(EndZoneView());
         }
         if(panSpikeTrap)
@@ -103,6 +104,7 @@ public class SwitchCameraView : MonoBehaviour
             panSpikeTrap = false;
             playerCamera.gameObject.SetActive(false);
             spikeTrapCamera.gameObject.SetActive(true);
+            playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(SpikeTrapView());
         }
         if(panResetButton)
@@ -111,6 +113,7 @@ public class SwitchCameraView : MonoBehaviour
             playerCamera.gameObject.SetActive(false);
             spikeTrapCamera.gameObject.SetActive(false);
             resetButtonCamera.gameObject.SetActive(true);
+            playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(ResetButtonButton());
         }
     }
@@ -132,21 +135,27 @@ public class SwitchCameraView : MonoBehaviour
 
     private IEnumerator EndZoneView()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         endZoneCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(2f);
+        playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
     }
     private IEnumerator SpikeTrapView()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSecondsRealtime(5f);
         spikeTrapCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(2f);
+        playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
     }
     private IEnumerator ResetButtonButton()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         spikeTrapCamera.gameObject.SetActive(false);
         resetButtonCamera.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(2f);
+        playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
     }
 }

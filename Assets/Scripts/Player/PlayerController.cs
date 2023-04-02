@@ -208,6 +208,12 @@ public class PlayerController : MonoBehaviour
                                 string popupText = "This is a Noise Trap! Use it to lure in enemies!";
                                 canPause = false;
                                 if (pop) pop.PopUp(popupText);
+                            } else if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName == "Freeze" &&
+                                SceneManager.GetActiveScene().name == "Level 5 Speedball" && !TP.placedTrapBefore)
+                            {
+                                string popupText = "This is a Freeze Trap! Use it to stun enemies in place!";
+                                canPause = false;
+                                if (pop) pop.PopUp(popupText);
                             }
                         }
                     } else if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
@@ -301,6 +307,18 @@ public class PlayerController : MonoBehaviour
     {
         pauseScreen.SetActive(true);
         //Time.timeScale = 0;
+    }
+
+    public void pausePlayer()
+    {
+        speed = 0;
+        GetComponent<PlayerDamage>().invincible = true;
+    }
+
+    public void unPausePlayer()
+    {
+        speed = 15f;
+        GetComponent<PlayerDamage>().invincible = false;
     }
 
     //IEnumerator swapOff()
