@@ -87,7 +87,7 @@ public class NoiseTrapActivation : BaseTrapClass
                 }
 
             }
-            Debug.Log(count);
+            //Debug.Log(count);
         }
         
         
@@ -100,6 +100,7 @@ public class NoiseTrapActivation : BaseTrapClass
     }
     public void respawnMe()
     {
+        Debug.Log("respawnMe() called");
         isTriggered = false;
         calculateOffLink = false;
         transform.parent.GetComponent<Renderer>().material.color = Color.grey;
@@ -174,7 +175,7 @@ public class NoiseTrapActivation : BaseTrapClass
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             StateMachine_Robust SM = other.gameObject.GetComponent<StateMachine_Robust>();
-            Debug.Log("Enemy Inside sphere");
+            //Debug.Log("Enemy Inside sphere");
             if (!isTriggered && SM.conscious && SM.alive)
             {
                 calculateOffLink = true;
@@ -209,8 +210,9 @@ public class NoiseTrapActivation : BaseTrapClass
     
 
         
-    IEnumerator OnTriggerStay(Collider other)
+    IEnumerator OnTriggerEnter(Collider other)
     {
+        Debug.Log("OnTriggerStay() called");
         yield return new WaitForSeconds(0.1f);
         if (other.gameObject.layer==7)
         {
