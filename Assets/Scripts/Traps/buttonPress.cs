@@ -64,7 +64,7 @@ public class buttonPress : MonoBehaviour
                 spikeTrapWorking.transform.GetChild(0).GetComponent<Renderer>().material.color = Color.grey;
 
                 string sceneName = SceneManager.GetActiveScene().name;
-                if(sceneName == "Level 2 Spike Trap Tutorial" || sceneName == "Level 3 Trap Resets")
+                if(sceneName == "Level 2 Spike Trap Tutorial")
                 {
                     if (!switchView)
                     {
