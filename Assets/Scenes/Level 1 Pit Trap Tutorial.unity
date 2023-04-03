@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -690,11 +690,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233021658}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &309171524 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1790128393226058109, guid: ca86d376863e64e4a894d9f48cd8a92b, type: 3}
-  m_PrefabInstance: {fileID: 899477676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310147513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,6 +1852,11 @@ MeshFilter:
 Transform:
   m_CorrespondingSourceObject: {fileID: 717739889044231972, guid: 80df0765c235d6a4f85f655221d6f9a5, type: 3}
   m_PrefabInstance: {fileID: 1246729551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &745402157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1584329771905893691, guid: ca86d376863e64e4a894d9f48cd8a92b, type: 3}
+  m_PrefabInstance: {fileID: 899477676}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &746165826
 GameObject:
@@ -5238,7 +5238,7 @@ PrefabInstance:
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: pauseScreen
       value: 
-      objectReference: {fileID: 309171524}
+      objectReference: {fileID: 745402157}
     - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: gameOverPanel
       value: 
