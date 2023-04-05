@@ -70,7 +70,7 @@ public class StateMachine_Robust : MonoBehaviour
     private float timeCounter = 0f; 
 
     // Stores the countdown from idle or unconscious to another state
-    private float waitTime = 0.0f;
+    public float waitTime = 0.0f;
 
     // Stores the state of the NPC when it's frozen
     private STATE stateCache;
