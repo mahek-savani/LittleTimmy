@@ -48,8 +48,7 @@ public class FreezeTrap : BaseTrapClass
     void OnTriggerEnter(Collider triggerObject){
         // If an enemy enters the trigger box, freeze enemy and deactivate trap
         if(!isTriggered && triggerObject.gameObject.layer == LayerMask.NameToLayer("Enemies")) {
-            triggerObject.gameObject.GetComponent<StateMachine_Robust>().stop(transform.position);
-            triggerObject.gameObject.GetComponent<StateMachine_Robust>().getUnconscious(3.5f);
+            triggerObject.gameObject.GetComponent<StateMachine_Robust>().stop(3.5f);
 
 
         // Play freeze sound
