@@ -97,11 +97,13 @@ public class NoiseTrapActivation : BaseTrapClass
         
     }
 
+    /*
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawSphere(transform.position, 8.25f);
         Gizmos.color = Color.green;
     }
+    */
     public void respawnMe()
     {
         Debug.Log("respawnMe() called");
