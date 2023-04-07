@@ -9,6 +9,7 @@ public class SwitchCameraView : MonoBehaviour
     public CinemachineVirtualCamera playerCamera;
     public CinemachineVirtualCamera endZoneCamera;
     public CinemachineVirtualCamera spikeTrapCamera;
+    public CinemachineVirtualCamera pitTrapCamera;
     public CinemachineVirtualCamera resetButtonCamera;
     public CinemachineVirtualCamera[] enemyCameras;
     public float switchTime = 5f;
@@ -18,6 +19,7 @@ public class SwitchCameraView : MonoBehaviour
 
     private bool panEndZone = false;
     private bool panSpikeTrap = false;
+    private bool panPitTrap = false;
     private bool panResetButton = false;
 
     private void Start()
@@ -25,6 +27,10 @@ public class SwitchCameraView : MonoBehaviour
         playerCamera.gameObject.SetActive(true);
         endZoneCamera.gameObject.SetActive(false);
         string sceneName = SceneManager.GetActiveScene().name;
+        if(sceneName == "Level 1 Pit Trap Tutorial")
+        {
+            pitTrapCamera.gameObject.SetActive(false);
+        }
         if(sceneName == "Level 2 Spike Trap Tutorial")
         {
             spikeTrapCamera.gameObject.SetActive(false);
@@ -92,7 +98,15 @@ public class SwitchCameraView : MonoBehaviour
         {
             panEndZone = false;
             playerCamera.gameObject.SetActive(false);
-            endZoneCamera.gameObject.SetActive(true);
+            string sceneName = SceneManager.GetActiveScene().name;
+            if(sceneName == "Level 1 Pit Trap Tutorial")
+            {
+                StartCoroutine(WaitForPitTrap());
+            }
+            else
+            {
+                endZoneCamera.gameObject.SetActive(true);
+            }
             playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(EndZoneView());
         }
@@ -117,6 +131,14 @@ public class SwitchCameraView : MonoBehaviour
             playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(ResetButtonButton());
         }
+        if(panPitTrap)
+        {
+            panPitTrap = false;
+            playerCamera.gameObject.SetActive(false);
+            pitTrapCamera.gameObject.SetActive(true);
+            playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
+            StartCoroutine(PitTrapView());
+        }
     }
 
     public void SetPanEndZone(bool value)
@@ -132,6 +154,17 @@ public class SwitchCameraView : MonoBehaviour
     public void SetPanResetButton(bool value)
     {
         panResetButton = value;
+    }
+
+    public void SetPanPitTrap(bool value)
+    {
+        panPitTrap = value;
+    }
+
+    private IEnumerator WaitForPitTrap()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        endZoneCamera.gameObject.SetActive(true);
     }
 
     private IEnumerator EndZoneView()
@@ -151,6 +184,24 @@ public class SwitchCameraView : MonoBehaviour
         playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
 
     }
+
+    private IEnumerator PitTrapView()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        pitTrapCamera.gameObject.SetActive(false);
+        //playerCamera.gameObject.SetActive(true);
+        if(isPlayerCamera)
+        {
+            playerCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            enemyCameras[0].gameObject.SetActive(true);
+        }
+        yield return new WaitForSecondsRealtime(2f);
+        playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
+    }
+
     private IEnumerator SpikeTrapView()
     {
         yield return new WaitForSecondsRealtime(5f);
