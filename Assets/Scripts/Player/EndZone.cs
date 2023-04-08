@@ -11,6 +11,7 @@ public class EndZone : MonoBehaviour
     public int nextScene;
     private bool switchView = false;
     private float timeGap = 2f;
+  
 
     public Material open_mat;
     public Material close_mat;
@@ -51,7 +52,7 @@ public class EndZone : MonoBehaviour
                 data.checkData();                
 
                 // Play Finish Sound
-                FindObjectOfType<AudioManager>().Play("FinishSound");
+                // FindObjectOfType<AudioManager>().Play("FinishSound");
 
                 SceneManager.LoadScene(nextScene);
             }

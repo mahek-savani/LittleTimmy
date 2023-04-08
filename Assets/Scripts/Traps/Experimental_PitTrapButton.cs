@@ -37,8 +37,8 @@ public class Experimental_PitTrapButton : MonoBehaviour
             if (pitTrap.trapActive)
             {
 
-                // Play Door Opening Sound
-                FindObjectOfType<AudioManager>().Play("DoorActiveSound");
+                // // Play Door Opening Sound
+                // FindObjectOfType<AudioManager>().Play("DoorActiveSound");
 
 
                 //changing pit trap's trigger button's animation direction to forward

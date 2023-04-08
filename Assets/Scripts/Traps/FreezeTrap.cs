@@ -52,7 +52,7 @@ public class FreezeTrap : BaseTrapClass
 
 
         // Play freeze sound
-          FindObjectOfType<AudioManager>().Play("FreezeSound");
+        //   FindObjectOfType<AudioManager>().Play("FreezeSound");
 
 
             isTriggered = true;

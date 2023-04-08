@@ -311,7 +311,7 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.UNCONSCIOUS:
 
                 // Stop chase  sound 
-                FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
+                // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
 
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, 0);
@@ -623,7 +623,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         
         // Play  sound 
-        FindObjectOfType<AudioManager>().Play("NPCChaseSound");
+        // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
 
         agent.isStopped = false;
         targetLine.enabled = true;
@@ -668,7 +668,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
 
                 // Play  sound 
-        FindObjectOfType<AudioManager>().Play("NPCFootSteps");
+        // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
 
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
@@ -793,7 +793,7 @@ public class StateMachine_Robust : MonoBehaviour
         agent.speed = patrolSpeed;
 
                                 // Play  sound 
-        FindObjectOfType<AudioManager>().Play("NPCFootSteps");
+        // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
 
         returnToPatrol();
         myMesh.material.color = Color.cyan;
@@ -811,9 +811,9 @@ public class StateMachine_Robust : MonoBehaviour
     public void die()
     {
         // STop  sound 
-        FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
+        // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
              
-        FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
+        // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
 
         alive = false;
         conscious = false;
