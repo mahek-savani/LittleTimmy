@@ -13,6 +13,12 @@ public class Spike : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
+        if(c.gameObject.layer == LayerMask.NameToLayer("breakableWall"))
+        {
+            // Debug.Log("collide");
+            c.gameObject.SetActive(false);
+        }
+
         if (c.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
             //data.trapActiveOrder.Add("spikeTrap-1");

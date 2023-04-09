@@ -276,6 +276,13 @@ public class PlayerController : MonoBehaviour
             if (pop) pop.PopUpImage(image);
         }
 
+        if(SceneManager.GetActiveScene().name == "Level 2 Spike Trap Tutorial" && triggerObject.gameObject.name == "TutorialBox")
+        {
+            triggerObject.gameObject.SetActive(false);
+            canPause = false;
+            if (pop) pop.PopUp("coming out of my cage and i've been doing just fine-");
+        }
+
     }
 
     public void swapTraps()

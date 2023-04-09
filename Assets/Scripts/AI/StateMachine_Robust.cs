@@ -8,10 +8,10 @@ using static Unity.VisualScripting.Member;
 public class StateMachine_Robust : MonoBehaviour
 {
     // Enumerated type for possible states
-    public enum STATE {IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS, FROZEN};
-    
+    public enum STATE { IDLE, PATROLLING, SUSPICIOUS, CHASING, PARANOID, NOISE, UNCONSCIOUS, FROZEN };
+
     // Specifies a cardinal direction to look in for the idle state
-    public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE};
+    public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE };
 
 
 
@@ -19,10 +19,10 @@ public class StateMachine_Robust : MonoBehaviour
 
     // Current state of the machine
     public STATE state = STATE.IDLE;
-    
+
     // The machine will eventually revert back to this state by default
     public STATE defaultState = STATE.PATROLLING;
-    
+
     // Determines whether this agent is alive or dying
     public bool alive = true;
 
@@ -67,7 +67,7 @@ public class StateMachine_Robust : MonoBehaviour
     public STATE idleState = STATE.SUSPICIOUS;
 
     // A variable used to store the countdown from suspicious to passivity, or chase to suspicion
-    private float timeCounter = 0f; 
+    private float timeCounter = 0f;
 
     // Stores the countdown from idle or unconscious to another state
     public float waitTime = 0.0f;
@@ -141,7 +141,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The AI agent controller
     public NavMeshAgent agent;
-    
+
     // The waypoint graph
     public Transform graph;
 
@@ -153,7 +153,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     // Speed for patrolling
     public float patrolSpeed = 5;
-    
+
     // An array of the waypoint (transforms) this agent will follow while on patrol
     public Transform[] patrolPoints;
 
@@ -239,7 +239,8 @@ public class StateMachine_Robust : MonoBehaviour
     {
         //StartCoroutine(assignOGTransform());
     }
-    void OnEnable() {
+    void OnEnable()
+    {
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;
 
         collisionTime = Random.Range(1.0f, 3.0f);
@@ -302,7 +303,8 @@ public class StateMachine_Robust : MonoBehaviour
         //Debug.Log(state);
 
         // The body of the state machine, checking the state every frame and acting accordingly
-        switch (state) {
+        switch (state)
+        {
 
             case STATE.FROZEN:
                 break;
@@ -329,7 +331,7 @@ public class StateMachine_Robust : MonoBehaviour
                         getCustom(idleState, transform.position);
                         //getSuspicious(transform.position);
                     }
-                    
+
                 }
 
                 break;
@@ -380,7 +382,7 @@ public class StateMachine_Robust : MonoBehaviour
             // Once they finish, they will return to the first waypoint on the list
             // Can transition into suspicion if the player stays in the FOV
             case STATE.PATROLLING:
-                if ( playerVisibleTimer >= timeToSuspicion)
+                if (playerVisibleTimer >= timeToSuspicion)
                 {
                     getNoise(playerPos.position);
                     return;
@@ -406,15 +408,17 @@ public class StateMachine_Robust : MonoBehaviour
                     if (currentDest < patrolPoints.Length - 1)
                     {
                         currentDest++;
-                    } else{
+                    }
+                    else
+                    {
                         currentDest = 0;
                     }
                     agent.SetDestination(patrolPoints[currentDest].position);
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
                 break;
-                
-            
+
+
             // While chasing the player, the NPC knows their exact position
             // Transitions into suspicion when the player stays out of the enemy FOV for long enough
             case STATE.CHASING:
@@ -456,7 +460,7 @@ public class StateMachine_Robust : MonoBehaviour
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
-            
+
                 timeCounter -= Time.deltaTime;
 
                 if (timeCounter < Mathf.Epsilon)
@@ -475,8 +479,13 @@ public class StateMachine_Robust : MonoBehaviour
                     paranoidPoints[currentPosition] += 10000;
                     waypoint currentPoint = currentPosition.GetComponent<waypoint>();
 
-                    currentPosition = getRandomNeighbor(currentPoint);
-                    agent.SetDestination(currentPosition.position);
+                    Transform neighbor = getRandomNeighbor(currentPoint);
+
+                    if (neighbor != null)
+                    {
+                        currentPosition = neighbor;
+                        agent.SetDestination(currentPosition.position);
+                    }
                 }
 
                 break;
@@ -534,7 +543,7 @@ public class StateMachine_Robust : MonoBehaviour
             // The NPC will randomly walk between adjacent waypoints
             // They will prefer some waypoints over others, assigning each a random weight when this state is entered
             case STATE.PARANOID:
-                if ( playerVisibleTimer - timeToSuspicion >= Mathf.Epsilon)
+                if (playerVisibleTimer - timeToSuspicion >= Mathf.Epsilon)
                 {
                     getNoise(playerPos.position);
                     return;
@@ -613,10 +622,10 @@ public class StateMachine_Robust : MonoBehaviour
                 getIdle();
                 break;
             case STATE.NOISE:
-                getNoise((Vector3) location);
+                getNoise((Vector3)location);
                 break;
             case STATE.SUSPICIOUS:
-                getSuspicious((Vector3) location);
+                getSuspicious((Vector3)location);
                 break;
             case STATE.CHASING:
                 getChase();
@@ -716,7 +725,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
-        
+
         conscious = false;
         FOVMesh.enabled = false;
         targetLine.enabled = false;
@@ -769,7 +778,7 @@ public class StateMachine_Robust : MonoBehaviour
     {
         agent.isStopped = false;
         targetLine.enabled = false;
-        myMesh.material.color = new Color(252/255f, 139/255f, 0f);
+        myMesh.material.color = new Color(252 / 255f, 139 / 255f, 0f);
         assignParanoidWalk();
 
         returnToSuspicion();
@@ -909,7 +918,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Neighbors with lower weights are preferred
     Transform getRandomNeighbor(waypoint wayPoint)
     {
-        Transform bestPoint = transform;
+        Transform bestPoint = null;
         int smallestWeight = 1000000000;
 
         for (int i = 0; i < wayPoint.neighbors.Count; i++)
@@ -1036,7 +1045,7 @@ public class StateMachine_Robust : MonoBehaviour
         //conscious = true;
         //agent.enabled = true;
 
-        
+
         //state = stateCache;
         //agent.isStopped = stopCache;
         agent.destination = destinationCache;
