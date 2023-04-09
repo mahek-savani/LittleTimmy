@@ -41,7 +41,7 @@ public class buttonPress : MonoBehaviour
             if (spikeTrap.trapActive)
             {
                 // Play Spike Release Sound
-                FindObjectOfType<AudioManager>().Play("SpikeActiveSound");
+                //FindObjectOfType<AudioManager>().Play("SpikeActiveSound");
 
                 spike.isTrapMoving = true;
                 //changing spike trap's trigger button's animation direction to forward

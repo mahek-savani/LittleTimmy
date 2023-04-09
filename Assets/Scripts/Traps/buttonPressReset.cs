@@ -54,7 +54,7 @@ public class buttonPressReset : MonoBehaviour
             {
 
                 // Play Spike Reset Sound
-                FindObjectOfType<AudioManager>().Play("SpikeResetSound");
+                //FindObjectOfType<AudioManager>().Play("SpikeResetSound");
                 
                 //spike.isTrapMovingBack = true;
 

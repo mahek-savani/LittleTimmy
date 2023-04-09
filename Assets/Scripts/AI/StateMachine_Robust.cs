@@ -201,6 +201,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     public Material FOVPassive;
 
+    [Header("Art and Audio")]
+
+    public AudioManager audioManager;
 
 
     //[Header("Debugging")]
@@ -238,6 +241,9 @@ public class StateMachine_Robust : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(assignOGTransform());
+        //audioManager.Play("360BallSound");
+
+        audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f); ;
     }
     void OnEnable() {
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;
