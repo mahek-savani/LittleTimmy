@@ -278,7 +278,7 @@ public class StateMachine_Robust : MonoBehaviour
         // Make the visual FOV redder as the player stays inside of it
 
         //Debug.Log(fov.visibleTargets.Count);
-        //Debug.Log(fov.visibleTargets.Count);
+
         fov.FindVisibleTargets();
 
         if (fov.visibleTargets.Count != 0 && !passive && state != STATE.FROZEN)
@@ -294,10 +294,10 @@ public class StateMachine_Robust : MonoBehaviour
 
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material.Lerp(passiveFOV, alertFOV, playerVisibleTimer / timeToChase);
 
-        if (agent.isOnOffMeshLink)
-        {
-            agent.speed = susSpeed / 2;
-        }
+        //if (agent.isOnOffMeshLink)
+        //{
+        //    agent.speed = susSpeed / 2;
+        //}
 
         //Debug.Log(state);
 
@@ -383,6 +383,7 @@ public class StateMachine_Robust : MonoBehaviour
                 if ( playerVisibleTimer >= timeToSuspicion)
                 {
                     getNoise(playerPos.position);
+                    return;
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
@@ -451,6 +452,7 @@ public class StateMachine_Robust : MonoBehaviour
                 if (playerVisibleTimer >= timeToChase)
                 {
                     getChase();
+                    return;
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
@@ -486,6 +488,7 @@ public class StateMachine_Robust : MonoBehaviour
                 if (playerVisibleTimer >= timeToChase)
                 {
                     getChase();
+                    return;
                 }
 
                 //Debug.DrawLine(transform.position, noiseSource, Color.yellow, 0.0f);
@@ -495,12 +498,27 @@ public class StateMachine_Robust : MonoBehaviour
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToChase);
 
+                //Debug.Log(agent.speed);
+
+                if (agent.isOnOffMeshLink)
+                {
+                    agent.speed = susSpeed / 2;
+                }
+                else
+                {
+                    agent.speed = susSpeed;
+                }
+
                 if (fov.visibleTargets.Count != 0)
                 {
-                    noiseSource = getPointNearestNavMesh(playerPos.position);
-                    agent.SetDestination(playerPos.position);
-                    transform.LookAt(playerPos.position, transform.up);
-                    timeCounter = suspiciousTime;
+                    //noiseSource = getPointNearestNavMesh(playerPos.position);
+                    //agent.SetDestination(playerPos.position);
+                    //transform.LookAt(playerPos.position, transform.up);
+                    //timeCounter = suspiciousTime;
+
+                    getNoise(playerPos.position);
+
+
                 }
                 else if (agent.remainingDistance <= 0.12)
                 {
@@ -519,6 +537,7 @@ public class StateMachine_Robust : MonoBehaviour
                 if ( playerVisibleTimer - timeToSuspicion >= Mathf.Epsilon)
                 {
                     getNoise(playerPos.position);
+                    return;
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
@@ -537,15 +556,15 @@ public class StateMachine_Robust : MonoBehaviour
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (DEBUG && Input.GetKeyDown("backspace"))
         {
-            die();
-            //if (state != STATE.FROZEN)
-            //{
-            //    getFrozen();
-            //}
-            //else
-            //{
-            //    unFreeze();
-            //}
+            //die();
+            if (state != STATE.FROZEN)
+            {
+                getFrozen();
+            }
+            else
+            {
+                unFreeze();
+            }
         }
     }
 
@@ -978,25 +997,25 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getFrozen()
     {
-        //velocityCache = myBody.velocity;
-        //angularVelocityCache = myBody.angularVelocity;
-        //inertiaCache = myBody.inertiaTensor;
-        //massCache = myBody.centerOfMass;
-        //inertiaRotationCache = myBody.inertiaTensorRotation;
+        velocityCache = myBody.velocity;
+        angularVelocityCache = myBody.angularVelocity;
+        inertiaCache = myBody.inertiaTensor;
+        massCache = myBody.centerOfMass;
+        inertiaRotationCache = myBody.inertiaTensorRotation;
 
-        //destinationCache = agent.destination;
+        destinationCache = agent.destination;
         //pathCache = agent.path;
         //aiVelocityCache = agent.velocity;
         //positionCache = agent.nextPosition;
 
-        ////speedCache = agent.speed;
+        //speedCache = agent.speed;
         //stopCache = agent.isStopped;
         //agent.isStopped = true;
         //agent.enabled = false;
-        //myBody.isKinematic = true;
+        myBody.isKinematic = true;
         //stateCache = state;
-        ////myBody.constraints = RigidbodyConstraints.FreezeAll;
-        ///
+        //myBody.constraints = RigidbodyConstraints.FreezeAll;
+        
 
         stateCache = state;
         stopCache = agent.isStopped;
@@ -1020,19 +1039,19 @@ public class StateMachine_Robust : MonoBehaviour
         
         //state = stateCache;
         //agent.isStopped = stopCache;
-        //agent.destination = destinationCache;
+        agent.destination = destinationCache;
         //agent.path = pathCache;
         //agent.velocity = aiVelocityCache;
         //agent.nextPosition = positionCache;
 
-        //myBody.isKinematic = false;
-        ////myBody.constraints = RigidbodyConstraints.None;
-        //myBody.velocity = velocityCache;
-        //myBody.angularVelocity = angularVelocityCache;
-        //myBody.inertiaTensor = inertiaCache;
-        //myBody.centerOfMass = massCache;
-        //myBody.inertiaTensorRotation = inertiaRotationCache;
-        
+        myBody.isKinematic = false;
+        //myBody.constraints = RigidbodyConstraints.None;
+        myBody.velocity = velocityCache;
+        myBody.angularVelocity = angularVelocityCache;
+        myBody.inertiaTensor = inertiaCache;
+        myBody.centerOfMass = massCache;
+        myBody.inertiaTensorRotation = inertiaRotationCache;
+
         //agent.speed = speedCache;
 
         //agent.ResetPath();
