@@ -212,10 +212,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.8977993
+  m_Height: 15.789558
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.013458952, y: 1.4838268, z: -0.0000000020970663}
 --- !u!114 &1855799587114176684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,10 +229,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikeTrap: {fileID: 7096947455661487187}
+  spike: {fileID: 0}
   spikeGrid: {fileID: 7096947455647887253}
   buttonParent: {fileID: 1855799585599178723}
   trapButton: {fileID: 3036458115205093043}
   spikeTrapWorking: {fileID: 7096947455661487191}
+  smoke: {fileID: 0}
+  colorDelay: 2
 --- !u!1 &2613048079992954381
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf224726f2272f44a73c6872144c64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTrapMoving: 0
+  isTrapMovingBack: 0
 --- !u!1 &2613048080511226032
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,10 +477,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.8231415
+  m_Height: 3.3982205
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.05652172, y: -0.932793, z: 0.0000000050244884}
 --- !u!114 &3036458113581967442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,8 +494,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikeTrap: {fileID: 7096947455661487187}
+  spike: {fileID: 0}
+  spikeGrid: {fileID: 0}
+  spikeTrapObject: {fileID: 0}
   buttonParent: {fileID: 3036458115205093043}
   spikeResetButton: {fileID: 1855799585599178723}
+  spikeTrapWorking: {fileID: 0}
+  movementSpeed: 30
 --- !u!1 &3036458115205093043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapActive: 1
+  originalPos: {x: 0, y: 0, z: 0}
 --- !u!111 &1855799586214413621
 Animation:
   m_ObjectHideFlags: 0
