@@ -38,7 +38,7 @@ public class Experimental_Reset_Button : MonoBehaviour
         //navMesh.BuildNavMesh();
 
         if(!pitTrap.trapActive){
-            if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
+            if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
             else {
                 colorDelay = 2;
                 if(colorBit == 0)
