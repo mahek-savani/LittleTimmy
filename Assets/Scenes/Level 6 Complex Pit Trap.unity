@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4513957, g: 0.5008993, b: 0.57238466, a: 1}
+  m_IndirectSpecularColor: {r: 0.45137691, g: 0.5009603, b: 0.5724783, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2232,6 +2232,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551086133}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &559833574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7588791816632741555, guid: 6b2aa13055e8c4075ba214c298fee102, type: 3}
+  m_PrefabInstance: {fileID: 720139762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &559833576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559833574}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17041417f4303334cb843adc5450221c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieTime: 2
+  enemyTransforms: []
+  startLink: {fileID: 0}
+  endLink: {fileID: 0}
+  floor: {fileID: 0}
 --- !u!1 &573665958
 GameObject:
   m_ObjectHideFlags: 0
@@ -9114,6 +9136,10 @@ PrefabInstance:
     - target: {fileID: 4365956427272848186, guid: dbba952fd97f99d4f87938ece050d430, type: 3}
       propertyPath: m_Name
       value: OffLinkMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4365956427272848186, guid: dbba952fd97f99d4f87938ece050d430, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4365956427272848188, guid: dbba952fd97f99d4f87938ece050d430, type: 3}
       propertyPath: m_Enabled

@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 8799665274418558756}
   - component: {fileID: 2811719289467326676}
   - component: {fileID: 2128366959035838618}
+  - component: {fileID: 2390857677875196394}
   m_Layer: 2
   m_Name: Sphere
   m_TagString: NoiseTrap
@@ -241,15 +242,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapName: 
   isTriggered: 0
-  offLink: {fileID: 0}
-  startLink: {fileID: 0}
-  endLink: {fileID: 0}
   floor: {fileID: 0}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 1, g: 0.843, b: 0, a: 1}
+--- !u!114 &2390857677875196394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588791816632741555}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17041417f4303334cb843adc5450221c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieTime: 2
+  enemyTransforms: []
+  startLink: {fileID: 0}
+  endLink: {fileID: 0}
+  floor: {fileID: 0}
 --- !u!1001 &7626847893720141161
 PrefabInstance:
   m_ObjectHideFlags: 0
