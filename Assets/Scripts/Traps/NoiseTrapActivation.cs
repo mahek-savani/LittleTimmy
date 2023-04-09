@@ -15,6 +15,10 @@ public class NoiseTrapActivation : BaseTrapClass
     public LayerMask obstacleMask;
     public Color activeColor = new Color(1f, 0f, 0f, 1f);
     public Color inactiveColor = new Color(1f, 0.843f, 0f, 1f);
+    private List<Collider> npcArray= new List<Collider>();
+    private Collider temp;
+    private Collider[] npcArray1;
+    private int count = 0;
 
     private GameObject ring;
 
@@ -68,10 +72,39 @@ public class NoiseTrapActivation : BaseTrapClass
             enemyAgent.enabled = true;
             enemyMachine.getNoise(endLink.position);
         }
+        
+        
+        npcArray1 = Physics.OverlapSphere(transform.position, 8.25f);
+        
+        //Debug.Log(npcArray1.Length);
+        if (isTriggered == false)
+        {
+            if (count > 0)
+            {
+                count = 0;
+            }
+            
+            for (var i = 0; i < npcArray1.Length; i++)
+            {
+                if (npcArray1[i].gameObject.layer == 7)
+                {
+                    count = count + 1;
+                }
+
+            }
+            //Debug.Log(count);
+        }
+        
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(transform.position, 8.25f);
+        Gizmos.color = Color.green;
+    }
     public void respawnMe()
     {
+        Debug.Log("respawnMe() called");
         isTriggered = false;
         calculateOffLink = false;
         transform.parent.GetComponent<Renderer>().material.color = Color.grey;
@@ -98,6 +131,7 @@ public class NoiseTrapActivation : BaseTrapClass
         ring.GetComponent<ParticleSystem>().startColor = Color.yellow;
     }
 
+    /*
     void OnTriggerStay(Collider other)
     {
         //Debug.Log(other.gameObject.name);
@@ -136,6 +170,112 @@ public class NoiseTrapActivation : BaseTrapClass
   
         }
     }
+    
+    */
+    
+
+    void goToCenter(Collider other, StateMachine_Robust SM)
+    {
+        // Debug.Log(isTriggered);
+        // Debug.Log("goToCenter called()");
+        // Debug.Log(other);
+        // Debug.Log("isTriggered");
+        // Debug.Log(isTriggered);
+        if (!isTriggered && SM.conscious && SM.alive && SM.state!=StateMachine_Robust.STATE.CHASING)
+        {
+            calculateOffLink = true;
+            enemyTransform = other.transform;
+            workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
+            offScript.enabled = true;
+            offScript.enemyTransform = enemyTransform;
+            offScript.floor = floor;
+            enemyMachine = SM;
+            enemyAgent = other.gameObject.GetComponent<NavMeshAgent>();
+            // Debug.Log(transform.position);
+
+
+            other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //Debug.Log("getNoise called");
+            //isTriggered = true;
+            //data.trapActiveOrder.Add("noiseTrap-1");
+            data.noiseTrap.Add(1);
+
+            // ring.GetComponent<ParticleSystem>().startColor = Color.white;
+            ring.GetComponent<ParticleSystem>().Clear();
+            ring.GetComponent<ParticleSystem>().enableEmission = true;   //Enable the ring  (if you dont want to remove ring then delete this and false line in void visible)
+            transform.parent.GetComponent<Renderer>().material.color = Color.grey;
+            //Debug.Log("reached center");
+            //Debug.Log(count);
+            count = count - 1;
+            //Debug.Log(count);
+            if (count == 0)
+            {
+                isTriggered = true;
+            }
+            //Debug.Log(count);
+        }
+
+    }
+
+    
+
+        
+    IEnumerator OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("OnTriggerStay() called");
+        yield return new WaitForSeconds(0.1f);
+        
+        if (other.gameObject.layer==7)
+        {
+            StateMachine_Robust SM = other.gameObject.GetComponent<StateMachine_Robust>();
+            //Debug.Log(SM.state);
+            //Debug.Log(SM.waitTime);
+            if(SM.state == StateMachine_Robust.STATE.UNCONSCIOUS)
+            {
+                yield return new WaitForSeconds(SM.waitTime + 0.1f);
+            }
+            // unconscious and layed down trap
+
+            //Debug.Log("Enemy Inside sphere");
+            //Debug.Log(SM.conscious);
+            // Debug.Log(count);
+            goToCenter(other, SM);
+            //Debug.Log(count);
+            //Debug.Log(isTriggered);
+            
+            
+        }
+        
+        /*
+        if (npcArray.Count == 1 && other.gameObject.layer == 7)
+        {
+            Debug.Log("hi");
+            npcArray.Add(other);
+
+            //Debug.Log(other.gameObject);
+            //Debug.Log(npcArray.Count);
+            while (npcArray.Count != 0)
+            {
+                //Debug.Log("Hi");
+                //Debug.Log(npcArray.Count);
+                Debug.Log(npcArray.Count);
+                if (npcArray.Count > 1)
+                {
+                    isTriggered = false;
+                }
+                //isTriggered = false;
+                goToCenter(npcArray[0]);
+                npcArray.RemoveAt(0);
+            }
+        }
+        
+        //Debug.Log(other.gameObject.name);
+        */
+        
+   }
+    
+
 
     public void visible()
     {

@@ -11,6 +11,8 @@ public class PlayerDamage : MonoBehaviour
     public Health_Bar healthbar;
 
     public PlayerController playerController;
+
+    public bool invincible = false;
     
     private float timeRed;
     private Color origColor;
@@ -30,21 +32,24 @@ public class PlayerDamage : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        data.healthRemaining = currentHealth;
-        data.healthLost = data.healthLost + 1;
-       
-        healthbar.SetHealth(currentHealth);         //Give Damage
-        StartCoroutine(healthbar.ShakeHealth());  //Shake the Health Bar
-
-        this.GetComponent<Renderer>().material.color = Color.red;
-
-        
-
-        timeRed = 0.3f;
-        if (currentHealth == 0)
+        if (!invincible)
         {
-            playerController.playerDie();
+            currentHealth -= damage;
+            data.healthRemaining = currentHealth;
+            data.healthLost = data.healthLost + 1;
+
+            healthbar.SetHealth(currentHealth);         //Give Damage
+            StartCoroutine(healthbar.ShakeHealth());  //Shake the Health Bar
+
+            this.GetComponent<Renderer>().material.color = Color.red;
+
+
+
+            timeRed = 0.3f;
+            if (currentHealth == 0)
+            {
+                playerController.playerDie();
+            }
         }
     }
 
