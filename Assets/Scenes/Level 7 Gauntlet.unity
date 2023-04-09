@@ -1253,6 +1253,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 230422729}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!4 &124982968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8969124351964925889, guid: 93f20b4084d3b6345be3c70d7c960dbc, type: 3}
@@ -2251,9 +2252,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2009037927}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 347451953}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 
       objectReference: {fileID: 1964847700}
+    - target: {fileID: 566989745343162765, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 566989745343162765, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 566989745343162765, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431872, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: healthbar
       value: 
@@ -2300,7 +2317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -57
+      value: -39.4
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2308,7 +2325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.2
+      value: -21.1
       objectReference: {fileID: 0}
     - target: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3259,7 +3276,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28832
+  m_Name: pb_Mesh178786
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3541,6 +3558,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 230422729}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1001 &299670152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3785,6 +3803,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 230422729}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &323528444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,6 +4329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC AI
       objectReference: {fileID: 0}
+    - target: {fileID: 6327803450025997104, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: DEBUG
       value: 0
@@ -4420,11 +4443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1e-45
+      value: -3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -4724,6 +4747,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelFloor_SinglePlane
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d96d502aa12add4d8a0c88509ca9ccb, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d96d502aa12add4d8a0c88509ca9ccb, type: 3}
 --- !u!1 &486621344
@@ -4840,6 +4867,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1001 &486675910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6320,6 +6348,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!4 &655842222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2876180185629961313, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}
@@ -6536,6 +6565,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &671207548 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6156419557918731987, guid: ee623fc41cc084544a129edd8d2b6d62, type: 3}
@@ -6923,6 +6953,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 230422729}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!43 &759556369
 Mesh:
   m_ObjectHideFlags: 0
@@ -13111,7 +13142,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29476
+  m_Name: pb_Mesh179438
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13696,7 +13727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997104, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: DEBUG
@@ -13824,15 +13855,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3946831
+      value: 0.39468312
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000027382889
+      value: 0.000000023560231
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000011762472
+      value: -0.000000010120426
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -14251,6 +14282,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &1256373216
 GameObject:
   m_ObjectHideFlags: 0
@@ -15867,15 +15899,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.39468312
+      value: 0.3946831
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000023560228
+      value: -0.00000002004567
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000010120426
+      value: 0.000000008610729
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -17228,19 +17260,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.91881734
+      value: 0.9188174
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.39468312
+      value: 0.3946831
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000012139958
+      value: -0.000000017813365
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000052147877
+      value: 0.000000007651829
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -17374,6 +17406,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &1630642395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8916128871503007076, guid: daf337bc4a30d9a4f8375f6ed40409b9, type: 3}
@@ -17678,6 +17711,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &1652290879
 GameObject:
   m_ObjectHideFlags: 0
@@ -18488,7 +18522,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28886
+  m_Name: pb_Mesh178840
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18760,6 +18794,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 230422729}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1001 &1744772354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20373,7 +20408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 241757366}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -20492,6 +20527,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!1 &1970872787
 GameObject:
   m_ObjectHideFlags: 0
@@ -20595,7 +20631,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28806
+  m_Name: pb_Mesh178760
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21062,6 +21098,7 @@ MonoBehaviour:
   AttachedSpikeTrap: {fileID: 1164724031}
   AttachedPitTrap: {fileID: 0}
   startingMaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  colorDelay: 2
 --- !u!4 &2000088815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2876180185629961313, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}

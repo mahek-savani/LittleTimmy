@@ -57,19 +57,23 @@ public class TrapPlacer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && eLocked == 1)
             {
                 RaycastHit Hit;
-                if (Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
+                if (Physics.Raycast(cams.position, -cams.up, out Hit, 1000f, canBeTrapped))
                 {
                     //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                     GameObject trapPlaced = trapInInventory;
-                    trapPlaced.transform.position = (Hit.point + Hit.normal * .001f);
-                    trapPlaced.transform.LookAt(Hit.point + Hit.normal);
+                    trapPlaced.transform.position =  (Hit.point + Hit.normal * .001f);
+                    trapPlaced.transform.LookAt(cams.up);
                     trapPlaced.layer = 8;
 
                     trapPlaced.SetActive(true);
                     trapPlaced.GetComponentInChildren<BaseTrapClass>().isTriggered = false;
-                    // player.hasTrapInInventory = false;
+                    player.hasTrapInInventory = false;
                     player.pickupDelay = 0f;
                     NoiseTrapActivation cloud = trapPlaced.GetComponentInChildren<NoiseTrapActivation>();
+                    if (cloud != null)
+                    {
+                        cloud.visible();
+                    }
                 }
 
                 // Vector3 trapPosition = player.transform.position;
@@ -85,11 +89,11 @@ public class TrapPlacer : MonoBehaviour
                 //data.trapActiveOrder.Add("noiseTrap-0");
                 //Debug.Log(trapPlaced);
                 //Debug.Log(trapInInventory.gameObject.tag);
-                //data.noiseTrap.Add(0);
-                if (cloud != null)
-                {
-                    cloud.visible();
-                }
+                // //data.noiseTrap.Add(0);
+                // if (cloud != null)
+                // {
+                //     cloud.visible();
+                // }
 
                 // MeshRenderer[] kids = trapPlaced.GetComponentsInChildren<MeshRenderer>();
                 // if (kids.Length == 2)
@@ -97,8 +101,8 @@ public class TrapPlacer : MonoBehaviour
                 //     kids[1].enabled = true;
                 // }
 
-                player.hasTrapInInventory = false;
-                player.pickupDelay = 0f;
+                // player.hasTrapInInventory = false;
+                // player.pickupDelay = 0f;
 
                 data.addTrapVal(player.trapInHand.gameObject.tag.ToString());
 
