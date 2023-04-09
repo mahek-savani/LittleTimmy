@@ -243,7 +243,7 @@ public class StateMachine_Robust : MonoBehaviour
         //StartCoroutine(assignOGTransform());
         //audioManager.Play("360BallSound");
 
-        audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f); ;
+        audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
     }
     void OnEnable() {
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;

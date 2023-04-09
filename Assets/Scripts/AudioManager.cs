@@ -12,9 +12,16 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<int, AudioSource> channelMap;
 
-    private void Start()
+    private void defineChannelMap()
     {
-        channelMap = new Dictionary<int, AudioSource>  {{1, channel1}, {2, channel2 }, {3, channel3 } };
+        if (channelMap != null)
+        {
+            return;
+        }
+        else
+        {
+            channelMap = new Dictionary<int, AudioSource> { { 1, channel1 }, { 2, channel2 }, { 3, channel3 } };
+        }
     }
 
     //void Awake()
@@ -60,6 +67,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play (string name, int channel)
      {
+        defineChannelMap();
         Sound s = findSound(name);
 
         if (s != null)
@@ -84,6 +92,7 @@ public class AudioManager : MonoBehaviour
                      float spatialBlend = 0f, bool loop = true, AudioRolloffMode rollOffMod = AudioRolloffMode.Custom,
                      float maxDistance = Mathf.Infinity, float spread = 0f, float dopplerLevel = 0f)
     {
+        defineChannelMap();
         Sound s = findSound(name);
 
         if (s != null)
