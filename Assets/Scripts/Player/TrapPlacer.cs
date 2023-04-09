@@ -63,6 +63,8 @@ public class TrapPlacer : MonoBehaviour
                     GameObject trapPlaced = trapInInventory;
                     trapPlaced.transform.position =  (Hit.point + Hit.normal * .001f);
                     trapPlaced.transform.LookAt(cams.up);
+                    //trapPlaced.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    trapPlaced.transform.rotation = Hit.transform.rotation;
                     trapPlaced.layer = 8;
 
                     trapPlaced.SetActive(true);
