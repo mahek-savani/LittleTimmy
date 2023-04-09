@@ -21,7 +21,7 @@ public class workingOffLinkScript : MonoBehaviour
     {
         for(int i=0; i<enemyTransforms.Count; i++)
         {
-            if(enemyTransforms[i])
+            if(enemyTransforms[i] && startLink)
             {
                 startLink.SetPositionAndRotation(new Vector3(enemyTransforms[i].position.x, floor.position.y,
 enemyTransforms[i].position.z), enemyTransforms[i].rotation);
