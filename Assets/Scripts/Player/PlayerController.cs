@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         //pbody.velocity = temp;
 
         pbody.velocity = new Vector3(newPos.x, pbody.velocity.y, newPos.z);
-        pbody.AddForce(Physics.gravity * 2, ForceMode.Acceleration);
+        pbody.AddForce(Physics.gravity * 10, ForceMode.Acceleration);
     }
 
     void OnTriggerStay(Collider triggerObject){
