@@ -21,15 +21,23 @@ public class workingOffLinkScript : MonoBehaviour
     {
         for(int i=0; i<enemyTransforms.Count; i++)
         {
-            startLink.SetPositionAndRotation(new Vector3(enemyTransforms[i].position.x, floor.position.y,
+            if(enemyTransforms[i])
+            {
+                startLink.SetPositionAndRotation(new Vector3(enemyTransforms[i].position.x, floor.position.y,
 enemyTransforms[i].position.z), enemyTransforms[i].rotation);
+            }
         }
     }
 
     IEnumerator waitToDie()
     {
         yield return new WaitForSeconds(dieTime);
-        gameObject.GetComponent<OffMeshLink>().enabled = false;
+        OffMeshLink[] offMeshLinks = GetComponents<OffMeshLink>();
+        // Debug.Log(offMeshLinks.Length);
+        foreach (OffMeshLink offMeshLink in offMeshLinks)
+        {
+            Destroy(offMeshLink);
+        }
         gameObject.GetComponent<workingOffLinkScript>().enabled = false;
     }
 }
