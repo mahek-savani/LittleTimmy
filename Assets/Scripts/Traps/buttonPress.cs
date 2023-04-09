@@ -8,7 +8,7 @@ public class buttonPress : MonoBehaviour
     public SpikeTrap spikeTrap;
     public Spike spike;
     public GameObject spikeGrid;
-    public GameObject spikeTrapObject;
+    public Transform orientation;
     public GameObject buttonParent;
     public GameObject spikeResetButton;
     public GameObject spikeTrapWorking;
@@ -22,7 +22,7 @@ public class buttonPress : MonoBehaviour
 
     public void Update(){
         if (spike.isTrapMoving){
-            spikeGrid.transform.position += spikeTrapObject.transform.rotation * transform.forward * Time.deltaTime * movementSpeed;
+            spikeGrid.transform.position += orientation.forward * Time.deltaTime * movementSpeed;
         }
     }
 
