@@ -537,15 +537,15 @@ public class StateMachine_Robust : MonoBehaviour
         // Kill NPC 1 on hitting backspace (for debug purposes)
         if (DEBUG && Input.GetKeyDown("backspace"))
         {
-            //die();
-            if (state != STATE.FROZEN)
-            {
-                getFrozen();
-            }
-            else
-            {
-                unFreeze();
-            }
+            die();
+            //if (state != STATE.FROZEN)
+            //{
+            //    getFrozen();
+            //}
+            //else
+            //{
+            //    unFreeze();
+            //}
         }
     }
 

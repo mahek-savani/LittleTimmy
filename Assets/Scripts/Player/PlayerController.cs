@@ -363,7 +363,7 @@ public class PlayerController : MonoBehaviour
 
     public void unPausePlayer()
     {
-        speed = 15f;
+        speed = 10f;
         GetComponent<PlayerDamage>().invincible = false;
     }
 
