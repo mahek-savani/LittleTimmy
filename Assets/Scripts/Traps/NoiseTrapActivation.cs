@@ -7,10 +7,10 @@ using UnityEngine.AI;
 
 public class NoiseTrapActivation : BaseTrapClass
 {
-    public OffMeshLink offLink;
-    public workingOffLinkScript offLinkScript;
-    public Transform startLink;
-    public Transform endLink;
+    // private OffMeshLink offLink;
+    private workingOffLinkScript offLinkScript;
+    // public Transform startLink;
+    // public Transform endLink;
     public Transform floor;
     public LayerMask obstacleMask;
     public Color activeColor = new Color(1f, 0f, 0f, 1f);
@@ -24,8 +24,10 @@ public class NoiseTrapActivation : BaseTrapClass
 
     private bool calculateOffLink = false;
     private Transform enemyTransform;
+    private List<Transform> enemyTransforms = new List<Transform>();
     private StateMachine_Robust enemyMachine;
     private NavMeshAgent enemyAgent;
+    private OffMeshLink[] offMeshLinks = new  OffMeshLink[20];
 
     //public Transform myTransform;
 
@@ -51,26 +53,69 @@ public class NoiseTrapActivation : BaseTrapClass
         {
             calculateOffLink = false;
         }
+        // Debug.Log(enemyTransforms.Count);
+        // for( int i=0; i<enemyTransforms.Count; i++)
+        // {
+        //     Debug.Log(enemyTransforms[i].position);
+        // }
         //if (calculateOffLink && !walledOff(transform.position, enemyTransform.position))
         if (calculateOffLink && !walledOff(transform.position, enemyTransform.position))
         {
-            //enemyAgent.isStopped = true;
-            enemyAgent.enabled = false;
-            
-            offLink.enabled = true;
-            startLink.SetPositionAndRotation(new Vector3(enemyTransform.position.x, floor.position.y,
-            enemyTransform.position.z), enemyTransform.rotation);
-            endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
-            transform.position.z), transform.rotation);
-            offLink.startTransform = startLink;
-            //offLink.startTransform = new Vector3(enemyTransform.position.x, floor.position.y, enemyTransform.position.z);
-            offLink.endTransform = endLink;
-            workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
-            offScript.enabled = true;
-            calculateOffLink = false;
+            offMeshLinks = new OffMeshLink[enemyTransforms.Count];
+            for( int i=0; i<enemyTransforms.Count; i++)
+            {
+                if(!walledOff(transform.position, enemyTransforms[i].position))
+                {
+                    enemyAgent.enabled = false;
+                    // offLink.enabled = true;
+                    OffMeshLink link = gameObject.AddComponent<OffMeshLink>();
+                    // Debug.Log(floor.position.y);
+                    GameObject startObject = new GameObject("StartObject");
+                    Transform startTransform = startObject.transform;
+                    startTransform.position = new Vector3(enemyTransforms[i].position.x, floor.position.y, enemyTransforms[i].position.z);
+                    startTransform.rotation = enemyTransforms[i].rotation;
+                    link.startTransform = startTransform;
+                    GameObject endObject = new GameObject("EndObject");
+                    Transform endTransform = endObject.transform;
+                    endTransform.position = new Vector3(transform.position.x, floor.position.y, transform.position.z);
+                    endTransform.rotation = transform.rotation;
+                    link.endTransform = endTransform;
+                    link.costOverride = -1.0f;
+                    link.biDirectional = true;
+                    link.activated = true;
+                    link.autoUpdatePositions = true;
+                    link.area = 0;
+                    // link.startTransform = startPoints[i];
+                    // link.endTransform = endPoints[i];
+                    offMeshLinks[i] = link;
+                    // Debug.Log(enemyTransforms[i].position);
+                    workingOffLinkScript offScript = GetComponent<workingOffLinkScript>();
+                    offScript.enabled = true;
+                    offScript.startLink = link.startTransform;
+                    offScript.endLink = link.endTransform;
+                    calculateOffLink = false;
 
-            enemyAgent.enabled = true;
-            enemyMachine.getNoise(endLink.position);
+                    enemyAgent.enabled = true;
+                    enemyMachine.getNoise(endTransform.position);
+                }
+            }
+            //enemyAgent.isStopped = true;
+            // enemyAgent.enabled = false;
+            
+            // offLink.enabled = true;
+            // startLink.SetPositionAndRotation(new Vector3(enemyTransform.position.x, floor.position.y,
+            // enemyTransform.position.z), enemyTransform.rotation);
+            // endLink.SetPositionAndRotation(new Vector3(transform.position.x, floor.position.y,
+            // transform.position.z), transform.rotation);
+            // offLink.startTransform = startLink;
+            //offLink.startTransform = new Vector3(enemyTransform.position.x, floor.position.y, enemyTransform.position.z);
+            // offLink.endTransform = endLink;
+            // workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
+            // offScript.enabled = true;
+            // calculateOffLink = false;
+
+            // enemyAgent.enabled = true;
+            // enemyMachine.getNoise(endLink.position);
         }
         
         
@@ -129,6 +174,8 @@ public class NoiseTrapActivation : BaseTrapClass
         invisible();
 
         ring.GetComponent<ParticleSystem>().startColor = Color.yellow;
+
+        offLinkScript = GetComponent<workingOffLinkScript>();
     }
 
     /*
@@ -185,9 +232,15 @@ public class NoiseTrapActivation : BaseTrapClass
         {
             calculateOffLink = true;
             enemyTransform = other.transform;
-            workingOffLinkScript offScript = offLink.GetComponent<workingOffLinkScript>();
+            enemyTransforms.Add(enemyTransform);
+            workingOffLinkScript offScript = GetComponent<workingOffLinkScript>();
             offScript.enabled = true;
-            offScript.enemyTransform = enemyTransform;
+            // for(int i=0; i<enemyTransforms.Count; i++)
+            // {
+            //     offScript.enemyTransform = enemyTransforms[i];
+            //     offScript.floor = floor;
+            // }
+            offScript.enemyTransforms = enemyTransforms;
             offScript.floor = floor;
             enemyMachine = SM;
             enemyAgent = other.gameObject.GetComponent<NavMeshAgent>();
