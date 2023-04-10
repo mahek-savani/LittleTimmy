@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public Rigidbody pbody;
     public float speed = 15f;
+    bool tutorialSeen = false;
+
+    public GameObject pitTut;
+    public GameObject endTut;
+
 
     public bool hasTrapInInventory; // Check if a trap already exists in inv
     public bool inSwapCommand;      // This prevents player from swapping and dropping trap at the same time
@@ -256,24 +261,33 @@ public class PlayerController : MonoBehaviour
         helpText.text = "";
         //inSwapCommand = false;
 
-        if(triggerObject.gameObject.layer == LayerMask.NameToLayer("pitTrapTutorial") &&
+        if(triggerObject.gameObject.layer == LayerMask.NameToLayer("navTutorial") &&
             SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
         {
             Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
             canPause = false;
             if (pop) pop.PopUpImage(image);
+            if(tutorialSeen == true){
+                pitTut.SetActive(true);
+                endTut.SetActive(true);
+                tutorialSeen = false;
+            }
+
         }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("endZoneTutorial") &&
             SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
         {
             Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
             canPause = false;
             if (pop) pop.PopUpImage(image);
-        }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("navTutorial") &&
+            triggerObject.gameObject.SetActive(false);
+            tutorialSeen = true;
+        }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("pitTrapTutorial") &&
             SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
         {
             Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
             canPause = false;
             if (pop) pop.PopUpImage(image);
+            triggerObject.gameObject.SetActive(false);
         }
 
         if(SceneManager.GetActiveScene().name == "Level 2 Spike Trap Tutorial" && triggerObject.gameObject.name == "TutorialBox")

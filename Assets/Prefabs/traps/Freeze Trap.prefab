@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1654152998}
   m_Layer: 8
   m_Name: Freeze Trap
-  m_TagString: Untagged
+  m_TagString: freezeTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3170616001608613119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.59, y: 0.02829361, z: 6.43}
-  m_LocalScale: {x: 2, y: 0.1, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 0.17, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1715397944818724871}
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3170616001608613119}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 879393299063259478, guid: eeb766d225284d347bfde306414a9515, type: 3}
 --- !u!23 &3170616001608613117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -99,8 +99,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 13.768612, z: 1}
-  m_Center: {x: 0, y: 6.384304, z: 0}
+  m_Size: {x: 0.75, y: 1, z: 0.75}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &3170616001608613106
 MonoBehaviour:
   m_ObjectHideFlags: 0
