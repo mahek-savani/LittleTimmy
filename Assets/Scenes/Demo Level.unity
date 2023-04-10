@@ -2602,6 +2602,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 161732396}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+      propertyPath: NPCManager
+      value: 
+      objectReference: {fileID: 250257200}
+    - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1620037838}
@@ -4496,6 +4500,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 161732396}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+      propertyPath: NPCManager
+      value: 
+      objectReference: {fileID: 250257200}
+    - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1620037838}
@@ -5729,6 +5737,10 @@ PrefabInstance:
       value: 75.6
       objectReference: {fileID: 0}
     - target: {fileID: 1119044885, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119044885, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: m_Priority
       value: 10
       objectReference: {fileID: 0}
@@ -5962,6 +5974,10 @@ PrefabInstance:
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 161732396}
+    - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
+      propertyPath: NPCManager
+      value: 
+      objectReference: {fileID: 250257200}
     - target: {fileID: 6327803450025997514, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: audioManager
       value: 
@@ -6875,7 +6891,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1689298478}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
