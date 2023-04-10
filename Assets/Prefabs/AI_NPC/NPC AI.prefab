@@ -221,22 +221,25 @@ MonoBehaviour:
   waitTime: 0
   myMesh: {fileID: 6327803450025997517}
   myBody: {fileID: 6327803450025997519}
-  NPCManager: {fileID: 597644910372517495, guid: 8d858fd9d27198b4c90a9bf3293a2701, type: 3}
+  NPCManager: {fileID: 0}
   fov: {fileID: 6327803450025997512}
   FOVMesh: {fileID: 6327803451168946060}
   alertFOV: {fileID: 2100000, guid: 9646a033ad9fcfa4cb20a035b93879b6, type: 2}
   passiveFOV: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
   agent: {fileID: 6327803450025997513}
-  graph: {fileID: 5817582213518777809, guid: de954de07c7af814c85798283e80f2ac, type: 3}
+  graph: {fileID: 0}
   chaseSpeed: 11
   susSpeed: 4
   patrolSpeed: 4
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   targetLine: {fileID: 1403198769126221781}
-  damageInterface: {fileID: 2762713670264431872, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+  damageInterface: {fileID: 0}
   playerDamage: 1
   playerVisibleTimer: 0
-  playerPos: {fileID: 2762713670264431879, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+  playerPos: {fileID: 0}
+  AIAudio: {fileID: 6192366691849383811}
   DEBUG: 0
   myTransform: {fileID: 6327803450025997515}
   FOVPassive: {fileID: 2100000, guid: 991412137485d6840bc015e59dee6e10, type: 2}
@@ -397,7 +400,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 44637ee1c8fdc2f46acae8d5834479d7, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1

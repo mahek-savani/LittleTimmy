@@ -188,7 +188,7 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
-    private AudioSource AIAudio;
+    public AudioSource AIAudio;
 
     [Header("Debugging")]
 
@@ -348,13 +348,13 @@ public class StateMachine_Robust : MonoBehaviour
 
                 }
 
-                if (audioManager && AIAudio)
-                {
-                    if (AIAudio.isPlaying)
-                    {
-                        AIAudio.Stop();
-                    }
-                }
+                //if (audioManager && AIAudio)
+                //{
+                //    if (AIAudio.isPlaying)
+                //    {
+                //        AIAudio.Stop();
+                //    }
+                //}
 
                 break;
 
@@ -445,17 +445,17 @@ public class StateMachine_Robust : MonoBehaviour
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
 
-                if(audioManager && AIAudio)
-                {
-                    if(AIAudio.clip.name != "NPC_Walk")
-                    {
-                        AIAudio.Stop();
-                        AIAudio.loop = true;
-                        AIAudio.volume = 0.3f;
-                        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
-                        AIAudio.Play();
-                    }
-                }
+                //if(audioManager && AIAudio)
+                //{
+                //    if(AIAudio.clip.name != "NPC_Walk")
+                //    {
+                //        AIAudio.Stop();
+                //        AIAudio.loop = true;
+                //        AIAudio.volume = 0.3f;
+                //        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
+                //        AIAudio.Play();
+                //    }
+                //}
 
                 break;
 
@@ -490,17 +490,17 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(patrolPoints[currentDest]);
                 }
 
-                if (audioManager && AIAudio)
-                {
-                    if (AIAudio.clip.name != "NPCChase")
-                    {
-                        AIAudio.Stop();
-                        AIAudio.loop = true;
-                        AIAudio.volume = 0.3f;
-                        AIAudio.clip = audioManager.findSound("NPCChaseSound").clip;
-                        AIAudio.Play();
-                    }
-                }
+                //if (audioManager && AIAudio)
+                //{
+                //    if (AIAudio.clip.name != "NPCChase")
+                //    {
+                //        AIAudio.Stop();
+                //        AIAudio.loop = true;
+                //        AIAudio.volume = 0.3f;
+                //        AIAudio.clip = audioManager.findSound("NPCChaseSound").clip;
+                //        AIAudio.Play();
+                //    }
+                //}
 
                 break;
 
@@ -543,17 +543,17 @@ public class StateMachine_Robust : MonoBehaviour
                     }
                 }
 
-                if (audioManager && AIAudio)
-                {
-                    if (AIAudio.clip.name != "NPCSus")
-                    {
-                        AIAudio.Stop();
-                        AIAudio.loop = false;
-                        AIAudio.volume = 0.3f;
-                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
-                        AIAudio.Play();
-                    }
-                }
+                //if (audioManager && AIAudio)
+                //{
+                //    if (AIAudio.clip.name != "NPCSus")
+                //    {
+                //        AIAudio.Stop();
+                //        AIAudio.loop = false;
+                //        AIAudio.volume = 0.3f;
+                //        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                //        AIAudio.Play();
+                //    }
+                //}
 
                 break;
 
@@ -605,17 +605,17 @@ public class StateMachine_Robust : MonoBehaviour
                     timeCounter -= Time.deltaTime;
                 }
 
-                if (audioManager && AIAudio)
-                {
-                    if (AIAudio.clip.name != "NPCSus")
-                    {
-                        AIAudio.Stop();
-                        AIAudio.loop = false;
-                        AIAudio.volume = 0.3f;
-                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
-                        AIAudio.Play();
-                    }
-                }
+                //if (audioManager && AIAudio)
+                //{
+                //    if (AIAudio.clip.name != "NPCSus")
+                //    {
+                //        AIAudio.Stop();
+                //        AIAudio.loop = false;
+                //        AIAudio.volume = 0.3f;
+                //        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                //        AIAudio.Play();
+                //    }
+                //}
 
                 break;
 
@@ -713,12 +713,23 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
+    public void playSound(string clipName)
+    {
+        if (audioManager && AIAudio)
+        {
+            AIAudio.loop = true;
+            AIAudio.volume = 0.3f;
+            AIAudio.clip = audioManager.findSound(clipName).clip;
+            AIAudio.Play();
+        }
+    }
+
     public void getChase()
     {
-        
+
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
-
+        playSound("NPCChaseSound");
         agent.isStopped = false;
         targetLine.enabled = true;
         myMesh.material.color = Color.red;
@@ -732,6 +743,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
+        AIAudio.Stop();
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
         targetLine.enabled = false;
@@ -761,9 +773,9 @@ public class StateMachine_Robust : MonoBehaviour
     public void getIdle()
     {
 
-                // Play  sound 
+        // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
-
+        AIAudio.Stop();
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
         targetLine.enabled = false;
@@ -799,6 +811,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
+        AIAudio.Stop();
         targetLine.enabled = false;
         conscious = false;
         FOVMesh.enabled = false;
@@ -813,7 +826,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
-
+        AIAudio.Stop();
         conscious = false;
         FOVMesh.enabled = false;
         targetLine.enabled = false;
@@ -824,6 +837,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getNoise(Vector3 source)
     {
+        playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = true;
         agent.speed = susSpeed;
@@ -846,6 +860,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getSuspicious(Vector3 source)
     {
+        playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = susSpeed;
@@ -864,6 +879,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getParanoid()
     {
+        playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
         myMesh.material.color = new Color(252 / 255f, 139 / 255f, 0f);
@@ -880,8 +896,6 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getPatrol()
     {
-
-
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = patrolSpeed;
@@ -892,9 +906,9 @@ public class StateMachine_Robust : MonoBehaviour
         returnToPatrol();
         myMesh.material.color = Color.cyan;
 
+        playSound("NPCFootStepsWalk");
+
         state = STATE.PATROLLING;
-
-
     }
 
 
