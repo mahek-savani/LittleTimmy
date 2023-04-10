@@ -920,9 +920,9 @@ public class StateMachine_Robust : MonoBehaviour
     {
         // STop  sound 
         // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
-             
-        // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
 
+        // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
+        AIAudio.Stop();
         alive = false;
         conscious = false;
         targetLine.enabled = false;
