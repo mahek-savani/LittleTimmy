@@ -188,6 +188,8 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
+    private AudioSource AIAudio;
+
     [Header("Debugging")]
 
     public bool DEBUG = false;
@@ -243,7 +245,8 @@ public class StateMachine_Robust : MonoBehaviour
         //StartCoroutine(assignOGTransform());
         //audioManager.Play("360BallSound");
 
-        audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
+        //audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
+        AIAudio = this.GetComponent<AudioSource>();
     }
     void OnEnable() {
         fov.viewMeshFilter.GetComponent<MeshRenderer>().material = FOVPassive;
@@ -343,6 +346,14 @@ public class StateMachine_Robust : MonoBehaviour
                     
                 }
 
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.isPlaying)
+                    {
+                        AIAudio.Stop();
+                    }
+                }
+
                 break;
 
             // In the idle state, the NPC will remain motionless for some amount of specified time
@@ -393,8 +404,8 @@ public class StateMachine_Robust : MonoBehaviour
             // Once they finish, they will return to the first waypoint on the list
             // Can transition into suspicion if the player stays in the FOV
             case STATE.PATROLLING:
-            
-      
+
+
 
                 if ( playerVisibleTimer >= timeToSuspicion)
                 {
@@ -428,6 +439,19 @@ public class StateMachine_Robust : MonoBehaviour
                     agent.SetDestination(patrolPoints[currentDest].position);
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
+
+                if(audioManager && AIAudio)
+                {
+                    if(AIAudio.clip.name != "NPC_Walk")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = true;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
+                        AIAudio.Play();
+                    }
+                }
+
                 break;
                 
             
@@ -461,6 +485,17 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(patrolPoints[currentDest]);
                 }
 
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCChase")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = true;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCChaseSound").clip;
+                        AIAudio.Play();
+                    }
+                }
 
                 break;
 
@@ -497,6 +532,18 @@ public class StateMachine_Robust : MonoBehaviour
                     agent.SetDestination(currentPosition.position);
                 }
 
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCSus")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = false;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                        AIAudio.Play();
+                    }
+                }
+
                 break;
 
             // The NPC walks directly to some specified position
@@ -530,6 +577,19 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     timeCounter -= Time.deltaTime;
                 }
+
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCSus")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = false;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                        AIAudio.Play();
+                    }
+                }
+
                 break;
 
             // CURRENTLY NOT USED

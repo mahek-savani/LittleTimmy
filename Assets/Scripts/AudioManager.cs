@@ -130,7 +130,7 @@ public class AudioManager : MonoBehaviour
 
      }
 
-    private Sound findSound(string name)
+    public Sound findSound(string name)
     {
         Sound s = null;
         foreach (Sound sound in sounds)
