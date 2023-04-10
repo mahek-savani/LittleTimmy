@@ -61,6 +61,10 @@ public class Experimental_Reset_Button : MonoBehaviour
         {
             if (!pitTrap.trapActive)
             {
+
+                // Play Reset Door SOund
+                // FindObjectOfType<AudioManager>().Play("DoorResetSound");
+
                 //changing pit trap's trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");

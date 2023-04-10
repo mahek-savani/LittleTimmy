@@ -33,6 +33,7 @@ public class TrapPlacer : MonoBehaviour
             {
                 player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";
                 placedTrapBefore = true;
+                
             }
 
             //Wall traps

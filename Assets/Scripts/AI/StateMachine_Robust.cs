@@ -188,6 +188,8 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
+    private AudioSource AIAudio;
+
     [Header("Debugging")]
 
     public bool DEBUG = false;
@@ -201,6 +203,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     public Material FOVPassive;
 
+    [Header("Art and Audio")]
+
+    public AudioManager audioManager;
 
 
     //[Header("Debugging")]
@@ -238,6 +243,10 @@ public class StateMachine_Robust : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(assignOGTransform());
+        //audioManager.Play("360BallSound");
+
+        //audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
+        AIAudio = this.GetComponent<AudioSource>();
     }
     void OnEnable()
     {
@@ -311,6 +320,11 @@ public class StateMachine_Robust : MonoBehaviour
 
             // The NPC can't hurt or see the player, and can't move until the timer runs out
             case STATE.UNCONSCIOUS:
+
+                // Stop chase  sound 
+                // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
+
+
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, 0);
                 if (waitTime > 0)
                 {
@@ -334,6 +348,14 @@ public class StateMachine_Robust : MonoBehaviour
 
                 }
 
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.isPlaying)
+                    {
+                        AIAudio.Stop();
+                    }
+                }
+
                 break;
 
             // In the idle state, the NPC will remain motionless for some amount of specified time
@@ -341,6 +363,8 @@ public class StateMachine_Robust : MonoBehaviour
             // When waking up from unconsciousness, the NPC will become suspicious
             // When ceasing awake idling, the NPC will return to their default state
             case STATE.IDLE:
+
+                
 
 
                 if (agent.remainingDistance <= Mathf.Epsilon && !agent.isStopped)
@@ -382,13 +406,17 @@ public class StateMachine_Robust : MonoBehaviour
             // Once they finish, they will return to the first waypoint on the list
             // Can transition into suspicion if the player stays in the FOV
             case STATE.PATROLLING:
-                if (playerVisibleTimer >= timeToSuspicion)
+
+
+
+                if ( playerVisibleTimer >= timeToSuspicion)
                 {
                     getNoise(playerPos.position);
                     return;
                 }
 
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, 0, timeToChase);
+
 
                 //if (fov.visibleTargets.Count != 0)
                 //{
@@ -416,12 +444,28 @@ public class StateMachine_Robust : MonoBehaviour
                     agent.SetDestination(patrolPoints[currentDest].position);
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
+
+                if(audioManager && AIAudio)
+                {
+                    if(AIAudio.clip.name != "NPC_Walk")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = true;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
+                        AIAudio.Play();
+                    }
+                }
+
                 break;
 
 
             // While chasing the player, the NPC knows their exact position
             // Transitions into suspicion when the player stays out of the enemy FOV for long enough
             case STATE.CHASING:
+
+
+
                 playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToChase, timeToChase);
 
                 targetLine.SetPosition(0, transform.position);
@@ -446,6 +490,17 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(patrolPoints[currentDest]);
                 }
 
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCChase")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = true;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCChaseSound").clip;
+                        AIAudio.Play();
+                    }
+                }
 
                 break;
 
@@ -485,6 +540,18 @@ public class StateMachine_Robust : MonoBehaviour
                     {
                         currentPosition = neighbor;
                         agent.SetDestination(currentPosition.position);
+                    }
+                }
+
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCSus")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = false;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                        AIAudio.Play();
                     }
                 }
 
@@ -537,6 +604,19 @@ public class StateMachine_Robust : MonoBehaviour
                 {
                     timeCounter -= Time.deltaTime;
                 }
+
+                if (audioManager && AIAudio)
+                {
+                    if (AIAudio.clip.name != "NPCSus")
+                    {
+                        AIAudio.Stop();
+                        AIAudio.loop = false;
+                        AIAudio.volume = 0.3f;
+                        AIAudio.clip = audioManager.findSound("NPCSus").clip;
+                        AIAudio.Play();
+                    }
+                }
+
                 break;
 
             // CURRENTLY NOT USED
@@ -635,6 +715,10 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getChase()
     {
+        
+        // Play  sound 
+        // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
+
         agent.isStopped = false;
         targetLine.enabled = true;
         myMesh.material.color = Color.red;
@@ -676,6 +760,10 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle()
     {
+
+                // Play  sound 
+        // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
+
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
         targetLine.enabled = false;
@@ -792,13 +880,21 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getPatrol()
     {
+
+
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = patrolSpeed;
+
+                                // Play  sound 
+        // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
+
         returnToPatrol();
         myMesh.material.color = Color.cyan;
 
         state = STATE.PATROLLING;
+
+
     }
 
 
@@ -808,6 +904,11 @@ public class StateMachine_Robust : MonoBehaviour
     //}
     public void die()
     {
+        // STop  sound 
+        // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
+             
+        // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
+
         alive = false;
         conscious = false;
         targetLine.enabled = false;

@@ -54,6 +54,10 @@ public class buttonPressReset : MonoBehaviour
         {
             if (!spikeTrap.trapActive)
             {
+
+                // Play Spike Reset Sound
+                //FindObjectOfType<AudioManager>().Play("SpikeResetSound");
+                
                 //spike.isTrapMovingBack = true;
 
                 spikeGrid.transform.position = spikeTrap.originalPos;

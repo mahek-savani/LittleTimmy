@@ -38,6 +38,11 @@ public class Experimental_PitTrapButton : MonoBehaviour
         {
             if (pitTrap.trapActive)
             {
+
+                // // Play Door Opening Sound
+                // FindObjectOfType<AudioManager>().Play("DoorActiveSound");
+
+
                 //changing pit trap's trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;
                 buttonParent.GetComponent<Animation>().Play("buttonAnim");
@@ -78,9 +83,13 @@ public class Experimental_PitTrapButton : MonoBehaviour
 
                 if (resetButton)
                 {
+                    
                     resetButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;
                     resetButton.GetComponent<Animation>().Play("buttonAnim");
                     resetButton.GetComponent<Renderer>().material.color = startingMaterialColor;
+
+
+                        
                 }
 
                 //navMesh.RemoveData();
@@ -89,7 +98,11 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //navMesh.UpdateNavMesh(currentNavMesh);
 
                 //Destroy(gameObject);
-                if(ExperimentalPitButtonPushed != null) ExperimentalPitButtonPushed();
+                if(ExperimentalPitButtonPushed != null) 
+                {
+
+                    ExperimentalPitButtonPushed();
+                }
                 buttonParent.GetComponent<Renderer>().material.color = Color.grey;
                 trapDoor.transform.GetComponent<Renderer>().material.color = Color.grey;
             }
