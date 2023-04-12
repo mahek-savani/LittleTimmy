@@ -247,6 +247,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         //audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
         AIAudio = this.GetComponent<AudioSource>();
+        Physics.IgnoreLayerCollision(7, 21);
     }
     void OnEnable()
     {
