@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2877,6 +2877,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tutorial Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 200109591535901868, guid: ca86d376863e64e4a894d9f48cd8a92b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2166516953705215351, guid: ca86d376863e64e4a894d9f48cd8a92b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5633,33 +5637,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1878671067, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: trapSketch
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878671069, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1878671069, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3572b01a32099604287e61c81b2d91a2, type: 2}
     - target: {fileID: 3093220715327356596, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180794719686713, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180794719686713, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3572b01a32099604287e61c81b2d91a2, type: 2}
-    - target: {fileID: 3168180794719686727, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: trapSketch
-      value: 
+      value: -35.71
       objectReference: {fileID: 0}
     - target: {fileID: 3168180795790727004, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
       propertyPath: m_RootOrder
@@ -5705,68 +5685,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: navSketch
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: endZoneSketch
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: navSketchSidePan
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: trapSketchObject
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: endZoneSketchSidePan
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: trapSketchObjectSidePan
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3168180795790727006, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
       propertyPath: m_Name
       value: Tutorial triggers
       objectReference: {fileID: 0}
-    - target: {fileID: 3168180796237964242, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: endZoneSketch
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180796237964244, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3168180796237964244, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3572b01a32099604287e61c81b2d91a2, type: 2}
     - target: {fileID: 4941358287835763634, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35.91
+      value: -35.69
       objectReference: {fileID: 0}
-    - target: {fileID: 5581823659558001359, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c71a3c567cf5747a886a7da6f7b3d65e, type: 3}
-    - target: {fileID: 7422655283803189622, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 65aa5d424d4c94539a729e7bb541a31f, type: 3}
-    - target: {fileID: 7599994408022664890, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 57318d7f10b8348b08ba82c72b8cc114, type: 3}
     - target: {fileID: 7932928230231178412, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.3
+      propertyPath: m_AnchoredPosition.x
+      value: -35.659996
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3168180795790727005, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3a082b5af77caf4e92fa5579e3d71e6, type: 3}
 --- !u!1 &1965230902
 GameObject:
@@ -6142,11 +6073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8280838150575721760, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000004768371
+      value: -0.0000006342306
       objectReference: {fileID: 0}
     - target: {fileID: 8280838150575721760, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000004768371
+      value: -0.0000006342306
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
