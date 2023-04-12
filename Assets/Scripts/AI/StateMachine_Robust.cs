@@ -275,10 +275,10 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (agent.pathPending)
-        //{
-        //    return;
-        //}
+        if (agent.pathPending)
+        {
+            return;
+        }
         Vector3 distOffMesh = getPointNearestNavMesh(playerPos.position) - playerPos.position;
 
         if (distOffMesh.magnitude >= 1f)
