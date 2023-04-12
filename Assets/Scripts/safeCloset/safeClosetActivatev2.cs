@@ -11,7 +11,7 @@ public class safeClosetActivatev2 : MonoBehaviour
     public bool playerAwake = true;
     public LiveCounter enemyCounter;
     public GameObject pos;
-    private bool check = false;
+    private bool check = true;
 
     private void disablePlayer()
     {
