@@ -12,12 +12,14 @@ public class SwitchCameraView : MonoBehaviour
     public CinemachineVirtualCamera pitTrapCamera;
     public CinemachineVirtualCamera resetButtonCamera;
     public CinemachineVirtualCamera levelCamera;
+    public Vector3 playerCameraOffset = new Vector3(0f, 50f, -30f);
     public float switchTime = 5f;
     public Transform playerTransform;
     private bool isPlayerCamera = false;
     public GameObject SwitchCamFill;
     public bool isPlayerInCloset = false;
 
+    private Quaternion playerCamRotation;
     private bool panEndZone = false;
     private bool panSpikeTrap = false;
     private bool panPitTrap = false;
@@ -25,6 +27,8 @@ public class SwitchCameraView : MonoBehaviour
 
     private void Start()
     {
+        playerCamRotation = playerCamera.transform.rotation;
+        // Debug.Log(playerCamera.transform.rotation);
         levelCamera.gameObject.SetActive(true);
         endZoneCamera.gameObject.SetActive(false);
         string sceneName = SceneManager.GetActiveScene().name;
@@ -47,6 +51,9 @@ public class SwitchCameraView : MonoBehaviour
     }
     private void Update()
     {
+        playerCamera.transform.rotation = playerCamRotation;
+        playerCamera.transform.position = playerTransform.position + playerCameraOffset;
+        // Debug.Log(playerCamera.transform.rotation);
         if (Input.GetKeyDown("c"))
         {
             if (isPlayerCamera)
