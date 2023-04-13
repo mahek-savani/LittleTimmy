@@ -22,7 +22,7 @@ public class safeClosetActivatev2 : MonoBehaviour
             playerAwake = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log("key press");
             if (check == true)
