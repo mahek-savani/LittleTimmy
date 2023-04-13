@@ -29,12 +29,13 @@ public class TrapPlacer : MonoBehaviour
         {
             trapInInventory = player.trapInHand;
 
-            if (!placedTrapBefore)
-            {
-                player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";
-                placedTrapBefore = true;
-                
-            }
+            // Update the HelpUI if you have an item in your inventory + are navigating level
+            // Should NOT update if the helpUI is already occupied with the closet interaction text
+            if (player.helpUI.GetComponent<TextMeshProUGUI>().text == "") player.helpUI.GetComponent<TextMeshProUGUI>().text = "[E] to place your trap on the floor!";                
+
+            // placedTrapBefore is used in PlayerController.OnTriggerStay to help trigger tutorials in Level 4 (Noise Trap Tutorial)
+            // and Level 5 (Speedball/Freeze Trap Tutorial). Remove at your own risk.
+            if(!placedTrapBefore) placedTrapBefore = true;
 
             //Wall traps
             if (Input.GetKeyDown(KeyCode.R))
