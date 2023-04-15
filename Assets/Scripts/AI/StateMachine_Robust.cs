@@ -172,6 +172,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Renders a line to a target the NPC is moving to
     public LineRenderer targetLine;
 
+    // Script that manages the NPC's offMeshLink
+    public workingOffLinkScript linkScript;
+
 
 
     [Header("Player Interaction")]
@@ -310,6 +313,11 @@ public class StateMachine_Robust : MonoBehaviour
         //}
 
         //Debug.Log(state);
+
+        if (linkScript.enabled)
+        {
+            linkScript.UpdateLink();
+        }
 
         // The body of the state machine, checking the state every frame and acting accordingly
         switch (state)
@@ -563,6 +571,7 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.NOISE:
                 if (playerVisibleTimer >= timeToChase)
                 {
+                    disableLink();
                     getChase();
                     return;
                 }
@@ -591,19 +600,20 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(playerPos.position);
                     //transform.LookAt(playerPos.position, transform.up);
                     //timeCounter = suspiciousTime;
-
+                    disableLink();
                     getNoise(playerPos.position);
 
 
                 }
                 else if (agent.remainingDistance <= 0.12)
                 {
+                    disableLink();
                     getSuspicious(transform.position);
                 }
-                else
-                {
-                    timeCounter -= Time.deltaTime;
-                }
+                //else
+                //{
+                //    timeCounter -= Time.deltaTime;
+                //}
 
                 //if (audioManager && AIAudio)
                 //{
@@ -726,7 +736,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getChase()
     {
-
+        disableLink();
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
         playSound("NPCChaseSound");
@@ -743,6 +753,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
+        disableLink();
         AIAudio.Stop();
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
@@ -772,7 +783,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle()
     {
-
+        disableLink();
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
         AIAudio.Stop();
@@ -807,6 +818,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious(float time)
     {
+        disableLink();
         if (agent.enabled)
         {
             agent.isStopped = true;
@@ -822,6 +834,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious()
     {
+        disableLink();
         if (agent.enabled)
         {
             agent.isStopped = true;
@@ -854,12 +867,14 @@ public class StateMachine_Robust : MonoBehaviour
     // Forcibly transitions into suspicious state, even if currently chasing
     public void forceSuspicious()
     {
+        disableLink();
         playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToSuspicion);
         getSuspicious(transform.position);
     }
 
     public void getSuspicious(Vector3 source)
     {
+        disableLink();
         playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
@@ -879,6 +894,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getParanoid()
     {
+        disableLink();
         playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
@@ -896,6 +912,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getPatrol()
     {
+        disableLink();
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = patrolSpeed;
@@ -918,6 +935,7 @@ public class StateMachine_Robust : MonoBehaviour
     //}
     public void die()
     {
+        disableLink();
         // STop  sound 
         // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
 
@@ -1186,6 +1204,11 @@ public class StateMachine_Robust : MonoBehaviour
         //agent.Resume();
 
 
+    }
+
+    private void disableLink()
+    {
+        gameObject.GetComponent<workingOffLinkScript>().enabled = false;
     }
 
     //public void start()
