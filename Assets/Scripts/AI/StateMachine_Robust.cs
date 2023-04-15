@@ -317,7 +317,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         //Debug.Log(state);
 
-        if (linkScript.enabled)
+        if (linkScript && linkScript.enabled)
         {
             linkScript.UpdateLink();
         }
@@ -1211,8 +1211,11 @@ public class StateMachine_Robust : MonoBehaviour
 
     private void disableLink()
     {
-        noiseTriggered = false;
-        gameObject.GetComponent<workingOffLinkScript>().enabled = false;
+        if (gameObject.GetComponent<workingOffLinkScript>())
+        {
+            noiseTriggered = false;
+            gameObject.GetComponent<workingOffLinkScript>().enabled = false;
+        }
     }
 
     //public void start()

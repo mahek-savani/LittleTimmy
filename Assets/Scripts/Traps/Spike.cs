@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 
@@ -10,6 +12,7 @@ public class Spike : MonoBehaviour
     public bool isTrapMoving = false;
     public bool isTrapMovingBack = false;
     private bool switchView = false;
+    public NavMeshSurface navMesh;
 
     void OnTriggerEnter(Collider c)
     {
@@ -17,6 +20,7 @@ public class Spike : MonoBehaviour
         {
             // Debug.Log("collide");
             c.gameObject.SetActive(false);
+            navMesh.BuildNavMesh();
         }
 
         if (c.gameObject.layer == LayerMask.NameToLayer("Enemies"))
