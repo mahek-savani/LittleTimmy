@@ -38,6 +38,9 @@ public class StateMachine_Robust : MonoBehaviour
     // The default direction to face for an idle NPC
     public DIRECTION defaultIdleDir = DIRECTION.NORTH;
 
+    // Denotes whether the NPC is following a noise trap or not
+    public bool noiseTriggered;
+
     // The current idle position for the NPC
     private Vector3 idlePos;
 
@@ -1208,6 +1211,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     private void disableLink()
     {
+        noiseTriggered = false;
         gameObject.GetComponent<workingOffLinkScript>().enabled = false;
     }
 

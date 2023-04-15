@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Unity.Jobs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -62,7 +63,12 @@ public class NoiseTrapActivation : BaseTrapClass
         {
             if(enemyTransforms[i])
             {
-                if(!walledOff(transform.position, enemyTransforms[i].position))
+                StateMachine_Robust SM = enemyTransforms[i].gameObject.GetComponent<StateMachine_Robust>();
+                if (!SM.noiseTriggered)
+                {
+                    enemyTransforms.RemoveAt(i);
+                }
+                else if(!walledOff(transform.position, enemyTransforms[i].position))
                 {
                     //enemyAgent.enabled = false;
                     // offLink.enabled = true;
@@ -111,7 +117,8 @@ public class NoiseTrapActivation : BaseTrapClass
 
                     //enemyAgent.enabled = true;
                     enemyTransforms.RemoveAt(i);
-                    enemyMachine.getNoise(transform.position);
+
+                    //enemyMachine.getNoise(transform.position);
                 }
             }
         }
@@ -263,7 +270,7 @@ public class NoiseTrapActivation : BaseTrapClass
             enemyAgent = other.gameObject.GetComponent<NavMeshAgent>();
             // Debug.Log(transform.position);
 
-
+            SM.noiseTriggered = true;
             other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             //Debug.Log("getNoise called");

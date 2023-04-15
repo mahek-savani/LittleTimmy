@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129685582315827948}
-  m_LocalRotation: {x: 0.39468312, y: -0.000000012349576, z: 0.000000005304829, w: 0.91881734}
+  m_LocalRotation: {x: 0.3946831, y: -0.000000024812486, z: 0.000000010658342, w: 0.91881734}
   m_LocalPosition: {x: 0, y: 13.390001, z: -12.710002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -488,6 +488,7 @@ MonoBehaviour:
   passive: 0
   defaultIdlePos: {fileID: 0}
   defaultIdleDir: 0
+  noiseTriggered: 0
   timeToSuspicion: 0.3
   suspiciousTime: 5
   timeToChase: 1
@@ -507,15 +508,7 @@ MonoBehaviour:
   chaseSpeed: 11
   susSpeed: 4
   patrolSpeed: 5
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  patrolPoints: []
   targetLine: {fileID: 4588654442731936812}
   linkScript: {fileID: 3231057028954451629}
   damageInterface: {fileID: 0}
