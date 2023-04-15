@@ -10,6 +10,7 @@ public class buttonPressReset : MonoBehaviour
     public GameObject buttonParent;
     public GameObject trapButton;
     public GameObject spikeTrapWorking;
+    public GameObject smoke;
 
     public float colorDelay = 2f;
     float colorBit = 0f;
@@ -29,7 +30,8 @@ public class buttonPressReset : MonoBehaviour
 
     void Update(){
         if(!spikeTrap.trapActive){
-            if(colorDelay > 0) colorDelay -= 1f * Time.deltaTime;
+            if (smoke) smoke.SetActive(true);
+            if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
             else {
                 colorDelay = 2;
                 if(colorBit == 0)
@@ -68,6 +70,7 @@ public class buttonPressReset : MonoBehaviour
                 // spikeTrapWorking.GetComponent<Animation>().Play("Spike Tutorial Hallway Anim");
                 // spikeGrid.transform.position += new Vector3(0, 0, -23.6f);
                 spikeTrap.trapActive = true;
+                spike.isTrapMoving = false;
                 // trapButton.transform.localScale += new Vector3(0, 0.63f, 0);
                 //changing spike trap's trigger button's animation direction to backward
                 trapButton.GetComponent<Animation>()["buttonAnim"].speed = animDirection;

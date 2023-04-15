@@ -4,6 +4,7 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Experimental_PitTrapButton : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
 
     //public NavMeshSurface navMesh;
     //public NavMeshData currentNavMesh;
+    private bool switchView = false;
 
     //backward direction
     float animDirection = -1f;
@@ -63,7 +65,20 @@ public class Experimental_PitTrapButton : MonoBehaviour
                 //manager.resetting = false;
                 //manager.rebuildNavMesh = true;
 
-  
+                string sceneName = SceneManager.GetActiveScene().name;
+                if(sceneName == "Level 1 Pit Trap Tutorial")
+                {
+                    if (!switchView)
+                    {
+                        switchView = true;
+                        SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
+                        if (cameraView != null)
+                        {
+                            cameraView.SetPanPitTrap(true);
+                        }
+                    }
+                }
+
 
 
                 if (resetButton)

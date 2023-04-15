@@ -9,6 +9,8 @@ public class WireChange : MonoBehaviour
     public PitTrap AttachedPitTrap;
 
     [SerializeField]private Color startingMaterialColor;
+    public float colorDelay = 2f;
+    float colorBit = 0f;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -58,6 +60,54 @@ public class WireChange : MonoBehaviour
             Experimental_Reset_Button.ExperimentalResetPushed -= ChangeActiveColor;
         }
     }
+
+    void Update(){
+       if(gameObject.layer == LayerMask.NameToLayer("Reset Wires")){
+            if(AttachedPitTrap){
+                if(AttachedPitTrap.trapActive){
+                    GetComponent<Renderer>().material.color = Color.grey;
+                } else {
+                    if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
+                    else {
+                        colorDelay = 2;
+                        if(colorBit == 0)
+                        { 
+                            GetComponent<Renderer>().material.color = Color.green;
+                            colorBit = 1;
+                        }
+                        else
+                        {
+                            GetComponent<Renderer>().material.color = startingMaterialColor;
+                            colorBit = 0;
+                        }
+                    }
+                }
+            
+            // If not, is this an Spike Trap that is attached?
+            } else if(AttachedSpikeTrap){
+                if(AttachedSpikeTrap.trapActive){
+                    GetComponent<Renderer>().material.color = Color.grey;
+                } else {
+                    if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
+                    else {
+                        colorDelay = 2;
+                        if(colorBit == 0)
+                        { 
+                            GetComponent<Renderer>().material.color = Color.green;
+                            colorBit = 1;
+                        }
+                        else
+                        {
+                            GetComponent<Renderer>().material.color = startingMaterialColor;
+                            colorBit = 0;
+                        }
+                    }
+                }
+            }
+                        
+        }
+    }
+    
 
     void ChangeActiveColor()
     {

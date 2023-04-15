@@ -7,7 +7,8 @@ using UnityEngine.AI;
 public class workingOffLinkScript : MonoBehaviour
 {
     public float dieTime = 2.0f;
-    public Transform enemyTransform;
+    // public Transform enemyTransform;
+    public List<Transform> enemyTransforms = new List<Transform>();
     public Transform startLink;
     public Transform endLink;
     public Transform floor;
@@ -18,14 +19,25 @@ public class workingOffLinkScript : MonoBehaviour
 
     private void Update()
     {
-        startLink.SetPositionAndRotation(new Vector3(enemyTransform.position.x, floor.position.y,
-enemyTransform.position.z), enemyTransform.rotation);
+        for(int i=0; i<enemyTransforms.Count; i++)
+        {
+            if(enemyTransforms[i] && startLink)
+            {
+                startLink.SetPositionAndRotation(new Vector3(enemyTransforms[i].position.x, floor.position.y,
+enemyTransforms[i].position.z), enemyTransforms[i].rotation);
+            }
+        }
     }
 
     IEnumerator waitToDie()
     {
         yield return new WaitForSeconds(dieTime);
-        gameObject.GetComponent<OffMeshLink>().enabled = false;
+        OffMeshLink[] offMeshLinks = GetComponents<OffMeshLink>();
+        // Debug.Log(offMeshLinks.Length);
+        foreach (OffMeshLink offMeshLink in offMeshLinks)
+        {
+            Destroy(offMeshLink);
+        }
         gameObject.GetComponent<workingOffLinkScript>().enabled = false;
     }
 }
