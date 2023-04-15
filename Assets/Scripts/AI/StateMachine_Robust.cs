@@ -439,18 +439,6 @@ public class StateMachine_Robust : MonoBehaviour
                 }
                 //Debug.Log(Vector3.Distance(transform.position, patrolPoints[currentDest]) );
 
-                //if(audioManager && AIAudio)
-                //{
-                //    if(AIAudio.clip.name != "NPC_Walk")
-                //    {
-                //        AIAudio.Stop();
-                //        AIAudio.loop = true;
-                //        AIAudio.volume = 0.3f;
-                //        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
-                //        AIAudio.Play();
-                //    }
-                //}
-
                 break;
 
 
