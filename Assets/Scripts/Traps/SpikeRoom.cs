@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SpikeRoom : MonoBehaviour
 {
-    void OnTriggerEnter(Collider c)
+    void OnCollisionEnter(Collision c)
     {
         if (c.gameObject.layer == 7)
         {
