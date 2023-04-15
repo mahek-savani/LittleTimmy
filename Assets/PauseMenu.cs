@@ -15,13 +15,13 @@ public class PauseMenu : MonoBehaviour
     void unPauseGame()
     {
         gameObject.SetActive(false);
-        AudioListener.pause = false;
+        //AudioListener.pause = false;
     }
 
     private void OnEnable()
     {
         Time.timeScale = 0;
-        AudioListener.pause = true;
+        //AudioListener.pause = true;
     }
 
     private void OnDisable()
