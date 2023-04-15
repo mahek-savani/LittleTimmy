@@ -5550,11 +5550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002004567
+      value: 0.000000027382889
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000008610729
+      value: -0.000000011762472
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: graph
@@ -5572,6 +5572,10 @@ PrefabInstance:
       propertyPath: NPCManager
       value: 
       objectReference: {fileID: 250257200}
+    - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1247133509}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: defaultState
       value: 1
@@ -10548,6 +10552,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 3e9ed069d4a2a484b84697930cbbb408, type: 2}
   m_BuildHeightMesh: 0
+--- !u!82 &1565611118 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8734926698138702970, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+  m_PrefabInstance: {fileID: 755056453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1615669798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11919,11 +11928,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 3e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: graph
@@ -11934,6 +11943,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+      propertyPath: AIAudio
+      value: 
+      objectReference: {fileID: 1565611118}
+    - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 161732396}
@@ -11941,6 +11954,10 @@ PrefabInstance:
       propertyPath: NPCManager
       value: 
       objectReference: {fileID: 250257200}
+    - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1247133509}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: defaultState
       value: 0
@@ -13055,11 +13072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: graph
@@ -13070,6 +13087,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+      propertyPath: AIAudio
+      value: 
+      objectReference: {fileID: 1565611118}
+    - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: playerPos
       value: 
       objectReference: {fileID: 161732396}
@@ -13077,6 +13098,10 @@ PrefabInstance:
       propertyPath: NPCManager
       value: 
       objectReference: {fileID: 250257200}
+    - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1247133509}
     - target: {fileID: 8865294676942180147, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: defaultState
       value: 1
