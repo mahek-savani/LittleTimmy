@@ -730,10 +730,15 @@ public class StateMachine_Robust : MonoBehaviour
     {
         if (audioManager && AIAudio)
         {
-            AIAudio.loop = true;
-            AIAudio.volume = 0.3f;
-            AIAudio.clip = audioManager.findSound(clipName).clip;
-            AIAudio.Play();
+            AudioClip sound = audioManager.findSound(clipName).clip;
+
+            if (AIAudio.clip != sound)
+            {
+                AIAudio.loop = true;
+                AIAudio.volume = 0.3f;
+                AIAudio.clip = sound;
+                AIAudio.Play();
+            }
         }
     }
 
