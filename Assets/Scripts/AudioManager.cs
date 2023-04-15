@@ -114,21 +114,17 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void Stop (string name)
+    public void Stop (int channel)
      {
-        Sound s = findSound(name);
-
-        if (s != null)
-        {
-            s.source.Stop();
-        }
-        else
-        {
-            Debug.Log("AudioManager Error: Stop: Null sound played (Sound not found)");
-        }
-
-
+        channelMap[channel].Stop();
      }
+
+    public void StopAll ()
+    {
+        channel1.Stop();
+        channel2.Stop();
+        channel3.Stop();
+    }
 
     public Sound findSound(string name)
     {
