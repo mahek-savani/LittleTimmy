@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour
      }
 
     public void Play(string name, int channel, float volume = 0.5f, float pitch = 1f,
-                     float spatialBlend = 0f, bool loop = true, AudioRolloffMode rollOffMod = AudioRolloffMode.Custom,
+                     float spatialBlend = 0f, bool loop = true, AudioRolloffMode rollOffMode = AudioRolloffMode.Custom,
                      float maxDistance = Mathf.Infinity, float spread = 0f, float dopplerLevel = 0f)
     {
         defineChannelMap();
@@ -98,7 +98,7 @@ public class AudioManager : MonoBehaviour
         if (s != null)
         {
             s.changeChannel(channelMap[channel]);
-            s.setCustom(volume, pitch, spatialBlend, loop, rollOffMod, maxDistance, spread, dopplerLevel);
+            s.setCustom(volume, pitch, spatialBlend, loop, rollOffMode, maxDistance, spread, dopplerLevel);
             s.source.Play();
         }
         else
@@ -114,21 +114,18 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void Stop (string name)
+    public void Stop (int channel)
      {
-        Sound s = findSound(name);
-
-        if (s != null)
-        {
-            s.source.Stop();
-        }
-        else
-        {
-            Debug.Log("AudioManager Error: Stop: Null sound played (Sound not found)");
-        }
-
+        channelMap[channel].Stop();
 
      }
+
+    public void StopAll ()
+    {
+        channel1.Stop();
+        channel2.Stop();
+        channel3.Stop();
+    }
 
     public Sound findSound(string name)
     {

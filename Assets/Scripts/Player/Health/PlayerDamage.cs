@@ -17,6 +17,8 @@ public class PlayerDamage : MonoBehaviour
     private float timeRed;
     private Color origColor;
 
+    public LocalAudioManager localAudioManager;
+
     void Start()
     {
         data.healthRemaining = maxHealth;
@@ -44,18 +46,32 @@ public class PlayerDamage : MonoBehaviour
             this.GetComponent<Renderer>().material.color = Color.red;
 
 
-
             timeRed = 0.3f;
             if (currentHealth == 0)
             {
                 playerController.playerDie();
+            }
+            else
+            {
+                if (localAudioManager)
+                {
+
+                    localAudioManager.Play(name: "PlayerDamage", channel: 2, loop: false, volume: 0.1f);
+                }
             }
         }
     }
 
     public void HealDamage()
     {
+
         currentHealth++;
+        if (localAudioManager)
+        {
+
+            localAudioManager.Play(name: "HealthPickup", channel: 2, loop: false);
+        }
+
         healthbar.SetHealth(currentHealth);
     }
 }

@@ -7,7 +7,7 @@ public class NPCDieOnTouch : MonoBehaviour
 {
     public PitTrap pitTrap;
     public PlayerController playercontroller;
-    private int check = 0;
+    // private int check = 0;
     private GameObject trapInHand;
     private string temmp;
     private GameObject trap;

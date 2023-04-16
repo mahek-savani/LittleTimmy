@@ -18,6 +18,8 @@ public class TrapPlacer : MonoBehaviour
 
     public bool placedTrapBefore = false;
 
+    public LocalAudioManager localAudioManager;
+
     // Trap pickup analytics logic; integrate after merge
     /*                 data.addTrapVal(player.trapInHand.gameObject.tag.ToString());
                 trapTemp = true;*/
@@ -77,6 +79,11 @@ public class TrapPlacer : MonoBehaviour
                     if (cloud != null)
                     {
                         cloud.visible();
+                    }
+
+                    if(localAudioManager)
+                    {
+                         localAudioManager.Play(name: "TrapPlace", channel: 3, loop: false, volume: 0.3f);
                     }
                 }
 

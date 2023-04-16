@@ -11,10 +11,13 @@ public class EndZone : MonoBehaviour
     public int nextScene;
     private bool switchView = false;
     private float timeGap = 2f;
-  
+    
 
     public Material open_mat;
     public Material close_mat;
+
+    public LocalAudioManager localAudioManager;
+
     void LateUpdate(){
         if (NPCManager.getNumLiving() != 0){
             this.gameObject.GetComponent<MeshRenderer>().material = close_mat;
@@ -33,6 +36,11 @@ public class EndZone : MonoBehaviour
                 if (cameraView != null)
                 {
                     cameraView.SetPanEndZone(true);
+
+                }
+                if(localAudioManager)
+                {
+                    localAudioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.3f);
                 }
             }
         }
@@ -43,9 +51,15 @@ public class EndZone : MonoBehaviour
         if (playerObject.gameObject.layer == LayerMask.NameToLayer("Player")){
 
 
-
+            
 
             if(NPCManager.getNumLiving() == 0){
+
+                // if(localAudioManager)
+                // {
+                //     localAudioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.3f);
+                // }
+
                 data.levelName = SceneManager.GetActiveScene().name;
                 data.userLevelComplete = true;
                 data.checkUserLevelCompleted();
@@ -61,8 +75,13 @@ public class EndZone : MonoBehaviour
     }
 
     private IEnumerator TurnGreen()
-    {
+    {           
+
         yield return new WaitForSeconds(timeGap);
         this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
+
+
+
+
     }
 }

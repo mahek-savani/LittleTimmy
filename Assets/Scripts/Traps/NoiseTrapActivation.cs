@@ -29,6 +29,7 @@ public class NoiseTrapActivation : BaseTrapClass
     private NavMeshAgent enemyAgent;
     private OffMeshLink[] offMeshLinks = new  OffMeshLink[20];
 
+    public LocalAudioManager localAudioManager;
     //public Transform myTransform;
 
     //private Vector3 ogPosition = new Vector3();
@@ -155,6 +156,13 @@ public class NoiseTrapActivation : BaseTrapClass
     public void respawnMe()
     {
         // Debug.Log("respawnMe() called");
+
+        
+        if(localAudioManager)
+            {
+                  localAudioManager.Stop(1);
+            }
+
         isTriggered = false;
         calculateOffLink = false;
         transform.parent.GetComponent<Renderer>().material.color = Color.grey;
@@ -254,6 +262,12 @@ public class NoiseTrapActivation : BaseTrapClass
 
             other.GetComponent<StateMachine_Robust>().getNoise(transform.position);
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+
+                        if(localAudioManager)
+            {
+                  localAudioManager.Stop(1);
+            }
+
             //Debug.Log("getNoise called");
             //isTriggered = true;
             //data.trapActiveOrder.Add("noiseTrap-1");
@@ -303,6 +317,7 @@ public class NoiseTrapActivation : BaseTrapClass
             //Debug.Log(isTriggered);
             
             
+            
         }
         
         /*
@@ -341,6 +356,13 @@ public class NoiseTrapActivation : BaseTrapClass
         transform.GetComponent<SphereCollider>().enabled = true;
         transform.parent.GetComponent<Renderer>().material.color = activeColor;
         ring.GetComponent<ParticleSystem>().enableEmission =false;  //Disable the ring
+
+        
+            if(localAudioManager)
+            {
+                  localAudioManager.Play(name: "NoiseTrapSound", channel: 1, loop: true, volume: 0.2f);
+            }
+
         // ring.GetComponent<ParticleSystem>().startColor = Color.yellow;
     }
 

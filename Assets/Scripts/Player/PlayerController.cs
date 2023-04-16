@@ -45,7 +45,9 @@ public class PlayerController : MonoBehaviour
 
     private PopUpSystem pop;
 
-    private AudioSource playerFootsteps;
+    // private AudioSource playerFootsteps;
+
+    public LocalAudioManager localAudioManager;
 
     void Start()
     {
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour
         spawnRotation = transform.rotation;
 
         pop = this.GetComponent<PopUpSystem>();
-        playerFootsteps = this.GetComponent<AudioSource>();
+        // playerFootsteps = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -138,22 +140,33 @@ public class PlayerController : MonoBehaviour
         // Footsteps Sound Code
         if (Input.GetKeyDown(KeyCode.W) | Input.GetKeyDown(KeyCode.A) | Input.GetKeyDown(KeyCode.S) |Input.GetKeyDown(KeyCode.D))
         {
-            if (playerFootsteps && !playerFootsteps.isPlaying)
-            {
-                playerFootsteps.Play();
-            }
+            // if (playerFootsteps && !playerFootsteps.isPlaying)
+            // {
+            //     playerFootsteps.Play();
+            // }
             // FindObjectOfType<AudioManager>().Play("PlayerFootSteps");
+                    if (localAudioManager && !localAudioManager.channel1.isPlaying  )
+                    {
+
+                        localAudioManager.Play(name: "PlayerFootSteps", channel: 1, loop: true);
+                    }
+
         }
 
         else if(Input.GetKeyUp(KeyCode.W) | Input.GetKeyUp(KeyCode.A) | Input.GetKeyUp(KeyCode.S) | Input.GetKeyUp(KeyCode.D))
         {
             if (!(Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) |Input.GetKey(KeyCode.D)))
             {
-                if (playerFootsteps)
-                {
-                    playerFootsteps.Stop();
-                }
+                // if (playerFootsteps)
+                // {
+                //     playerFootsteps.Stop();
+                // }
                 // FindObjectOfType<AudioManager>().Stop("PlayerFootSteps");
+                    if (localAudioManager)
+                    {
+
+                        localAudioManager.Stop(1);  //channel 1 only plays footsteps
+                    }
             }
         }
     }
@@ -242,6 +255,12 @@ public class PlayerController : MonoBehaviour
                         
                         if (eDown)
                         {
+                             if (localAudioManager)
+                            {
+
+                                localAudioManager.Play(name: "TrapPickup", channel: 3, loop: false, volume: 0.1f);
+                            }       
+
                             trapInHand = triggerObject.gameObject;
                             triggerObject.gameObject.SetActive(false);
                             hasTrapInInventory = true;
@@ -261,6 +280,7 @@ public class PlayerController : MonoBehaviour
                             if(triggerObject.gameObject.GetComponentInChildren<BaseTrapClass>().trapName == "Noise" && 
                                 SceneManager.GetActiveScene().name == "Level 4 Noise Trap Tutorial" && !TP.placedTrapBefore)
                             {
+                                
                                 string popupText = "This is a Noise Trap! Use it to lure in enemies!";
                                 canPause = false;
                                 if (pop) pop.PopUp(popupText);
@@ -273,6 +293,7 @@ public class PlayerController : MonoBehaviour
                             }
                         }
                     } else if(gameObject.GetComponent<PlayerDamage>().currentHealth != gameObject.GetComponent<PlayerDamage>().maxHealth){
+                        
                         gameObject.GetComponent<PlayerDamage>().HealDamage();
                         Destroy(triggerObject.gameObject);
                     }     
@@ -322,6 +343,15 @@ public class PlayerController : MonoBehaviour
 
     public void swapTraps()
     {
+
+        
+        if (localAudioManager)
+        {
+
+            localAudioManager.Play(name: "TrapPickup", channel: 3, loop: false, volume: 0.1f);
+        }       
+
+
         //    // Swap object positions  
         Vector3 newObjectPos = myTrigger.gameObject.transform.position;
         trapInHand.transform.position = newObjectPos;
