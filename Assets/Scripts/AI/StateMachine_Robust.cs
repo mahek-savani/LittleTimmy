@@ -13,6 +13,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies a cardinal direction to look in for the idle state
     public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE };
 
+    // Specifies the type of NPC this is
+    public enum TYPE { STANDARD, SPEEDBALL };
+
 
 
     [Header("State Settings")]
@@ -22,6 +25,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The machine will eventually revert back to this state by default
     public STATE defaultState = STATE.PATROLLING;
+
+    // Denotes the type of NPC this is
+    public TYPE enemyType = TYPE.STANDARD;
 
     // Determines whether this agent is alive or dying
     public bool alive = true;
@@ -931,7 +937,7 @@ public class StateMachine_Robust : MonoBehaviour
         returnToPatrol();
         myMesh.material.color = Color.cyan;
 
-        playSound("NPCFootStepsWalk");
+        playFootSteps();
 
         state = STATE.PATROLLING;
     }
@@ -1220,6 +1226,19 @@ public class StateMachine_Robust : MonoBehaviour
         {
             noiseTriggered = false;
             gameObject.GetComponent<workingOffLinkScript>().enabled = false;
+        }
+    }
+
+    private void playFootSteps()
+    {
+        switch (enemyType)
+        {
+            case TYPE.STANDARD:
+                playSound("NPCFootStepsWalk");
+                break;
+            case TYPE.SPEEDBALL:
+                playSound("360BallSound");
+                break;
         }
     }
 
