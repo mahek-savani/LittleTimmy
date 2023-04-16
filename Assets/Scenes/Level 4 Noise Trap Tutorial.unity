@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3237,6 +3237,7 @@ GameObject:
   - component: {fileID: 1009289868}
   - component: {fileID: 1009289867}
   - component: {fileID: 1009289866}
+  - component: {fileID: 1009289871}
   m_Layer: 2
   m_Name: Fall Trigger
   m_TagString: Untagged
@@ -3351,6 +3352,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009289864}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1009289871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009289864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782546f1628e82e47a9141c02f8fa7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitTrap: {fileID: 731859009}
+  playercontroller: {fileID: 1847924895}
 --- !u!1 &1030991873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5014333708128783131, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
