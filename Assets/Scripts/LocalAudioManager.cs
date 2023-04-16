@@ -10,7 +10,7 @@ public class LocalAudioManager : MonoBehaviour
     public AudioSource channel2;
     public AudioSource channel3;
 
-    private Dictionary<int, AudioSource> channelMap;
+    public Dictionary<int, AudioSource> channelMap;
 
     private void defineChannelMap()
     {

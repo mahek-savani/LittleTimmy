@@ -48,7 +48,9 @@ public class PlayerController : MonoBehaviour
 
     private PopUpSystem pop;
 
-    private AudioSource playerFootsteps;
+    // private AudioSource playerFootsteps;
+
+    public LocalAudioManager localAudioManager;
 
     void Start()
     {
@@ -61,7 +63,7 @@ public class PlayerController : MonoBehaviour
         spawnRotation = transform.rotation;
 
         pop = this.GetComponent<PopUpSystem>();
-        playerFootsteps = this.GetComponent<AudioSource>();
+        // playerFootsteps = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -141,22 +143,33 @@ public class PlayerController : MonoBehaviour
         // Footsteps Sound Code
         if (Input.GetKeyDown(KeyCode.W) | Input.GetKeyDown(KeyCode.A) | Input.GetKeyDown(KeyCode.S) |Input.GetKeyDown(KeyCode.D))
         {
-            if (playerFootsteps && !playerFootsteps.isPlaying)
-            {
-                playerFootsteps.Play();
-            }
+            // if (playerFootsteps && !playerFootsteps.isPlaying)
+            // {
+            //     playerFootsteps.Play();
+            // }
             // FindObjectOfType<AudioManager>().Play("PlayerFootSteps");
+                    if (localAudioManager && !localAudioManager.channel1.isPlaying  )
+                    {
+
+                        localAudioManager.Play(name: "PlayerFootSteps", channel: 1, loop: true);
+                    }
+
         }
 
         else if(Input.GetKeyUp(KeyCode.W) | Input.GetKeyUp(KeyCode.A) | Input.GetKeyUp(KeyCode.S) | Input.GetKeyUp(KeyCode.D))
         {
             if (!(Input.GetKey(KeyCode.W) | Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.S) |Input.GetKey(KeyCode.D)))
             {
-                if (playerFootsteps)
-                {
-                    playerFootsteps.Stop();
-                }
+                // if (playerFootsteps)
+                // {
+                //     playerFootsteps.Stop();
+                // }
                 // FindObjectOfType<AudioManager>().Stop("PlayerFootSteps");
+                    if (localAudioManager)
+                    {
+
+                        localAudioManager.Stop(1);  //channel 1 only plays footsteps
+                    }
             }
         }
     }
