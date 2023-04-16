@@ -63,9 +63,9 @@ public class TrapPlacer : MonoBehaviour
                     //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                     GameObject trapPlaced = trapInInventory;
                     trapPlaced.transform.position =  (Hit.point + Hit.normal * .001f);
-                    trapPlaced.transform.LookAt(cams.up);
+                    //trapPlaced.transform.LookAt(cams.up);
                     //trapPlaced.transform.rotation = new Quaternion(0, 0, 0, 0);
-                    trapPlaced.transform.rotation = Hit.transform.rotation;
+                    //trapPlaced.transform.rotation = Hit.transform.rotation;
                     trapPlaced.layer = 8;
 
                     trapPlaced.SetActive(true);
@@ -77,6 +77,18 @@ public class TrapPlacer : MonoBehaviour
                     {
                         cloud.visible();
                     }
+
+                    trapPlaced.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    Vector3 surfaceNormal = Hit.normal;
+                    surfaceNormal.Normalize();
+                    Vector3 orthVector = cams.position - Hit.point;
+                    orthVector.Normalize();
+
+                    float rotationAngle = Vector3.Angle(surfaceNormal, orthVector) * -1;
+                    Vector3 rotationAxis = Vector3.Cross(surfaceNormal, orthVector);
+                    rotationAxis.Normalize();
+
+                    trapPlaced.transform.RotateAround(Hit.point, rotationAxis, rotationAngle);
                 }
 
                 // Vector3 trapPosition = player.transform.position;
