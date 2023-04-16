@@ -27,6 +27,8 @@ public class Experimental_PitTrapButton : MonoBehaviour
 
     public static event System.Action ExperimentalPitButtonPushed;
     private Color startingMaterialColor;
+    public LocalAudioManager localAudioManager;
+    public LocalAudioManager pitlocalAudioManager;
 
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
@@ -41,6 +43,16 @@ public class Experimental_PitTrapButton : MonoBehaviour
 
                 // // Play Door Opening Sound
                 // FindObjectOfType<AudioManager>().Play("DoorActiveSound");
+                if(localAudioManager)
+                {
+                    // audioManager.Play(name: "ButtonPress", loop: false);
+                     localAudioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.3f);
+     
+                     
+                }
+
+                if(pitlocalAudioManager)
+                { pitlocalAudioManager.Play(name: "DoorActiveSound", channel: 1, loop: false, volume: 0.3f);}
 
 
                 //changing pit trap's trigger button's animation direction to forward

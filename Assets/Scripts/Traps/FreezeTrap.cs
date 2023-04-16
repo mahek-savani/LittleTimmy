@@ -8,6 +8,7 @@ public class FreezeTrap : BaseTrapClass
     public Color inactiveColor = new Color(0.392f, 0.392f, 0.392f, 1f);
 
     private GameObject ring;
+    public LocalAudioManager localAudioManager;
 
     public void respawnMe()
     {
@@ -54,7 +55,10 @@ public class FreezeTrap : BaseTrapClass
         // Play freeze sound
         //   FindObjectOfType<AudioManager>().Play("FreezeSound");
 
-
+            if(localAudioManager)
+            {
+                  localAudioManager.Play(name: "FreezeSound", channel: 1, loop: false, volume: 0.3f);
+            }
             isTriggered = true;
 
             //data.trapActiveOrder.Add("freezeTrap");

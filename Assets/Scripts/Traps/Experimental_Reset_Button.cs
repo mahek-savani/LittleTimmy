@@ -27,6 +27,8 @@ public class Experimental_Reset_Button : MonoBehaviour
     public static event System.Action ExperimentalResetPushed;
     private Color startingMaterialColor;
 
+    public LocalAudioManager localAudioManager;
+    public LocalAudioManager pitlocalAudioManager;
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
         buttonParent.GetComponent<Renderer>().material.color = Color.grey;
@@ -64,6 +66,19 @@ public class Experimental_Reset_Button : MonoBehaviour
 
                 // Play Reset Door SOund
                 // FindObjectOfType<AudioManager>().Play("DoorResetSound");
+
+                if(localAudioManager)
+                {
+                    // audioManager.Play(name: "ButtonPress", loop: false);
+                     localAudioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.2f);
+
+                     
+                }
+
+                if(pitlocalAudioManager)
+                { pitlocalAudioManager.Play(name: "DoorResetSound", channel: 1, loop: false, volume: 0.3f);}
+
+
 
                 //changing pit trap's trigger button's animation direction to forward
                 buttonParent.GetComponent<Animation>()["buttonAnim"].speed = animDirectionFw;

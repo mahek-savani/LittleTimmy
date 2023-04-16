@@ -12,7 +12,8 @@ public class buttonPress : MonoBehaviour
     public GameObject buttonParent;
     public GameObject spikeResetButton;
     public GameObject spikeTrapWorking;
-    public AudioManager audioManager;
+    public LocalAudioManager localAudioManager;
+    public LocalAudioManager spikeslocalAudioManager;
     //backward direction
     float animDirection = -1f; 
     //forward direction
@@ -44,10 +45,16 @@ public class buttonPress : MonoBehaviour
                 // Play Spike Release Sound
                 //FindObjectOfType<AudioManager>().Play("SpikeActiveSound");
 
-                if(audioManager)
+                if(localAudioManager)
                 {
                     // audioManager.Play(name: "ButtonPress", loop: false);
-                     audioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.3f);
+                     localAudioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.2f);
+                     
+                }
+
+                if(spikeslocalAudioManager)
+                {
+                    spikeslocalAudioManager.Play(name: "SpikeActiveSound", channel: 1, loop: false, volume: 0.3f);
                 }
 
                 spike.isTrapMoving = true;

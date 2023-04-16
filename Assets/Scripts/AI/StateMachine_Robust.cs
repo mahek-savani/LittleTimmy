@@ -716,7 +716,7 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
-    public void playSound(string clipName, int channelno, bool looptf, float vol)
+    public void playSound(string clipName, int channelno, bool looptf, float vol, float pitchlocal = 1f)
     {
         //if (audioManager && AIAudio)
         //{
@@ -728,7 +728,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         if (localAudioManager)
         {
-            localAudioManager.Play(name: clipName, channel: channelno, loop: looptf, volume: vol);
+            localAudioManager.Play(name: clipName, channel: channelno, loop: looptf, volume: vol, pitch: pitchlocal);
         }
     }
 
@@ -757,7 +757,7 @@ public class StateMachine_Robust : MonoBehaviour
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
         //playSound("NPCChaseSound");
         playSound(clipName: "NPCChaseSound", channelno: 2, vol: 0.2f, looptf: true);
-        playSound(clipName: "NPCFootStepsRun", channelno: 1, vol: 0.2f, looptf: true);
+        playSound(clipName: "NPCFootStepsRun", channelno: 1, vol: 0.2f, looptf: true, pitchlocal:1.3f);
 
         agent.isStopped = false;
         targetLine.enabled = true;
@@ -969,8 +969,8 @@ public class StateMachine_Robust : MonoBehaviour
 
         // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
 
-     playSound(clipName: "NPCDeath", channelno: 1, vol: 1f, looptf: false);
-        print("dead");
+     playSound(clipName: "NPCDeath", channelno: 1, vol: 0.3f, looptf: false);
+        
         
         alive = false;
         conscious = false;

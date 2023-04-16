@@ -11,7 +11,7 @@ public class buttonPressReset : MonoBehaviour
     public GameObject trapButton;
     public GameObject spikeTrapWorking;
     public GameObject smoke;
-
+    
     public float colorDelay = 2f;
     float colorBit = 0f;
     //backward direction
@@ -19,9 +19,11 @@ public class buttonPressReset : MonoBehaviour
     //forward direction
     float animDirectionFw = 1f; 
     //public float movementSpeed = -30f;
-
+  
     public static event System.Action SpikeTrapResetPushed;
     private Color startingMaterialColor;
+     public LocalAudioManager localAudioManager;
+    public LocalAudioManager spikeslocalAudioManager;
 
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
@@ -58,12 +60,16 @@ public class buttonPressReset : MonoBehaviour
                 // Play Spike Reset Sound
                 //FindObjectOfType<AudioManager>().Play("SpikeResetSound");
                 
-                if(audioManager)
+                if(localAudioManager)
                 {
                     // audioManager.Play(name: "ButtonPress", loop: false);
-                     audioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.3f);
+                     localAudioManager.Play(name: "ButtonPress", channel: 3, loop: false, volume: 0.2f);                 
                 }
                 
+                if(spikeslocalAudioManager)
+                {
+                        spikeslocalAudioManager.Play(name: "SpikeResetSound", channel: 1, loop: false, volume: 0.3f);
+                }
                 //spike.isTrapMovingBack = true;
 
                 spikeGrid.transform.position = spikeTrap.originalPos;
