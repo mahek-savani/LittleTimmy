@@ -12,10 +12,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     public Rigidbody pbody;
     public float speed = 15f;
-    bool tutorialSeen = false;
-
-    public GameObject pitTut;
-    public GameObject endTut;
+    public GameObject allTut;
 
 
     public bool hasTrapInInventory; // Check if a trap already exists in inv
@@ -294,12 +291,7 @@ public class PlayerController : MonoBehaviour
             Sprite image = triggerObject.gameObject.GetComponent<Image>().sprite;
             canPause = false;
             if (pop) pop.PopUpImage(image);
-            if(tutorialSeen == true){
-                pitTut.SetActive(true);
-                endTut.SetActive(true);
-                tutorialSeen = false;
-            }
-
+            triggerObject.gameObject.SetActive(false);
         }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("endZoneTutorial") &&
             SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
         {
@@ -307,7 +299,7 @@ public class PlayerController : MonoBehaviour
             canPause = false;
             if (pop) pop.PopUpImage(image);
             triggerObject.gameObject.SetActive(false);
-            tutorialSeen = true;
+            if (allTut) allTut.SetActive(true);
         }else if(triggerObject.gameObject.layer == LayerMask.NameToLayer("pitTrapTutorial") &&
             SceneManager.GetActiveScene().name == "Level 1 Pit Trap Tutorial")
         {

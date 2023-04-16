@@ -9,6 +9,7 @@ public class PitTrapResetButton : MonoBehaviour
     public GameObject trapButton;
     public MeshCollider door;
     public GameObject trapDoor;
+    public GameObject smoke;
 
     public float colorDelay = 2f;
     float colorBit = 0f;
@@ -28,6 +29,7 @@ public class PitTrapResetButton : MonoBehaviour
 
     void Update(){
         if(!pitTrap.trapActive){
+            if (smoke) smoke.SetActive(true);
             if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
             else {
                 colorDelay = 2;

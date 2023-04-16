@@ -9,6 +9,7 @@ public class PitTrapButton : MonoBehaviour
     public GameObject resetButton;
     public MeshCollider door;
     public GameObject trapdoor;
+    public GameObject smoke;
     //backward direction
     float animDirection = -1f; 
     //forward direction
@@ -20,6 +21,12 @@ public class PitTrapButton : MonoBehaviour
     void Start(){
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
     }
+
+     public void Update(){
+        if(pitTrap.trapActive){
+            if(smoke) smoke.SetActive(false);
+        }
+     }
 
     public void OnTriggerEnter(Collider c)
     {

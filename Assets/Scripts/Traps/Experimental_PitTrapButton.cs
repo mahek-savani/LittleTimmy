@@ -15,6 +15,7 @@ public class Experimental_PitTrapButton : MonoBehaviour
     public GameObject fallTrigger;
     public GameObject dieTrigger;
     public GameObject resetButton;
+    public GameObject smoke;
 
     //public NavMeshSurface navMesh;
     //public NavMeshData currentNavMesh;
@@ -32,6 +33,11 @@ public class Experimental_PitTrapButton : MonoBehaviour
         startingMaterialColor = buttonParent.GetComponent<Renderer>().material.color;
     }
 
+    public void Update(){
+        if(pitTrap.trapActive){
+            if(smoke) smoke.SetActive(false);
+        }
+     }
     public void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == 3)

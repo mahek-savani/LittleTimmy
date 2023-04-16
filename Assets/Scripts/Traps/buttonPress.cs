@@ -12,6 +12,7 @@ public class buttonPress : MonoBehaviour
     public GameObject buttonParent;
     public GameObject spikeResetButton;
     public GameObject spikeTrapWorking;
+    public GameObject smoke;
     //backward direction
     float animDirection = -1f; 
     //forward direction
@@ -23,6 +24,9 @@ public class buttonPress : MonoBehaviour
     public void Update(){
         if (spike.isTrapMoving){
             spikeGrid.transform.position += orientation.forward * Time.deltaTime * movementSpeed;
+        }
+        if(spikeTrap.trapActive){
+            if(smoke) smoke.SetActive(false);
         }
     }
 

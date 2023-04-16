@@ -14,6 +14,7 @@ public class Experimental_Reset_Button : MonoBehaviour
     public GameObject fallTrigger;
     public GameObject dieTrigger;
     public GameObject resetButton;
+    public GameObject smoke;
 
     public NavMeshSurface navMesh;
     public float colorDelay = 2f;
@@ -38,6 +39,7 @@ public class Experimental_Reset_Button : MonoBehaviour
         //navMesh.BuildNavMesh();
 
         if(!pitTrap.trapActive){
+            if(smoke) smoke.SetActive(true);
             if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
             else {
                 colorDelay = 2;
