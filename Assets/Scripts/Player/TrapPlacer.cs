@@ -65,7 +65,15 @@ public class TrapPlacer : MonoBehaviour
                 {
                     //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
                     GameObject trapPlaced = trapInInventory;
-                    trapPlaced.transform.position =  (Hit.point + Hit.normal * .001f);
+                    float height = 0;
+                    //Debug.Log(trapPlaced.ToString());
+                    if(trapPlaced.CompareTag("noiseTrap"))
+                    {
+                        height = transform.position.y - Hit.point.y + 0.3f;
+                    }
+                    
+                    trapPlaced.transform.position =  new Vector3(Hit.point.x + Hit.normal.x * .001f, Hit.point.y + Hit.normal.y * .001f + height, Hit.point.z + Hit.normal.z * .001f); 
+                    
                     trapPlaced.transform.LookAt(cams.up);
                     // trapPlaced.transform.rotation = Quaternion.identity;
                     trapPlaced.transform.rotation = Hit.transform.rotation;

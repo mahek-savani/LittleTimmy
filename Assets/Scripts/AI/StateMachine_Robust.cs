@@ -248,8 +248,7 @@ public class StateMachine_Robust : MonoBehaviour
         //audioManager.Play("360BallSound");
 
         //audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
-        playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
-        
+        //AIAudio = this.GetComponent<AudioSource>();
     }
     void OnEnable()
     {
@@ -277,10 +276,10 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (agent.pathPending)
-        //{
-        //    return;
-        //}
+        if (agent.pathPending)
+        {
+            return;
+        }
         Vector3 distOffMesh = getPointNearestNavMesh(playerPos.position) - playerPos.position;
 
         if (distOffMesh.magnitude >= 1f)

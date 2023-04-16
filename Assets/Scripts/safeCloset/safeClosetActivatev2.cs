@@ -11,7 +11,26 @@ public class safeClosetActivatev2 : MonoBehaviour
     public bool playerAwake = true;
     public LiveCounter enemyCounter;
     public GameObject pos;
-    private bool check = false;
+    private bool check = true;
+
+    private void disablePlayer()
+    {
+        playerObject.GetComponent<MeshRenderer>().enabled = playerAwake;
+        if(playerAwake == false)
+        {
+            playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+            player.speed = 0;
+        }
+        else
+        {
+            playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            player.speed = 10;
+        }
+        playerObject.GetComponent<CapsuleCollider>().enabled = playerAwake;
+
+    }
+
 
     // UI
     public TextMeshProUGUI helpText;
@@ -21,19 +40,23 @@ public class safeClosetActivatev2 : MonoBehaviour
         
         if (playerAwake == false)
         {
-            playerObject.SetActive(playerAwake);
+            disablePlayer();
+            //playerObject.SetActive(playerAwake);
             enemyCounter.stopChase();
             playerAwake = true;
+            check = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log("key press");
-            if (check == true)
+            if (check == false)
             {
-                playerObject.SetActive(playerAwake);
+                disablePlayer();
+                //playerObject.SetActive(playerAwake);
                 playerObject.transform.position = pos.transform.position;
-                check = false;
+                check = true;
+                //playerAwake = false;
                 if (helpText) helpText.text = "";
             }
             //playerObject.transform.position = pos;
