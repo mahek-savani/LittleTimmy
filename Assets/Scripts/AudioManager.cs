@@ -117,6 +117,7 @@ public class AudioManager : MonoBehaviour
     public void Stop (int channel)
      {
         channelMap[channel].Stop();
+
      }
 
     public void StopAll ()
