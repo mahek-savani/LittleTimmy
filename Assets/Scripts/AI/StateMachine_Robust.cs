@@ -338,6 +338,7 @@ public class StateMachine_Robust : MonoBehaviour
                     conscious = true;
                     agent.enabled = true;
                     myBody.isKinematic = false;
+                    playSound(clipName: "NPCWakes", channelno: 3, vol: 0.2f, looptf: false);
                     if (passive)
                     {
                         getIdle();
@@ -942,8 +943,7 @@ public class StateMachine_Robust : MonoBehaviour
 
                                 // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
-        
-        playSound(clipName: "NPCWakes", channelno: 3, vol: 0.2f, looptf: false);
+       
         playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
 
         stopchannelSound(2);
