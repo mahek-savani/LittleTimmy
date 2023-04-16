@@ -188,7 +188,7 @@ public class StateMachine_Robust : MonoBehaviour
     // The transform of the player
     public Transform playerPos;
 
-    public AudioSource AIAudio;
+    //public AudioSource AIAudio;
 
     [Header("Debugging")]
 
@@ -205,7 +205,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     [Header("Art and Audio")]
 
-    public AudioManager audioManager;
+    //public AudioManager audioManager;
+
+    public LocalAudioManager localAudioManager;
 
 
     //[Header("Debugging")]
@@ -246,7 +248,6 @@ public class StateMachine_Robust : MonoBehaviour
         //audioManager.Play("360BallSound");
 
         //audioManager.Play(name: "360BallSound", channel: 1, volume: 0.2f);
-        AIAudio = this.GetComponent<AudioSource>();
     }
     void OnEnable()
     {
@@ -352,7 +353,7 @@ public class StateMachine_Robust : MonoBehaviour
                 //{
                 //    if (AIAudio.isPlaying)
                 //    {
-                //        AIAudio.Stop();
+                //        stopSound();
                 //    }
                 //}
 
@@ -449,7 +450,7 @@ public class StateMachine_Robust : MonoBehaviour
                 //{
                 //    if(AIAudio.clip.name != "NPC_Walk")
                 //    {
-                //        AIAudio.Stop();
+                //        stopSound();
                 //        AIAudio.loop = true;
                 //        AIAudio.volume = 0.3f;
                 //        AIAudio.clip = audioManager.findSound("NPCFootStepsWalk").clip;
@@ -494,7 +495,7 @@ public class StateMachine_Robust : MonoBehaviour
                 //{
                 //    if (AIAudio.clip.name != "NPCChase")
                 //    {
-                //        AIAudio.Stop();
+                //        stopSound();
                 //        AIAudio.loop = true;
                 //        AIAudio.volume = 0.3f;
                 //        AIAudio.clip = audioManager.findSound("NPCChaseSound").clip;
@@ -547,7 +548,7 @@ public class StateMachine_Robust : MonoBehaviour
                 //{
                 //    if (AIAudio.clip.name != "NPCSus")
                 //    {
-                //        AIAudio.Stop();
+                //        stopSound();
                 //        AIAudio.loop = false;
                 //        AIAudio.volume = 0.3f;
                 //        AIAudio.clip = audioManager.findSound("NPCSus").clip;
@@ -609,7 +610,7 @@ public class StateMachine_Robust : MonoBehaviour
                 //{
                 //    if (AIAudio.clip.name != "NPCSus")
                 //    {
-                //        AIAudio.Stop();
+                //        stopSound();
                 //        AIAudio.loop = false;
                 //        AIAudio.volume = 0.3f;
                 //        AIAudio.clip = audioManager.findSound("NPCSus").clip;
@@ -715,13 +716,24 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void playSound(string clipName)
     {
-        if (audioManager && AIAudio)
-        {
-            AIAudio.loop = true;
-            AIAudio.volume = 0.3f;
-            AIAudio.clip = audioManager.findSound(clipName).clip;
-            AIAudio.Play();
-        }
+        //if (audioManager && AIAudio)
+        //{
+        //    AIAudio.loop = true;
+        //    AIAudio.volume = 0.3f;
+        //    AIAudio.clip = audioManager.findSound(clipName).clip;
+        //    AIAudio.Play();
+        //}
+        localAudioManager.Play(name: clipName, channel: 1, loop: true);
+    }
+
+    public void stopSound()
+    {
+        localAudioManager.StopAll();
+    }
+
+    public void stopSound(int channel)
+    {
+        localAudioManager.Stop(channel);
     }
 
     public void getChase()
@@ -729,7 +741,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
-        playSound("NPCChaseSound");
+        //playSound("NPCChaseSound");
         agent.isStopped = false;
         targetLine.enabled = true;
         myMesh.material.color = Color.red;
@@ -743,7 +755,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
-        AIAudio.Stop();
+        stopSound();
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
         targetLine.enabled = false;
@@ -775,7 +787,7 @@ public class StateMachine_Robust : MonoBehaviour
 
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
-        AIAudio.Stop();
+        stopSound();
         myMesh.material.color = Color.blue;
         //agent.isStopped = true;
         targetLine.enabled = false;
@@ -811,7 +823,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
-        AIAudio.Stop();
+        stopSound();
         targetLine.enabled = false;
         conscious = false;
         FOVMesh.enabled = false;
@@ -826,7 +838,7 @@ public class StateMachine_Robust : MonoBehaviour
         {
             agent.isStopped = true;
         }
-        AIAudio.Stop();
+        stopSound();
         conscious = false;
         FOVMesh.enabled = false;
         targetLine.enabled = false;
@@ -837,7 +849,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getNoise(Vector3 source)
     {
-        playSound("NPCSus");
+        //playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = true;
         agent.speed = susSpeed;
@@ -860,7 +872,8 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getSuspicious(Vector3 source)
     {
-        playSound("NPCSus");
+        
+        //playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = susSpeed;
@@ -879,7 +892,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getParanoid()
     {
-        playSound("NPCSus");
+        //playSound("NPCSus");
         agent.isStopped = false;
         targetLine.enabled = false;
         myMesh.material.color = new Color(252 / 255f, 139 / 255f, 0f);
@@ -922,7 +935,7 @@ public class StateMachine_Robust : MonoBehaviour
         // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
 
         // FindObjectOfType<AudioManager>().Stop("NPCFootSteps");
-        AIAudio.Stop();
+        stopSound();
         alive = false;
         conscious = false;
         targetLine.enabled = false;

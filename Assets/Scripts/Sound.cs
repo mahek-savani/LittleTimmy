@@ -80,7 +80,7 @@ public class Sound
     }
 
     public void setCustom(float volume = 0.5f, float pitch = 1f,
-                 float spatialBlend = 1f, bool loop = true, AudioRolloffMode rolloffMod = AudioRolloffMode.Custom,
+                 float spatialBlend = 1f, bool loop = true, AudioRolloffMode rolloffMode = AudioRolloffMode.Custom,
                  float maxDistance = 0f, float spread = 0f, float dopplerLevel = 0f)
     {
         {
