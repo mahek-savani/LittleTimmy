@@ -11,12 +11,15 @@ public class SwitchCameraView : MonoBehaviour
     public CinemachineVirtualCamera spikeTrapCamera;
     public CinemachineVirtualCamera pitTrapCamera;
     public CinemachineVirtualCamera resetButtonCamera;
-    public CinemachineVirtualCamera[] enemyCameras;
+    public CinemachineVirtualCamera levelCamera;
+    public Vector3 playerCameraOffset = new Vector3(0f, 50f, -30f);
     public float switchTime = 5f;
     public Transform playerTransform;
-    private bool isPlayerCamera = true;
+    private bool isPlayerCamera = false;
     public GameObject SwitchCamFill;
+    public bool isPlayerInCloset = false;
 
+    private Quaternion playerCamRotation;
     private bool panEndZone = false;
     private bool panSpikeTrap = false;
     private bool panPitTrap = false;
@@ -24,7 +27,9 @@ public class SwitchCameraView : MonoBehaviour
 
     private void Start()
     {
-        playerCamera.gameObject.SetActive(true);
+        playerCamRotation = playerCamera.transform.rotation;
+        // Debug.Log(playerCamera.transform.rotation);
+        levelCamera.gameObject.SetActive(true);
         endZoneCamera.gameObject.SetActive(false);
         string sceneName = SceneManager.GetActiveScene().name;
         if(sceneName == "Level 1 Pit Trap Tutorial")
@@ -40,55 +45,35 @@ public class SwitchCameraView : MonoBehaviour
             resetButtonCamera.gameObject.SetActive(false);
         }
         
-        enemyCameras[0].gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(false);
         
         data.levelCam.Add(System.DateTime.Now.ToString());
     }
     private void Update()
     {
+        playerCamera.transform.rotation = playerCamRotation;
+        playerCamera.transform.position = playerTransform.position + playerCameraOffset;
+        // Debug.Log(playerCamera.transform.rotation);
         if (Input.GetKeyDown("c"))
         {
             if (isPlayerCamera)
             {
-                // float closestDistance = float.MaxValue;
-                // int closestEnemyIndex = 0;
-                // for (int i = 0; i < enemyCameras.Length; i++)
-                // {
-                //     if (enemyCameras[i] == null)
-                //     {
-                //         continue;
-                //     }
-                //     float distance = Vector3.Distance(playerTransform.position, enemyCameras[i].transform.position);
-                //     if (distance < closestDistance)
-                //     {
-                //         closestDistance = distance;
-                //         closestEnemyIndex = i;
-                //     }
-                // }
-                //Debug.Log(closestEnemyIndex);
                 data.levelCam.Add(System.DateTime.Now.ToString());
                 data.playerCam.Add(System.DateTime.Now.ToString());
                 
-                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(0,1,0,1); //Change the color of icon to show that it is active
+                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(1,1,1,1); //Change the color of icon to show that it is inactive
                
                 playerCamera.gameObject.SetActive(false);
-                enemyCameras[0].gameObject.SetActive(true);
+                levelCamera.gameObject.SetActive(true);
 
                 isPlayerCamera = false;
             }
             else
             {   
-                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(1,1,1,1); //Change the color of icon to show that it is inactive
+                SwitchCamFill.GetComponent<CameraIconColor>().SetColor(0,1,0,1); //Change the color of icon to show that it is active
 
                 playerCamera.gameObject.SetActive(true);
-                // for (int i = 0; i < enemyCameras.Length; i++)
-                // {
-                //     if (enemyCameras[i] == null)
-                //     {
-                //         continue;
-                //     }
-                enemyCameras[0].gameObject.SetActive(false);
-                // }
+                levelCamera.gameObject.SetActive(false);
                 data.levelCam.Add(System.DateTime.Now.ToString());
                 data.playerCam.Add(System.DateTime.Now.ToString());
                 isPlayerCamera = true;
@@ -98,6 +83,7 @@ public class SwitchCameraView : MonoBehaviour
         {
             panEndZone = false;
             playerCamera.gameObject.SetActive(false);
+            levelCamera.gameObject.SetActive(false);
             string sceneName = SceneManager.GetActiveScene().name;
             if(sceneName == "Level 1 Pit Trap Tutorial")
             {
@@ -112,13 +98,9 @@ public class SwitchCameraView : MonoBehaviour
         }
         if(panSpikeTrap)
         {
-            // string sceneName = SceneManager.GetActiveScene().name;
-            // if(sceneName != "Level 3 Trap Resets")
-            // {
-            //     Debug.Log("Called"+ sceneName);
-            // }
             panSpikeTrap = false;
             playerCamera.gameObject.SetActive(false);
+            levelCamera.gameObject.SetActive(false);
             spikeTrapCamera.gameObject.SetActive(true);
             playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(SpikeTrapView());
@@ -127,6 +109,7 @@ public class SwitchCameraView : MonoBehaviour
         {
             panResetButton = false;
             playerCamera.gameObject.SetActive(false);
+            levelCamera.gameObject.SetActive(false);
             resetButtonCamera.gameObject.SetActive(true);
             playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(ResetButtonButton());
@@ -135,6 +118,7 @@ public class SwitchCameraView : MonoBehaviour
         {
             panPitTrap = false;
             playerCamera.gameObject.SetActive(false);
+            levelCamera.gameObject.SetActive(false);
             pitTrapCamera.gameObject.SetActive(true);
             playerTransform.gameObject.GetComponent<PlayerController>().pausePlayer();
             StartCoroutine(PitTrapView());
@@ -178,7 +162,7 @@ public class SwitchCameraView : MonoBehaviour
         }
         else
         {
-            enemyCameras[0].gameObject.SetActive(true);
+            levelCamera.gameObject.SetActive(true);
         }
         yield return new WaitForSecondsRealtime(2f);
         playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
@@ -196,7 +180,7 @@ public class SwitchCameraView : MonoBehaviour
         }
         else
         {
-            enemyCameras[0].gameObject.SetActive(true);
+            levelCamera.gameObject.SetActive(true);
         }
         yield return new WaitForSecondsRealtime(2f);
         playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
@@ -213,7 +197,7 @@ public class SwitchCameraView : MonoBehaviour
         }
         else
         {
-            enemyCameras[0].gameObject.SetActive(true);
+            levelCamera.gameObject.SetActive(true);
         }
         yield return new WaitForSecondsRealtime(2f);
         playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();
@@ -230,7 +214,7 @@ public class SwitchCameraView : MonoBehaviour
         }
         else
         {
-            enemyCameras[0].gameObject.SetActive(true);
+            levelCamera.gameObject.SetActive(true);
         }
         yield return new WaitForSecondsRealtime(2f);
         playerTransform.gameObject.GetComponent<PlayerController>().unPausePlayer();

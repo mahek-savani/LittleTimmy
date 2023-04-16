@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1847924883}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 25
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -7845,7 +7845,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2137054911}
   - component: {fileID: 2137054913}
-  - component: {fileID: 2137054914}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -7880,28 +7879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2137054914
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137054910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: -0.78100014, y: 18.986, z: -10.524}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_AngularDampingMode: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AngularDamping: 0
 --- !u!1 &2137885733
 GameObject:
   m_ObjectHideFlags: 0
@@ -8024,9 +8001,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 331471093}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
-      propertyPath: playerCamera
+      propertyPath: levelCamera
       value: 
       objectReference: {fileID: 752008085}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 275464032}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: SwitchCamFill
       value: 
@@ -8035,6 +8016,10 @@ PrefabInstance:
       propertyPath: endZoneCamera
       value: 
       objectReference: {fileID: 1189461789}
+    - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: playerCameraOffset.z
+      value: -35
+      objectReference: {fileID: 0}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: enemyCameras.Array.data[0]
       value: 
