@@ -13,6 +13,9 @@ public class StateMachine_Robust : MonoBehaviour
     // Specifies a cardinal direction to look in for the idle state
     public enum DIRECTION { NORTH, SOUTH, EAST, WEST, HARDCODE };
 
+    // Specifies the type of NPC this is
+    public enum TYPE { STANDARD, SPEEDBALL };
+
 
 
     [Header("State Settings")]
@@ -22,6 +25,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The machine will eventually revert back to this state by default
     public STATE defaultState = STATE.PATROLLING;
+
+    // Denotes the type of NPC this is
+    public TYPE enemyType = TYPE.STANDARD;
 
     // Determines whether this agent is alive or dying
     public bool alive = true;
@@ -37,6 +43,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // The default direction to face for an idle NPC
     public DIRECTION defaultIdleDir = DIRECTION.NORTH;
+
+    // Denotes whether the NPC is following a noise trap or not
+    public bool noiseTriggered;
 
     // The current idle position for the NPC
     private Vector3 idlePos;
@@ -171,6 +180,9 @@ public class StateMachine_Robust : MonoBehaviour
 
     // Renders a line to a target the NPC is moving to
     public LineRenderer targetLine;
+
+    // Script that manages the NPC's offMeshLink
+    public workingOffLinkScript linkScript;
 
 
 
@@ -312,6 +324,11 @@ public class StateMachine_Robust : MonoBehaviour
         //}
 
         //Debug.Log(state);
+
+        if (linkScript && linkScript.enabled)
+        {
+            linkScript.UpdateLink();
+        }
 
         // The body of the state machine, checking the state every frame and acting accordingly
         switch (state)
@@ -566,6 +583,7 @@ public class StateMachine_Robust : MonoBehaviour
             case STATE.NOISE:
                 if (playerVisibleTimer >= timeToChase)
                 {
+                    disableLink();
                     getChase();
                     return;
                 }
@@ -594,19 +612,20 @@ public class StateMachine_Robust : MonoBehaviour
                     //agent.SetDestination(playerPos.position);
                     //transform.LookAt(playerPos.position, transform.up);
                     //timeCounter = suspiciousTime;
-
+                    disableLink();
                     getNoise(playerPos.position);
 
 
                 }
                 else if (agent.remainingDistance <= 0.12)
                 {
+                    disableLink();
                     getSuspicious(transform.position);
                 }
-                else
-                {
-                    timeCounter -= Time.deltaTime;
-                }
+                //else
+                //{
+                //    timeCounter -= Time.deltaTime;
+                //}
 
                 //if (audioManager && AIAudio)
                 //{
@@ -752,7 +771,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getChase()
     {
-
+        disableLink();
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
         //playSound("NPCChaseSound");
@@ -772,6 +791,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle(float time, DIRECTION dir, Vector3 pos)
     {
+        disableLink();
         stopallSounds();
         myMesh.material.color = Color.blue;
         // agent.isStopped = true;
@@ -801,7 +821,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getIdle()
     {
-
+        disableLink();
         // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
         stopallSounds();
@@ -836,6 +856,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious(float time)
     {
+        disableLink();
         if (agent.enabled)
         {
             agent.isStopped = true;
@@ -853,6 +874,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getUnconscious()
     {
+        disableLink();
         if (agent.enabled)
         {
             agent.isStopped = true;
@@ -890,6 +912,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Forcibly transitions into suspicious state, even if currently chasing
     public void forceSuspicious()
     {
+        disableLink();
         playerVisibleTimer = Mathf.Clamp(playerVisibleTimer, timeToSuspicion, timeToSuspicion);
         getSuspicious(transform.position);
     }
@@ -897,6 +920,7 @@ public class StateMachine_Robust : MonoBehaviour
     public void getSuspicious(Vector3 source)
     {
         
+        disableLink();
         //playSound("NPCSus");
         playSound(clipName: "NPCSus", channelno: 2, vol: 0.2f, looptf: true);
         playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
@@ -936,6 +960,7 @@ public class StateMachine_Robust : MonoBehaviour
 
     public void getPatrol()
     {
+        disableLink();
         agent.isStopped = false;
         targetLine.enabled = false;
         agent.speed = patrolSpeed;
@@ -963,6 +988,7 @@ public class StateMachine_Robust : MonoBehaviour
     //}
     public void die()
     {
+        disableLink();
         // STop  sound 
         // FindObjectOfType<AudioManager>().Stop("NPCChaseSound");
 
@@ -1236,6 +1262,28 @@ public class StateMachine_Robust : MonoBehaviour
 
 
     }
+
+    private void disableLink()
+    {
+        if (gameObject.GetComponent<workingOffLinkScript>())
+        {
+            noiseTriggered = false;
+            gameObject.GetComponent<workingOffLinkScript>().enabled = false;
+        }
+    }
+
+    //private void playFootSteps()
+    //{
+    //    switch (enemyType)
+    //    {
+    //        case TYPE.STANDARD:
+    //            playSound("NPCFootStepsWalk");
+    //            break;
+    //        case TYPE.SPEEDBALL:
+    //            playSound("360BallSound");
+    //            break;
+    //    }
+    //}
 
     //public void start()
     //{

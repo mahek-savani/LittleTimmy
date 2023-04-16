@@ -93,6 +93,18 @@ public class TrapPlacer : MonoBehaviour
                     {
                          localAudioManager.Play(name: "TrapPlace", channel: 3, loop: false, volume: 0.3f);
                     }
+
+                    trapPlaced.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    Vector3 surfaceNormal = Hit.normal;
+                    surfaceNormal.Normalize();
+                    Vector3 orthVector = cams.position - Hit.point;
+                    orthVector.Normalize();
+
+                    float rotationAngle = Vector3.Angle(surfaceNormal, orthVector) * -1;
+                    Vector3 rotationAxis = Vector3.Cross(surfaceNormal, orthVector);
+                    rotationAxis.Normalize();
+
+                    trapPlaced.transform.RotateAround(Hit.point, rotationAxis, rotationAngle);
                 }
 
                 // Vector3 trapPosition = player.transform.position;

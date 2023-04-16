@@ -14,32 +14,32 @@ public class LiveCounter : MonoBehaviour
         liveCounter = totalLives;
     }
 
-    private void Update()
-    {
-        if (paranoidMode)
-        {
-            if (liveCounter <= totalLives / 2)
-                {
-                    StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
+    //private void Update()
+    //{
+    //    if (paranoidMode)
+    //    {
+    //        if (liveCounter <= totalLives / 2)
+    //            {
+    //                StateMachine_Robust[] children = gameObject.GetComponentsInChildren<StateMachine_Robust>();
 
-                    for (int i = 0; i < children.Length; i++)
-                    {
-                        if (children[i].alive)
-                        {
-                            if (children[i].state == children[i].defaultState)
-                            {
-                                children[i].getParanoid();
-                            }
+    //                for (int i = 0; i < children.Length; i++)
+    //                {
+    //                    if (children[i].alive)
+    //                    {
+    //                        if (children[i].state == children[i].defaultState)
+    //                        {
+    //                            children[i].getParanoid();
+    //                        }
 
-                            children[i].defaultState = StateMachine_Robust.STATE.PARANOID;
-                        }
-                    }
+    //                        children[i].defaultState = StateMachine_Robust.STATE.PARANOID;
+    //                    }
+    //                }
 
-                    liveCounter = totalLives * 2;
-                }
-        }
+    //                liveCounter = totalLives * 2;
+    //            }
+    //    }
 
-    }
+    //}
 
     public void decrement()
     {
