@@ -12,6 +12,10 @@ public class safeClosetActivatev2 : MonoBehaviour
     public LiveCounter enemyCounter;
     public GameObject pos;
     private bool check = false;
+
+    // UI
+    public TextMeshProUGUI helpText;
+
     private void Update()
     {
         
@@ -22,7 +26,7 @@ public class safeClosetActivatev2 : MonoBehaviour
             playerAwake = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log("key press");
             if (check == true)
@@ -30,7 +34,7 @@ public class safeClosetActivatev2 : MonoBehaviour
                 playerObject.SetActive(playerAwake);
                 playerObject.transform.position = pos.transform.position;
                 check = false;
-
+                if (helpText) helpText.text = "";
             }
             //playerObject.transform.position = pos;
             
@@ -43,6 +47,7 @@ public class safeClosetActivatev2 : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
+            if(helpText) helpText.text = "Press Space to exit the closet";
             check = true;
             playerAwake = false;
         }

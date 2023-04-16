@@ -181,6 +181,8 @@ public class PlayerController : MonoBehaviour
 
         pbody.velocity = new Vector3(newPos.x, pbody.velocity.y, newPos.z);
         pbody.AddForce(Physics.gravity * 10, ForceMode.Acceleration);
+
+        if(!this.gameObject.GetComponent<AudioListener>().enabled)this.gameObject.GetComponent<AudioListener>().enabled = true;
     }
 
     void OnTriggerStay(Collider triggerObject){
@@ -392,6 +394,7 @@ public class PlayerController : MonoBehaviour
     void pauseGame()
     {
         pauseScreen.SetActive(true);
+        this.gameObject.GetComponent<AudioListener>().enabled = false;
         //Time.timeScale = 0;
     }
 
