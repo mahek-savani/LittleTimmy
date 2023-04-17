@@ -56,8 +56,7 @@ public class LocalAudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("LocalAudioManager Error: Play (Custom values): Null sound played (Sound not found)");
-            Debug.Log(name);
+            Debug.Log("LocalAudioManager Error: Play (Custom values): Sound name " + name + " is null");
         }
 
         //if(s.name != "PlayerFootSteps")

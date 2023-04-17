@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class workingOffLinkScript : MonoBehaviour
 {
-    public float dieTime = 100.0f;
+    public float dieTime = 100f;
     public OffMeshLink link;
     public Transform myBody;
     private float floor;
