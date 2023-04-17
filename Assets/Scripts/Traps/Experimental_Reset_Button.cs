@@ -15,6 +15,7 @@ public class Experimental_Reset_Button : MonoBehaviour
     public GameObject dieTrigger;
     public GameObject resetButton;
     public GameObject smoke;
+    private bool isPlaying = false;
 
     public NavMeshSurface navMesh;
     public float colorDelay = 2f;
@@ -37,10 +38,13 @@ public class Experimental_Reset_Button : MonoBehaviour
 
     private void Update()
     {
-        //navMesh.RemoveData();
-        //navMesh.BuildNavMesh();
+        if (isPlaying && !trapDoor.GetComponent<Animation>().isPlaying)
+        {
+            navMesh.RemoveData();
+            navMesh.BuildNavMesh();
+        }
 
-        if(!pitTrap.trapActive){
+        if (!pitTrap.trapActive){
             if(smoke) smoke.SetActive(true);
             if(colorDelay > 0) colorDelay -= 2f * Time.deltaTime;
             else {
@@ -91,15 +95,19 @@ public class Experimental_Reset_Button : MonoBehaviour
                 trapDoor.GetComponent<Animation>()["trapDoorAnim"].speed = animDirection;
                 trapDoor.GetComponent<Animation>().Play("trapDoorAnim");
 
+                isPlaying = true;
                 pitTrap.trapActive = true;
                 door.enabled = true;
+
+                //StartCoroutine("rebuildNavMesh");
+                //navMesh.BuildNavMesh();
                 //data.trapActiveOrder.Add("pitTrap");
                 //fallTrigger.SetActive(false);
 
                 //trapDoor.layer = LayerMask.NameToLayer("CanTrap");
 
                 //fallTrigger.GetComponent<FallNow>().rebuildNavMesh = true;
-                
+
 
                 //obstacle.SetActive(false);
                 fallTrigger.SetActive(false);
@@ -134,8 +142,10 @@ public class Experimental_Reset_Button : MonoBehaviour
 
     //IEnumerator rebuildNavMesh()
     //{
-    //    yield return new WaitUntil(collisionChecked);
+    //    while (trapDoor.GetComponent<Animation>().isPlaying);
     //    navMesh.RemoveData();
     //    navMesh.BuildNavMesh();
+
+    //    yield return null;
     //}
 }

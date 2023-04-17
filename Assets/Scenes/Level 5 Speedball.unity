@@ -4887,6 +4887,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC-Box
       objectReference: {fileID: 0}
+    - target: {fileID: 2104726775102887234, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4673791385389354266, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
       propertyPath: m_Range
       value: 4
@@ -4907,5 +4911,7 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 941465078}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 779919547595684290, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+    - {fileID: 2104726775102887233, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
