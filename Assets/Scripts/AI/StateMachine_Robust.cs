@@ -288,7 +288,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathPending)
+        if (agent.pathPending || !agent.isActiveAndEnabled)
         {
             return;
         }
@@ -830,6 +830,7 @@ public class StateMachine_Robust : MonoBehaviour
         targetLine.enabled = false;
         waitTime = Mathf.Infinity;
         idlePos = defaultIdlePos.transform.position;
+
         agent.SetDestination(idlePos);
 
         switch (defaultIdleDir)
@@ -923,7 +924,8 @@ public class StateMachine_Robust : MonoBehaviour
         disableLink();
         //playSound("NPCSus");
         playSound(clipName: "NPCSus", channelno: 2, vol: 0.2f, looptf: true);
-        playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+        //playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+        playFootSteps();
 
         agent.isStopped = false;
         targetLine.enabled = false;
@@ -965,10 +967,12 @@ public class StateMachine_Robust : MonoBehaviour
         targetLine.enabled = false;
         agent.speed = patrolSpeed;
 
-                                // Play  sound 
+        // Play  sound 
         // FindObjectOfType<AudioManager>().Play("NPCFootSteps");
-       
-        playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+
+        //playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+
+        playFootSteps();
 
         stopchannelSound(2);
 
@@ -1272,18 +1276,18 @@ public class StateMachine_Robust : MonoBehaviour
         }
     }
 
-    //private void playFootSteps()
-    //{
-    //    switch (enemyType)
-    //    {
-    //        case TYPE.STANDARD:
-    //            playSound("NPCFootStepsWalk");
-    //            break;
-    //        case TYPE.SPEEDBALL:
-    //            playSound("360BallSound");
-    //            break;
-    //    }
-    //}
+    private void playFootSteps()
+    {
+        switch (enemyType)
+        {
+            case TYPE.STANDARD:
+                playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+                break;
+            case TYPE.SPEEDBALL:
+                playSound(clipName: "360BallSound", channelno: 1, vol: 0.2f, looptf: true, pitchlocal: 1.3f);
+                break;
+        }
+    }
 
     //public void start()
     //{
