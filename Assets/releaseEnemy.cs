@@ -17,11 +17,12 @@ public class releaseEnemy : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             gate.SetActive(false);
-            navMesh.BuildNavMesh();
             //npcFake.SetActive(false);
             //npcReal.SetActive(true);
+
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            navMesh.BuildNavMesh();
         }
 
     }
