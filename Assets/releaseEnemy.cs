@@ -20,6 +20,9 @@ public class releaseEnemy : MonoBehaviour
             navMesh.BuildNavMesh();
             //npcFake.SetActive(false);
             //npcReal.SetActive(true);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
+
     }
 }

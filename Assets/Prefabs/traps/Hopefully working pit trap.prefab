@@ -542,6 +542,8 @@ MonoBehaviour:
   dieTrigger: {fileID: 2165397899587345625}
   resetButton: {fileID: 2681964717186778181}
   smoke: {fileID: 0}
+  localAudioManager: {fileID: 0}
+  pitlocalAudioManager: {fileID: 0}
 --- !u!1 &2681964716637403809
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,8 +572,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2681964716637403809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -1.6, z: 0.029999256}
-  m_LocalScale: {x: 0.74664074, y: 0.8490848, z: 0.746641}
+  m_LocalPosition: {x: 0.04, y: 0.38, z: 0.073}
+  m_LocalScale: {x: 0.52886057, y: 0.60142374, z: 0.52886075}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2681964717186778200}
@@ -663,6 +665,8 @@ MonoBehaviour:
   smoke: {fileID: 0}
   navMesh: {fileID: 0}
   colorDelay: 2
+  localAudioManager: {fileID: 0}
+  pitlocalAudioManager: {fileID: 0}
 --- !u!1 &2681964717186778181
 GameObject:
   m_ObjectHideFlags: 0
