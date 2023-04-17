@@ -288,7 +288,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathPending || !agent.isActiveAndEnabled)
+        if (agent.pathPending)
         {
             return;
         }

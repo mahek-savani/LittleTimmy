@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.053875796, g: 0.09594638, b: 0.15899065, a: 1}
+  m_IndirectSpecularColor: {r: 0.05373559, g: 0.09578205, b: 0.15894184, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4882,6 +4882,22 @@ PrefabInstance:
     - target: {fileID: 1559146061975863789, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
       propertyPath: m_Name
       value: NPC-Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673791385389354266, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+      propertyPath: m_Range
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673791385389354266, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+      propertyPath: m_Intensity
+      value: 2.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5768282360778254706, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947506161164735352, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
+      propertyPath: m_SpotAngle
+      value: 179
       objectReference: {fileID: 0}
     - target: {fileID: 7803898678842559730, guid: 688ce549ae864244481bb5bc9bca4362, type: 3}
       propertyPath: manager
