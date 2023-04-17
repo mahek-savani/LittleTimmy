@@ -2186,7 +2186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746165826}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -34.33, y: 0.7143, z: 17.2}
+  m_LocalPosition: {x: -34.33, y: 0.7143, z: 16.76}
   m_LocalScale: {x: 0.5932235, y: 2.321596, z: 5.465845}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4764,15 +4764,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3946831
+      value: 0.39468312
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002481247
+      value: 0.000000012139958
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000106583355
+      value: -0.000000005214787
       objectReference: {fileID: 0}
     - target: {fileID: 7499714042508084391, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: manager
@@ -5733,6 +5733,10 @@ PrefabInstance:
       propertyPath: popUpImage
       value: 
       objectReference: {fileID: 1733078293}
+    - target: {fileID: 1929633021, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 31842706}
     - target: {fileID: 1941646822, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: levelCamera
       value: 
