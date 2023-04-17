@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 4
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 1b5ec15d1e8e74355a539738bb0521dd, type: 2}
@@ -1797,6 +1797,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5014333708128783131, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
   m_PrefabInstance: {fileID: 1082700796}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &676889806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4664018189476425101, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 1082700796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676889804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &688393283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3126,6 +3137,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1788931072}
     - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
+      propertyPath: helpText
+      value: 
+      objectReference: {fileID: 676889806}
+    - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
       propertyPath: enemyCounter
       value: 
       objectReference: {fileID: 1820652360}
@@ -3998,6 +4013,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1788931072}
+    - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
+      propertyPath: helpText
+      value: 
+      objectReference: {fileID: 676889806}
     - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
       propertyPath: enemyCounter
       value: 

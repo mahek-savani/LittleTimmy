@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 4
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 6c68794df119f43d79aee2c7f0fc3068, type: 2}
@@ -1700,6 +1700,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1373852409}
     - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
+      propertyPath: helpText
+      value: 
+      objectReference: {fileID: 2047690632}
+    - target: {fileID: 390159936955665460, guid: d8cb48fc504b72941a110ede05c4cd54, type: 3}
       propertyPath: enemyCounter
       value: 
       objectReference: {fileID: 250257200}
@@ -2270,11 +2274,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001580952
+      value: -0.000000015809523
       objectReference: {fileID: 0}
     - target: {fileID: 6513553589472271030, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000067910673
+      value: 0.000000006791068
       objectReference: {fileID: 0}
     - target: {fileID: 8865294676942180146, guid: 42f252ff6fe682c419e00a5220cb97f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6646,6 +6650,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5014333708128783131, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
   m_PrefabInstance: {fileID: 361928790}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2047690632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4664018189476425101, guid: 07e71f591e8fc6246bea6d172dae6ec8, type: 3}
+  m_PrefabInstance: {fileID: 361928790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047690630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2054784918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2876180185629961313, guid: 004cc0e6df6b25f46b8018f4eea59d0e, type: 3}
