@@ -285,6 +285,8 @@ MonoBehaviour:
   spikeResetButton: {fileID: 8609499169939733671}
   spikeTrapWorking: {fileID: 8916128872130425189}
   smoke: {fileID: 0}
+  localAudioManager: {fileID: 0}
+  spikeslocalAudioManager: {fileID: 0}
   movementSpeed: 30
 --- !u!1 &3738750155902833537
 GameObject:
@@ -553,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrapMoving: 0
   isTrapMovingBack: 0
+  navMesh: {fileID: 0}
 --- !u!114 &2016633304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,6 +707,8 @@ MonoBehaviour:
   spikeTrapWorking: {fileID: 8916128872130425189}
   smoke: {fileID: 0}
   colorDelay: 2
+  localAudioManager: {fileID: 0}
+  spikeslocalAudioManager: {fileID: 0}
 --- !u!1 &8609499169939733671
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,9 +736,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8609499169939733671}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 15.84, y: 0.65, z: 33.61}
-  m_LocalScale: {x: 1, y: 0.09999998, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 15.84001, y: 0.65, z: 33.610016}
+  m_LocalScale: {x: 1, y: 0.09999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5317073100827570429}

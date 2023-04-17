@@ -288,7 +288,7 @@ public class StateMachine_Robust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathPending)
+        if (agent.pathPending || !agent.isActiveAndEnabled)
         {
             return;
         }
@@ -830,6 +830,7 @@ public class StateMachine_Robust : MonoBehaviour
         targetLine.enabled = false;
         waitTime = Mathf.Infinity;
         idlePos = defaultIdlePos.transform.position;
+
         agent.SetDestination(idlePos);
 
         switch (defaultIdleDir)
