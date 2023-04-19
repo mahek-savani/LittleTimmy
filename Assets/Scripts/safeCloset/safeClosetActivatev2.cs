@@ -12,9 +12,12 @@ public class safeClosetActivatev2 : MonoBehaviour
     public LiveCounter enemyCounter;
     public GameObject pos;
     private bool check = true;
+    private GameObject pointLight;
 
     private void disablePlayer()
     {
+        pointLight = playerObject.transform.GetChild(3).gameObject;
+        pointLight.SetActive(playerAwake);
         playerObject.GetComponent<MeshRenderer>().enabled = playerAwake;
         if(playerAwake == false)
         {
