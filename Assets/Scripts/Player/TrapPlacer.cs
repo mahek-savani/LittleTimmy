@@ -40,22 +40,22 @@ public class TrapPlacer : MonoBehaviour
             if(!placedTrapBefore) placedTrapBefore = true;
 
             //Wall traps
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RaycastHit Hit;
-                if (Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
-                {
-                    //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
-                    GameObject trapPlaced = trapInInventory;
-                    trapPlaced.transform.position = (Hit.point + Hit.normal * .001f);
-                    trapPlaced.transform.LookAt(Hit.point + Hit.normal);
-                    trapPlaced.layer = 8;
+            // if (Input.GetKeyDown(KeyCode.R))
+            // {
+            //     RaycastHit Hit;
+            //     if (Physics.Raycast(cams.position, cams.forward, out Hit, 1000f, canBeTrapped))
+            //     {
+            //         //GameObject trapPlaced = Instantiate(trapInInventory, Hit.point + Hit.normal * .001f, Quaternion.identity) as GameObject;
+            //         GameObject trapPlaced = trapInInventory;
+            //         trapPlaced.transform.position = (Hit.point + Hit.normal * .001f);
+            //         trapPlaced.transform.LookAt(Hit.point + Hit.normal);
+            //         trapPlaced.layer = 8;
 
-                    trapPlaced.SetActive(true);
-                    player.hasTrapInInventory = false;
-                    player.pickupDelay = 0f;
-                }
-            }
+            //         trapPlaced.SetActive(true);
+            //         player.hasTrapInInventory = false;
+            //         player.pickupDelay = 0f;
+            //     }
+            // }
 
             //Floor traps
             if (Input.GetKeyDown(KeyCode.E) && eLocked == 1)
