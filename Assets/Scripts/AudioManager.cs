@@ -1,7 +1,7 @@
-using UnityEngine.Audio;
-using UnityEngine;
-using System;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<int, AudioSource> channelMap;
 
+    private static AudioManager instance;
+
     private void defineChannelMap()
     {
         if (channelMap != null)
@@ -21,6 +23,39 @@ public class AudioManager : MonoBehaviour
         else
         {
             channelMap = new Dictionary<int, AudioSource> { { 1, channel1 }, { 2, channel2 }, { 3, channel3 } };
+        }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                instance.Play("Title Music", 3);
+            }
+            else if (instance.channel3.clip.name == "Title Screen Music")
+            {
+                instance.Play("New Background Music", 3);
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Play("Title Music", 3);
+        }
+        else
+        {
+            Play("New Background Music", 3);
         }
     }
 

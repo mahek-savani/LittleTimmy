@@ -12,6 +12,11 @@ public class LocalAudioManager : MonoBehaviour
 
     public Dictionary<int, AudioSource> channelMap;
 
+
+    private void Start()
+    {
+        manager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
     private void defineChannelMap()
     {
         if (channelMap != null)

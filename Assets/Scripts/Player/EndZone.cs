@@ -21,6 +21,11 @@ public class EndZone : MonoBehaviour
 
     public AudioManager audioManager;
 
+    private void Start()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
+
     void LateUpdate(){
         if (NPCManager.getNumLiving() != 0){
             this.gameObject.GetComponent<MeshRenderer>().material = close_mat;
