@@ -180,7 +180,7 @@ MonoBehaviour:
     spread: 0
     dopplerLevel: 0
     source: {fileID: 0}
-  - name: PlayerDeathSound
+  - name: PlayerDamage
     clip: {fileID: 8300000, guid: 3b1dd1fcb40394649aaa519048db31d0, type: 3}
     volume: 1
     pitch: 0.8
@@ -202,8 +202,8 @@ MonoBehaviour:
     spread: 0
     dopplerLevel: 0
     source: {fileID: 0}
-  - name: PlayerDamage
-    clip: {fileID: 8300000, guid: 4907da8a75e3a5a45a136ecc1fdbbf64, type: 3}
+  - name: PlayerDeathSound
+    clip: {fileID: 8300000, guid: 9bc71b34c97ff0740a539e5cbd0d608a, type: 3}
     volume: 1
     pitch: 0.8
     spatialBlend: 0
