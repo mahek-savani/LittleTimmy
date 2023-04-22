@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody pbody;
     public float speed = 15f;
     public GameObject allTut;
+    public float rotationSpeed=720f;
 
 
     public bool hasTrapInInventory; // Check if a trap already exists in inv
@@ -181,6 +182,12 @@ public class PlayerController : MonoBehaviour
 
         //Vector3 newPos = new Vector3(horVal * Time.deltaTime * speed, 0, vertVal * Time.deltaTime * speed);
         Vector3 newPos = new Vector3(horVal, 0, vertVal);
+        Vector3 movementDirection = new Vector3(horVal, 0, vertVal);
+        movementDirection.Normalize();
+        if(movementDirection != Vector3.zero){
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            pbody.rotation = Quaternion.RotateTowards(pbody.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
         newPos *= Time.deltaTime * speed;
         //newPos.Normalize();
         //Debug.Log("Translation vector: " + newPos);
