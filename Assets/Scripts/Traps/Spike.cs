@@ -13,6 +13,7 @@ public class Spike : MonoBehaviour
     public bool isTrapMovingBack = false;
     private bool switchView = false;
     public NavMeshSurface navMesh;
+    public SpikeTrap spikeTrap;
 
     void OnTriggerEnter(Collider c)
     {
@@ -23,7 +24,7 @@ public class Spike : MonoBehaviour
             navMesh.BuildNavMesh();
         }
 
-        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && spikeTrap.trapActive == true)
         {
             //data.trapActiveOrder.Add("spikeTrap-1");
             data.spikeTrap.Add(1);
