@@ -59,6 +59,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void Pause(int channel)
+    {
+        defineChannelMap();
+        channelMap[channel].Pause();
+    }
+
+    public void Resume(int channel)
+    {
+        defineChannelMap();
+        channelMap[channel].UnPause();
+    }
+
     //void Awake()
     //{
 

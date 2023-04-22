@@ -45,12 +45,15 @@ public class PlayerController : MonoBehaviour
 
     private PopUpSystem pop;
 
+    //private AudioManager globalAudioManager;
+
     // private AudioSource playerFootsteps;
 
     public LocalAudioManager localAudioManager;
 
     void Start()
     {
+        //globalAudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         //inSwapCommand = false;
         hasTrapInInventory = false;
         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
@@ -423,6 +426,7 @@ public class PlayerController : MonoBehaviour
 
     void pauseGame()
     {
+        //globalAudioManager.Pause(3);
         pauseScreen.SetActive(true);
         this.gameObject.GetComponent<AudioListener>().enabled = false;
         //Time.timeScale = 0;
@@ -436,6 +440,7 @@ public class PlayerController : MonoBehaviour
 
     public void unPausePlayer()
     {
+        //globalAudioManager.Resume(3);
         speed = 10f;
         GetComponent<PlayerDamage>().invincible = false;
     }

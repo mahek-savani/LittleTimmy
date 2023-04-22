@@ -78,7 +78,7 @@ public class EndZone : MonoBehaviour
         this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
         if (audioManager)
         {
-            audioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.3f);
+            audioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.6f);
         }
     }
 }
