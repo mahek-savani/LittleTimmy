@@ -776,7 +776,7 @@ public class StateMachine_Robust : MonoBehaviour
         // FindObjectOfType<AudioManager>().Play("NPCChaseSound");
         //playSound("NPCChaseSound");
         playSound(clipName: "NPCChaseSound", channelno: 2, vol: 0.2f, looptf: true);
-        playSound(clipName: "NPCFootStepsRun", channelno: 1, vol: 0.2f, looptf: true, pitchlocal:1.3f);
+        playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.4f, looptf: true, pitchlocal: 4f);
 
         agent.isStopped = false;
         targetLine.enabled = true;
@@ -1281,7 +1281,7 @@ public class StateMachine_Robust : MonoBehaviour
         switch (enemyType)
         {
             case TYPE.STANDARD:
-                playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.2f, looptf: true);
+                playSound(clipName: "NPCFootStepsWalk", channelno: 1, vol: 0.4f, looptf: true, pitchlocal: 1.5f);
                 break;
             case TYPE.SPEEDBALL:
                 playSound(clipName: "360BallSound", channelno: 1, vol: 0.2f, looptf: true, pitchlocal: 1.3f);
