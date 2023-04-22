@@ -212,8 +212,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3250395405517195541}
-  m_LocalRotation: {x: 0.39468315, y: -1e-45, z: -0, w: 0.91881734}
-  m_LocalPosition: {x: 0, y: 13.390001, z: -12.710002}
+  m_LocalRotation: {x: 0.3946831, y: -0.000000011342371, z: 0.000000004872178, w: 0.91881734}
+  m_LocalPosition: {x: 0, y: 13.390001, z: -12.710001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -406,9 +406,9 @@ MonoBehaviour:
   defaultIdlePos: {fileID: 0}
   defaultIdleDir: 0
   noiseTriggered: 0
-  timeToSuspicion: 0.6
+  timeToSuspicion: 0.5
   suspiciousTime: 5
-  timeToChase: 1
+  timeToChase: 1.2
   coolTime: 2
   unconsciousTime: 3
   idleState: 2
