@@ -1,4 +1,4 @@
-using UnityEngine.Audio;
+    using UnityEngine.Audio;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,12 @@ public class LocalAudioManager : MonoBehaviour
     {
         defineChannelMap();
         Sound s = findSound(name);
+
+
+        if (name == "NoiseTrapSound" || name == "NPCDeath" || name == "FinishSound")
+        {
+            volume = 0.1f;
+        }
 
         if (s != null)
         {

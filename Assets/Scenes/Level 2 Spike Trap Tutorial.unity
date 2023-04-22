@@ -1059,6 +1059,7 @@ GameObject:
   - component: {fileID: 296683798}
   - component: {fileID: 296683797}
   - component: {fileID: 296683799}
+  - component: {fileID: 296683800}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1158,6 +1159,14 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!81 &296683800
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296683795}
+  m_Enabled: 1
 --- !u!1 &337709131
 GameObject:
   m_ObjectHideFlags: 0
@@ -5332,6 +5341,10 @@ PrefabInstance:
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 201661327}
+    - target: {fileID: 2762713670264431873, guid: d97586118959b7f49993c992d541d8b8, type: 3}
+      propertyPath: cameraListener
+      value: 
+      objectReference: {fileID: 296683800}
     - target: {fileID: 2762713670264431874, guid: d97586118959b7f49993c992d541d8b8, type: 3}
       propertyPath: player
       value: 

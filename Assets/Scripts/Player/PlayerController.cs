@@ -51,10 +51,15 @@ public class PlayerController : MonoBehaviour
 
     public LocalAudioManager localAudioManager;
 
+    private AudioManager globalAudioManager;
+
+    public AudioListener cameraListener;
+
     void Start()
     {
         //globalAudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         //inSwapCommand = false;
+        cameraListener.enabled = false;
         hasTrapInInventory = false;
         tmp_Pickup_text = tmp_Pickup.GetComponent<TextMeshProUGUI>();
         helpText = helpUI.GetComponent<TextMeshProUGUI>();
@@ -63,6 +68,7 @@ public class PlayerController : MonoBehaviour
         spawnRotation = transform.rotation;
 
         pop = this.GetComponent<PopUpSystem>();
+        globalAudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         // playerFootsteps = this.GetComponent<AudioSource>();
     }
 
@@ -393,6 +399,9 @@ public class PlayerController : MonoBehaviour
     public IEnumerator playerDie(float delay)
     {
         canPause = false;
+        //localAudioManager.Play(name: "PlayerDeathSound", channel: 2, loop: false);
+        cameraListener.enabled = true;
+        globalAudioManager.Play(name : "PlayerDeathSound", channel : 2, loop : false);
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
         data.playerDeath = "yes";
