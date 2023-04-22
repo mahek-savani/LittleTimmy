@@ -7,41 +7,34 @@ public class EndZone : MonoBehaviour
 {
     public LiveCounter NPCManager;
     //public Object nextScene;
-    private int ttrCount = 0;
+    //private int ttrCount = 0;
     public int nextScene;
-    private bool switchView = false;
+    //private bool switchView = false;
     private float timeGap = 2f;
+    private bool activated = false;
     
 
     public Material open_mat;
     public Material close_mat;
 
-    public LocalAudioManager localAudioManager;
+    //public LocalAudioManager localAudioManager;
+
+    public AudioManager audioManager;
 
     void LateUpdate(){
         if (NPCManager.getNumLiving() != 0){
             this.gameObject.GetComponent<MeshRenderer>().material = close_mat;
         } else {
-            if(ttrCount == 0)
+            if (!activated)
             {
-                //Debug.Log("hi");
+                activated = true;
                 data.ttrstart = System.DateTime.Now;
-                ttrCount = 1;
-            }
-            StartCoroutine(TurnGreen());
-            if (!switchView)
-            {
-                switchView = true;
                 SwitchCameraView cameraView = FindObjectOfType<SwitchCameraView>();
                 if (cameraView != null)
                 {
                     cameraView.SetPanEndZone(true);
-
                 }
-                if(localAudioManager)
-                {
-                    localAudioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.3f);
-                }
+                StartCoroutine(TurnGreen());
             }
         }
     }
@@ -76,12 +69,11 @@ public class EndZone : MonoBehaviour
 
     private IEnumerator TurnGreen()
     {           
-
         yield return new WaitForSeconds(timeGap);
         this.gameObject.GetComponent<MeshRenderer>().material = open_mat;
-
-
-
-
+        if (audioManager)
+        {
+            audioManager.Play(name: "FinishSound", channel: 1, loop: false, volume: 0.3f);
+        }
     }
 }

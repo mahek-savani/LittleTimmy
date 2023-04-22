@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.01276505, g: 0.0124167865, b: 0.012581322, a: 1}
+  m_IndirectSpecularColor: {r: 0.011692542, g: 0.0123408595, b: 0.011508405, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5554,6 +5554,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1804155250}
     - target: {fileID: 5247919480052230978, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 2090993225}
+    - target: {fileID: 5247919480052230978, guid: 88c4e2dc860fcce408660dbed583c7e5, type: 3}
       propertyPath: localAudioManager
       value: 
       objectReference: {fileID: 735533657}
@@ -10523,15 +10527,15 @@ PrefabInstance:
     - target: {fileID: 6450532410853139242, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
       propertyPath: channel1
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2090993228}
     - target: {fileID: 6450532410853139242, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
       propertyPath: channel2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2090993227}
     - target: {fileID: 6450532410853139242, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
       propertyPath: channel3
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2090993226}
     - target: {fileID: 6450532410853139242, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
       propertyPath: sounds.Array.size
       value: 25
@@ -10641,6 +10645,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f705af559b8605c4685944a227ca4c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2090993226 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1002036951, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
+  m_PrefabInstance: {fileID: 2090993224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2090993227 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1002036950, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
+  m_PrefabInstance: {fileID: 2090993224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2090993228 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1002036949, guid: 1a6b58b98cb2e784e8f83fe665000cc3, type: 3}
+  m_PrefabInstance: {fileID: 2090993224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2137054910
 GameObject:
   m_ObjectHideFlags: 3

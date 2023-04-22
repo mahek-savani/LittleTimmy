@@ -38,7 +38,7 @@ public class Experimental_Reset_Button : MonoBehaviour
 
     private void Update()
     {
-        if (isPlaying && !trapDoor.GetComponent<Animation>().isPlaying)
+        if (navMesh && isPlaying && !trapDoor.GetComponent<Animation>().isPlaying)
         {
             navMesh.RemoveData();
             navMesh.BuildNavMesh();
