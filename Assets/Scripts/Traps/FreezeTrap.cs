@@ -58,6 +58,7 @@ public class FreezeTrap : BaseTrapClass
             if(localAudioManager)
             {
                   localAudioManager.Play(name: "FreezeSound", channel: 1, loop: false, volume: 0.3f);
+                  print("Freeze");
             }
             isTriggered = true;
 

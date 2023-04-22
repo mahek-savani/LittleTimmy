@@ -191,7 +191,7 @@ MonoBehaviour:
     spread: 0
     dopplerLevel: 0
     source: {fileID: 0}
-  - name: NPCFootstepsRun
+  - name: NPCFootStepsRun
     clip: {fileID: 8300000, guid: 57cf860067aeb494384878a704bd59c7, type: 3}
     volume: 1
     pitch: 0.8
@@ -269,6 +269,17 @@ MonoBehaviour:
     dopplerLevel: 0
     source: {fileID: 0}
   - name: NPCDeath
+    clip: {fileID: 8300000, guid: fe5d28e8db12f7747b124f6283370541, type: 3}
+    volume: 1
+    pitch: 0.8
+    spatialBlend: 0
+    loop: 0
+    rolloffMode: 0
+    maxDistance: 10
+    spread: 0
+    dopplerLevel: 0
+    source: {fileID: 0}
+  - name: NPCCollide
     clip: {fileID: 8300000, guid: 825d2799cc1b62c4cb0cce620ff7b525, type: 3}
     volume: 1
     pitch: 0.8
@@ -279,9 +290,42 @@ MonoBehaviour:
     spread: 0
     dopplerLevel: 0
     source: {fileID: 0}
+  - name: NPCWakes
+    clip: {fileID: 8300000, guid: 24896ae9fee094544bd2a5da77b75a41, type: 3}
+    volume: 1
+    pitch: 0.8
+    spatialBlend: 0
+    loop: 0
+    rolloffMode: 0
+    maxDistance: 10
+    spread: 0
+    dopplerLevel: 0
+    source: {fileID: 0}
+  - name: HealthPickup
+    clip: {fileID: 8300000, guid: 353ceb56e7588cd4a836866c093656f1, type: 3}
+    volume: 1
+    pitch: 0.8
+    spatialBlend: 0
+    loop: 0
+    rolloffMode: 0
+    maxDistance: 10
+    spread: 0
+    dopplerLevel: 0
+    source: {fileID: 0}
+  - name: ButtonPress
+    clip: {fileID: 8300000, guid: 514920effcd740440871e045daedf962, type: 3}
+    volume: 1
+    pitch: 0.8
+    spatialBlend: 0
+    loop: 0
+    rolloffMode: 0
+    maxDistance: 10
+    spread: 0
+    dopplerLevel: 0
+    source: {fileID: 0}
   channel1: {fileID: 1002036949}
-  channel2: {fileID: 1002036951}
-  channel3: {fileID: 1002036950}
+  channel2: {fileID: 1002036950}
+  channel3: {fileID: 1002036951}
 --- !u!82 &1002036949
 AudioSource:
   m_ObjectHideFlags: 0
