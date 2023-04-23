@@ -23,7 +23,7 @@ public class Spike : MonoBehaviour
             navMesh.BuildNavMesh();
         }
 
-        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        if (c.gameObject.layer == LayerMask.NameToLayer("Enemies") && isTrapMoving)
         {
             //data.trapActiveOrder.Add("spikeTrap-1");
             data.spikeTrap.Add(1);
