@@ -27,7 +27,8 @@ public class SwitchCameraView : MonoBehaviour
 
     private void Start()
     {
-        playerCamRotation = playerCamera.transform.rotation;
+        playerCamRotation = new Quaternion(playerCamera.transform.rotation.x, playerCamera.transform.rotation.y,
+            playerCamera.transform.rotation.z, playerCamera.transform.rotation.w);
         // Debug.Log(playerCamera.transform.rotation);
         levelCamera.gameObject.SetActive(true);
         endZoneCamera.gameObject.SetActive(false);
@@ -51,8 +52,8 @@ public class SwitchCameraView : MonoBehaviour
     }
     private void Update()
     {
-        playerCamera.transform.rotation = playerCamRotation;
         playerCamera.transform.position = playerTransform.position + playerCameraOffset;
+        playerCamera.transform.rotation = playerCamRotation;
         // Debug.Log(playerCamera.transform.rotation);
         if (Input.GetKeyDown("c"))
         {
