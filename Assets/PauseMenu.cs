@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    AudioManager audioManager;
-    private void Start()
-    {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-    }
+    public AudioManager audioManager;
+    //private void Start()
+    //{
+    //    audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    //}
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -25,6 +25,7 @@ public class PauseMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         Time.timeScale = 0;
         audioManager.Pause(3);
         //AudioListener.pause = true;
