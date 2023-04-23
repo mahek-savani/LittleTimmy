@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlayerController : MonoBehaviour
 {
@@ -156,7 +157,9 @@ public class PlayerController : MonoBehaviour
             //     playerFootsteps.Play();
             // }
             // FindObjectOfType<AudioManager>().Play("PlayerFootSteps");
-                    if (localAudioManager && !localAudioManager.channel1.isPlaying  )
+            Light pointLight = gameObject.GetComponentInChildren<Light>();
+
+            if (localAudioManager && !localAudioManager.channel1.isPlaying && gameObject.GetComponent<MeshRenderer>().enabled)
                     {
 
                         localAudioManager.Play(name: "PlayerFootSteps", channel: 1, loop: true);
