@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }
 
+    public void PressedCredits()
+    {
+        SceneManager.LoadScene(10);
+    }
+
     public void PressedBack(){
         SceneManager.LoadScene(0);
     }
