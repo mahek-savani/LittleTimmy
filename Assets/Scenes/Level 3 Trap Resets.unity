@@ -890,9 +890,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 51.75
+  field of view: 46.3
   orthographic: 0
-  orthographic size: 8.3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -915,8 +915,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296683795}
-  m_LocalRotation: {x: 0.5983246, y: 0, z: 0, w: 0.8012538}
-  m_LocalPosition: {x: -39.95, y: 24.6, z: -5.4}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -15.559908, y: 54.51315, z: 6.7371836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1789,7 +1789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.91881734
+      value: 0.9188174
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1797,11 +1797,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000024812469
+      value: 0.000000017813365
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000010658335
+      value: -0.000000007651829
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
@@ -1870,7 +1870,7 @@ PrefabInstance:
       objectReference: {fileID: 1654227406}
     - target: {fileID: 5152570800513930789, guid: c915706070bfc5a4bbbd357e9813ef07, type: 3}
       propertyPath: m_Priority
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c915706070bfc5a4bbbd357e9813ef07, type: 3}
@@ -5336,7 +5336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8553408013823746383, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1e-45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ada406c14142db448b47e33768f7fa4, type: 3}
