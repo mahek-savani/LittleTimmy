@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class safeClosetActivatev2 : MonoBehaviour
 {
@@ -12,20 +13,24 @@ public class safeClosetActivatev2 : MonoBehaviour
     public LiveCounter enemyCounter;
     public GameObject pos;
     private bool check = true;
-    private GameObject pointLight;
+    private Light pointLight;
+    private float lightRange;
 
     private void disablePlayer()
     {
-        pointLight = playerObject.transform.GetChild(3).gameObject;
-        pointLight.SetActive(playerAwake);
+        pointLight = playerObject.gameObject.GetComponentInChildren<Light>();
+
         playerObject.GetComponent<MeshRenderer>().enabled = playerAwake;
         if(playerAwake == false)
         {
+            lightRange = pointLight.range;
+            pointLight.range = 0;
             playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
             player.speed = 0;
         }
         else
         {
+            pointLight.range = lightRange;
             playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             player.speed = 10;
